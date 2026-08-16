@@ -1,0 +1,773 @@
+{% schema %}
+{
+  "name": "SNC Flex Content",
+  "class": "section--snc-flex-content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración General"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen Superior",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen Inferior",
+      "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo (Full Width)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 400,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho máximo del contenedor",
+      "default": 1520,
+      "info": "Esta opción se ignora si 'Ancho completo' está activado."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content_block",
+      "name": "Bloque de Contenido",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Imagen"
+        },
+        {
+          "type": "richtext",
+          "id": "text_content",
+          "label": "Texto",
+          "default": "<p>Texto del bloque</p>"
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Ancho del contenedor de texto (0 = Automático)",
+          "default": 0,
+          "info": "Si es 0, el texto ocupará el espacio disponible."
+        },
+        {
+          "type": "range",
+          "id": "text_max_width",
+          "min": 200,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Ancho máximo del contenido de texto",
+          "default": 600
+        },
+        {
+          "type": "color",
+          "id": "text_color_val",
+          "label": "Color del texto",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "text_font_size",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño de fuente (Escritorio)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_font_size_mobile",
+          "min": 10,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño de fuente (Móvil)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "text_font_weight",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "label": "Grosor de fuente",
+          "default": 400
+        },
+        {
+          "type": "range",
+          "id": "text_line_height",
+          "min": 1.0,
+          "max": 2.0,
+          "step": 0.1,
+          "label": "Altura de línea",
+          "default": 1.5
+        },
+        {
+          "type": "range",
+          "id": "text_letter_spacing",
+          "min": -2,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Espaciado entre letras",
+          "default": 0
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Transformación de texto",
+          "options": [
+            { "value": "none", "label": "Ninguna" },
+            { "value": "uppercase", "label": "Mayúsculas" },
+            { "value": "lowercase", "label": "Minúsculas" },
+            { "value": "capitalize", "label": "Capitalizar" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Alineación",
+          "options": [
+            { "value": "left", "label": "Izquierda" },
+            { "value": "center", "label": "Centro" },
+            { "value": "right", "label": "Derecha" },
+            { "value": "justify", "label": "Justificado" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "text_margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen inferior",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "text_padding_v",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding Vertical",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "text_padding_h",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding Horizontal",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Icono Texto"
+        },
+        {
+          "type": "image_picker",
+          "id": "text_icon_image",
+          "label": "Icono Texto"
+        },
+        {
+          "type": "range",
+          "id": "text_icon_width",
+          "min": 5,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Ancho del icono texto",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "text_icon_position",
+          "label": "Posición del icono texto",
+          "options": [
+            { "value": "left", "label": "Izquierda" },
+            { "value": "right", "label": "Derecha" }
+          ],
+          "default": "right"
+        },
+        {
+          "type": "header",
+          "content": "Botón"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto del botón",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Enlace"
+        },
+        {
+          "type": "select",
+          "id": "button_preset",
+          "label": "Estilo de Botón (Preset)",
+          "options": [
+            { "value": "1", "label": "Preset 1" },
+            { "value": "2", "label": "Preset 2" },
+            { "value": "3", "label": "Preset 3" }
+          ],
+          "default": "1"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Estilo de tipografía",
+          "options": [
+            { "value": "h1", "label": "Título principal" },
+            { "value": "h2", "label": "Títulos secundarios" },
+            { "value": "h3", "label": "Títulos pequeños" },
+            { "value": "body", "label": "Párrafo" },
+            { "value": "small", "label": "Párrafo pequeño" },
+            { "value": "button", "label": "Botón" },
+            { "value": "emphasis", "label": "Énfasis" }
+          ],
+          "default": "button"
+        },
+        {
+          "type": "range",
+          "id": "button_margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen inferior",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "button_font_size",
+          "min": 12,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño de fuente",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_font_weight",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "label": "Grosor de fuente",
+          "default": 700
+        },
+        {
+          "type": "range",
+          "id": "button_padding_v",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding Vertical",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "button_padding_h",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding Horizontal",
+          "default": 24
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Color del texto botón",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "button_border_color",
+          "label": "Color del borde",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "border_width",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "unit": "px",
+          "label": "Ancho del borde",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Icono Botón"
+        },
+        {
+          "type": "image_picker",
+          "id": "button_icon_image",
+          "label": "Icono Botón"
+        },
+        {
+          "type": "range",
+          "id": "button_icon_width",
+          "min": 5,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Ancho del icono botón",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "button_icon_position",
+          "label": "Posición del icono botón",
+          "options": [
+            { "value": "left", "label": "Izquierda" },
+            { "value": "right", "label": "Derecha" }
+          ],
+          "default": "right"
+        },
+        {
+          "type": "header",
+          "content": "Imagen Principal"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Ancho del contenedor de imagen (0 = Automático)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "image_height",
+          "min": 200,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "label": "Alto de la imagen",
+          "default": 760
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Enlace Imagen (Opcional)"
+        },
+        {
+          "type": "range",
+          "id": "image_border_radius",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Redondeo de bordes",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Ajustes de Animación"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Flex Content",
+      "blocks": [
+        { "type": "content_block" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  #snc-flex-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    height: {{ section.blocks.size | times: 100 }}vh; /* Altura para el scroll */
+  }
+
+  .snc-flex--sticky-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .snc-flex--slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: {{ section.settings.background_color }};
+    /* Animación de cortina */
+    clip-path: inset(50% 0 50% 0);
+    will-change: clip-path;
+  }
+
+  .snc-flex--slide:first-child {
+    clip-path: inset(0 0 0 0); /* El primero siempre visible */
+  }
+
+  .snc-flex--slide-inner {
+    max-width: 1512px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 60px;
+    height: 100%;
+  }
+
+  .snc-flex--media-wrapper {
+    width: 1234px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .snc-flex--content-wrapper {
+    width: 1234px;
+    height: 67px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: center;
+  }
+
+  .snc-flex--rte {
+    font-size: var(--font-size-desktop);
+  }
+
+  .snc-flex--rte p, 
+  .snc-flex--rte h1, .snc-flex--rte h2, .snc-flex--rte h3, 
+  .snc-flex--rte h4, .snc-flex--rte h5, .snc-flex--rte h6 {
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+  }
+
+  .snc-flex--btn-icon svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    fill: currentColor;
+  }
+
+  .snc-flex--image svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+	  @media (max-width: 768px) {
+	    .snc-flex--rte {
+	      font-size: var(--font-size-mobile);
+	    }
+	    .snc-flex--slide-inner {
+	      flex-direction: column;
+	      height: auto;
+	      justify-content: flex-start;
+	      padding-top: 50px;
+	    }
+	    .snc-flex--image img {
+	      object-fit: contain !important;
+	    }
+	    #snc-flex-{{ section.id }} {
+	      height: auto;
+	    }
+	    .snc-flex--sticky-container {
+      position: relative;
+      height: auto;
+      display: block;
+    }
+    .snc-flex--slide {
+      position: relative;
+      height: auto;
+      clip-path: none !important;
+      padding-bottom: 60px;
+    }
+  }
+
+  /* Background Image for Slides > 1 */
+  .snc-flex--slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .snc-slide-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(20px);
+    transform: scale(1.1);
+  }
+  .snc-flex--slide-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+</style>
+
+<div id="snc-flex-{{ section.id }}">
+  <div class="snc-flex--sticky-container">
+    {% for block in section.blocks %}
+      <div class="snc-flex--slide" style="z-index: {{ forloop.index }};">
+        {% if forloop.index > 1 and block.settings.image != blank %}
+          <div class="snc-flex--slide-bg">
+            {{ block.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'snc-slide-bg-img' }}
+          </div>
+        {% endif %}
+        <div class="snc-flex--slide-inner">
+          
+          <!-- Contenido -->
+          <div class="snc-flex--content-wrapper">
+          <div class="snc-flex--item snc-flex--text" {{ block.shopify_attributes }} style="
+            {% if block.settings.width > 0 %}
+              width: {{ block.settings.width }}%; 
+            {% else %}
+              flex: 1;
+            {% endif %}
+            padding: {{ block.settings.text_padding_v }}px {{ block.settings.text_padding_h }}px;
+            margin-bottom: {{ block.settings.text_margin_bottom }}px;
+          ">
+            {%- liquid
+              assign justify_val = 'flex-start'
+              if block.settings.text_align == 'center'
+                assign justify_val = 'center'
+              elsif block.settings.text_align == 'right'
+                assign justify_val = 'flex-end'
+              endif
+            -%}
+            <div style="display: flex; gap: 10px; align-items: center; justify-content: {{ justify_val }};">
+            {% if block.settings.text_icon_image != blank and block.settings.text_icon_position == 'left' %}
+              <span class="snc-flex--btn-icon" style="width: {{ block.settings.text_icon_width }}px; display: block;">
+                {{ block.settings.text_icon_image | image_url: width: 200 | image_tag: loading: 'lazy', style: 'width: 100%; height: auto;' }}
+              </span>
+            {% endif %}
+            <div class="snc-flex--rte" style="
+              text-align: {{ block.settings.text_align }};
+              color: {{ block.settings.text_color_val }};
+              font-weight: {{ block.settings.text_font_weight }};
+              line-height: {{ block.settings.text_line_height }};
+              letter-spacing: {{ block.settings.text_letter_spacing }}px;
+              text-transform: {{ block.settings.text_transform }};
+              --font-size-desktop: {{ block.settings.text_font_size }}px;
+              --font-size-mobile: {{ block.settings.text_font_size_mobile }}px;
+              max-width: {{ block.settings.text_max_width }}px;
+            ">
+              {{ block.settings.text_content }}
+            </div>
+            {% if block.settings.text_icon_image != blank and block.settings.text_icon_position == 'right' %}
+              <span class="snc-flex--btn-icon" style="width: {{ block.settings.text_icon_width }}px; display: block;">
+                {{ block.settings.text_icon_image | image_url: width: 200 | image_tag: loading: 'lazy', style: 'width: 100%; height: auto;' }}
+              </span>
+            {% endif %}
+            </div>
+          </div>
+          <div class="snc-flex--item snc-flex--button" {{ block.shopify_attributes }} style="margin-bottom: {{ block.settings.button_margin_bottom }}px;">
+            {% if block.settings.button_label != blank %}
+              <a href="{{ block.settings.button_link | default: '#' }}" class="btn-preset-{{ block.settings.button_preset }} {{ block.settings.button_style }}" style="
+                border: {{ block.settings.border_width }}px solid {{ block.settings.button_border_color }};
+                font-size: {{ block.settings.button_font_size }}px !important;
+                font-weight: {{ block.settings.button_font_weight }} !important;
+                color: {{ block.settings.button_text_color }} !important;
+                padding: {{ block.settings.button_padding_v }}px {{ block.settings.button_padding_h }}px !important;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+              ">
+                {% if block.settings.button_icon_image != blank and block.settings.button_icon_position == 'left' %}
+                  <span class="snc-flex--btn-icon" style="width: {{ block.settings.button_icon_width }}px; display: flex;">
+                    {{ block.settings.button_icon_image | image_url: width: 200 | image_tag: loading: 'lazy', style: 'width: 100%; height: auto;' }}
+                  </span>
+                {% endif %}
+                {{ block.settings.button_label }}
+                {% if block.settings.button_icon_image != blank and block.settings.button_icon_position == 'right' %}
+                  <span class="snc-flex--btn-icon" style="width: {{ block.settings.button_icon_width }}px; display: flex;">
+                    {{ block.settings.button_icon_image | image_url: width: 200 | image_tag: loading: 'lazy', style: 'width: 100%; height: auto;' }}
+                  </span>
+                {% endif %}
+              </a>
+            {% endif %}
+          </div>
+          </div>
+
+          <!-- Imagen -->
+          <div class="snc-flex--media-wrapper">
+          <div class="snc-flex--item snc-flex--image" {{ block.shopify_attributes }} style="
+            {% if block.settings.image_width > 0 %}
+              width: {{ block.settings.image_width }}%; 
+              flex: 0 0 {{ block.settings.image_width }}%;
+            {% else %}
+              flex: 1;
+              min-width: 200px;
+            {% endif %}
+          ">
+            {% if block.settings.image_link != blank %}<a href="{{ block.settings.image_link }}" style="display: block;">{% endif %}
+            
+	            {% if block.settings.image != blank %}
+	              {% assign img_style = 'width: 100%; height: ' | append: block.settings.image_height | append: 'px; object-fit: cover; display: block; margin: 0 auto; max-width: 100%; border-radius: ' | append: block.settings.image_border_radius | append: 'px;' %}
+	              {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', style: img_style }}
+	            {% else %}
+	              {{ 'image' | placeholder_svg_tag }}
+	            {% endif %}
+
+            {% if block.settings.image_link != blank %}</a>{% endif %}
+          </div>
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('snc-flex-{{ section.id }}');
+    if (!section) return;
+    
+    // Solo activar efecto en desktop
+    if (window.innerWidth <= 768) return;
+
+    const slides = section.querySelectorAll('.snc-flex--slide');
+    const slideCount = slides.length;
+    
+    let isScrolling = false;
+
+    function updateAnimation() {
+      const rect = section.getBoundingClientRect();
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      const scrollDistance = sectionHeight - viewportHeight;
+      
+      if (scrollDistance <= 0) {
+        isScrolling = false;
+        return;
+      }
+
+      let progress = -rect.top / scrollDistance;
+      
+      // Clamp progress
+      if (progress < 0) progress = 0;
+      if (progress > 1) progress = 1;
+      
+      // Calcular qué slide debe mostrarse
+      // Dividimos el progreso total en (slideCount - 1) segmentos
+      // El primer slide siempre está visible.
+      // El segundo slide empieza a aparecer cuando progress > 0 y termina en 1/(N-1)
+      
+      if (slideCount <= 1) {
+        isScrolling = false;
+        return;
+      }
+
+      const segmentSize = 1 / (slideCount - 1);
+
+      slides.forEach((slide, index) => {
+        if (index === 0) return; // El primero es base
+
+        // Calcular progreso local para este slide
+        // Slide 1 (index 1) debe animarse de 0 a segmentSize
+        // Slide 2 (index 2) debe animarse de segmentSize a 2*segmentSize
+        
+        const start = (index - 1) * segmentSize;
+        const end = index * segmentSize;
+        
+        let localProgress = (progress - start) / (end - start);
+        if (localProgress < 0) localProgress = 0;
+        if (localProgress > 1) localProgress = 1;
+        
+        // Animación de cortina vertical: inset(50% 0 50% 0) -> inset(0 0 0 0)
+        // 50% -> 0%
+        const insetVal = 50 * (1 - localProgress);
+        slide.style.clipPath = `inset(${insetVal}% 0 ${insetVal}% 0)`;
+      });
+      isScrolling = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!isScrolling) {
+        window.requestAnimationFrame(updateAnimation);
+        isScrolling = true;
+      }
+    }, { passive: true });
+  });
+</script>

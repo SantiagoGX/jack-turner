@@ -1,0 +1,1044 @@
+{% schema %}
+{
+  "name": "SNC Horizontal Scroll",
+  "class": "section--snc-horizontal-scroll",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración General"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de texto",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide_type_1",
+      "name": "Bloque Tipo 1",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Texto descriptivo.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "header",
+          "content": "Estilos"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del Título",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamaño del Título",
+          "min": 20,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Color del Texto",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Tamaño del Texto",
+          "min": 12,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "content_max_width",
+          "label": "Ancho máximo del contenido",
+          "min": 300,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "default": 600
+        },
+        {
+          "type": "range",
+          "id": "text_container_height",
+          "label": "Altura mínima del contenedor de texto (0 = Automático)",
+          "min": 0,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "text_offset_y",
+          "label": "Posición vertical del texto (eje Y)",
+          "min": -200,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "slide_type_2",
+      "name": "Bloque Tipo 2",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Subtítulo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Texto descriptivo.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Segunda Imagen"
+        },
+        {
+          "type": "header",
+          "content": "Estilos"
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "Color del Subtítulo",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size",
+          "label": "Tamaño del Subtítulo",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del Título",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamaño del Título",
+          "min": 20,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Color del Texto",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Tamaño del Texto",
+          "min": 12,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "content_max_width",
+          "label": "Ancho máximo del contenido",
+          "min": 300,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "default": 600
+        },
+        {
+          "type": "range",
+          "id": "text_container_height",
+          "label": "Altura mínima del contenedor de texto (0 = Automático)",
+          "min": 0,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "text_offset_y",
+          "label": "Posición vertical del texto (eje Y)",
+          "min": -200,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "slide_type_3",
+      "name": "Bloque Tipo 3",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Subtítulo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Texto descriptivo.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Imagen 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Imagen 3"
+        },
+        {
+          "type": "header",
+          "content": "Estilos"
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "Color del Subtítulo",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size",
+          "label": "Tamaño del Subtítulo",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del Título",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamaño del Título",
+          "min": 20,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Color del Texto",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Tamaño del Texto",
+          "min": 12,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "content_max_width",
+          "label": "Ancho máximo del contenido",
+          "min": 300,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "default": 600
+        },
+        {
+          "type": "range",
+          "id": "text_container_height",
+          "label": "Altura mínima del contenedor de texto (0 = Automático)",
+          "min": 0,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "text_offset_y",
+          "label": "Posición vertical del texto (eje Y)",
+          "min": -200,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "slide_type_4",
+      "name": "Bloque Tipo 4",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Time, Elevated"
+        },
+        {
+          "type": "richtext",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "<p>Lorem ipsum dolor sit amet consectetur.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "macro_image",
+          "label": "Imagen macro (derecha)"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alineación del contenido",
+          "options": [
+            { "value": "center", "label": "Centrado" },
+            { "value": "left", "label": "Izquierda" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "range",
+          "id": "content_max_width",
+          "label": "Ancho máximo del contenido",
+          "min": 280,
+          "max": 800,
+          "step": 10,
+          "unit": "px",
+          "default": 420
+        },
+        {
+          "type": "range",
+          "id": "text_container_height",
+          "label": "Altura mínima del contenedor de texto (0 = Automático)",
+          "min": 0,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "text_offset_y",
+          "label": "Posición vertical del texto (eje Y)",
+          "min": -200,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "label": "Ancho del logo",
+          "min": 40,
+          "max": 240,
+          "step": 5,
+          "unit": "px",
+          "default": 110
+        },
+        {
+          "type": "range",
+          "id": "macro_width",
+          "label": "Ancho de imagen macro",
+          "min": 40,
+          "max": 90,
+          "step": 1,
+          "unit": "vw",
+          "default": 65
+        },
+        {
+          "type": "select",
+          "id": "macro_fit",
+          "label": "Ajuste de imagen macro",
+          "options": [
+            { "value": "contain", "label": "Contain (sin recorte)" },
+            { "value": "cover", "label": "Cover (recorta)" }
+          ],
+          "default": "contain"
+        },
+        {
+          "type": "range",
+          "id": "macro_scale",
+          "label": "Escala imagen macro",
+          "min": 80,
+          "max": 160,
+          "step": 1,
+          "unit": "%",
+          "default": 115
+        },
+        {
+          "type": "range",
+          "id": "macro_offset_x",
+          "label": "Offset X (imagen macro)",
+          "min": -400,
+          "max": 400,
+          "step": 10,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "macro_offset_y",
+          "label": "Offset Y (imagen macro)",
+          "min": -300,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Estilos"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del Título",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamaño del Título",
+          "min": 20,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "Color del Subtítulo",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size",
+          "label": "Tamaño del Subtítulo",
+          "min": 12,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Horizontal Scroll",
+      "blocks": [
+        { "type": "slide_type_1" },
+        { "type": "slide_type_2" },
+        { "type": "slide_type_3" },
+        { "type": "slide_type_4" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{%- liquid
+  assign total_width = 0
+  for block in section.blocks
+    if block.type == 'slide_type_2'
+      assign total_width = total_width | plus: 150
+    elsif block.type == 'slide_type_3'
+      assign total_width = total_width | plus: 240
+    elsif block.type == 'slide_type_4'
+      assign total_width = total_width | plus: 100
+    else
+      assign total_width = total_width | plus: 100
+    endif
+  endfor
+-%}
+
+<style>
+  #snc-horizontal-scroll-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    height: {{ total_width }}vh;
+    position: relative;
+    z-index: 0;
+  }
+
+  .snc-horizontal-scroll--sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .snc-horizontal-scroll--track {
+    display: flex;
+    height: 100%;
+    width: {{ total_width }}vw;
+    will-change: transform;
+  }
+
+  .snc-horizontal-scroll--slide {
+    width: 100vw;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+  }
+
+  .snc-horizontal-scroll--container {
+    max-width: 1512px;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    pointer-events: none; /* Permite clicks en la imagen de fondo si es necesario */
+  }
+
+  .snc-horizontal-scroll--content {
+    pointer-events: auto;
+    position: absolute;
+    left: 0px;
+    bottom: 74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    max-width: 600px;
+    gap: 150px; /* Gap solicitado entre título y párrafo */
+    color: {{ section.settings.text_color }};
+    z-index: 2;
+    transform: translateY(var(--snc-hs-text-offset-y, 0px));
+    min-height: var(--snc-hs-text-min-height, 0px);
+  }
+
+  .snc-hs--subtitle {
+    font-family: var(--font-main);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .snc-hs--title {
+    font-family: var(--font-main);
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+  }
+
+  .snc-hs--text {
+    font-family: var(--font-main);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .snc-hs--header-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .snc-horizontal-scroll--image {
+    position: absolute;
+    right: 0;
+    width: 600px;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  /* Estilos específicos Bloque 1 */
+  .slide-type-1 .snc-horizontal-scroll--image {
+    bottom: 0;
+    height: 90%;
+  }
+
+  /* Estilos específicos Bloque 2 */
+  .slide-type-2 {
+    width: 150vw;
+  }
+
+  .slide-type-2 .snc-horizontal-scroll--gallery {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: flex-start;
+    z-index: 1;
+    gap: 20px;
+  }
+
+  .slide-type-2 .snc-hs--img-container-1 {
+    width: 600px;
+    height: 60vh;
+  }
+  .slide-type-2 .snc-hs--img-container-1 img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  .slide-type-2 .snc-hs--img-container-2 {
+    width: 721px;
+    height: calc(60vh * 1.13);
+  }
+  .slide-type-2 .snc-hs--img-container-2 img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  /* Estilos específicos Bloque 3 */
+  .slide-type-3 {
+    width: 240vw;
+  }
+
+  .slide-type-3 .snc-horizontal-scroll--gallery {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: flex-start;
+    z-index: 1;
+    gap: 20px;
+  }
+
+  .slide-type-3 .snc-hs--img-container-1 {
+    width: 796px;
+    height: 60vh;
+  }
+  .slide-type-3 .snc-hs--img-container-1 img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  .slide-type-3 .snc-hs--img-container-2,
+  .slide-type-3 .snc-hs--img-container-3 {
+    width: 633px;
+    height: 35vh;
+  }
+  .slide-type-3 .snc-hs--img-container-2 img,
+  .slide-type-3 .snc-hs--img-container-3 img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  .snc-horizontal-scroll--image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Estilos específicos Bloque 4 */
+  .slide-type-4 .snc-horizontal-scroll--content {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    height: 100%;
+    max-width: var(--content-max-width);
+    gap: 28px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .slide-type-4 .snc-horizontal-scroll--content.snc-hs--type4-align-left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .snc-hs--type4-logo {
+    width: var(--logo-width);
+    max-width: 70%;
+    height: auto;
+    display: block;
+  }
+
+  .snc-hs--type4-macro {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--macro-width);
+    z-index: 1;
+    pointer-events: none;
+    transform: translate(var(--macro-offset-x), var(--macro-offset-y)) scale(var(--macro-scale));
+    transform-origin: right center;
+  }
+
+  .snc-hs--type4-macro img {
+    width: 100%;
+    height: 100%;
+    object-fit: var(--macro-fit);
+    object-position: right center;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    #snc-horizontal-scroll-{{ section.id }} {
+      height: auto;
+    }
+    .snc-horizontal-scroll--sticky {
+      position: relative;
+      height: auto;
+      overflow: visible;
+    }
+    .snc-horizontal-scroll--track {
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+      transform: none !important;
+    }
+    .snc-horizontal-scroll--slide {
+      width: 100%;
+      height: auto;
+      padding: 60px 0;
+      display: block;
+    }
+    .snc-horizontal-scroll--container {
+      height: auto;
+      padding: 0 20px;
+    }
+    .snc-horizontal-scroll--content {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      gap: 40px;
+      margin-top: 40px;
+      margin-bottom: 0px;
+      transform: none;
+      min-height: 0 !important;
+    }
+    .snc-horizontal-scroll--image {
+      position: relative;
+      width: 100%;
+      height: 400px !important;
+      transform: none !important;
+      top: auto !important;
+      bottom: auto !important;
+    }
+    .slide-type-2, .slide-type-3 {
+      width: 100%;
+    }
+    .slide-type-2 .snc-horizontal-scroll--gallery {
+      position: relative;
+      flex-direction: column;
+      transform: none;
+      top: auto;
+      width: 100%;
+      height: auto;
+      right: 0;
+    }
+    .slide-type-2 .snc-hs--img-container-1,
+    .slide-type-2 .snc-hs--img-container-2 {
+      width: 100%;
+      height: 400px;
+    }
+    .slide-type-3 .snc-horizontal-scroll--gallery {
+      position: relative;
+      flex-direction: column;
+      transform: none;
+      top: auto;
+      width: 100%;
+      height: auto;
+      right: 0;
+    }
+    .slide-type-3 .snc-hs--img-container-1,
+    .slide-type-3 .snc-hs--img-container-2,
+    .slide-type-3 .snc-hs--img-container-3 {
+      width: 100%;
+      height: 400px;
+    }
+
+    .slide-type-4 .snc-horizontal-scroll--content {
+      height: auto;
+      max-width: 100%;
+      justify-content: flex-start;
+      padding-top: 10px;
+    }
+
+    .slide-type-4.snc-horizontal-scroll--slide {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .slide-type-4 .snc-horizontal-scroll--container {
+      order: 1;
+    }
+
+    .slide-type-4 .snc-hs--type4-macro {
+      order: 2;
+    }
+
+    .snc-hs--type4-macro {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      transform: none;
+      margin-top: auto;
+      margin-bottom: 0;
+    }
+
+    .snc-hs--type4-macro img {
+      object-position: center bottom;
+    }
+  }
+</style>
+
+<div class="snc-horizontal-scroll--wrapper" id="snc-horizontal-scroll-{{ section.id }}">
+  <div class="snc-horizontal-scroll--sticky">
+    <div class="snc-horizontal-scroll--track">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'slide_type_1' %}
+            <div class="snc-horizontal-scroll--slide slide-type-1" {{ block.shopify_attributes }}>
+              <div class="snc-horizontal-scroll--image">
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag }}
+                {% endif %}
+              </div>
+              <div class="snc-horizontal-scroll--container">
+                <div class="snc-horizontal-scroll--content" style="max-width: {{ block.settings.content_max_width }}px;{% if block.settings.text_container_height > 0 %} --snc-hs-text-min-height: {{ block.settings.text_container_height }}px;{% endif %} --snc-hs-text-offset-y: {{ block.settings.text_offset_y | default: 0 }}px;">
+                  <h2 class="snc-hs--title" style="color: {{ block.settings.title_color }}; font-size: {{ block.settings.title_size }}px;">{{ block.settings.title }}</h2>
+                  <div class="snc-hs--text" style="color: {{ block.settings.text_color }}; font-size: {{ block.settings.text_size }}px;">{{ block.settings.text }}</div>
+                </div>
+              </div>
+            </div>
+          {% when 'slide_type_2' %}
+            <div class="snc-horizontal-scroll--slide slide-type-2" {{ block.shopify_attributes }}>
+              <div class="snc-horizontal-scroll--gallery">
+                <div class="snc-hs--img-container-1">
+                  {% if block.settings.image != blank %}
+                    {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+                <div class="snc-hs--img-container-2">
+                  {% if block.settings.image_2 != blank %}
+                    {{ block.settings.image_2 | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="snc-horizontal-scroll--container">
+                <div class="snc-horizontal-scroll--content" style="max-width: {{ block.settings.content_max_width }}px;{% if block.settings.text_container_height > 0 %} --snc-hs-text-min-height: {{ block.settings.text_container_height }}px;{% endif %} --snc-hs-text-offset-y: {{ block.settings.text_offset_y | default: 0 }}px;">
+                  <div class="snc-hs--header-group">
+                    <p class="snc-hs--subtitle" style="color: {{ block.settings.subtitle_color }}; font-size: {{ block.settings.subtitle_size }}px;">{{ block.settings.subtitle }}</p>
+                    <h2 class="snc-hs--title" style="color: {{ block.settings.title_color }}; font-size: {{ block.settings.title_size }}px;">{{ block.settings.title }}</h2>
+                  </div>
+                  <div class="snc-hs--text" style="color: {{ block.settings.text_color }}; font-size: {{ block.settings.text_size }}px;">{{ block.settings.text }}</div>
+                </div>
+              </div>
+            </div>
+          {% when 'slide_type_3' %}
+            <div class="snc-horizontal-scroll--slide slide-type-3" {{ block.shopify_attributes }}>
+              <div class="snc-horizontal-scroll--gallery">
+                <div class="snc-hs--img-container-1">
+                  {% if block.settings.image != blank %}
+                    {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+                <div class="snc-hs--img-container-2">
+                  {% if block.settings.image_2 != blank %}
+                    {{ block.settings.image_2 | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+                <div class="snc-hs--img-container-3">
+                  {% if block.settings.image_3 != blank %}
+                    {{ block.settings.image_3 | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="snc-horizontal-scroll--container">
+                <div class="snc-horizontal-scroll--content" style="max-width: {{ block.settings.content_max_width }}px;{% if block.settings.text_container_height > 0 %} --snc-hs-text-min-height: {{ block.settings.text_container_height }}px;{% endif %} --snc-hs-text-offset-y: {{ block.settings.text_offset_y | default: 0 }}px;">
+                  <div class="snc-hs--header-group">
+                    <p class="snc-hs--subtitle" style="color: {{ block.settings.subtitle_color }}; font-size: {{ block.settings.subtitle_size }}px;">{{ block.settings.subtitle }}</p>
+                    <h2 class="snc-hs--title" style="color: {{ block.settings.title_color }}; font-size: {{ block.settings.title_size }}px;">{{ block.settings.title }}</h2>
+                  </div>
+                  <div class="snc-hs--text" style="color: {{ block.settings.text_color }}; font-size: {{ block.settings.text_size }}px;">{{ block.settings.text }}</div>
+                </div>
+              </div>
+            </div>
+          {% when 'slide_type_4' %}
+            <div
+	              class="snc-horizontal-scroll--slide slide-type-4"
+	              style="
+	                --content-max-width: {{ block.settings.content_max_width }}px;
+	                --logo-width: {{ block.settings.logo_width }}px;
+	                --macro-width: {{ block.settings.macro_width }}vw;
+	                --macro-fit: {{ block.settings.macro_fit }};
+	                --macro-scale: {{ block.settings.macro_scale | divided_by: 100.0 }};
+	                --macro-offset-x: {{ block.settings.macro_offset_x }}px;
+	                --macro-offset-y: {{ block.settings.macro_offset_y }}px;
+	                --snc-hs-text-offset-y: {{ block.settings.text_offset_y | default: 0 }}px;
+	              "
+	              {{ block.shopify_attributes }}
+	            >
+              <div class="snc-hs--type4-macro">
+                {% if block.settings.macro_image != blank %}
+                  {{ block.settings.macro_image | image_url: width: 2200 | image_tag: loading: 'lazy' }}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag }}
+                {% endif %}
+              </div>
+
+	              <div class="snc-horizontal-scroll--container">
+	                <div class="snc-horizontal-scroll--content snc-hs--type4-align-{{ block.settings.alignment }}" style="{% if block.settings.text_container_height > 0 %}--snc-hs-text-min-height: {{ block.settings.text_container_height }}px;{% endif %} --snc-hs-text-offset-y: {{ block.settings.text_offset_y | default: 0 }}px;">
+	                  {% if block.settings.logo_image != blank %}
+	                    {{ block.settings.logo_image | image_url: width: 400 | image_tag: class: 'snc-hs--type4-logo', loading: 'lazy' }}
+	                  {% endif %}
+
+                  <div class="snc-hs--header-group">
+                    <h2 class="snc-hs--title" style="color: {{ block.settings.title_color }}; font-size: {{ block.settings.title_size }}px;">{{ block.settings.title }}</h2>
+                    <div class="snc-hs--text" style="color: {{ block.settings.subtitle_color }}; font-size: {{ block.settings.subtitle_size }}px;">{{ block.settings.subtitle }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('snc-horizontal-scroll-{{ section.id }}');
+    if (!section) return;
+    
+    // Solo activar efecto en desktop
+    if (window.innerWidth <= 768) return;
+
+    const track = section.querySelector('.snc-horizontal-scroll--track');
+    
+    window.addEventListener('scroll', () => {
+      const rect = section.getBoundingClientRect();
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      const scrollDistance = sectionHeight - viewportHeight;
+      
+      if (scrollDistance <= 0) return;
+
+      let progress = -rect.top / scrollDistance;
+      
+      // Clamp progress
+      if (progress < 0) progress = 0;
+      if (progress > 1) progress = 1;
+      
+      const maxTranslate = track.scrollWidth - window.innerWidth;
+      const translateX = progress * maxTranslate;
+      
+      track.style.transform = `translateX(-${translateX}px)`;
+    }, { passive: true });
+  });
+</script>

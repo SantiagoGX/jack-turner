@@ -1,0 +1,563 @@
+<style>
+  .snc-contact-form--root {
+    --contact-max-width: {{ section.settings.max_width | default: 759 }}px;
+    --contact-margin-top: {{ section.settings.margin_top | default: 60 }}px;
+    --contact-margin-bottom: {{ section.settings.margin_bottom | default: 60 }}px;
+    --contact-padding-x: {{ section.settings.padding_horizontal | default: 20 }}px;
+    --contact-text-gap: {{ section.settings.text_gap | default: 40 }}px;
+    --contact-subtitle-color: {{ section.settings.subtitle_color | default: '#0d0d0d' }};
+    --contact-title-color: {{ section.settings.title_color | default: '#0d0d0d' }};
+    --contact-paragraph-color: {{ section.settings.paragraph_color | default: '#333333' }};
+    --contact-form-gap: {{ section.settings.form_gap | default: 15 }}px;
+    --contact-field-padding-vertical: {{ section.settings.field_padding_vertical | default: 30 }}px;
+    --contact-field-padding-horizontal: {{ section.settings.field_padding_horizontal | default: 25 }}px;
+    --contact-field-background: {{ section.settings.field_background | default: '#ffffff' }};
+    --contact-field-border-radius: {{ section.settings.field_border_radius | default: 11 }}px;
+    --contact-field-border-color: {{ section.settings.field_border_color | default: '#e6e6e6' }};
+    --contact-field-focus-border-color: {{ section.settings.field_focus_border_color | default: '#0d0d0d' }};
+    --contact-button-bg: {{ section.settings.button_bg_color | default: '#0d0d0d' }};
+    --contact-button-text: {{ section.settings.button_text_color | default: '#ffffff' }};
+    --contact-button-radius: {{ section.settings.button_border_radius | default: 8 }}px;
+    --contact-separator-color: {{ section.settings.separator_color | default: 'rgba(42, 68, 50, 0.2)' }};
+    --contact-info-bg: {{ section.settings.info_background | default: '#ffffff' }};
+    --contact-info-gap: {{ section.settings.info_gap | default: 20 }}px;
+    --contact-info-subtitle-color: {{ section.settings.info_subtitle_color | default: '#0d0d0d' }};
+    --contact-info-title-color: {{ section.settings.info_title_color | default: '#0d0d0d' }};
+    max-width: var(--contact-max-width);
+    margin: var(--contact-margin-top) auto var(--contact-margin-bottom);
+    padding: 0 var(--contact-padding-x);
+    text-align: center;
+  }
+
+  .snc-contact-form--text-content {
+    margin-bottom: var(--contact-text-gap);
+  }
+
+  .snc-contact-form--subtitle {
+    color: var(--contact-subtitle-color);
+    margin: 0 0 10px 0;
+  }
+
+  .snc-contact-form--title {
+    color: var(--contact-title-color);
+    margin: 0 0 15px 0;
+  }
+
+  .snc-contact-form--paragraph {
+    color: var(--contact-paragraph-color);
+  }
+
+  .snc-contact-form--paragraph p {
+    margin: 0;
+  }
+
+  .snc-contact-form--form-wrapper .form-errors {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .snc-contact-form--form-wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--contact-form-gap);
+  }
+
+  .snc-contact-form--field {
+    margin-bottom: 0;
+  }
+
+  .snc-contact-form--row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 0;
+  }
+
+  .snc-contact-form--row .snc-contact-form--field {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  .snc-contact-form--field label {
+    display: none;
+  }
+
+  .snc-contact-form--field input,
+  .snc-contact-form--field textarea {
+    width: 100%;
+    padding: var(--contact-field-padding-vertical) var(--contact-field-padding-horizontal);
+    background-color: var(--contact-field-background);
+    border-radius: var(--contact-field-border-radius);
+    border: 1px solid var(--contact-field-border-color);
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+    margin: 0 !important;
+  }
+
+  .snc-contact-form--field input:focus,
+  .snc-contact-form--field textarea:focus {
+    outline: none;
+    border-color: var(--contact-field-focus-border-color);
+  }
+
+  .snc-contact-form--submit {
+    text-align: right;
+    margin-top: 0;
+  }
+
+  .snc-contact-form--button {
+    background-color: var(--contact-button-bg);
+    color: var(--contact-button-text);
+    border: none;
+    padding: 14px 30px;
+    font-family: var(--font-heading-family);
+    font-size: 1.6rem;
+    cursor: pointer;
+    border-radius: var(--contact-button-radius);
+    transition: opacity 0.2s ease;
+  }
+
+  .snc-contact-form--button:hover {
+    opacity: 0.85;
+  }
+
+  .snc-contact-form--separator {
+    height: 1px;
+    background-color: var(--contact-separator-color);
+    margin: 30px 0;
+    width: 100%;
+  }
+
+  .snc-contact-form--info-bar {
+    background-color: var(--contact-info-bg);
+    border-radius: 10px;
+    padding: 36px 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+    gap: var(--contact-info-gap);
+  }
+
+  .snc-contact-form--info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .snc-contact-form--info-subtitle {
+    color: var(--contact-info-subtitle-color);
+  }
+
+  .snc-contact-form--info-title {
+    color: var(--contact-info-title-color);
+  }
+
+  @media (max-width: 768px) {
+    
+    .snc-contact-form--row {
+      flex-direction: column;
+    }
+    
+    .snc-contact-form--info-bar {
+      flex-direction: column;
+      padding: 20px;
+      gap: 30px;
+    }
+  }
+</style>
+
+<div class="snc-contact-form--root color-{{ section.settings.color_scheme }}">
+  <div class="snc-contact-form--text-content">
+    {%- if section.settings.subtitle != blank -%}
+      <p class="snc-contact-form--subtitle {{ section.settings.subtitle_style }}">{{ section.settings.subtitle | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="snc-contact-form--title {{ section.settings.title_style }}">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="snc-contact-form--paragraph {{ section.settings.text_style }}">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="snc-contact-form--form-wrapper">
+    {%- form 'contact' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-success">Thanks for reaching out! We'll get back to you soon.</p>
+      {%- endif -%}
+      {{ form.errors | default_errors }}
+
+      <div class="snc-contact-form--row">
+        <div class="snc-contact-form--field">
+          <label for="ContactForm-name-{{ section.id }}">Name</label>
+          <input type="text" id="ContactForm-name-{{ section.id }}" name="contact[name]" value="{{ form.name }}" placeholder="Name" required>
+        </div>
+
+        <div class="snc-contact-form--field">
+          <label for="ContactForm-email-{{ section.id }}">Email</label>
+          <input type="email" id="ContactForm-email-{{ section.id }}" name="contact[email]" value="{{ form.email }}" placeholder="Email" required>
+        </div>
+      </div>
+
+      <div class="snc-contact-form--field">
+        <label for="ContactForm-body-{{ section.id }}">Message</label>
+        <textarea rows="5" id="ContactForm-body-{{ section.id }}" name="contact[body]" placeholder="Message" required>{{ form.body }}</textarea>
+      </div>
+
+      <div class="snc-contact-form--submit">
+        <button type="submit" class="snc-contact-form--button">Send</button>
+      </div>
+    {%- endform -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="snc-contact-form--separator"></div>
+    <div class="snc-contact-form--info-bar">
+      {%- for block in section.blocks -%}
+        <div class="snc-contact-form--info-col" {{ block.shopify_attributes }}>
+          {%- if block.settings.subtitle != blank -%}
+            <div class="snc-contact-form--info-subtitle {{ section.settings.info_subtitle_style }}">{{ block.settings.subtitle | escape }}</div>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}
+            <div class="snc-contact-form--info-title {{ section.settings.info_title_style }}">{{ block.settings.title | escape }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "SNC Contact Form",
+  "class": "section--snc-contact-form",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "CONTÁCTANOS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Estamos aquí para ayudarte"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Párrafo",
+      "default": "<p>Si tienes alguna pregunta, no dudes en contactarnos. Rellena el formulario y nos pondremos en contacto contigo lo antes posible.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tipografía"
+    },
+    {
+      "type": "select",
+      "id": "subtitle_style",
+      "label": "Estilo del Subtítulo",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "emphasis"
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "Estilo del Título",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Estilo del Texto",
+      "options": [
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "h3", "label": "Títulos pequeños" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "header",
+      "content": "Estilos"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Ancho máximo del bloque",
+      "min": 480,
+      "max": 1200,
+      "step": 8,
+      "unit": "px",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margen superior",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margen inferior",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Padding horizontal",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "text_gap",
+      "label": "Espacio texto superior",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "form_gap",
+      "label": "Gap de formulario",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color del subtítulo",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "paragraph_color",
+      "label": "Color del párrafo",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "field_padding_vertical",
+      "label": "Padding vertical de campos",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "field_padding_horizontal",
+      "label": "Padding horizontal de campos",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "color",
+      "id": "field_background",
+      "label": "Fondo de campos",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "field_border_radius",
+      "label": "Redondeo de campos",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "color",
+      "id": "field_border_color",
+      "label": "Color del borde de campos",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "field_focus_border_color",
+      "label": "Color del borde al enfocar",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Color de fondo del botón",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Color del texto del botón",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Redondeo del botón",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Color del separador",
+      "default": "rgba(42, 68, 50, 0.2)"
+    },
+    {
+      "type": "color",
+      "id": "info_background",
+      "label": "Fondo de la barra de info",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "info_gap",
+      "label": "Gap de columnas de info",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "info_subtitle_color",
+      "label": "Color del subtítulo de info",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "info_title_color",
+      "label": "Color del título de info",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "select",
+      "id": "info_subtitle_style",
+      "label": "Estilo Subtítulo Info",
+      "options": [
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "h3", "label": "Títulos pequeños" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "select",
+      "id": "info_title_style",
+      "label": "Estilo Título Info",
+      "options": [
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "h3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info_column",
+      "name": "Columna de información",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Subtítulo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Contact Form",
+      "blocks": [
+        {
+          "type": "info_column",
+          "settings": {
+            "subtitle": "Llámanos",
+            "title": "+52 123 456 7890"
+          }
+        },
+        {
+          "type": "info_column",
+          "settings": {
+            "subtitle": "Escríbenos",
+            "title": "hola@kwara.mx"
+          }
+        },
+        {
+          "type": "info_column",
+          "settings": {
+            "subtitle": "Visítanos",
+            "title": "Michoacán, México"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

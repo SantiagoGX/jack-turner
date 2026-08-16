@@ -1,0 +1,89 @@
+{% doc %}
+  Injects Jack Turner global marketing pixels: Meta (Facebook), Pinterest, GA4, Google tag (GT),
+  and Klaviyo onsite JS (required for name="g" list-sync on Shopify contact forms).
+  Loaded once from layout/theme.liquid in the document head.
+
+  @example
+  {% render 'snc-tracking-v2' %}
+{% enddoc %}
+
+{%- liquid
+  assign fb_pixel_id = '543974622835945'
+  assign pinterest_tag_id = '549756787032'
+  assign ga4_id = 'G-3Z20QPFHXE'
+  assign google_tag_id = 'GT-5DCVJ3J'
+  assign klaviyo_public_key = 'X2CxYi'
+-%}
+
+<!-- Klaviyo onsite JS — intercepts Shopify contact forms and syncs to list via name="g" -->
+<script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id={{ klaviyo_public_key | escape }}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4_id | escape }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', '{{ ga4_id | escape }}');
+  gtag('config', '{{ google_tag_id | escape }}');
+</script>
+
+<script>
+  !(function (f, b, e, v, n, t, s) {
+    if (f.fbq) return;
+    n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = !0;
+    n.version = '2.0';
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s);
+  })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '{{ fb_pixel_id | escape }}');
+  fbq('track', 'PageView');
+</script>
+<noscript>
+  <img
+    height="1"
+    width="1"
+    style="display:none"
+    alt=""
+    src="https://www.facebook.com/tr?id={{ fb_pixel_id | escape }}&ev=PageView&noscript=1"
+  >
+</noscript>
+
+<script>
+  !(function (e) {
+    if (!window.pintrk) {
+      window.pintrk = function () {
+        window.pintrk.queue.push(Array.prototype.slice.call(arguments));
+      };
+      var n = window.pintrk;
+      n.queue = [];
+      n.version = '3.0';
+      var t = document.createElement('script');
+      t.async = !0;
+      t.src = e;
+      var r = document.getElementsByTagName('script')[0];
+      r.parentNode.insertBefore(t, r);
+    }
+  })('https://s.pinimg.com/ct/core.js');
+  pintrk('load', '{{ pinterest_tag_id | escape }}');
+  pintrk('page');
+</script>
+<noscript>
+  <img
+    height="1"
+    width="1"
+    style="display:none"
+    alt=""
+    src="https://ct.pinterest.com/v3/?tid={{ pinterest_tag_id | escape }}&event=init&noscript=1"
+  >
+</noscript>

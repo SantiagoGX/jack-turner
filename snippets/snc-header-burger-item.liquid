@@ -1,0 +1,69 @@
+{%- comment -%}
+  Renders a burger menu item (desktop or mobile)
+  Accepts:
+  - link: {Object} Link object
+  - block: {Object} Block object (desktop_drawer or mobile_drawer)
+{%- endcomment -%}
+{%- liquid
+  assign enable_advanced_colors = block.settings.enable_advanced_colors
+-%}
+<li class="custom-header--burger-nav-item" data-burger-item>
+  <a 
+    href="{{ link.url }}" 
+    class="custom-header--burger-nav-link"
+    {% if link.links.size > 0 %}data-burger-submenu-trigger{% endif %}
+  >
+    <span>
+      {%- if enable_advanced_colors -%}
+        {%- for i in (1..20) -%}
+          {%- assign name_key = 'color_name_' | append: i -%}
+          {%- assign hex_key = 'color_hex_' | append: i -%}
+          {%- assign setting_name = settings[name_key] | downcase | strip -%}
+          {%- assign link_title_lower = link.title | downcase | strip -%}
+          {%- if setting_name != blank and setting_name == link_title_lower -%}
+            <span class="snc-color-swatch" style="--swatch-color: {{ settings[hex_key] }};"></span>
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {{ link.title }}
+    </span>
+    {%- if link.links.size > 0 -%}
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="custom-header--burger-arrow">
+        <path d="M1 3.5L5 7.5L9 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    {%- endif -%}
+  </a>
+  
+  {%- if link.links.size > 0 -%}
+    <div class="custom-header--burger-submenu">
+      <div class="custom-header--burger-submenu-content">
+        <ul class="custom-header--burger-subnav">
+          {%- for child in link.links -%}
+            <li>
+              <a href="{{ child.url }}">
+                {%- if enable_advanced_colors -%}
+                  {%- for i in (1..20) -%}
+                    {%- assign name_key = 'color_name_' | append: i -%}
+                    {%- assign hex_key = 'color_hex_' | append: i -%}
+                    {%- assign setting_name = settings[name_key] | downcase | strip -%}
+                    {%- assign child_title_lower = child.title | downcase | strip -%}
+                    {%- if setting_name != blank and setting_name == child_title_lower -%}
+                      <span class="snc-color-swatch" style="--swatch-color: {{ settings[hex_key] }};"></span>
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+                {{ child.title }}
+              </a>
+            </li>
+          {%- else -%}
+            <li class="custom-header--burger-nav-item custom-header--burger-nav-item--empty">
+              <span>Asigna un menú lateral desde la configuración de la sección.</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  {%- endif -%}
+</li>

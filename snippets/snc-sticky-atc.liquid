@@ -1,0 +1,181 @@
+{%- if product -%}
+<div class="snc-sticky-bar" data-snc-sticky-bar aria-hidden="true">
+  <div class="snc-sticky-bar--inner">
+    <a href="{{ product.url }}" class="snc-sticky-bar--left">
+      {%- if product.featured_image != blank -%}
+        <img src="{{ product.featured_image | image_url: width: 120 }}" alt="{{ product.title | escape }}" width="48" height="48" class="snc-sticky-bar--thumb" loading="lazy">
+      {%- endif -%}
+      <div class="snc-sticky-bar--info">
+        <div class="snc-sticky-bar--title">{{ product.title }}</div>
+        <div class="snc-sticky-bar--price" data-snc-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</div>
+      </div>
+    </a>
+    <button type="button" class="snc-sticky-bar--cta" data-snc-sticky-cta>Add to Cart</button>
+  </div>
+</div>
+
+<style>
+  .snc-sticky-bar {
+    position: fixed;
+    top: calc(var(--custom-header-total-height, 102.53px) - 1px);
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transform: translateY(-100%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .snc-sticky-bar.is-visible {
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+  }
+  .snc-sticky-bar--inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 48px;
+    height: 60px;
+    box-sizing: border-box;
+  }
+  .snc-sticky-bar--left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: #0d0d0d;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .snc-sticky-bar--thumb {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 0;
+    background: #f4f2ef;
+    flex: 0 0 44px;
+  }
+  .snc-sticky-bar--info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .snc-sticky-bar--title {
+    font-size: 10px;
+    font-weight: 400;
+    color: #4a4a48;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .snc-sticky-bar--price {
+    font-size: 15px;
+    font-weight: 400;
+    color: #0d0d0d;
+    letter-spacing: 0.01em;
+  }
+  .snc-sticky-bar--cta {
+    font-size: 10px;
+    font-weight: 500;
+    color: #ffffff;
+    background: #0d0d0d;
+    border: none;
+    padding: 11px 28px;
+    border-radius: 0;
+    cursor: pointer;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+    flex: 0 0 auto;
+  }
+  .snc-sticky-bar--cta:hover { opacity: 0.7; }
+  .snc-sticky-bar--cta:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 767px) {
+    .snc-sticky-bar--inner { padding: 0 20px; gap: 12px; height: 54px; }
+    .snc-sticky-bar--thumb { display: none; }
+    .snc-sticky-bar--title { font-size: 9px; letter-spacing: 0.14em; }
+    .snc-sticky-bar--price { font-size: 14px; }
+    .snc-sticky-bar--cta { padding: 10px 20px; font-size: 9px; letter-spacing: 0.12em; }
+  }
+</style>
+
+<script>
+(function() {
+  var bar = document.querySelector('[data-snc-sticky-bar]');
+  if (!bar) return;
+  var section = document.querySelector('.pdp-hero--root[data-section-id="{{ section.id }}"]')
+             || document.querySelector('.pdp-hero--root');
+  if (!section) return;
+  var barCta = bar.querySelector('[data-snc-sticky-cta]');
+  var primaryAtc = section.querySelector('[data-add-to-cart]');
+  if (!primaryAtc) return;
+
+  // Forward click to main ATC so all variant logic runs.
+  if (barCta) {
+    barCta.addEventListener('click', function() { primaryAtc.click(); });
+  }
+
+  // Mirror disabled state from primary button.
+  function syncState() {
+    barCta.disabled = primaryAtc.disabled;
+    barCta.textContent = primaryAtc.disabled ? 'Unavailable' : 'Add to Cart';
+  }
+  var obs = new MutationObserver(syncState);
+  obs.observe(primaryAtc, { attributes: true, childList: true, subtree: true });
+  syncState();
+
+  function show() {
+    bar.classList.add('is-visible');
+    bar.setAttribute('aria-hidden', 'false');
+  }
+  function hide() {
+    bar.classList.remove('is-visible');
+    bar.setAttribute('aria-hidden', 'true');
+  }
+
+  var mobileQuery = window.matchMedia('(max-width: 767px)');
+
+  // Mobile: trigger based on ATC button scroll position.
+  var initialAtcTop = 0;
+  function measure() {
+    var rect = primaryAtc.getBoundingClientRect();
+    initialAtcTop = rect.top + window.scrollY;
+  }
+  measure();
+  window.addEventListener('load', measure);
+  window.addEventListener('resize', measure);
+
+  function onScroll() {
+    var shouldShow;
+    if (mobileQuery.matches) {
+      var triggerY = Math.max(
+        Math.min(initialAtcTop - window.innerHeight * 0.7, window.innerHeight * 0.5),
+        60
+      );
+      shouldShow = window.scrollY > triggerY;
+    } else {
+      // Desktop: show only after the hero section has fully scrolled out of view.
+      shouldShow = section.getBoundingClientRect().bottom <= 0;
+    }
+    if (shouldShow) { show(); } else { hide(); }
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { onScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  onScroll();
+})();
+</script>
+{%- endif -%}

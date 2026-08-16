@@ -1,0 +1,231 @@
+{% comment %}
+  Styled page content for legal pages (terms, privacy, shipping, refunds, etc.).
+  Use with `templates/page.legal.json` and assign it to your legal Pages in Shopify admin.
+{% endcomment %}
+
+{%- liquid
+  assign max_width = section.settings.max_width
+-%}
+
+<section
+  class="snc-legal-page"
+  style="
+    --snc-legal-max-width: {{ max_width }}px;
+    --snc-legal-padding-top: {{ section.settings.padding_top }}px;
+    --snc-legal-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --snc-legal-title-color: {{ section.settings.title_color }};
+    --snc-legal-text-color: {{ section.settings.text_color }};
+    --snc-legal-muted-color: {{ section.settings.muted_color }};
+    --snc-legal-accent: {{ section.settings.accent_color }};
+  "
+>
+  <div class="snc-legal-page__inner">
+    <header class="snc-legal-page__header">
+      {%- if section.settings.kicker != blank -%}
+        <div class="snc-legal-page__kicker">{{ section.settings.kicker | escape }}</div>
+      {%- endif -%}
+      {%- if section.settings.show_title -%}
+        <h1 class="snc-legal-page__title">{{ page.title | escape }}</h1>
+      {%- endif -%}
+      {%- if section.settings.show_subtitle and section.settings.subtitle != blank -%}
+        <div class="snc-legal-page__subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- if section.settings.show_content -%}
+      <div class="snc-legal-page__content rte">
+        {{ page.content }}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .snc-legal-page {
+    padding-top: calc(var(--snc-legal-padding-top) + var(--custom-header-total-height, 0px));
+    padding-bottom: var(--snc-legal-padding-bottom);
+  }
+
+  .snc-legal-page__inner {
+    max-width: var(--snc-legal-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .snc-legal-page__header {
+    text-align: center;
+    margin-bottom: 34px;
+  }
+
+  .snc-legal-page__kicker {
+    font-family: var(--font-body-family);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--snc-legal-muted-color);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .snc-legal-page__title {
+    margin: 0 0 10px 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--snc-legal-title-color);
+  }
+
+  .snc-legal-page__subtitle {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--snc-legal-muted-color);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .snc-legal-page__content {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--snc-legal-text-color);
+  }
+
+  .snc-legal-page__content h2,
+  .snc-legal-page__content h3,
+  .snc-legal-page__content h4 {
+    font-family: var(--font-heading-family);
+    color: var(--snc-legal-title-color);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 2em 0 0.8em;
+  }
+
+  .snc-legal-page__content p {
+    margin: 0 0 1.2em;
+  }
+
+  .snc-legal-page__content a {
+    color: var(--snc-legal-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .snc-legal-page__content ul,
+  .snc-legal-page__content ol {
+    padding-left: 1.2em;
+    margin: 0 0 1.2em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SNC Legal Page",
+  "class": "section--snc-legal-page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 420,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "label": "Max width",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 220,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 220,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker (optional)",
+      "default": "LEGAL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subtitle",
+      "label": "Show subtitle",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_content",
+      "label": "Show content",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Muted color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Link color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Legal Page"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,350 @@
+{% schema %}
+{
+  "name": "SNC Animated Collections",
+  "class": "section--snc-animated-collections",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenido"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Nuestras Colecciones"
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "Estilo del Título",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto / Párrafo"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Estilo del Texto",
+      "options": [
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "h3", "label": "Títulos pequeños" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "min": 200,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho del párrafo",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Estilo de Colecciones"
+    },
+    {
+      "type": "range",
+      "id": "collection_font_size",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño de fuente (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "collection_font_size_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente (Móvil)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "collection_gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Espacio entre títulos",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "collection_color",
+      "label": "Color de texto",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "collection_text_transform",
+      "label": "Transformación de texto",
+      "options": [
+        { "value": "none", "label": "Normal" },
+        { "value": "uppercase", "label": "Mayúsculas" },
+        { "value": "lowercase", "label": "Minúsculas" },
+        { "value": "capitalize", "label": "Capitalizar" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho de imágenes laterales",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "inactive_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacidad inactiva",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Botón"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Ver todo"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "select",
+      "id": "button_preset",
+      "label": "Estilo de Botón",
+      "options": [
+        { "value": "1", "label": "Preset 1" },
+        { "value": "2", "label": "Preset 2" },
+        { "value": "3", "label": "Preset 3" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "vh",
+      "label": "Altura mínima (VH)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Superior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Inferior",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Colección",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Título personalizado (Opcional)"
+        },
+        {
+          "type": "url",
+          "id": "custom_link",
+          "label": "Enlace personalizado (Opcional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Imagen Izquierda"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Imagen Derecha"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Animated Collections",
+      "category": "Animated"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .snc-animated-collections {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    text-align: center;
+    min-height: {{ section.settings.min_height }}vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .snc-animated-collections__header { padding: 0 20px; }
+  .snc-animated-collections__title { margin: 0 0 15px; }
+  .snc-animated-collections__text { max-width: {{ section.settings.text_width }}px; margin: 0 auto; }
+  
+  .snc-animated-collections__content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    position: relative;
+    align-items: center;
+  }
+  
+  .snc-animated-collections__images {
+    width: {{ section.settings.image_width }}px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    pointer-events: none;
+  }
+  
+  .snc-ac-image-wrapper { grid-area: 1 / 1; opacity: 0; transition: opacity 0.8s ease-in-out; width: 100%; }
+  .snc-ac-image-wrapper.is-active { opacity: 1; }
+  .snc-ac-image-wrapper img { width: 100%; height: auto; display: block; border-radius: 12px; }
+
+  .snc-animated-collections__list { display: flex; flex-direction: column; align-items: center; gap: {{ section.settings.collection_gap }}px; width: 100%; max-width: 800px; }
+  
+  .snc-animated-collections__item {
+    display: block; text-decoration: none; line-height: 1.1;
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+    opacity: {{ section.settings.inactive_opacity | divided_by: 100.0 }};
+    color: {{ section.settings.collection_color }};
+    font-size: {{ section.settings.collection_font_size }}px;
+    font-weight: 700; cursor: pointer;
+    text-transform: {{ section.settings.collection_text_transform }};
+  }
+  .snc-animated-collections__item.is-active { opacity: 1; transform: scale(1.02); }
+  .snc-animated-collections__item:hover { opacity: 1; }
+  .snc-animated-collections__footer a { 
+    font-size: {{ settings.button_size }}px;
+    text-transform: {{ settings.button_transform }};
+  }
+  @media (max-width: 768px) {
+    .snc-animated-collections__item { font-size: {{ section.settings.collection_font_size_mobile }}px; }
+    .snc-animated-collections__images { display: none; }
+  }
+</style>
+
+<div class="snc-animated-collections color-{{ section.settings.color_scheme }}">
+  <div class="snc-animated-collections__header">
+    {% if section.settings.title != blank %}<h2 class="snc-animated-collections__title {{ section.settings.title_style }}">{{ section.settings.title }}</h2>{% endif %}
+    {% if section.settings.text != blank %}<div class="snc-animated-collections__text {{ section.settings.text_style }}">{{ section.settings.text }}</div>{% endif %}
+  </div>
+  
+  <div class="snc-animated-collections__content">
+    <div class="snc-animated-collections__images left">
+      {% for block in section.blocks %}
+        <div class="snc-ac-image-wrapper" data-index="{{ forloop.index0 }}">
+          {% if block.settings.image_1 != blank %}{{ block.settings.image_1 | image_url: width: 600 | image_tag: loading: 'lazy' }}{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="snc-animated-collections__list">
+      {% for block in section.blocks %}
+        {% assign collection = block.settings.collection %}
+        {% assign title = block.settings.custom_title | default: collection.title %}
+        {% assign url = block.settings.custom_link | default: collection.url %}
+        {% if title != blank %}<a href="{{ url }}" class="snc-animated-collections__item" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>{{ title }}</a>{% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="snc-animated-collections__images right">
+      {% for block in section.blocks %}
+        <div class="snc-ac-image-wrapper" data-index="{{ forloop.index0 }}">
+          {% if block.settings.image_2 != blank %}{{ block.settings.image_2 | image_url: width: 600 | image_tag: loading: 'lazy' }}{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if section.settings.button_label != blank %}<div class="snc-animated-collections__footer"><a href="{{ section.settings.button_link }}" class="btn-preset-{{ section.settings.button_preset }}">{{ section.settings.button_label }}</a></div>{% endif %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const items = document.querySelectorAll('#shopify-section-{{ section.id }} .snc-animated-collections__item');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const index = entry.target.dataset.index;
+          const images = document.querySelectorAll(`#shopify-section-{{ section.id }} .snc-ac-image-wrapper[data-index="${index}"]`);
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-active');
+            images.forEach(img => img.classList.add('is-active'));
+          } else {
+            entry.target.classList.remove('is-active');
+            images.forEach(img => img.classList.remove('is-active'));
+          }
+        });
+      }, { root: null, rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      items.forEach(item => observer.observe(item));
+    } else { items.forEach(item => item.classList.add('is-active')); }
+  });
+</script>

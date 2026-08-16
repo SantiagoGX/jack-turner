@@ -1,0 +1,394 @@
+{% schema %}
+{
+  "name": "3D Info Section",
+  "class": "section--snc-3d-info-section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen Superior",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen Inferior",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "scroll_height",
+      "min": 100,
+      "max": 500,
+      "step": 50,
+      "unit": "vh",
+      "label": "Altura de scroll (Duración)",
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Contenido Central"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Imagen 2 (Emergente)"
+    },
+    {
+      "type": "range",
+      "id": "image_2_width",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Ancho Imagen 2 (Pantalla)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho de imagen",
+      "default": 300
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto"
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "min": 200,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho máximo de texto",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "text_initial_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Posición inicial horizontal (Texto)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "text_move_range",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Desplazamiento del texto (Velocidad)",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "image_move_range",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Desplazamiento de la imagen (Velocidad)",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Grosor de fuente",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Contenido Lateral (Izquierda)"
+    },
+    {
+      "type": "text",
+      "id": "side_title",
+      "label": "Título Lateral",
+      "default": "Discover more"
+    },
+    {
+      "type": "select",
+      "id": "side_title_style",
+      "label": "Estilo del Título Lateral",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "side_text",
+      "label": "Texto Lateral"
+    },
+    {
+      "type": "select",
+      "id": "side_text_style",
+      "label": "Estilo del Texto Lateral",
+      "options": [
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "h3", "label": "Títulos pequeños" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "text",
+      "id": "side_button_label",
+      "label": "Texto Botón",
+      "default": "Ver detalles"
+    },
+    {
+      "type": "url",
+      "id": "side_button_link",
+      "label": "Enlace Botón"
+    },
+    {
+      "type": "select",
+      "id": "side_button_preset",
+      "label": "Estilo de Botón Lateral",
+      "options": [
+        { "value": "1", "label": "Preset 1" },
+        { "value": "2", "label": "Preset 2" },
+        { "value": "3", "label": "Preset 3" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "side_button_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Horizontal Botón",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "3D Info Section"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .snc-3d-info-section {
+    width: 100vw;
+    height: {{ section.settings.scroll_height }}vh;
+    background-color: {{ section.settings.background_color }};
+    position: relative;
+    margin-left: calc(50% - 50vw);
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+  .snc-3d-sticky-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .snc-3d-info-image {
+    width: {{ section.settings.image_width }}px;
+    height: auto;
+    max-width: 90vw;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    will-change: left;
+  }
+  .snc-3d-info-text {
+    position: absolute;
+    top: 50%;
+    left: {{ section.settings.text_initial_x }}%;
+    transform: translate(-50%, -50%);
+    max-width: {{ section.settings.text_max_width }}px;
+    width: max-content;
+    padding: 0 20px;
+    z-index: 2;
+    text-align: center;
+    will-change: left, opacity;
+  }
+  .snc-3d-info-text > * {
+    font-size: {{ section.settings.text_size }}px;
+    font-weight: {{ section.settings.text_weight }};
+  }
+  .snc-3d-side-content {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translateY(-50%);
+    width: 35%;
+    max-width: 500px;
+    opacity: 0;
+    z-index: 3;
+    text-align: left;
+    will-change: opacity, transform;
+  }
+  .snc-3d-side-title { margin: 0 0 15px; }
+  .snc-3d-side-text { margin-bottom: 25px; }
+  .snc-3d-side-content .snc-3d-btn {
+    padding-left: {{ section.settings.side_button_padding_horizontal }}px !important;
+    padding-right: {{ section.settings.side_button_padding_horizontal }}px !important;
+    font-size: {{ settings.button_size }}px;
+    text-transform: {{ settings.button_transform }};
+  }
+  .snc-3d-info-image-2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: {{ section.settings.image_2_width }}%;
+    object-fit: cover;
+    z-index: 1;
+    transform: translateY(100%);
+  }
+</style>
+
+<div class="snc-3d-info-section color-{{ section.settings.color_scheme }}">
+  <div class="snc-3d-sticky-container">
+    {% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 1000 | image_tag: class: 'snc-3d-info-image', loading: 'lazy' }}{% endif %}
+    {% if section.settings.text != blank %}<div class="snc-3d-info-text">{{ section.settings.text }}</div>{% endif %}
+    
+    {% if section.settings.image_2 != blank %}{{ section.settings.image_2 | image_url: width: 1200 | image_tag: class: 'snc-3d-info-image-2', loading: 'lazy' }}{% endif %}
+
+    <div class="snc-3d-side-content">
+      {% if section.settings.side_title != blank %}<h2 class="snc-3d-side-title {{ section.settings.side_title_style }}">{{ section.settings.side_title }}</h2>{% endif %}
+      {% if section.settings.side_text != blank %}<div class="snc-3d-side-text {{ section.settings.side_text_style }}">{{ section.settings.side_text }}</div>{% endif %}
+      {% if section.settings.side_button_label != blank %}
+        <a href="{{ section.settings.side_button_link }}" class="snc-3d-btn btn-preset-{{ section.settings.side_button_preset }}">{{ section.settings.side_button_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.querySelector('.section--snc-3d-info-section .snc-3d-info-section');
+    if(!section) return;
+    
+    const image = section.querySelector('.snc-3d-info-image');
+    const centerText = section.querySelector('.snc-3d-info-text');
+    const sideContent = section.querySelector('.snc-3d-side-content');
+    const image2 = section.querySelector('.snc-3d-info-image-2');
+    
+    window.addEventListener('scroll', () => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const sectionHeight = rect.height;
+      const scrollableDistance = sectionHeight - viewportHeight;
+      
+      if (scrollableDistance <= 0) return;
+
+      // Calculamos el progreso del scroll dentro de la sección (0 a 1)
+      let progress = -rect.top / scrollableDistance;
+      progress = Math.max(0, Math.min(1, progress));
+      
+      // 1. Mover Imagen y Texto Central hacia la derecha (50% -> 75%)
+      const imageMoveRange = {{ section.settings.image_move_range }};
+      const textMoveRange = {{ section.settings.text_move_range }};
+      const textInitialX = {{ section.settings.text_initial_x }};
+      
+      const currentImageLeft = 50 + (progress * imageMoveRange);
+      const currentTextLeft = textInitialX + (progress * textMoveRange);
+      
+      if(image) image.style.left = `${currentImageLeft}%`;
+      if(centerText) centerText.style.left = `${currentTextLeft}%`;
+      
+      // 2. Desvanecer Texto Central (Empieza al 40%, termina al 60%)
+      let textOpacity = 1;
+      if (progress > 0.4) {
+        textOpacity = 1 - ((progress - 0.4) / 0.2);
+        textOpacity = Math.max(0, Math.min(1, textOpacity));
+      }
+      if(centerText) centerText.style.opacity = textOpacity;
+      
+      // 3. Aparecer Contenido Lateral (Empieza al 50%, termina al 80%)
+      let sideOpacity = 0;
+      let sideSlide = 30;
+      if (progress > 0.5) {
+        sideOpacity = (progress - 0.5) / 0.3;
+        sideOpacity = Math.max(0, Math.min(1, sideOpacity));
+        sideSlide = 30 - (sideOpacity * 30);
+      }
+      if(sideContent) {
+        sideContent.style.opacity = sideOpacity;
+        sideContent.style.transform = `translateY(calc(-50% + ${sideSlide}px))`;
+      }
+      
+      // 4. Desvanecer Imagen 1 y Emerger Imagen 2 (Empieza al 75%, termina al 100%)
+      if (progress > 0.75) {
+        const phaseProgress = (progress - 0.75) / 0.25;
+        
+        // Imagen 1 Fade Out
+        if(image) image.style.opacity = Math.max(0, 1 - phaseProgress);
+        
+        // Imagen 2 Slide Up
+        if(image2) {
+            const translateY = 100 - (phaseProgress * 100);
+            image2.style.transform = `translateY(${Math.max(0, translateY)}%)`;
+        }
+      } else {
+        if(image) image.style.opacity = 1;
+        if(image2) image2.style.transform = `translateY(100%)`;
+      }
+    }, { passive: true });
+  });
+</script>

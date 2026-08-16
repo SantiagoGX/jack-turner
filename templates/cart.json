@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "snc-cart-page",
+      "settings": {
+        "max_width": 980,
+        "margin_top": 60,
+        "margin_bottom": 60,
+        "checkout_label": "Checkout",
+        "empty_title": "Your cart is empty",
+        "empty_text": "<p>Looks like you haven’t added anything yet.</p>",
+        "empty_button_label": "Continue shopping",
+        "empty_button_link": "/collections"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

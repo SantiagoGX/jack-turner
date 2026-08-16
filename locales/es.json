@@ -1,0 +1,45 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "shopify": {
+    "checkout": {
+      "contact": {
+        "address2_label": "Colonia",
+        "company_label": "Color de la casa"
+      },
+      "field_errors": {
+        "address_company_blank": "Introduce el color de la casa.",
+        "address_company_too_long": "El nombre de la referencia es demasiado largo (el máximo es de 255 caracteres).",
+        "address_company_contains_emojis": "El nombre de la referencia no puede contener emojis.",
+        "address_company_contains_mathematical_symbols": "El nombre de la referencia no puede contener símbolos matemáticos.",
+        "address_address2_blank": "Introduce tu colonia."
+      },
+      "wallets": {
+        "errors": {
+          "missing": {
+            "address2": "Introduce tu colonia."
+          }
+        }
+      },
+      "payment": {
+        "card_security_notice": "Todas las transacciones son 100% seguras y encriptadas. Nota: Si eliges PayPal, se realizará un cobro previo para verificar los fondos de tu tarjeta. Este monto se devolverá a la tarjeta al finalizar la compra."
+      }
+    }
+  },
+  "customer_accounts": {
+    "payment_methods": {
+      "card_fields": {
+        "tooltip": {
+          "card_security_notice": "Todas las transacciones son 100% seguras y encriptadas. Nota: Si eliges PayPal, se realizará un cobro previo para verificar los fondos de tu tarjeta. Este monto se devolverá a la tarjeta al finalizar la compra."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{%- comment -%}
+  SNC Main Account Section
+  Replica la estructura de "Mi cuenta" solicitada.
+{%- endcomment -%}
+
+<style>
+  .snc-account--wrapper {
+    max-width: 1512px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    margin-top: var(--MT);
+    margin-bottom: var(--MB);
+    box-sizing: border-box;
+  }
+  
+  .snc-account--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+  }
+  
+  .snc-account--title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    font-family: var(--font-main, sans-serif);
+    color: {{ section.settings.main_color | default: '#0d0d0d' }};
+  }
+  
+  .snc-account--logout {
+    text-decoration: none;
+    color: inherit;
+    font-size: 14px;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .snc-account--logout:hover { opacity: 0.7; }
+  
+  .snc-account--hr {
+    border: 0;
+    border-top: 1px solid #e5e5e5;
+    margin: 0 0 30px 0;
+    height: 1px;
+    display: block;
+  }
+  
+  .snc-account--grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -20px;
+    margin-top: 12px;
+  }
+  
+  .snc-account--col {
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+  
+  .snc-account--col-main {
+    width: 66.666%;
+  }
+  
+  .snc-account--col-sidebar {
+    width: 33.333%;
+  }
+  
+  .snc-account--subtitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 8px;
+    font-family: var(--font-main, sans-serif);
+    color: {{ section.settings.main_color | default: '#0d0d0d' }};
+    text-align: left;
+  }
+  
+  .snc-account--address {
+    font-style: normal;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .snc-account--link {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 6px;
+    display: inline-block;
+  }
+  .snc-account--link:hover { text-decoration: underline; }
+  
+  @media (max-width: 768px) {
+    .snc-account--col-main,
+    .snc-account--col-sidebar {
+      width: 100%;
+    }
+    .snc-account--col-sidebar {
+      margin-top: 40px;
+    }
+  }
+</style>
+
+<div class="snc-account--wrapper" style="--MT: {{ section.settings.margin_top }}px; --MB: {{ section.settings.margin_bottom }}px;">
+
+  <header class="snc-account--header">
+    <h1 class="snc-account--title">{{ section.settings.title | default: 'Mi cuenta' }}</h1>
+    <div class="account-header__right">
+      <a href="{{ routes.account_logout_url }}" class="snc-account--logout">{{ section.settings.log_out_text | default: 'Cerrar sesión' }}</a>
+    </div>
+  </header>
+
+  <hr class="snc-account--hr">
+
+  <div class="snc-account--grid">
+
+    <div class="snc-account--col snc-account--col-main">
+      <h2 class="snc-account--subtitle">{{ section.settings.orders_title | default: 'Historial de pedidos' }}</h2>
+
+      {% paginate customer.orders by 20 %}
+        {% if customer.orders.size > 0 %}
+          {%- comment -%} Aquí iría la tabla de pedidos si hubiera pedidos {%- endcomment -%}
+          <p>Tienes {{ customer.orders.size }} pedidos.</p>
+        {% else %}
+          <p>{{ section.settings.no_orders_text | default: 'No has realizado pedidos aún.' }}</p>
+        {% endif %}
+
+        {%- if paginate.pages > 1 -%}
+          {{ paginate | default_pagination }}
+        {%- endif -%}
+      {% endpaginate %}
+    </div>
+
+    <div class="snc-account--col snc-account--col-sidebar">
+      <h2 class="snc-account--subtitle">{{ section.settings.account_details_title | default: 'Detalles de la cuenta' }}</h2>
+
+      <div class="snc-account--address">
+        {{ customer.default_address | format_address }}
+      </div>
+
+      <p><a class="snc-account--link" href="{{ routes.account_addresses_url }}">{{ section.settings.view_addresses_text | default: 'Ver direcciones' }} ({{ customer.addresses_count }})</a></p>
+    </div>
+
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "SNC Account",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "color",
+      "id": "main_color",
+      "label": "Color principal",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "header",
+      "content": "Textos"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título principal",
+      "default": "Mi cuenta"
+    },
+    {
+      "type": "text",
+      "id": "log_out_text",
+      "label": "Texto cerrar sesión",
+      "default": "Cerrar sesión"
+    },
+    {
+      "type": "text",
+      "id": "orders_title",
+      "label": "Título historial de pedidos",
+      "default": "Historial de pedidos"
+    },
+    {
+      "type": "text",
+      "id": "no_orders_text",
+      "label": "Texto sin pedidos",
+      "default": "No has realizado pedidos aún."
+    },
+    {
+      "type": "text",
+      "id": "account_details_title",
+      "label": "Título detalles de cuenta",
+      "default": "Detalles de la cuenta"
+    },
+    {
+      "type": "text",
+      "id": "view_addresses_text",
+      "label": "Texto ver direcciones",
+      "default": "Ver direcciones"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen superior",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen inferior",
+      "default": 40
+    }
+  ]
+}
+{% endschema %}

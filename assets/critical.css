@@ -1,0 +1,378 @@
+/** Critical CSS for the theme. This file is included on every page. */
+
+/* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100svh;
+}
+
+html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
+  overflow: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  border-radius: var(--style-border-radius-inputs);
+}
+
+select {
+  background-color: var(--color-background);
+  color: currentcolor;
+}
+
+dialog {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+p {
+  text-wrap: pretty;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+button,
+a,
+input,
+textarea,
+select,
+.snc-footer--credits-right {
+  overflow-wrap: break-word;
+  letter-spacing: -0.04em;
+}
+
+p:empty {
+  display: none;
+}
+
+:is(p, h1, h2, h3, h4, h5, h6):first-child,
+:empty:first-child + :where(p, h1, h2, h3, h4, h5, h6) {
+  margin-block-start: 0;
+}
+
+:is(p, h1, h2, h3, h4, h5, h6):last-child,
+:where(p, h1, h2, h3, h4, h5, h6) + :has(+ :empty:last-child) {
+  margin-block-end: 0;
+}
+
+/** Theme styles below */
+body {
+  font-family: var(--font-primary--family);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/** Section layout utilities */
+
+/**
+ * Setup a grid that enables both full-width and constrained layouts
+ * depending on the class of the child elements.
+ *
+ * By default, a minimum content margin is set on the left and right
+ * sides of the section and the content is centered in the viewport to
+ * not exceed the maximum page width.
+ *
+ * When a child element is given the `full-width` class, it will span
+ * the entire viewport.
+ */
+.shopify-section {
+  --content-width: min(
+    calc(var(--page-width) - var(--page-margin) * 2),
+    calc(100% - var(--page-margin) * 2)
+  );
+  --content-margin: minmax(var(--page-margin), 1fr);
+  --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
+
+  /* This is required to make <img> elements work as background images */
+  position: relative;
+  grid-template-columns: var(--content-grid);
+  display: grid;
+  width: 100%;
+}
+
+/* Child elements, by default, are constrained to the central column of the grid. */
+.shopify-section > * {
+  grid-column: 2;
+}
+
+/* Child elements that use the full-width utility class span the entire viewport. */
+.shopify-section > .full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* ESTILOS PARA POLITICAS */
+.shopify-policy__container{
+  max-width: 600px !important;
+  margin: 180px auto !important;
+}
+
+.shopify-policy__title{
+  text-align: left !important;
+  margin-bottom: 20px;
+}
+
+.shopify-policy__body .rte div{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.shopify-policy__body .rte div p,
+.shopify-policy__body .rte div li{
+  opacity: 0.7;
+  line-height: 25px;;
+}
+
+.shopify-policy__body .rte div li{
+  margin-bottom: 10px;
+}
+
+#open-tidio-chat{
+  background-color: transparent !important;
+  color: inherit !important;
+  border: 0 !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  text-decoration: underline;
+}
+
+#open-tidio-chat:hover{
+  cursor: pointer;
+}
+
+/* === LOOX WIDGET OVERRIDES — Jack Turner Luxury Style === */
+
+/* ---- Global reset for all Loox elements ---- */
+[class*="loox"],
+[id*="loox"],
+[data-loox] {
+  border-radius: 0 !important;
+  font-family: inherit !important;
+  letter-spacing: -0.04em !important;
+}
+
+/* ---- Floating tab / badge (if ever enabled) ---- */
+.loox-tab,
+.loox-badge,
+#loox-tab {
+  border-radius: 0 !important;
+  background: #0d0d0d !important;
+  color: #f4f2ef !important;
+  font-family: inherit !important;
+  box-shadow: none !important;
+}
+
+/* ---- Main widget wrapper ---- */
+.loox-widget,
+.loox-reviews-widget,
+#loox-reviews {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* ---- Section header / summary bar ---- */
+.loox-widget__header,
+.loox-reviews__header,
+.loox-summary {
+  border-radius: 0 !important;
+  border-bottom: 1px solid #c9c4bc !important;
+  background: transparent !important;
+  color: #0d0d0d !important;
+  padding-bottom: 24px !important;
+}
+
+/* ---- Average score / overall rating ---- */
+.loox-summary__average,
+.loox-summary__count,
+.loox-rating__count,
+.loox-widget__rating-count {
+  color: #0d0d0d !important;
+  font-size: 13px !important;
+}
+
+/* ---- Stars — filled ---- */
+.loox-star--filled path,
+.loox-star--full path,
+[class*="loox-star"][class*="fill"] path,
+.loox-star[fill] {
+  fill: #0d0d0d !important;
+  stroke: none !important;
+}
+
+/* ---- Stars — empty ---- */
+.loox-star--empty path,
+[class*="loox-star"][class*="empty"] path {
+  fill: none !important;
+  stroke: #c9c4bc !important;
+}
+
+/* ---- SVG star elements (catches both old and new Loox) ---- */
+.loox-star svg,
+[class*="loox"] svg {
+  border-radius: 0 !important;
+}
+
+/* ---- Filter bar ---- */
+.loox-filter,
+.loox-reviews__filter,
+.loox-widget__filter {
+  border: 1px solid #c9c4bc !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #4a4a48 !important;
+  font-size: 13px !important;
+}
+
+.loox-filter:hover,
+.loox-filter--active,
+.loox-reviews__filter--active {
+  background: #0d0d0d !important;
+  color: #f4f2ef !important;
+  border-color: #0d0d0d !important;
+}
+
+/* ---- Review cards ---- */
+.loox-review,
+.loox-review-card,
+.loox-reviews__item {
+  background: #f4f2ef !important;
+  border: 1px solid #c9c4bc !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 24px !important;
+}
+
+/* ---- Review card — author name ---- */
+.loox-review__author,
+.loox-review-card__author,
+.loox-review__name {
+  color: #0d0d0d !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+/* ---- Review card — date ---- */
+.loox-review__date,
+.loox-review-card__date,
+.loox-review__time {
+  color: #4a4a48 !important;
+  font-size: 12px !important;
+}
+
+/* ---- Review card — body text ---- */
+.loox-review__body,
+.loox-review-card__body,
+.loox-review__text {
+  color: #4a4a48 !important;
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+}
+
+/* ---- Verified badge ---- */
+.loox-review__verified,
+.loox-review-card__verified,
+[class*="loox"][class*="verified"] {
+  background: transparent !important;
+  border: 1px solid #c9c4bc !important;
+  border-radius: 0 !important;
+  color: #4a4a48 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  padding: 2px 6px !important;
+}
+
+/* ---- Review media / photo thumbnails ---- */
+.loox-review__media img,
+.loox-review-card__media img,
+[class*="loox"][class*="media"] img {
+  border-radius: 0 !important;
+  border: 1px solid #c9c4bc !important;
+}
+
+/* ---- CTA buttons (Write a review, Load more) ---- */
+.loox-btn,
+.loox-reviews__btn,
+[class*="loox"][class*="btn"],
+[class*="loox"][class*="button"] {
+  background: #0d0d0d !important;
+  color: #f4f2ef !important;
+  border: 1px solid #0d0d0d !important;
+  border-radius: 0 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+  padding: 12px 24px !important;
+  font-weight: 500 !important;
+}
+
+.loox-btn:hover,
+.loox-reviews__btn:hover,
+[class*="loox"][class*="btn"]:hover {
+  background: #f4f2ef !important;
+  color: #0d0d0d !important;
+}
+
+/* ---- Pagination dots / arrows ---- */
+[class*="loox"][class*="arrow"],
+[class*="loox"][class*="pagination"],
+[class*="loox"][class*="nav"] {
+  border-radius: 0 !important;
+  border: 1px solid #c9c4bc !important;
+  background: transparent !important;
+  color: #0d0d0d !important;
+}
+
+/* ---- Progress bars (rating breakdown) ---- */
+[class*="loox"][class*="bar"] {
+  border-radius: 0 !important;
+  background: #c9c4bc !important;
+}
+
+[class*="loox"][class*="bar"][class*="fill"],
+[class*="loox"][class*="progress"] {
+  background: #0d0d0d !important;
+  border-radius: 0 !important;
+}
+
+/* ---- Modal overlay (photo lightbox) ---- */
+[class*="loox"][class*="modal"],
+[class*="loox"][class*="lightbox"],
+[class*="loox"][class*="overlay"] {
+  border-radius: 0 !important;
+}
+
+[class*="loox"][class*="modal"] img,
+[class*="loox"][class*="lightbox"] img {
+  border-radius: 0 !important;
+}

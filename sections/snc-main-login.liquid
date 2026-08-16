@@ -1,0 +1,201 @@
+{%- comment -%}
+  SNC Main Login
+  Maneja el inicio de sesión y recuperación de contraseña.
+{%- endcomment -%}
+
+<style>
+  .snc-login--section {
+    padding: 80px 20px;
+    max-width: {{ section.settings.max_width | default: 440 }}px;
+    margin-top: {{ section.settings.margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | default: 0 }}px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: var(--font-main, sans-serif);
+    width: 100%;
+  }
+  .snc-login--title {
+    font-size: 32px;
+    color: {{ section.settings.title_color | default: '#0d0d0d' }};
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+  .snc-login--field {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  .snc-login--input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .snc-login--input:focus {
+    border-color: #0d0d0d;
+  }
+  .snc-login--btn {
+    background-color: {{ section.settings.btn_bg_color | default: '#0d0d0d' }};
+    color: {{ section.settings.btn_text_color | default: '#FFFFFF' }};
+    border: none;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-size: {{ section.settings.btn_font_size | default: 16 }}px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+  }
+  .snc-login--btn:hover { opacity: 0.9; }
+  .snc-login--links {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: {{ section.settings.links_font_size | default: 14 }}px;
+  }
+  .snc-login--link {
+    color: {{ section.settings.links_color | default: '#0d0d0d' }};
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .form-errors { color: #D0021B; margin-bottom: 15px; font-size: 14px; }
+</style>
+
+<div class="snc-login--section" data-section-id="{{ section.id }}" data-section-type="snc-main-login">
+  <div id="login-form">
+    <h1 class="snc-login--title">Sign In</h1>
+    {% form 'customer_login' %}
+      {{ form.errors | default_errors }}
+      <div class="snc-login--field">
+        <input type="email" name="customer[email]" class="snc-login--input" placeholder="Email address" required>
+      </div>
+      <div class="snc-login--field">
+        <input type="password" name="customer[password]" class="snc-login--input" placeholder="Password" required>
+      </div>
+      <button type="submit" class="snc-login--btn">Sign In</button>
+      <div class="snc-login--links">
+        <a href="#recover" class="snc-login--link" onclick="document.getElementById('login-form').style.display='none';document.getElementById('recover-form').style.display='block';return false;">Forgot your password?</a>
+        <a href="{{ routes.account_register_url }}" class="snc-login--link">Create account</a>
+      </div>
+    {% endform %}
+  </div>
+
+  <div id="recover-form" style="display: none;">
+    <h1 class="snc-login--title">Reset Password</h1>
+    <p style="margin-bottom: 20px; color: #666;">We will send you an email to reset your password.</p>
+    {% form 'recover_customer_password' %}
+      {{ form.errors | default_errors }}
+      <div class="snc-login--field">
+        <input type="email" name="email" class="snc-login--input" placeholder="Email address" required>
+      </div>
+      <button type="submit" class="snc-login--btn">Submit</button>
+      <div class="snc-login--links">
+        <a href="#login" class="snc-login--link" onclick="document.getElementById('recover-form').style.display='none';document.getElementById('login-form').style.display='block';return false;">Cancel</a>
+      </div>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SNC Login",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenedor"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen superior",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen inferior",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 300,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho del formulario",
+      "default": 440
+    },
+    {
+      "type": "header",
+      "content": "Título"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "header",
+      "content": "Botón"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Color de fondo",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Color del texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "btn_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Enlaces (Olvidar contraseña / Crear cuenta)"
+    },
+    {
+      "type": "color",
+      "id": "links_color",
+      "label": "Color de enlaces",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "range",
+      "id": "links_font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente",
+      "default": 14
+    }
+  ]
+}
+{% endschema %}

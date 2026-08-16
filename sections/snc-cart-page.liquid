@@ -1,0 +1,1152 @@
+{% comment %}
+  Custom cart page section that mirrors the Side Cart (drawer) UI.
+{% endcomment %}
+
+{%- liquid
+  assign cart_wishlist_icon_url = settings.global_icon_wishlist
+  if cart_wishlist_icon_url != blank
+    assign cart_wishlist_icon_url = cart_wishlist_icon_url | image_url: width: 40
+  else
+    assign cart_wishlist_icon_url = 'favorite.svg' | asset_url
+  endif
+
+  assign free_shipping_threshold_val = section.settings.free_shipping_threshold | default: 2000
+  assign free_shipping_text_before = section.settings.free_shipping_text_before | default: "You're"
+  assign free_shipping_text_after = section.settings.free_shipping_text_after | default: 'away from free shipping'
+  assign free_shipping_success_message = section.settings.free_shipping_success_message | default: '<p><strong>Congrats!</strong> You unlocked free shipping.</p>'
+  assign cart_shipping_text_color = section.settings.cart_shipping_text_color | default: '#333333'
+  assign cart_shipping_success_text_color = section.settings.cart_shipping_success_text_color | default: '#0d0d0d'
+  assign cart_shipping_bar_margin_bottom = section.settings.cart_shipping_bar_margin_bottom | default: 20
+  assign cart_guarantee_text = section.settings.cart_guarantee_text | default: 'Your purchase is protected by our service policy.'
+  assign cart_guarantee_icon = section.settings.cart_guarantee_icon
+  assign cart_payment_icons = section.settings.cart_payment_icons | split: ','
+
+  assign upsell_collection = section.settings.upsell_collection
+  assign upsell_title = section.settings.upsell_title
+  assign upsell_text = section.settings.upsell_text
+  assign upsell_bg_color = section.settings.upsell_bg_color | default: '#F5F5F5'
+  assign upsell_title_color = section.settings.upsell_title_color | default: '#333333'
+  assign upsell_text_color = section.settings.upsell_text_color | default: '#666666'
+  assign upsell_title_size = section.settings.upsell_title_size | default: 14
+  assign upsell_text_size = section.settings.upsell_text_size | default: 12
+  assign upsell_limit = section.settings.upsell_limit | default: 5
+  assign upsell_vertical_padding = section.settings.upsell_vertical_padding | default: 15
+  assign upsell_item_height = section.settings.upsell_item_height | default: 100
+  assign upsell_item_padding = section.settings.upsell_item_padding | default: 10
+  assign upsell_margin_top = section.settings.upsell_margin_top | default: 20
+  assign upsell_margin_bottom = section.settings.upsell_margin_bottom | default: 20
+  assign upsell_add_button_text = section.settings.upsell_add_button_text | default: 'Add'
+  assign upsell_show_plus_icon = section.settings.upsell_show_plus_icon
+
+  assign cart_tab_label = section.settings.cart_tab_label | default: 'Cart'
+  assign wishlist_tab_label = section.settings.wishlist_tab_label | default: 'Wishlist'
+  assign wishlist_title_text = section.settings.wishlist_title_text | default: 'Your wishlist'
+  assign wishlist_description_text = section.settings.wishlist_description_text | default: 'Save your favorites here.'
+  assign wishlist_layout = section.settings.wishlist_layout | default: 'grid'
+
+  assign empty_title = section.settings.empty_title | default: 'Your cart is empty'
+  assign empty_text = section.settings.empty_text
+  assign empty_button_label = section.settings.empty_button_label | default: 'Continue shopping'
+  assign empty_button_link = section.settings.empty_button_link | default: routes.all_products_collection_url
+
+  assign checkout_label = section.settings.checkout_label | default: 'Checkout'
+-%}
+
+<style>
+  .custom-cart-page {
+    margin-top: calc(var(--custom-header-total-height, 0px) + {{ section.settings.margin_top }}px);
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding: 0 20px 40px;
+    max-width: {{ section.settings.max_width }}px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .custom-cart-page .custom-header--cart-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .custom-cart-page .custom-header--cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .custom-cart-page .custom-header--cart-remove {
+    background: none;
+    border: 0;
+    color: #6c6c6c;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
+    text-decoration: underline;
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  }
+
+  .custom-cart-page .custom-header--cart-toast {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 24px;
+    background: rgba(42, 68, 50, 0.95);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1010;
+  }
+
+  .custom-cart-page .custom-header--cart-toast.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -10px);
+  }
+
+  .custom-cart-page .custom-header--cart-switch-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .custom-cart-page .custom-header--cart-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #f0f0f0;
+    border-radius: 100px;
+    padding: 4px;
+  }
+
+  .custom-cart-page .custom-header--cart-switch-btn {
+    background: none;
+    border: none;
+    padding: 6px 16px;
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: none;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+
+  .custom-cart-page .custom-header--cart-switch-btn.is-active {
+    color: #0d0d0d;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .custom-cart-page .custom-header--wishlist-view-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .custom-cart-page .custom-header--wishlist-header h3 {
+    margin: 0;
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 20px;
+    color: #0d0d0d;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .custom-cart-page .custom-header--wishlist-header p {
+    margin: 0;
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.4;
+  }
+
+  .custom-cart-page .custom-header--wishlist-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .custom-cart-page .custom-header--wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .custom-cart-page .custom-header--wishlist-grid.custom-header--wishlist-layout-list {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-cart-page .custom-header--wishlist-items[data-wishlist-layout="list"] .custom-header--wishlist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-cart-page .custom-header--wishlist-grid-item {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.04);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .custom-cart-page .custom-header--wishlist-select {
+    max-width: 100%;
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #E2E2E2;
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    font-size: 12px;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .custom-cart-page {
+      padding: 0 15px 30px;
+      margin-top: calc(var(--custom-header-total-height, 0px) + 10px);
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .custom-cart-page .custom-header--wishlist-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+</style>
+
+<div
+  class="custom-cart-page"
+  data-snc-cart-page
+  style="
+    --cart-shipping-text-color: {{ cart_shipping_text_color }};
+    --cart-shipping-success-text-color: {{ cart_shipping_success_text_color }};
+    --cart-shipping-bar-margin-bottom: {{ cart_shipping_bar_margin_bottom }}px;
+    --cart-summary-margin-bottom: 20px;
+    --upsell-bg-color: {{ upsell_bg_color }};
+    --upsell-title-color: {{ upsell_title_color }};
+    --upsell-text-color: {{ upsell_text_color }};
+    --upsell-title-size: {{ upsell_title_size }}px;
+    --upsell-text-size: {{ upsell_text_size }}px;
+    --upsell-vertical-padding: {{ upsell_vertical_padding }}px;
+    --upsell-item-height: {{ upsell_item_height }}px;
+    --upsell-item-padding: {{ upsell_item_padding }}px;
+    --upsell-margin-top: {{ upsell_margin_top }}px;
+    --upsell-margin-bottom: {{ upsell_margin_bottom }}px;
+  "
+>
+  <div class="custom-header--cart-switch-wrapper">
+    <div class="custom-header--cart-switch">
+      <button type="button" class="custom-header--cart-switch-btn is-active" data-cart-view="cart">
+        {{ cart_tab_label }}
+      </button>
+      <button type="button" class="custom-header--cart-switch-btn" data-cart-view="wishlist">
+        {{ wishlist_tab_label }}
+      </button>
+    </div>
+  </div>
+
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post">
+      <div class="custom-header--cart-body">
+        <div id="custom-header--cart-view">
+          {%- comment -%} Free shipping progress {%- endcomment -%}
+          {%- assign free_shipping_threshold = free_shipping_threshold_val | times: 100 -%}
+          {%- assign cart_total = cart.total_price -%}
+          {%- assign remaining_amount = free_shipping_threshold | minus: cart_total -%}
+          {%- if remaining_amount > 0 -%}
+            {%- assign progress_percentage = cart_total | times: 100 | divided_by: free_shipping_threshold | at_least: 0 | at_most: 100 -%}
+          {%- else -%}
+            {%- assign progress_percentage = 100 -%}
+            {%- assign remaining_amount = 0 -%}
+          {%- endif -%}
+
+          <div class="custom-header--cart-shipping-bar">
+            {%- if cart_total >= free_shipping_threshold -%}
+              <div class="custom-header--cart-shipping-text free-shipping-achieved">
+                {{ free_shipping_success_message }}
+              </div>
+            {%- else -%}
+              <div class="custom-header--cart-shipping-text">
+                {{ free_shipping_text_before }} <strong class="custom-header--cart-shipping-amount">{{ remaining_amount | money_without_trailing_zeros }}</strong> {{ free_shipping_text_after }}
+              </div>
+            {%- endif -%}
+            <div class="custom-header--cart-progress-container">
+              <div class="custom-header--cart-progress-bar">
+                <div class="custom-header--cart-progress-fill" style="width: {{ progress_percentage }}%;"></div>
+              </div>
+              <div class="custom-header--cart-progress-labels">
+                <span class="custom-header--cart-progress-label">$0</span>
+                <span class="custom-header--cart-progress-label">{{ free_shipping_threshold | money_without_trailing_zeros }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="custom-header--cart-items">
+            {% for item in cart.items %}
+              <div class="custom-header--cart-item" data-cart-item-key="{{ item.key }}" data-item-price="{{ item.final_price }}">
+                <div class="custom-header--cart-item-image-container">
+                  {% if item.image %}
+                    <a href="{{ item.url }}" style="display:block; height:100%;">
+                      <img
+                        src="{{ item.image | image_url: width: 113 }}"
+                        alt="{{ item.image.alt | escape }}"
+                        class="custom-header--cart-item-image"
+                        width="113"
+                        loading="lazy"
+                      >
+                    </a>
+                  {% else %}
+                    <a href="{{ item.url }}" style="display:block; height:100%;">
+                      <div class="custom-header--cart-item-image-placeholder"></div>
+                    </a>
+                  {% endif %}
+                </div>
+                <div class="custom-header--cart-item-details">
+                  <div class="custom-header--cart-item-heading">
+                    <h3 class="custom-header--cart-item-title">
+                      <a href="{{ item.url }}" style="text-decoration: none; color: inherit;">{{ item.product.title }}</a>
+                    </h3>
+                    <div class="custom-header--cart-item-actions">
+                      <button
+                        type="button"
+                        class="custom-header--cart-wishlist"
+                        data-cart-wishlist="{{ item.product.handle }}"
+                        data-handle="{{ item.product.handle }}"
+                        aria-label="Wishlist"
+                      >
+                        <img src="{{ cart_wishlist_icon_url }}" alt="Wishlist">
+                      </button>
+                      <button
+                        type="button"
+                        class="custom-header--cart-remove"
+                        data-cart-remove="{{ item.key }}"
+                        aria-label="Remove"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                  {% if item.variant.title != 'Default Title' %}
+                    <div class="custom-header--cart-item-variant">{{ item.variant.title }}</div>
+                  {% endif %}
+                  <div class="custom-header--cart-item-meta">
+                    <div class="custom-header--cart-item-price">
+                      {% if item.original_price != item.final_price %}
+                        <span class="custom-header--cart-item-price-original">{{ item.original_price | money }}</span>
+                      {% endif %}
+                      <span class="custom-header--cart-item-price-final">{{ item.final_price | money }}</span>
+                    </div>
+                    <div class="custom-header--cart-item-qty">
+                      <div class="custom-header--cart-qty-selector">
+                        <button
+                          type="button"
+                          class="custom-header--cart-qty-btn"
+                          data-qty-change="-1"
+                          data-key="{{ item.key }}"
+                          aria-label="Decrease quantity"
+                        >
+                          <img src="{% if settings.global_icon_minus_dark != blank %}{{ settings.global_icon_minus_dark | image_url: width: 20 }}{% else %}{{ 'minus.svg' | asset_url }}{% endif %}" alt="" class="custom-header--cart-qty-icon" loading="lazy">
+                        </button>
+                        <input
+                          type="text"
+                          name="updates[]"
+                          value="{{ item.quantity }}"
+                          class="custom-header--cart-qty-input"
+                          aria-label="Quantity"
+                          inputmode="numeric"
+                          readonly
+                        >
+                        <button
+                          type="button"
+                          class="custom-header--cart-qty-btn"
+                          data-qty-change="1"
+                          data-key="{{ item.key }}"
+                          aria-label="Increase quantity"
+                        >
+                          <img src="{% if settings.global_icon_plus_dark != blank %}{{ settings.global_icon_plus_dark | image_url: width: 20 }}{% else %}{{ 'plus.svg' | asset_url }}{% endif %}" alt="" class="custom-header--cart-qty-icon" loading="lazy">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          {%- if upsell_collection != blank and collections[upsell_collection].products_count > 0 -%}
+            <div class="custom-header--cart-upsell">
+              <div class="custom-header--cart-upsell-header">
+                <div>
+                  {%- if upsell_title != blank -%}
+                    <h4 class="custom-header--cart-upsell-title">{{ upsell_title }}</h4>
+                  {%- endif -%}
+                  {%- if upsell_text != blank -%}
+                    <p class="custom-header--cart-upsell-text">{{ upsell_text }}</p>
+                  {%- endif -%}
+                </div>
+                <div class="custom-header--cart-upsell-nav">
+                  <button type="button" class="custom-header--cart-upsell-arrow prev" aria-label="Previous"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9L1 5L5 1"/></svg></button>
+                  <button type="button" class="custom-header--cart-upsell-arrow next" aria-label="Next"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 9L5 5L1 1"/></svg></button>
+                </div>
+              </div>
+              <div class="custom-header--cart-upsell-slider">
+                {%- for product in collections[upsell_collection].products limit: upsell_limit -%}
+                  {%- assign variant = product.selected_or_first_available_variant -%}
+                  <div class="custom-header--cart-upsell-item">
+                    <div class="custom-header--cart-upsell-image-container"><img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title }}" loading="lazy"></div>
+                    <div class="custom-header--cart-upsell-details">
+                      <h5 class="custom-header--cart-upsell-product-title">{{ product.title }}</h5>
+                      <div class="custom-header--cart-upsell-meta">
+                        <span class="custom-header--cart-upsell-price">{{ product.price | money }}</span>
+                        <button
+                          type="button"
+                          class="custom-header--cart-upsell-add"
+                          data-upsell-add="{{ variant.id }}"
+                          aria-label="{{ upsell_add_button_text }} {{ product.title }}"
+                        >
+                          {{ upsell_add_button_text }}
+                          {%- if upsell_show_plus_icon -%}<span style="margin-left: 4px;">+</span>{%- endif -%}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div id="custom-header--wishlist-view" style="display: none;">
+          <div class="custom-header--wishlist-view-inner">
+            <div class="custom-header--wishlist-header">
+              <h3>{{ wishlist_title_text }}</h3>
+              <p>{{ wishlist_description_text }}</p>
+            </div>
+            <div class="custom-header--wishlist-items custom-header--cart-items" data-wishlist-layout="{{ wishlist_layout }}">
+              <!-- Items injected via JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-header--cart-summary" data-cart-summary>
+          <div class="custom-header--cart-summary-row">
+            <span>Subtotal</span>
+            <span class="custom-header--cart-subtotal-price">{{ cart.original_total_price | money }}</span>
+          </div>
+          {% if cart.total_discounts > 0 %}
+            <div class="custom-header--cart-summary-row custom-header--cart-discount-row">
+              <span>Discount</span>
+              <span class="custom-header--cart-discount-amount">-{{ cart.total_discounts | money }}</span>
+            </div>
+          {% endif %}
+          <div class="custom-header--cart-summary-row">
+            <span>Shipping</span>
+            <span class="custom-header--cart-shipping-value">Calculated at checkout</span>
+          </div>
+          <div class="custom-header--cart-summary-row total">
+            <span>Total</span>
+            <span class="custom-header--cart-total-price">{{ cart.total_price | money }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="custom-header--cart-footer" data-cart-footer>
+        <button type="submit" name="checkout" class="custom-header--cart-checkout-button">{{ checkout_label }}</button>
+        <div class="custom-header--cart-payment-info">
+          <div class="custom-header--cart-guarantee">
+            {%- if cart_guarantee_icon != blank -%}
+              <img
+                src="{{ cart_guarantee_icon | image_url: width: 20 }}"
+                alt=""
+                class="custom-header--cart-guarantee-icon"
+                width="20"
+                height="20"
+                loading="lazy"
+                aria-hidden="true"
+              >
+            {%- endif -%}
+            <p class="custom-header--cart-guarantee-text">{{ cart_guarantee_text }}</p>
+          </div>
+          <div class="custom-header--cart-payment-icons">
+            {%- for type in cart_payment_icons -%}
+              {%- assign icon_key = type | strip | downcase | replace: 'mastercard', 'master' | replace: 'amex', 'american_express' -%}
+              {{ icon_key | payment_type_svg_tag: class: 'icon icon--full-color' }}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </form>
+  {% else %}
+    <div class="custom-header--cart-empty">
+      <h3 class="custom-header--cart-empty-title">{{ empty_title }}</h3>
+      {% if empty_text != blank %}
+        <div class="custom-header--cart-empty-text">{{ empty_text }}</div>
+      {% endif %}
+      <div class="custom-header--cart-empty-buttons">
+        <a href="{{ empty_button_link }}" class="custom-header--cart-empty-btn">{{ empty_button_label }}</a>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="custom-header--cart-toast" aria-live="polite"></div>
+</div>
+
+<script>
+  (() => {
+    const sectionId = {{ section.id | json }};
+    const sectionUrl = {{ routes.cart_url | append: '?sections=' | append: section.id | json }};
+    const FAVORITES_KEY = 'snc_favorites';
+
+    function getFavorites() {
+      try {
+        const raw = window.localStorage.getItem(FAVORITES_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveFavorites(list) {
+      try {
+        window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    function refreshCartPage() {
+      return fetch(sectionUrl, { headers: { Accept: 'application/json' } })
+        .then(r => r.json())
+        .then(data => {
+          const html = data && data[sectionId];
+          if (!html) return;
+          const temp = document.createElement('div');
+          temp.innerHTML = html;
+          const nextPage = temp.querySelector('[data-snc-cart-page]');
+          const currentPage = document.querySelector('[data-snc-cart-page]');
+          if (currentPage && nextPage) {
+            currentPage.replaceWith(nextPage);
+            initCartPage();
+          }
+          if (typeof window.updateSideCart === 'function') window.updateSideCart();
+        })
+        .catch(() => {});
+    }
+
+    window.refreshCartPage = refreshCartPage;
+
+    function initCartPage() {
+      const cartPage = document.querySelector('[data-snc-cart-page]');
+      if (!cartPage) return;
+      const form = cartPage.querySelector('form');
+      const toastEl = cartPage.querySelector('.custom-header--cart-toast');
+      let toastTimeout = null;
+
+      function showCartToast(message) {
+        if (!toastEl) return;
+        toastEl.textContent = message;
+        toastEl.classList.add('is-visible');
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toastEl.classList.remove('is-visible');
+        }, 3000);
+      }
+
+      function updateWishlistButtons() {
+        const favorites = getFavorites();
+        cartPage.querySelectorAll('[data-cart-wishlist]').forEach(btn => {
+          const handle = btn.dataset.handle || '';
+          btn.classList.toggle('is-active', handle && favorites.includes(handle));
+        });
+      }
+
+      cartPage.querySelectorAll('[data-cart-wishlist]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const handle = btn.dataset.handle;
+          if (!handle) return;
+          const favorites = getFavorites();
+          const index = favorites.indexOf(handle);
+          if (index >= 0) favorites.splice(index, 1);
+          else favorites.push(handle);
+          saveFavorites(favorites);
+          updateWishlistButtons();
+          window.dispatchEvent(new CustomEvent('snc:wishlist-updated'));
+        });
+      });
+
+      cartPage.querySelectorAll('[data-qty-change]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const key = btn.dataset.key;
+          const change = parseInt(btn.dataset.qtyChange, 10);
+          const input = btn.closest('.custom-header--cart-qty-selector')?.querySelector('.custom-header--cart-qty-input');
+          if (!input || !key || Number.isNaN(change)) return;
+          const prevQty = parseInt(input.value || '0', 10);
+          const nextQty = Math.max(0, prevQty + change);
+          input.value = nextQty;
+
+          fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: key, quantity: nextQty })
+          })
+            .then(async (res) => {
+              let data = null;
+              try { data = await res.json(); } catch (err) {}
+              if (!res.ok) {
+                showCartToast('Not enough inventory available.');
+                throw new Error('Cart change rejected');
+              }
+              if (change > 0 && data && Array.isArray(data.items)) {
+                const line = data.items.find(i => i && i.key === key);
+                if (line && typeof line.quantity === 'number' && line.quantity < nextQty) {
+                  showCartToast('Not enough inventory available.');
+                }
+              }
+              return data;
+            })
+            .then(() => refreshCartPage())
+            .catch(() => refreshCartPage());
+        });
+      });
+
+      cartPage.querySelectorAll('[data-cart-remove]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const key = btn.dataset.cartRemove;
+          if (!key) return;
+          fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: key, quantity: 0 })
+          })
+            .then(() => refreshCartPage())
+            .catch(() => refreshCartPage());
+        });
+      });
+
+      cartPage.querySelectorAll('.custom-header--cart-upsell-add').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const id = btn.dataset.upsellAdd;
+          if (!id || btn.disabled) return;
+          btn.disabled = true;
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: [{ id: id, quantity: 1 }] })
+          })
+            .then(() => refreshCartPage())
+            .catch(() => refreshCartPage());
+        });
+      });
+
+      const upsellSlider = cartPage.querySelector('.custom-header--cart-upsell-slider');
+      const upsellPrev = cartPage.querySelector('.custom-header--cart-upsell-arrow.prev');
+      const upsellNext = cartPage.querySelector('.custom-header--cart-upsell-arrow.next');
+      if (upsellSlider && upsellPrev && upsellNext) {
+        const scrollByItem = (dir) => {
+          const item = upsellSlider.querySelector('.custom-header--cart-upsell-item');
+          if (!item) return;
+          const itemWidth = item.offsetWidth;
+          upsellSlider.scrollBy({ left: dir * (itemWidth + 15), behavior: 'smooth' });
+        };
+        upsellPrev.addEventListener('click', () => scrollByItem(-1));
+        upsellNext.addEventListener('click', () => scrollByItem(1));
+      }
+
+      updateWishlistButtons();
+
+      const switchBtns = cartPage.querySelectorAll('[data-cart-view]');
+      const cartView = cartPage.querySelector('#custom-header--cart-view');
+      const wishlistView = cartPage.querySelector('#custom-header--wishlist-view');
+
+      function renderWishlist() {
+        const container = wishlistView ? wishlistView.querySelector('.custom-header--wishlist-items') : null;
+        if (!container) return;
+
+        const favorites = getFavorites();
+        if (favorites.length === 0) {
+          container.innerHTML = `
+            <div class="custom-header--cart-empty" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;">
+              <p style="color:#666;">No favorites yet</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.classList.add('custom-header--cart-items');
+        container.innerHTML = '<div style="text-align:center; padding: 20px;">Loading...</div>';
+        const productsMap = {};
+        const layout = container.dataset.wishlistLayout || 'grid';
+
+        const promises = favorites.map(handle =>
+          fetch(`/products/${handle}.js`)
+            .then(res => res.ok ? res.json() : null)
+            .catch(() => null)
+        );
+
+        Promise.all(promises).then(products => {
+          const validProducts = products.filter(p => p);
+          if (validProducts.length === 0) {
+            container.innerHTML = `
+              <div class="custom-header--cart-empty" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;">
+                <p style="color:#666;">No favorites yet</p>
+              </div>
+            `;
+            return;
+          }
+
+          let html = '';
+          validProducts.forEach(product => {
+            productsMap[product.handle] = product;
+            const selectedVariant = product.variants.find(v => v.available) || product.variants[0];
+            const image = (selectedVariant.featured_image && selectedVariant.featured_image.src) ? selectedVariant.featured_image.src : (product.featured_image || '');
+            const variantId = selectedVariant.id;
+
+            let optionsHtml = '';
+            if (product.options.length > 1 || (product.options.length === 1 && product.options[0].values.length > 1 && product.options[0].name !== 'Title')) {
+              product.options.forEach((option, index) => {
+                const selectedValue = selectedVariant.options[index];
+                optionsHtml += `<select class="custom-header--wishlist-select" data-product-handle="${product.handle}" data-option-index="${index}" aria-label="${option.name}">`;
+                option.values.forEach(value => {
+                  const isSelected = value === selectedValue ? 'selected' : '';
+                  optionsHtml += `<option value="${value.replace(/"/g, '&quot;')}" ${isSelected}>${value}</option>`;
+                });
+                optionsHtml += `</select>`;
+              });
+            }
+
+            html += `
+              <div class="custom-header--cart-item custom-header--wishlist-item custom-header--wishlist-grid-item" data-product-handle="${product.handle}">
+                <div class="custom-header--cart-item-image-container">
+                  <a href="${product.url}">
+                    <img src="${image}" alt="${product.title}" class="custom-header--cart-item-image" loading="lazy">
+                  </a>
+                </div>
+                <div class="custom-header--cart-item-details">
+                  <div class="custom-header--cart-item-heading">
+                    <h3 class="custom-header--cart-item-title">${product.title}</h3>
+                    <button class="custom-header--wishlist-remove" type="button" aria-label="Remove" data-wishlist-remove="${product.handle}">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                  </div>
+                  <div class="custom-header--cart-item-variant custom-header--wishlist-grid-options">
+                    ${optionsHtml}
+                  </div>
+                  <div class="custom-header--cart-item-meta">
+                    <div class="custom-header--cart-item-qty">
+                      <button class="custom-header--cart-upsell-add custom-header--wishlist-add" type="button" aria-label="Add ${product.title}" data-wishlist-add="${variantId}" ${selectedVariant.available ? '' : 'disabled'}>
+                        <span class="custom-header--cart-upsell-add-text">Add</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+
+          const grid = document.createElement('div');
+          grid.className = 'custom-header--wishlist-grid';
+          grid.classList.add(`custom-header--wishlist-layout-${layout}`);
+          grid.innerHTML = html;
+          container.innerHTML = '';
+          container.appendChild(grid);
+
+          container.querySelectorAll('[data-wishlist-add]').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const id = this.dataset.wishlistAdd;
+              if (!id) return;
+              this.disabled = true;
+              fetch('/cart/add.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ items: [{ id, quantity: 1 }] })
+              })
+                .then(() => {
+                  this.disabled = false;
+                  const cartBtn = cartPage.querySelector('[data-cart-view="cart"]');
+                  if (cartBtn) cartBtn.click();
+                  refreshCartPage();
+                  if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
+                })
+                .catch(() => { this.disabled = false; });
+            });
+          });
+
+          container.querySelectorAll('[data-wishlist-remove]').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const handle = this.dataset.wishlistRemove;
+              const favorites = getFavorites().filter(h => h !== handle);
+              saveFavorites(favorites);
+              const item = this.closest('.custom-header--wishlist-item') || this.closest('.custom-header--cart-item');
+              if (item) item.remove();
+              if (favorites.length === 0) renderWishlist();
+              window.dispatchEvent(new CustomEvent('snc:wishlist-updated'));
+            });
+          });
+        });
+      }
+
+      if (switchBtns.length && cartView && wishlistView) {
+        switchBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const view = btn.dataset.cartView;
+            switchBtns.forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            const cartSummary = cartPage.querySelector('[data-cart-summary]');
+            const cartFooter = cartPage.querySelector('[data-cart-footer]');
+
+            if (view === 'cart') {
+              cartView.style.display = 'block';
+              wishlistView.style.display = 'none';
+              if (cartSummary) cartSummary.style.display = 'block';
+              if (cartFooter) cartFooter.style.display = 'flex';
+            } else {
+              cartView.style.display = 'none';
+              wishlistView.style.display = 'block';
+              if (cartSummary) cartSummary.style.display = 'none';
+              if (cartFooter) cartFooter.style.display = 'none';
+              renderWishlist();
+            }
+          });
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCartPage, { once: true });
+    } else {
+      initCartPage();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SNC Cart Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 420,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Max width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Tabs"
+    },
+    {
+      "type": "text",
+      "id": "cart_tab_label",
+      "label": "Cart tab label",
+      "default": "Cart"
+    },
+    {
+      "type": "text",
+      "id": "wishlist_tab_label",
+      "label": "Wishlist tab label",
+      "default": "Wishlist"
+    },
+    {
+      "type": "text",
+      "id": "wishlist_title_text",
+      "label": "Wishlist title",
+      "default": "Your wishlist"
+    },
+    {
+      "type": "text",
+      "id": "wishlist_description_text",
+      "label": "Wishlist description",
+      "default": "Save your favorites here."
+    },
+    {
+      "type": "select",
+      "id": "wishlist_layout",
+      "label": "Wishlist layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "list", "label": "List" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "header",
+      "content": "Empty cart"
+    },
+    {
+      "type": "text",
+      "id": "empty_title",
+      "label": "Empty title",
+      "default": "Your cart is empty"
+    },
+    {
+      "type": "richtext",
+      "id": "empty_text",
+      "label": "Empty text",
+      "default": "<p>Looks like you haven’t added anything yet.</p>"
+    },
+    {
+      "type": "text",
+      "id": "empty_button_label",
+      "label": "Empty button label",
+      "default": "Continue shopping"
+    },
+    {
+      "type": "url",
+      "id": "empty_button_link",
+      "label": "Empty button link",
+      "default": "/collections"
+    },
+    {
+      "type": "header",
+      "content": "Checkout"
+    },
+    {
+      "type": "text",
+      "id": "checkout_label",
+      "label": "Checkout button label",
+      "default": "Checkout"
+    },
+    {
+      "type": "header",
+      "content": "Free shipping bar"
+    },
+    {
+      "type": "number",
+      "id": "free_shipping_threshold",
+      "label": "Free shipping threshold (store currency)",
+      "default": 2000
+    },
+    {
+      "type": "range",
+      "id": "cart_shipping_bar_margin_bottom",
+      "label": "Shipping bar bottom margin",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "free_shipping_text_before",
+      "label": "Text before amount",
+      "default": "You're"
+    },
+    {
+      "type": "text",
+      "id": "free_shipping_text_after",
+      "label": "Text after amount",
+      "default": "away from free shipping"
+    },
+    {
+      "type": "richtext",
+      "id": "free_shipping_success_message",
+      "label": "Success message",
+      "default": "<p><strong>Congrats!</strong> You unlocked free shipping.</p>"
+    },
+    {
+      "type": "color",
+      "id": "cart_shipping_text_color",
+      "label": "Shipping bar text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "cart_shipping_success_text_color",
+      "label": "Free shipping text color",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "cart_guarantee_icon",
+      "label": "Guarantee icon"
+    },
+    {
+      "type": "text",
+      "id": "cart_guarantee_text",
+      "label": "Guarantee text",
+      "default": "Your purchase is protected by our service policy."
+    },
+    {
+      "type": "text",
+      "id": "cart_payment_icons",
+      "label": "Payment icons (comma separated)",
+      "default": "visa,master,amex,paypal,apple_pay,google_pay"
+    },
+    {
+      "type": "header",
+      "content": "Upsell"
+    },
+    {
+      "type": "collection",
+      "id": "upsell_collection",
+      "label": "Upsell collection"
+    },
+    {
+      "type": "text",
+      "id": "upsell_title",
+      "label": "Upsell title",
+      "default": "You may also like"
+    },
+    {
+      "type": "text",
+      "id": "upsell_text",
+      "label": "Upsell text",
+      "default": "Complete your purchase with these items."
+    },
+    {
+      "type": "range",
+      "id": "upsell_limit",
+      "label": "Upsell limit",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "upsell_add_button_text",
+      "label": "Upsell button text",
+      "default": "Add"
+    },
+    {
+      "type": "checkbox",
+      "id": "upsell_show_plus_icon",
+      "label": "Show plus icon in upsell button",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "upsell_bg_color",
+      "label": "Upsell background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "upsell_title_color",
+      "label": "Upsell title color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "upsell_text_color",
+      "label": "Upsell text color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "upsell_title_size",
+      "label": "Upsell title size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "upsell_text_size",
+      "label": "Upsell text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "upsell_vertical_padding",
+      "label": "Upsell vertical padding",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "upsell_item_height",
+      "label": "Upsell item height",
+      "min": 80,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "upsell_item_padding",
+      "label": "Upsell item padding",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "upsell_margin_top",
+      "label": "Upsell top margin",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "upsell_margin_bottom",
+      "label": "Upsell bottom margin",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    { "name": "SNC Cart Page" }
+  ]
+}
+{% endschema %}

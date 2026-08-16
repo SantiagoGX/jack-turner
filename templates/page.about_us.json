@@ -1,0 +1,161 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "snc-info-hero",
+      "settings": {
+        "image": "shopify://shop_images/A51B33D1-57F4-431E-89C3-4B5F715D1BEF.png",
+        "color_scheme": "scheme-1",
+        "margin_top": 0,
+        "height_vh": 50,
+        "full_width": true,
+        "border_radius": 0,
+        "overlay_type": "solid",
+        "gradient_direction": "to top",
+        "overlay_color": "#000000",
+        "overlay_opacity": 40,
+        "content_vertical_position": "flex-end",
+        "content_horizontal_position": "flex-start",
+        "text_alignment": "left",
+        "title": "ABOUT US",
+        "title_max_width": 800,
+        "subtitle": "",
+        "text": "",
+        "title_style": "h1",
+        "title_scale": 100,
+        "title_scale_mobile": 100,
+        "subtitle_style": "body",
+        "subtitle_scale": 100,
+        "subtitle_scale_mobile": 100,
+        "text_style": "body",
+        "text_scale": 100,
+        "text_scale_mobile": 100,
+        "button_style": "button",
+        "button_scale": 100,
+        "button_scale_mobile": 100,
+        "button_label": "",
+        "button_link": "",
+        "button_preset": "1"
+      }
+    },
+    "about_content": {
+      "type": "snc-about-layout",
+      "blocks": {
+        "story_intro_header": {
+          "type": "story_header",
+          "settings": {
+            "eyebrow": "OUR STORY",
+            "title": "Legacy Is Not Given. It's Built.",
+            "image": "shopify://shop_images/IMG_8186.jpg"
+          }
+        },
+        "intro_story": {
+          "type": "story_text",
+          "settings": {
+            "eyebrow": "",
+            "title": "",
+            "text": "<p>My name is Jose.</p><p>I was born and raised in the South Bronx to parents who migrated to the United States from Puerto Rico in the 70's. We didn't grow up around luxury. We grew up around hard work, discipline, and responsibility.</p><p>My father loved watches.</p><p>He owned pieces from Bulova, Longines, Elgin and Gruen just to name a few.</p><p>They weren't flashy. They weren't status symbols. They were solid. Mechanical. Built to last.</p><p>When I was ten years old, I would sneak into his drawer and try them on. I'd stand in front of the mirror imagining I was older. More confident. More established.</p><p>One day he caught me.</p><p>He didn't get upset. He looked at me and said,</p><p><em>\"Son, one day, all of these watches will be yours.\"</em></p><p>That moment stayed with me.</p><p>Not because of the watches.</p><p>Because of what they represented to my father.</p>"
+          }
+        },
+        "mentors_story": {
+          "type": "story_text",
+          "settings": {
+            "eyebrow": "",
+            "title": "The Mentors Who Shaped the Brand",
+            "text": "<p>In my early twenties, two men changed the trajectory of my life.</p><p>One was Jack Patrukio. The other was William Turner.</p><p>They didn't know each other, but both taught me what discipline looks like in the real world. They helped me get my start in Corporate America. They showed me how ambition means nothing without integrity.</p><p>Both have since passed away.</p><p>When it came time to name this brand, I didn't want something trendy. I wanted something meaningful.</p><p>So I borrowed the first name from one. The last name from the other.</p><p>That's how Jack Turner was born. Not as a marketing idea. As a tribute.</p>"
+          }
+        },
+        "craftsman_image": {
+          "type": "image_centered",
+          "settings": {
+            "image": "shopify://shop_images/IMG_8185.jpg",
+            "caption": ""
+          }
+        },
+        "foundation_story": {
+          "type": "story_text",
+          "settings": {
+            "eyebrow": "",
+            "title": "Built From a One-Bedroom Condo",
+            "text": "<p>In 2018, inside a one-bedroom condo in Hackensack, New Jersey, Jack Turner Watches officially began.</p><p>There were no investors. No big launch campaign. Just a vision.</p><p>To build timepieces that felt earned.</p><p>To create watches that a man could wear through milestones — promotions, weddings, fatherhood, reinvention — and eventually pass on.</p><p>Today, Jack Turner Watches are worn around the world by men who understand something simple:</p><p>A watch is not just a timekeeper.</p><p>It's a statement.</p><p>A symbol of standards.</p><p>A reminder that your time matters and wasting it is not an option.</p>"
+          }
+        },
+        "promise": {
+          "type": "content_row",
+          "settings": {
+            "eyebrow": "OUR PROMISE",
+            "title": "Built for Men Who Understand Legacy Matters",
+            "text": "<p>Every Jack Turner timepiece is designed with intention, engineered to endure, and created to mark the moments that define you.</p><p>No shortcuts. No hype.</p><p>Just honest craftsmanship built to last — and built to be passed on.</p>",
+            "image": "shopify://shop_images/5206E36D-FFB3-4928-A9D4-43F235D8809E.png",
+            "image_position": "right",
+            "image_height": 520,
+            "image_height_mobile": 360
+          }
+        },
+        "story_text_FV4LbE": {
+          "type": "story_text",
+          "settings": {
+            "eyebrow": "BRAND VISION",
+            "title": "Celebrating Time, Embracing Uniqueness",
+            "text": "<p>Watches aren't trophies. They're reminders. Of discipline. Of choice. Of moments that matter. Rooted in excellence and authenticity, our vision is to redefine what a modern timepiece can be.</p>"
+          }
+        },
+        "content_row_XePRUB": {
+          "type": "content_row",
+          "settings": {
+            "eyebrow": "OUR VALUES",
+            "title": "Craftsmanship, Exclusivity, Excellence",
+            "text": "<p>Craftsmanship, exclusivity, and excellence are the cornerstones of Jack Turner Watches.</p><p>We believe in timeless design, premium materials, and uncompromising attention to detail.</p>",
+            "image": "shopify://shop_images/IMG_8184.jpg",
+            "image_position": "right",
+            "image_height": 520,
+            "image_height_mobile": 360
+          }
+        },
+        "final_cta": {
+          "type": "cta_centered",
+          "settings": {
+            "eyebrow": "",
+            "title": "Explore The Collection",
+            "text": "<p>Discover timepieces built to mark the moments that define you.</p>",
+            "button_label": "Shop Now",
+            "button_link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "story_intro_header",
+        "intro_story",
+        "mentors_story",
+        "craftsman_image",
+        "foundation_story",
+        "promise",
+        "story_text_FV4LbE",
+        "content_row_XePRUB",
+        "final_cta"
+      ],
+      "settings": {
+        "max_width": 1200,
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "column_gap": 80,
+        "background_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "muted_text_color": "#6c6c6c",
+        "eyebrow_color": "#8a7a6a"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "about_content"
+  ]
+}

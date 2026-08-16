@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "snc-page",
+      "disabled": true,
+      "settings": {
+        "kicker": "",
+        "kicker_size": 3,
+        "show_title": true,
+        "title_size": 10,
+        "show_content": true,
+        "content_size": 5,
+        "align_text": "text-left",
+        "text_color": "text--neutral",
+        "bg": "palette--light bg--neutral",
+        "margin_top": 175,
+        "margin_bottom": 125,
+        "width": "wrapper",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "snc_legal_page_K4hqVz": {
+      "type": "snc-legal-page",
+      "name": "SNC Legal Page",
+      "settings": {
+        "max_width": 760,
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "kicker": "LEGAL",
+        "show_title": true,
+        "show_subtitle": false,
+        "subtitle": "",
+        "show_content": true,
+        "title_color": "#000000",
+        "text_color": "#333333",
+        "muted_color": "#666666",
+        "accent_color": "#000000"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "snc_legal_page_K4hqVz"
+  ]
+}

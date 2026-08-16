@@ -1,0 +1,1068 @@
+{% schema %}
+{
+  "name": "SNC Info Hero",
+  "class": "section--snc-info-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sección"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de fondo"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video de fondo (Opcional)"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen superior",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "height_vh",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Altura de la sección",
+      "default": 80
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Redondeo de bordes",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "overlay_type",
+      "label": "Tipo de overlay",
+      "options": [
+        { "value": "solid", "label": "Color sólido" },
+        { "value": "gradient", "label": "Degradado" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "select",
+      "id": "gradient_direction",
+      "label": "Dirección del degradado",
+      "options": [
+        { "value": "to top", "label": "Abajo hacia Arriba (Oscuro abajo)" },
+        { "value": "to bottom", "label": "Arriba hacia Abajo (Oscuro arriba)" },
+        { "value": "to right", "label": "Izquierda a Derecha" },
+        { "value": "to left", "label": "Derecha a Izquierda" }
+      ],
+      "default": "to top"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Color del overlay",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacidad del overlay",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_position",
+      "label": "Posición Vertical",
+      "options": [
+        { "value": "flex-start", "label": "Arriba" },
+        { "value": "center", "label": "Centro" },
+        { "value": "flex-end", "label": "Abajo" }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "content_horizontal_position",
+      "label": "Posición Horizontal",
+      "options": [
+        { "value": "flex-start", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "flex-end", "label": "Derecha" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación de Texto",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Textos"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Título del Hero"
+    },
+    {
+      "type": "range",
+      "id": "title_max_width",
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho máximo del título",
+      "default": 800
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Subtítulo descriptivo de la sección"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto / Párrafo"
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "Estilo del Título",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "range",
+      "id": "title_scale",
+      "min": 80,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Ajuste tamaño título (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "title_scale_mobile",
+      "min": 80,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Ajuste tamaño título (Móvil)",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "subtitle_style",
+      "label": "Estilo del Subtítulo",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_scale",
+      "min": 80,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Ajuste tamaño subtítulo (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "subtitle_scale_mobile",
+      "min": 80,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Ajuste tamaño subtítulo (Móvil)",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Estilo del Texto / Párrafo",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "range",
+      "id": "text_scale",
+      "min": 80,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Ajuste tamaño texto (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "text_scale_mobile",
+      "min": 80,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Ajuste tamaño texto (Móvil)",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Botones"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Estilo de tipografía del botón",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "button"
+    },
+    {
+      "type": "range",
+      "id": "button_scale",
+      "min": 80,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Ajuste tamaño botón (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "button_scale_mobile",
+      "min": 80,
+      "max": 160,
+      "step": 2,
+      "unit": "%",
+      "label": "Ajuste tamaño botón (Móvil)",
+      "default": 100
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "select",
+      "id": "button_preset",
+      "label": "Estilo de Botón (Preset)",
+      "options": [
+        { "value": "1", "label": "Preset 1" },
+        { "value": "2", "label": "Preset 2" },
+        { "value": "3", "label": "Preset 3" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Award Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_award_badge",
+      "label": "Mostrar badge de award",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "award_badge_text",
+      "label": "Texto del badge",
+      "default": "Best Luxury Watch Brand · 2026",
+      "info": "Texto corto visible sobre el hero. Al hacer clic abre el certificado."
+    },
+    {
+      "type": "select",
+      "id": "award_badge_position",
+      "label": "Posición del Badge",
+      "options": [
+        { "value": "bottom_right", "label": "Abajo Derecha" },
+        { "value": "bottom_left", "label": "Abajo Izquierda" },
+        { "value": "bottom_center", "label": "Abajo Centro" },
+        { "value": "below_button", "label": "Debajo del Botón" }
+      ],
+      "default": "bottom_right"
+    },
+    {
+      "type": "image_picker",
+      "id": "award_badge_image",
+      "label": "Imagen del certificado",
+      "info": "Opcional. Si no se sube ninguna, se usa el certificado LUXlife 2026 por defecto."
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Info Hero"
+    }
+  ]
+}
+{% endschema %}
+
+{%- if section.settings.show_award_badge -%}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var lightbox = document.getElementById('snc-award-lightbox-{{ section.id }}');
+  var trigger  = document.querySelector('#shopify-section-{{ section.id }} [data-award-trigger]');
+  if (!lightbox || !trigger) return;
+
+  function openAward() {
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var stage = lightbox.querySelector('.snc-info-hero--award-lightbox-stage');
+    if (stage) {
+      stage.style.animation = 'none';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { stage.style.animation = ''; });
+      });
+    }
+  }
+
+  function closeAward() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  trigger.addEventListener('click', openAward);
+
+  lightbox.querySelectorAll('[data-award-close]').forEach(function (el) {
+    el.addEventListener('click', closeAward);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !lightbox.hidden) closeAward();
+  });
+});
+</script>
+{%- endif -%}
+
+{%- if section.settings.video != blank -%}
+<script>
+(function() {
+  function initVideo() {
+    var video = document.querySelector('.snc-info-hero--video');
+    if (!video) return;
+
+    function tryPlay() {
+      if (video.paused) {
+        video.play().catch(function() {});
+      }
+    }
+
+    video.addEventListener('canplay', tryPlay);
+    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('suspend', tryPlay);
+
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) tryPlay();
+    });
+
+    window.addEventListener('focus', tryPlay);
+
+    if (video.readyState >= 3) {
+      tryPlay();
+    } else {
+      tryPlay();
+      setTimeout(tryPlay, 500);
+      setTimeout(tryPlay, 1500);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVideo);
+  } else {
+    initVideo();
+  }
+})();
+</script>
+{%- endif -%}
+
+<style>
+	  .snc-info-hero--root {
+	    margin-top: {{ section.settings.margin_top }}px;
+	    --snc-info-hero-title-scale: {{ section.settings.title_scale | default: 100 }};
+	    --snc-info-hero-title-scale-mobile: {{ section.settings.title_scale_mobile | default: 100 }};
+	    --snc-info-hero-subtitle-scale: {{ section.settings.subtitle_scale | default: 100 }};
+	    --snc-info-hero-subtitle-scale-mobile: {{ section.settings.subtitle_scale_mobile | default: 100 }};
+	    --snc-info-hero-text-scale: {{ section.settings.text_scale | default: 100 }};
+	    --snc-info-hero-text-scale-mobile: {{ section.settings.text_scale_mobile | default: 100 }};
+	    --snc-info-hero-button-scale: {{ section.settings.button_scale | default: 100 }};
+	    --snc-info-hero-button-scale-mobile: {{ section.settings.button_scale_mobile | default: 100 }};
+	    --snc-info-hero-title-scale-current: var(--snc-info-hero-title-scale);
+	    --snc-info-hero-subtitle-scale-current: var(--snc-info-hero-subtitle-scale);
+	    --snc-info-hero-text-scale-current: var(--snc-info-hero-text-scale);
+	    --snc-info-hero-button-scale-current: var(--snc-info-hero-button-scale);
+	    {%- if section.settings.full_width -%}
+	      width: 100vw;
+	      position: relative;
+	      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    {%- else -%}
+      margin-left: 20px;
+      margin-right: 20px;
+      width: calc(100% - 40px);
+    {%- endif -%}
+    height: {{ section.settings.height_vh }}vh;
+    min-height: 50vh;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-size: cover;
+    background-position: center;
+    {% if section.settings.image != blank %}
+      background-image: url({{ section.settings.image | image_url: width: 2000 }});
+    {% endif %}
+  }
+
+  .snc-info-hero--overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    {%- if section.settings.overlay_type == 'gradient' -%}
+      background: linear-gradient({{ section.settings.gradient_direction }}, {{ section.settings.overlay_color }}, rgba(0,0,0,0.32));
+    {%- else -%}
+      background-color: {{ section.settings.overlay_color }};
+    {%- endif -%}
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    z-index: 1;
+  }
+
+  .snc-info-hero--content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: {{ section.settings.content_horizontal_position }};
+    justify-content: {{ section.settings.content_vertical_position }};
+    height: 100%;
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+	  .snc-info-hero--title {
+	    margin: 0;
+	    max-width: {{ section.settings.title_max_width }}px;
+	  }
+
+	  .snc-info-hero--title-inner {
+	    font-size: calc(1em * var(--snc-info-hero-title-scale-current) / 100);
+	  }
+
+	  .snc-info-hero--subtitle {
+	    margin: 0 0 10px 0;
+	  }
+
+	  .snc-info-hero--subtitle-inner {
+	    font-size: calc(1em * var(--snc-info-hero-subtitle-scale-current) / 100);
+	  }
+
+	  .snc-info-hero--text {
+	    margin: 0 0 20px 0;
+	  }
+
+	  .snc-info-hero--text-inner {
+	    font-size: calc(1em * var(--snc-info-hero-text-scale-current) / 100);
+	  }
+
+	  .snc-info-hero--text-inner p,
+	  .snc-info-hero--text-inner h1,
+	  .snc-info-hero--text-inner h2,
+	  .snc-info-hero--text-inner h3,
+	  .snc-info-hero--text-inner h4,
+	  .snc-info-hero--text-inner h5,
+	  .snc-info-hero--text-inner h6 {
+	    font-size: inherit;
+	    font-weight: inherit;
+	    line-height: inherit;
+	    margin: 0;
+	  }
+
+	  .snc-info-hero--button-wrapper {
+	    margin-top: 20px;
+	  }
+
+	  .snc-info-hero--button-inner {
+	    font-size: calc(1em * var(--snc-info-hero-button-scale-current) / 100);
+	  }
+	  
+	  @media (max-width: 768px) {
+	    .snc-info-hero--root {
+	       {%- unless section.settings.full_width -%}
+         margin: 10px;
+         width: calc(100% - 20px);
+         border-radius: 8px;
+       {%- endunless -%}
+       padding: 0;
+    }
+    
+	    .snc-info-hero--content {
+	      padding: 30px;
+	    }
+
+	    .snc-info-hero--root {
+	      --snc-info-hero-title-scale-current: var(--snc-info-hero-title-scale-mobile);
+	      --snc-info-hero-subtitle-scale-current: var(--snc-info-hero-subtitle-scale-mobile);
+	      --snc-info-hero-text-scale-current: var(--snc-info-hero-text-scale-mobile);
+	      --snc-info-hero-button-scale-current: var(--snc-info-hero-button-scale-mobile);
+	    }
+
+	  }
+
+  .snc-info-hero--video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .snc-info-hero--video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .snc-info-hero--trust-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .snc-info-hero--trust-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .snc-info-hero--trust-item {
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 500;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+
+  .snc-info-hero--trust-item::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: #0d0d0d;
+    border-radius: 50%;
+  }
+
+  .snc-info-hero--trust-item:first-child::before {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .snc-info-hero--trust-content {
+      gap: 16px;
+      flex-direction: column;
+    }
+    .snc-info-hero--trust-item {
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+    .snc-info-hero--trust-item::before {
+      display: none;
+    }
+  }
+
+  /* ── Hero Text & Button Refinements ─────────────────── */
+
+  /* Gold ornament line above the title block */
+  .snc-info-hero--title::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: #8b7355;
+    margin-bottom: 14px;
+  }
+
+  /* Tighter spacing stack */
+  .snc-info-hero--subtitle {
+    margin: 0 0 6px 0;
+    letter-spacing: 0.18em;
+  }
+
+  .snc-info-hero--text {
+    margin: 12px 0 0 0;
+    opacity: 0.82;
+  }
+
+  /* Subtle text-shadow for legibility against varied images */
+  .snc-info-hero--title-inner,
+  .snc-info-hero--subtitle-inner,
+  .snc-info-hero--text-inner {
+    text-shadow: 0 1px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Button wrapper — thin separator + clean margin */
+  .snc-info-hero--button-wrapper {
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(244, 242, 239, 0.15);
+  }
+
+  /* Button fill animation (scoped to hero only) */
+  .snc-info-hero--root .snc-info-hero--button-wrapper > a {
+    display: inline-block;
+    letter-spacing: 0.24em;
+    padding: 14px 38px;
+    border: 1px solid rgba(244, 242, 239, 0.6);
+    color: #f4f2ef;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to right, #f4f2ef 50%, transparent 50%);
+    background-size: 210% 100%;
+    background-position: right;
+    transition:
+      background-position 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.5s ease,
+      border-color 0.3s ease;
+  }
+
+  .snc-info-hero--root .snc-info-hero--button-wrapper > a:hover {
+    background-position: left;
+    color: #0d0d0d;
+    border-color: rgba(244, 242, 239, 0.95);
+  }
+
+  @media (max-width: 768px) {
+    .snc-info-hero--button-wrapper {
+      padding-top: 22px;
+      margin-top: 22px;
+    }
+    .snc-info-hero--root .snc-info-hero--button-wrapper > a {
+      padding: 13px 28px;
+      letter-spacing: 0.2em;
+    }
+    .snc-info-hero--title::before {
+      width: 22px;
+      margin-bottom: 10px;
+    }
+  }
+
+  /* ── Award Badge ─────────────────────────────────────── */
+  .snc-info-hero--award-badge {
+    z-index: 12;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(13, 13, 13, 0.68);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 115, 85, 0.55);
+    cursor: pointer;
+    color: rgba(244, 242, 239, 0.88);
+    font-family: var(--font-heading-family);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  .snc-award-badge-bottom_right {
+    position: absolute;
+    bottom: 76px;
+    right: 24px;
+  }
+
+  .snc-award-badge-bottom_left {
+    position: absolute;
+    bottom: 76px;
+    left: 24px;
+  }
+
+  .snc-award-badge-bottom_center {
+    position: absolute;
+    bottom: 76px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .snc-award-badge-below_button {
+    position: relative;
+    margin-top: 24px;
+  }
+
+  .snc-info-hero--award-badge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      transparent 30%,
+      rgba(139, 115, 85, 0.2) 50%,
+      transparent 70%,
+      transparent 100%
+    );
+    transform: translateX(-150%);
+    animation: snc-badge-shimmer 5s ease-in-out 3s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes snc-badge-shimmer {
+    0%   { transform: translateX(-150%); }
+    25%  { transform: translateX(250%); }
+    100% { transform: translateX(250%); }
+  }
+
+  .snc-info-hero--award-badge:hover {
+    border-color: rgba(139, 115, 85, 0.9);
+    background: rgba(13, 13, 13, 0.84);
+    color: #f4f2ef;
+  }
+
+  .snc-info-hero--award-badge-line {
+    display: block;
+    width: 12px;
+    height: 1px;
+    background: rgba(139, 115, 85, 0.65);
+    flex-shrink: 0;
+    transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+  }
+
+  .snc-info-hero--award-badge:hover .snc-info-hero--award-badge-line {
+    width: 18px;
+    background: rgba(139, 115, 85, 1);
+  }
+
+  .snc-info-hero--award-badge-text {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .snc-info-hero--award-badge {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      padding: 9px 14px;
+      gap: 6px;
+    }
+    .snc-award-badge-bottom_right {
+      bottom: 126px;
+      right: 14px;
+    }
+    .snc-award-badge-bottom_left {
+      bottom: 126px;
+      left: 14px;
+    }
+    .snc-award-badge-bottom_center {
+      bottom: 126px;
+    }
+    .snc-award-badge-below_button {
+      margin-top: 18px;
+    }
+    .snc-info-hero--award-badge-line {
+      width: 8px;
+    }
+  }
+
+  /* ── Award Lightbox ──────────────────────────────────── */
+  .snc-info-hero--award-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9990;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .snc-info-hero--award-lightbox[hidden] {
+    display: none;
+  }
+
+  .snc-info-hero--award-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 13, 13, 0.96);
+    cursor: pointer;
+  }
+
+  .snc-info-hero--award-lightbox-stage {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 0 24px;
+    animation: snc-award-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes snc-award-in {
+    from { opacity: 0; transform: translateY(18px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .snc-info-hero--award-lightbox-close {
+    position: static;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    padding: 0 0 18px 0;
+    cursor: pointer;
+    color: rgba(244, 242, 239, 0.4);
+    transition: color 0.25s ease;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-family: var(--font-heading-family);
+    line-height: 1;
+  }
+
+  .snc-info-hero--award-lightbox-close:hover {
+    color: rgba(244, 242, 239, 0.88);
+  }
+
+  .snc-info-hero--award-lightbox-close::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .snc-info-hero--award-lightbox-close-x {
+    display: none;
+  }
+
+  .snc-info-hero--award-lightbox-figure {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .snc-info-hero--award-lightbox-img {
+    display: block;
+    max-width: min(400px, 82vw);
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    box-shadow:
+      0 0 80px rgba(0, 0, 0, 0.55),
+      0 0 120px rgba(139, 115, 85, 0.07);
+  }
+
+</style>
+
+{%- if section.settings.show_award_badge -%}
+  {%- capture award_badge_html -%}
+    <button
+      class="snc-info-hero--award-badge snc-award-badge-{{ section.settings.award_badge_position }}"
+      data-award-trigger
+      aria-label="{{ section.settings.award_badge_text | escape }}"
+      type="button"
+    >
+      <span class="snc-info-hero--award-badge-line" aria-hidden="true"></span>
+      <span class="snc-info-hero--award-badge-text">{{ section.settings.award_badge_text | escape }}</span>
+      <span class="snc-info-hero--award-badge-line" aria-hidden="true"></span>
+    </button>
+  {%- endcapture -%}
+{%- endif -%}
+
+<div class="snc-info-hero--root color-{{ section.settings.color_scheme }}">
+  {%- if section.settings.video != blank -%}
+    <div class="snc-info-hero--video-wrapper">
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'snc-info-hero--video' }}
+    </div>
+  {%- endif -%}
+  <div class="snc-info-hero--overlay"></div>
+  <div class="snc-info-hero--content">
+    {%- if section.settings.subtitle != blank -%}
+      <div class="snc-info-hero--subtitle {{ section.settings.subtitle_style }}">
+        <span class="snc-info-hero--subtitle-inner">{{ section.settings.subtitle | escape }}</span>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="snc-info-hero--title {{ section.settings.title_style }}">
+        <span class="snc-info-hero--title-inner">{{ section.settings.title | escape }}</span>
+      </h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="snc-info-hero--text {{ section.settings.text_style }}">
+        <div class="snc-info-hero--text-inner">{{ section.settings.text }}</div>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <div class="snc-info-hero--button-wrapper">
+        <a href="{{ section.settings.button_link | default: '#' }}" class="btn-preset-{{ section.settings.button_preset }} {{ section.settings.button_style }}">
+          <span class="snc-info-hero--button-inner">{{ section.settings.button_label | escape }}</span>
+        </a>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.show_award_badge and section.settings.award_badge_position == 'below_button' -%}
+      {{ award_badge_html }}
+    {%- endif -%}
+  </div>
+
+  <div class="snc-info-hero--trust-bar">
+    <div class="snc-info-hero--trust-content">
+      <span class="snc-info-hero--trust-item">Complimentary Shipping</span>
+      <span class="snc-info-hero--trust-item">2-Year Warranty</span>
+      <span class="snc-info-hero--trust-item">30 Day Return Privilege</span>
+    </div>
+  </div>
+
+  {%- if section.settings.show_award_badge -%}
+    {%- if section.settings.award_badge_position != 'below_button' -%}
+      {{ award_badge_html }}
+    {%- endif -%}
+
+    <div
+      class="snc-info-hero--award-lightbox"
+      id="snc-award-lightbox-{{ section.id }}"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ section.settings.award_badge_text | escape }}"
+      hidden
+    >
+      <div class="snc-info-hero--award-lightbox-backdrop" data-award-close></div>
+      <div class="snc-info-hero--award-lightbox-stage">
+        <button
+          class="snc-info-hero--award-lightbox-close"
+          data-award-close
+          aria-label="Close"
+          type="button"
+        >
+          <span class="snc-info-hero--award-lightbox-close-x" aria-hidden="true">&#x2715;</span>
+          <span>Close</span>
+        </button>
+        <figure class="snc-info-hero--award-lightbox-figure">
+          {%- if section.settings.award_badge_image != blank -%}
+            {%- assign award_alt = section.settings.award_badge_text | default: 'Award' -%}
+            {{
+              section.settings.award_badge_image
+              | image_url: width: 800
+              | image_tag:
+                class: 'snc-info-hero--award-lightbox-img',
+                loading: 'lazy',
+                alt: award_alt,
+                widths: '400, 600, 800'
+            }}
+          {%- else -%}
+            <img
+              src="{{ 'jt-award-luxlife-2026.png' | asset_url }}"
+              alt="{{ section.settings.award_badge_text | default: 'LUXlife Best Luxury Watch Brand 2026' | escape }}"
+              class="snc-info-hero--award-lightbox-img"
+              loading="lazy"
+              width="600"
+              height="600"
+            >
+          {%- endif -%}
+        </figure>
+      </div>
+    </div>
+  {%- endif -%}
+</div>

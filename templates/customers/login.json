@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "snc-main-login",
+      "settings": {
+        "margin_top": 100,
+        "margin_bottom": 0,
+        "max_width": 390,
+        "title_color": "#000000",
+        "btn_bg_color": "#000000",
+        "btn_text_color": "#ffffff",
+        "btn_font_size": 16,
+        "links_color": "#000000",
+        "links_font_size": 14
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

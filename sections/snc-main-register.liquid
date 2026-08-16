@@ -1,0 +1,181 @@
+{%- comment -%}
+  SNC Main Register
+  Maneja el registro de nuevos usuarios.
+{%- endcomment -%}
+
+<style>
+  .snc-register--section {
+    padding: 80px 20px;
+    max-width: {{ section.settings.max_width | default: 440 }}px;
+    margin-top: {{ section.settings.margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | default: 0 }}px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: var(--font-main, sans-serif);
+    width: 100%;
+  }
+  .snc-register--title {
+    font-size: 32px;
+    color: {{ section.settings.title_color | default: '#0d0d0d' }};
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+  .snc-register--field {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  .snc-register--input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .snc-register--input:focus {
+    border-color: #0d0d0d;
+  }
+  .snc-register--btn {
+    background-color: {{ section.settings.btn_bg_color | default: '#0d0d0d' }};
+    color: {{ section.settings.btn_text_color | default: '#FFFFFF' }};
+    border: none;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-size: {{ section.settings.btn_font_size | default: 16 }}px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+  }
+  .snc-register--btn:hover { opacity: 0.9; }
+  .snc-register--link {
+    display: block;
+    margin-top: 20px;
+    color: {{ section.settings.links_color | default: '#0d0d0d' }};
+    text-decoration: underline;
+    font-size: {{ section.settings.links_font_size | default: 14 }}px;
+  }
+</style>
+
+<div class="snc-register--section">
+  <h1 class="snc-register--title">Crear Cuenta</h1>
+  {% form 'create_customer' %}
+    {{ form.errors | default_errors }}
+    <div class="snc-register--field">
+      <input type="text" name="customer[first_name]" class="snc-register--input" placeholder="Nombre" required>
+    </div>
+    <div class="snc-register--field">
+      <input type="text" name="customer[last_name]" class="snc-register--input" placeholder="Apellido" required>
+    </div>
+    <div class="snc-register--field">
+      <input type="email" name="customer[email]" class="snc-register--input" placeholder="Correo electrónico" required>
+    </div>
+    <div class="snc-register--field">
+      <input type="password" name="customer[password]" class="snc-register--input" placeholder="Contraseña" required>
+    </div>
+    <button type="submit" class="snc-register--btn">Crear</button>
+    <a href="{{ routes.account_login_url }}" class="snc-register--link">¿Ya tienes cuenta? Inicia sesión</a>
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "SNC Register",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenedor"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 300,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho del formulario",
+      "default": 440
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen superior",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen inferior",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Título"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "header",
+      "content": "Botón"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Color de fondo",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Color del texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "btn_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Enlace (Iniciar sesión)"
+    },
+    {
+      "type": "color",
+      "id": "links_color",
+      "label": "Color de enlace",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "range",
+      "id": "links_font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente",
+      "default": 14
+    }
+  ]
+}
+{% endschema %}

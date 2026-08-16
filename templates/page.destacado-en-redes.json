@@ -1,0 +1,233 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "snc_info_hero_wwiFMm": {
+      "type": "snc-info-hero",
+      "name": "SNC Info Hero",
+      "settings": {
+        "image": "shopify://shop_images/37c49f119d08e3140b0ec0f2bf66943f4996f3f0.jpg",
+        "margin_top": 0,
+        "height_vh": 50,
+        "full_width": true,
+        "border_radius": 0,
+        "overlay_type": "gradient",
+        "gradient_direction": "to top",
+        "overlay_color": "#000000",
+        "overlay_opacity": 100,
+        "content_vertical_position": "flex-end",
+        "content_horizontal_position": "flex-start",
+        "text_alignment": "left",
+        "title": "Destacado en Redes",
+        "subtitle": "",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "snc_influencer_carousel_6EEc6Y": {
+      "type": "snc-influencer-carousel",
+      "blocks": {
+        "influencer_slide_L7XNcx": {
+          "type": "influencer_slide",
+          "settings": {
+            "product": "🔸-leggings-burbuja-push-up-seamless-compresion-rosa-malva",
+            "image": "shopify://shop_images/Screenshot_2025-12-02_at_2.13.49_a.m..png",
+            "subtitle": "@cynthiamnv",
+            "button_text": ""
+          }
+        },
+        "influencer_slide_xUPKYY": {
+          "type": "influencer_slide",
+          "settings": {
+            "product": "🔸-leggings-burbuja-push-up-seamless-compresion-gris",
+            "image": "shopify://shop_images/Screenshot_2025-12-02_at_2.04.42_a.m..png",
+            "subtitle": "@micaabaca",
+            "button_text": ""
+          }
+        },
+        "influencer_slide_t8DdU4": {
+          "type": "influencer_slide",
+          "settings": {
+            "product": "🔸-leggings-burbuja-push-up-seamless-compresion-negro",
+            "image": "shopify://shop_images/IMG_8109_1.heic",
+            "subtitle": "@elicastillo.f",
+            "button_text": ""
+          }
+        },
+        "influencer_slide_LL4KDC": {
+          "type": "influencer_slide",
+          "settings": {
+            "product": "🔸-leggings-burbuja-push-up-seamless-compresion-pistache",
+            "image": "shopify://shop_images/Screenshot_2025-12-02_at_2.09.32_a.m..png",
+            "subtitle": "@alisonluna",
+            "button_text": ""
+          }
+        },
+        "influencer_slide_A7bmJy": {
+          "type": "influencer_slide",
+          "disabled": true,
+          "settings": {
+            "product": "blusa-ao-14112025-04",
+            "image": "shopify://shop_images/Curriculum_Agente_comercial_Profesional_Blanco_y_negro_2.png",
+            "subtitle": "@influencer",
+            "button_text": ""
+          }
+        },
+        "influencer_slide_DBUCMm": {
+          "type": "influencer_slide",
+          "disabled": true,
+          "settings": {
+            "product": "blusa-ao-14112025-04",
+            "image": "shopify://shop_images/Curriculum_Agente_comercial_Profesional_Blanco_y_negro_2.png",
+            "subtitle": "@influencer",
+            "button_text": ""
+          }
+        },
+        "influencer_slide_CVjPrC": {
+          "type": "influencer_slide",
+          "disabled": true,
+          "settings": {
+            "product": "blusa-ao-14112025-04",
+            "image": "shopify://shop_images/Curriculum_Agente_comercial_Profesional_Blanco_y_negro_2.png",
+            "subtitle": "@influencer",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "influencer_slide_L7XNcx",
+        "influencer_slide_xUPKYY",
+        "influencer_slide_t8DdU4",
+        "influencer_slide_LL4KDC",
+        "influencer_slide_A7bmJy",
+        "influencer_slide_DBUCMm",
+        "influencer_slide_CVjPrC"
+      ],
+      "name": "SNC Influencer Carousel",
+      "settings": {
+        "subtitle": "Visto en",
+        "title": "Nuestra comunidad",
+        "section_header_alignment": "center",
+        "section_title_color": "#000000",
+        "section_title_size": 40,
+        "section_title_weight": 400,
+        "section_subtitle_color": "#000000",
+        "section_subtitle_size": 14,
+        "section_subtitle_weight": 700,
+        "card_height": 440,
+        "visible_desktop": 5.3,
+        "visible_mobile": 1.2,
+        "button_display": "static",
+        "button_text": "Ver producto",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_width": 1,
+        "button_border_radius": 30,
+        "button_padding_vertical": 10,
+        "button_padding_horizontal": 20,
+        "button_font_size": 14,
+        "button_font_weight": 700,
+        "full_width": true,
+        "section_margin_top": 60,
+        "padding_left": 40,
+        "padding_right": 0,
+        "grid_gap": 5,
+        "card_border_radius": 0,
+        "fallback_behavior": "distribute",
+        "card_text_color": "#000000",
+        "card_title_size": 15,
+        "card_title_weight": 500,
+        "card_title_transform": "none",
+        "card_subtitle_size": 14,
+        "card_subtitle_weight": 400
+      }
+    },
+    "snc_product_carousel_aRczgM": {
+      "type": "snc-product-carousel",
+      "name": "SNC Product Carousel",
+      "settings": {
+        "subtitle": "Nuestra selección",
+        "title": "Destacados",
+        "section_header_alignment": "center",
+        "section_header_alignment_mobile": "center",
+        "header_vertical_alignment": "center",
+        "header_button_text": "",
+        "header_button_link": "",
+        "header_button_bg_color": "rgba(0,0,0,0)",
+        "header_button_text_color": "#000000",
+        "header_button_border_color": "#000000",
+        "header_button_hover_bg_color": "#000000",
+        "header_button_hover_text_color": "#ffffff",
+        "header_button_hover_border_color": "#000000",
+        "header_button_border_width": 1,
+        "header_button_border_radius": 30,
+        "header_button_font_size": 14,
+        "header_button_font_weight": 700,
+        "header_button_padding_vertical": 10,
+        "header_button_padding_horizontal": 25,
+        "source_type": "collection",
+        "collection": "leggins-seamless-adriana-olimpo",
+        "sort_by": "default",
+        "limit": 12,
+        "card_style": "below",
+        "full_width": true,
+        "section_margin_top": 0,
+        "section_margin_bottom": 0,
+        "section_padding_top": 60,
+        "section_padding_bottom": 80,
+        "carousel_mode": "infinite",
+        "side_peek": 20,
+        "carousel_side_padding": 0,
+        "card_gap": 5,
+        "card_border_radius": 0,
+        "card_title_margin_bottom": 6,
+        "image_brightness": 95,
+        "card_image_fit": "cover",
+        "section_title_color": "#000000",
+        "section_subtitle_color": "#000000",
+        "card_title_color": "#000000",
+        "card_price_color": "#000000",
+        "card_compare_price_color": "#00000066",
+        "section_title_font_size": 48,
+        "section_title_font_weight": 400,
+        "section_subtitle_font_size": 14,
+        "section_subtitle_font_weight": 700,
+        "card_title_font_size": 16,
+        "card_title_font_weight": 400,
+        "card_price_font_size": 14,
+        "card_price_font_weight": 400,
+        "qa_show_title": false,
+        "qa_padding": 13,
+        "qa_option_padding": 14,
+        "qa_border_radius": 0,
+        "qa_sizes_per_row": 5,
+        "qa_bg_color": "#ffffff",
+        "qa_option_bg_color": "#ffffff",
+        "qa_option_text_color": "#000000",
+        "qa_option_hover_bg_color": "#000000",
+        "qa_option_hover_text_color": "#ffffff",
+        "qa_option_border_radius": 4,
+        "visible_desktop": 3,
+        "visible_mobile": "1",
+        "card_height_mode": "fixed",
+        "card_aspect_ratio": "3/4",
+        "card_height": 590,
+        "dot_color": "#d8d8d8",
+        "dot_active_color": "#000000"
+      }
+    }
+  },
+  "order": [
+    "snc_info_hero_wwiFMm",
+    "snc_influencer_carousel_6EEc6Y",
+    "snc_product_carousel_aRczgM"
+  ]
+}

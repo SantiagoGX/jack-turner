@@ -1,0 +1,1724 @@
+{%- liquid
+  assign products_per_page = settings.pg_products_per_page | default: 24
+  assign columns_desktop = settings.pg_columns_desktop | default: 4
+  assign columns_mobile = settings.pg_columns_mobile | default: '2'
+  assign card_title_font_size_mobile = settings.pg_card_title_font_size_mobile | default: 14
+  assign grid_gap = settings.pg_grid_gap | default: 20
+  assign grid_gap_mobile = settings.pg_grid_gap_mobile | default: 15
+  assign section_margin_top = section.settings.section_margin_top | default: 40
+  assign section_margin_bottom = section.settings.section_margin_bottom | default: 40
+  assign section_header_alignment = settings.sh_alignment | default: 'center'
+  assign section_title_color = settings.sh_title_color | default: '#0d0d0d'
+  assign section_title_font_size = settings.sh_title_font_size | default: 36
+  assign section_title_font_weight = settings.sh_title_font_weight | default: 500
+  assign section_title_text_transform = settings.sh_title_text_transform | default: 'none'
+
+  assign full_width = section.settings.full_width
+  assign content_padding_vertical = section.settings.content_padding_vertical | default: 40
+  assign content_padding_horizontal = section.settings.content_padding_horizontal | default: 20
+
+  assign card_content_padding_vertical = settings.pg_card_content_padding_vertical | default: 20
+  assign card_content_padding_horizontal = settings.pg_card_content_padding_horizontal | default: 20
+  assign card_style = settings.pg_card_style | default: 'overlay'
+  assign card_height_mode = settings.pg_card_height_mode | default: 'fixed'
+  assign card_height_mobile = settings.pg_card_height_mobile | default: 280
+  assign card_aspect_ratio = settings.pg_card_aspect_ratio | default: '3/4'
+  assign card_border_radius = settings.pg_card_border_radius | default: 10
+  assign image_brightness = settings.pg_image_brightness | default: 100
+  assign card_image_fit = settings.pg_card_image_fit | default: 'contain'
+
+  assign enable_quick_add = true
+  if settings.pg_enable_quick_add == false
+    assign enable_quick_add = false
+  endif
+  assign qa_show_title = settings.pg_qa_show_title
+  assign qa_option_padding = settings.pg_qa_option_padding | default: 6
+  assign qa_padding = settings.pg_qa_padding | default: 13
+  assign qa_border_radius = settings.pg_qa_border_radius | default: 0
+  assign qa_sizes_per_row = settings.pg_qa_sizes_per_row | default: 5
+  assign qa_bg_color = settings.pg_qa_bg_color | default: '#ffffff'
+  assign qa_option_bg_color = settings.pg_qa_option_bg_color | default: '#ffffff'
+  assign qa_option_text_color = settings.pg_qa_option_text_color | default: '#0d0d0d'
+  assign qa_option_hover_bg_color = settings.pg_qa_option_hover_bg_color | default: '#0d0d0d'
+  assign qa_option_hover_text_color = settings.pg_qa_option_hover_text_color | default: '#ffffff'
+  assign qa_option_border_radius = settings.pg_qa_option_border_radius | default: 4
+
+  assign load_more_padding_v = settings.pg_load_more_padding_vertical | default: 12
+  assign load_more_padding_h = settings.pg_load_more_padding_horizontal | default: 28
+  assign load_more_radius = settings.pg_load_more_border_radius | default: 6
+  assign load_more_bg = settings.pg_load_more_bg_color | default: '#0d0d0d'
+  assign load_more_text_color = settings.pg_load_more_text_color | default: '#FFFFFF'
+  assign load_more_font_size = settings.pg_load_more_font_size | default: 14
+  assign load_more_font_weight = settings.pg_load_more_font_weight | default: 600
+
+  assign card_title_color = settings.pg_card_title_color | default: '#0d0d0d'
+  assign card_price_color = settings.pg_card_price_color | default: '#000000'
+  assign card_compare_price_color = settings.pg_card_compare_price_color | default: 'rgba(0, 0, 0, 0.4)'
+  assign card_title_margin_bottom = settings.pg_card_title_margin_bottom | default: 6
+
+  assign card_title_font_size = settings.pg_card_title_font_size | default: 16
+  assign card_price_font_size = settings.pg_card_price_font_size | default: 14
+
+  assign global_icon_plus = settings.global_icon_plus
+  assign wishlist_icon_version = settings.global_wishlist_icon_version | default: 'dark'
+  if wishlist_icon_version == 'light'
+    assign global_icon_wishlist = settings.global_icon_wishlist_light
+  else
+    assign global_icon_wishlist = settings.global_icon_wishlist_dark
+  endif
+  
+  assign wishlist_bg_enabled = settings.global_wishlist_bg_enabled
+  assign wishlist_bg_color = settings.global_wishlist_bg_color | default: '#FFFFFF'
+  assign wishlist_inset = settings.global_wishlist_inset | default: 20
+  assign wishlist_radius = settings.global_wishlist_radius | default: 0
+  assign wishlist_padding = settings.global_wishlist_padding | default: 8
+  assign wishlist_size = settings.global_wishlist_size | default: 40
+
+  # Filter Bar Settings
+  assign filter_bar_bg = settings.filter_bar_bg | default: '#ffffff'
+  assign filter_bar_padding_v = settings.filter_bar_padding_vertical | default: 10
+  assign filter_bar_padding_h = settings.filter_bar_padding_horizontal | default: 20
+  assign filter_bar_radius = settings.filter_bar_radius | default: 0
+  assign filter_bar_margin_bottom = settings.filter_bar_margin_bottom | default: 30
+  assign filter_bar_margin_top = settings.filter_bar_margin_top | default: 0
+  assign filter_btn_bg = settings.filter_btn_bg | default: '#F1F1F1'
+  assign filter_btn_text_color = settings.filter_btn_text_color | default: '#0d0d0d'
+  assign filter_btn_padding_v = settings.filter_btn_padding_vertical | default: 8
+  assign filter_btn_padding_h = settings.filter_btn_padding_horizontal | default: 16
+  assign filter_btn_radius = settings.filter_btn_radius | default: 4
+  assign filter_btn_gap = settings.filter_btn_gap | default: 8
+  assign filter_swatch_gap = settings.filter_swatch_gap | default: 8
+  assign clear_btn_bg = settings.clear_btn_bg | default: 'transparent'
+  assign clear_btn_text_color = settings.clear_btn_text_color | default: '#0d0d0d'
+  assign clear_btn_padding_v = settings.clear_btn_padding_vertical | default: 8
+  assign clear_btn_padding_h = settings.clear_btn_padding_horizontal | default: 0
+  assign clear_btn_radius = settings.clear_btn_radius | default: 0
+  assign filter_font_size = settings.filter_font_size | default: 14
+  assign filter_font_weight = settings.filter_font_weight | default: 600
+  assign filter_text_transform = settings.filter_text_transform | default: 'none'
+  assign count_text_transform = settings.count_text_transform | default: 'none'
+  assign clear_btn_text_transform = settings.clear_btn_text_transform | default: 'none'
+  assign count_margin_left = settings.count_margin_left | default: 0
+  assign count_margin_right = settings.count_margin_right | default: 0
+  assign enable_advanced_colors_filters = settings.enable_advanced_colors_filters
+
+  assign filter_bubble_bg_color = settings.filter_bubble_bg_color | default: '#0d0d0d'
+  assign filter_bubble_text_color = settings.filter_bubble_text_color | default: '#FFFFFF'
+  assign filter_bubble_margin_left = settings.filter_bubble_margin_left | default: 8
+  assign active_filter_padding_v = settings.active_filter_padding_vertical | default: 6
+  assign active_filter_padding_h = settings.active_filter_padding_horizontal | default: 12
+  assign active_filter_bg_color = settings.active_filter_bg_color | default: '#F1F1F1'
+  assign active_filter_text_color = settings.active_filter_text_color | default: '#0d0d0d'
+  assign active_filter_border_radius = settings.active_filter_border_radius | default: 4
+  assign active_filter_font_size = settings.active_filter_font_size | default: 13
+  assign active_filter_font_weight = settings.active_filter_font_weight | default: 500
+  assign active_filter_gap_top = settings.active_filter_gap_top | default: 15
+
+-%}
+
+{%- paginate collection.products by products_per_page -%}
+  {%- assign show_promo_media = false -%}
+  {%- if section.settings.enable_promo_media and columns_desktop == 3 and paginate.current_page == 1 -%}
+    {%- if section.settings.promo_media_video != blank or section.settings.promo_media_image != blank -%}
+      {%- assign show_promo_media = true -%}
+    {%- endif -%}
+  {%- endif -%}
+  <div class="snc-search-results-page" data-section-id="{{ section.id }}" data-section-type="snc-plp" style="
+    --grid-gap: {{ grid_gap }}px;
+    --grid-gap-mobile: {{ grid_gap_mobile }}px;
+    --section-margin-top: {{ section_margin_top }}px;
+    --section-margin-bottom: {{ section_margin_bottom }}px;
+    --section-header-alignment: {{ section_header_alignment }};
+    --section-title-color: {{ section_title_color }};
+    --section-title-font-size: {{ section_title_font_size }}px;
+    --section-title-font-weight: {{ section_title_font_weight }};
+    --section-title-text-transform: {{ section_title_text_transform }};
+    --content-padding-vertical: {{ content_padding_vertical }}px;
+    --card-title-font-size-mobile: {{ card_title_font_size_mobile }}px;
+    --content-padding-horizontal: {{ content_padding_horizontal }}px;
+    --card-content-padding-vertical: {{ card_content_padding_vertical }}px;
+    --card-content-padding-horizontal: {{ card_content_padding_horizontal }}px;
+    --card-title-color: {{ card_title_color }};
+    --card-price-color: {{ card_price_color }};
+    --card-compare-price-color: {{ card_compare_price_color }};
+    --card-title-margin-bottom: {{ card_title_margin_bottom }}px;
+    --card-title-font-size: {{ card_title_font_size }}px;
+    --card-price-font-size: {{ card_price_font_size }}px;
+    --filter-bar-bg: {{ filter_bar_bg }};
+    --filter-bar-padding-v: {{ filter_bar_padding_v }}px;
+    --filter-bar-padding-h: {{ filter_bar_padding_h }}px;
+    --filter-bar-radius: {{ filter_bar_radius }}px;
+    --filter-bar-margin-bottom: {{ filter_bar_margin_bottom }}px;
+    --filter-bar-margin-top: {{ filter_bar_margin_top }}px;
+    --filter-btn-bg: {{ filter_btn_bg }};
+    --filter-btn-text-color: {{ filter_btn_text_color }};
+    --filter-btn-padding-v: {{ filter_btn_padding_v }}px;
+    --filter-btn-padding-h: {{ filter_btn_padding_h }}px;
+    --filter-btn-radius: {{ filter_btn_radius }}px;
+    --filter-btn-gap: {{ filter_btn_gap }}px;
+    --filter-swatch-gap: {{ filter_swatch_gap }}px;
+    --clear-btn-bg: {{ clear_btn_bg }};
+    --clear-btn-text-color: {{ clear_btn_text_color }};
+    --filter-font-size: {{ filter_font_size }}px;
+    --filter-font-weight: {{ filter_font_weight }};
+    --filter-text-transform: {{ filter_text_transform }};
+    --count-text-transform: {{ count_text_transform }};
+    --clear-btn-text-transform: {{ clear_btn_text_transform }};
+    --count-margin-left: {{ count_margin_left }}px;
+    --count-margin-right: {{ count_margin_right }}px;
+    --filter-bubble-bg: {{ filter_bubble_bg_color }};
+    --filter-bubble-text-color: {{ filter_bubble_text_color }};
+    --filter-bubble-margin-left: {{ filter_bubble_margin_left }}px;
+    --active-filter-padding-v: {{ active_filter_padding_v }}px;
+    --active-filter-padding-h: {{ active_filter_padding_h }}px;
+    --active-filter-bg: {{ active_filter_bg_color }};
+    --active-filter-text-color: {{ active_filter_text_color }};
+    --active-filter-radius: {{ active_filter_border_radius }}px;
+    --active-filter-font-size: {{ active_filter_font_size }}px;
+    --active-filter-font-weight: {{ active_filter_font_weight }};
+    --active-filter-gap-top: {{ active_filter_gap_top }}px;
+    --load-more-padding-v: {{ load_more_padding_v }}px;
+    --load-more-padding-h: {{ load_more_padding_h }}px;
+    --load-more-radius: {{ load_more_radius }}px;
+    --load-more-bg: {{ load_more_bg }};
+    --load-more-text-color: {{ load_more_text_color }};
+    --load-more-font-size: {{ load_more_font_size }}px;
+    --load-more-font-weight: {{ load_more_font_weight }};
+  ">
+    
+    <div class="snc-search-results__header">
+      <h1 class="snc-search-results__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="snc-search-results__description rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+    <div class="snc-mobile-controls">
+      <span class="snc-mobile-controls__count">{{ collection.products_count }} products</span>
+    </div>
+
+    <form class="snc-filter-form">
+      <div class="snc-filter-bar">
+        <div class="snc-filter-bar__left">
+          <button type="button" class="snc-filter-mobile-trigger" data-filter-drawer-trigger>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.83331 10H14.1666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.33331 5H16.6666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.33331 15H11.6666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Filters</span>
+          </button>
+
+          <div class="snc-desktop-filters-wrapper">
+            <div class="snc-filter-desktop-groups">
+              {%- for filter in collection.filters -%}
+                {%- liquid
+                  assign filter_label_display = filter.label
+                  if filter_label_display == 'Disponibilidad'
+                    assign filter_label_display = 'Availability'
+                  elsif filter_label_display == 'Precio'
+                    assign filter_label_display = 'Price'
+                  endif
+                -%}
+                <details class="snc-filter-group" data-filter-group>
+                  <summary class="snc-filter-group__summary">
+                    <span>{{ filter_label_display }}</span>
+                    {%- if filter.active_values.size > 0 -%}
+                      <span class="snc-filter-group__bubble">{{ filter.active_values.size }}</span>
+                    {%- endif -%}
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1L5 5L9 1"/></svg>
+                  </summary>
+                  <div class="snc-filter-group__content">
+                    <div class="snc-filter-group__header">
+                      <span>{{ filter_label_display }}</span>
+                      <span class="snc-filter-group__count">{{ filter.active_values.size }} selected</span>
+                    </div>
+                    {%- if filter.type == 'price_range' -%}
+                      {%- liquid
+                        assign range_max_value = filter.range_max | money_without_currency | replace: ',', '' | replace: ' ', ''
+                        assign min_value_formatted = ''
+                        assign max_value_formatted = ''
+
+                        if filter.min_value.value != nil
+                          assign min_value_formatted = filter.min_value.value | money_without_currency | replace: ',', '' | replace: ' ', ''
+                        endif
+                        if filter.max_value.value != nil
+                          assign max_value_formatted = filter.max_value.value | money_without_currency | replace: ',', '' | replace: ' ', ''
+                        endif
+
+                        assign min_range_value = 0
+                        if min_value_formatted != blank
+                          assign min_range_value = min_value_formatted
+                        endif
+
+                        assign max_range_value = range_max_value
+                        if max_value_formatted != blank
+                          assign max_range_value = max_value_formatted
+                        endif
+                      -%}
+
+                      <div class="snc-price-range" data-price-range>
+                        <div class="snc-price-range__fields">
+                          <div class="snc-price-range__field">
+                            <span class="snc-price-range__label">Min</span>
+                            <input
+                              type="number"
+                              name="{{ filter.min_value.param_name }}"
+                              value="{{ min_value_formatted }}"
+                              min="0"
+                              max="{{ range_max_value }}"
+                              placeholder="0"
+                              inputmode="decimal"
+                              data-price-input-min
+                              onchange="this.form.submit()"
+                            >
+                          </div>
+                          <div class="snc-price-range__field">
+                            <span class="snc-price-range__label">Max</span>
+                            <input
+                              type="number"
+                              name="{{ filter.max_value.param_name }}"
+                              value="{{ max_value_formatted }}"
+                              min="0"
+                              max="{{ range_max_value }}"
+                              placeholder="{{ range_max_value }}"
+                              inputmode="decimal"
+                              data-price-input-max
+                              onchange="this.form.submit()"
+                            >
+                          </div>
+                        </div>
+
+                        <div class="snc-price-range__sliders" aria-hidden="true">
+                          <input
+                            type="range"
+                            min="0"
+                            max="{{ range_max_value }}"
+                            value="{{ min_range_value }}"
+                            step="1"
+                            data-price-range-min
+                          >
+                          <input
+                            type="range"
+                            min="0"
+                            max="{{ range_max_value }}"
+                            value="{{ max_range_value }}"
+                            step="1"
+                            data-price-range-max
+                          >
+                        </div>
+                      </div>
+                    {%- else -%}
+                      <ul class="snc-filter-group__list">
+                        {%- for value in filter.values -%}
+                          <li class="snc-filter-group__item">
+                            <label class="snc-filter-group__label {% if value.count == 0 and value.active == false %}is-disabled{% endif %}">
+                              <input type="checkbox"
+                                name="{{ value.param_name }}"
+                                value="{{ value.value }}"
+                                {% if value.active %}checked{% endif %}
+                                {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                                onchange="this.form.submit()"
+                              >
+                              <span class="snc-filter-group__checkbox"></span>
+                              {%- if enable_advanced_colors_filters -%}
+                                {%- assign value_label_lower = value.label | downcase | strip -%}
+                                {%- for scheme in settings.custom_colors -%}
+                                  {%- assign scheme_name_lower = scheme.name | downcase | strip -%}
+                                  {%- if scheme_name_lower != blank and scheme_name_lower == value_label_lower -%}
+                                    <span class="snc-color-swatch" style="--swatch-color: {{ scheme.settings.swatch }};"></span>
+                                    {%- break -%}
+                                  {%- endif -%}
+                                {%- endfor -%}
+                              {%- endif -%}
+                              <span class="snc-filter-group__text">{{ value.label }}</span>
+                              <span class="snc-filter-group__count">({{ value.count }})</span>
+                            </label>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- endif -%}
+                  </div>
+                </details>
+              {%- endfor -%}
+            </div>
+          </div>
+  
+            <details class="snc-filter-group snc-filter-sort">
+              <summary class="snc-filter-group__summary">
+                <span>Sort by</span>
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1L5 5L9 1"/></svg>
+              </summary>
+              <div class="snc-filter-group__content">
+                <ul class="snc-filter-group__list">
+                  {%- for option in collection.sort_options -%}
+                    {%- liquid
+                      assign sort_name = option.name
+                      case option.value
+                        when 'manual'
+                          assign sort_name = 'Featured'
+                        when 'best-selling'
+                          assign sort_name = 'Best selling'
+                        when 'title-ascending'
+                          assign sort_name = 'Alphabetically, A–Z'
+                        when 'title-descending'
+                          assign sort_name = 'Alphabetically, Z–A'
+                        when 'price-ascending'
+                          assign sort_name = 'Price, low to high'
+                        when 'price-descending'
+                          assign sort_name = 'Price, high to low'
+                        when 'created-ascending'
+                          assign sort_name = 'Date, old to new'
+                        when 'created-descending'
+                          assign sort_name = 'Date, new to old'
+                      endcase
+                    -%}
+                    <li class="snc-filter-group__item">
+                      <label class="snc-filter-group__label">
+                        <input type="radio"
+                          name="sort_by"
+                          value="{{ option.value }}"
+                          {% if option.value == collection.sort_by %}checked{% endif %}
+                          onchange="this.form.submit()"
+                        >
+                        <span class="snc-filter-group__radio"></span>
+                        <span class="snc-filter-group__text">{{ sort_name }}</span>
+                      </label>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </details>
+        </div>
+
+        <div class="snc-filter-bar__right">
+          <span class="snc-filter-bar__count is-desktop-only">{{ collection.products_count }} products</span>
+          {%- assign active_filters = false -%}
+          {%- for filter in collection.filters -%}
+            {%- if filter.active_values.size > 0 -%}
+              {%- assign active_filters = true -%}
+            {%- endif -%}
+            {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+              {%- assign active_filters = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+          
+          <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="snc-filter-bar__clear is-desktop-only {% unless active_filters %}is-hidden{% endunless %}">Clear filters</a>
+        </div>
+      </div>
+    </form>
+
+    {%- assign has_active_filters = false -%}
+    {%- for filter in collection.filters -%}
+      {%- if filter.active_values.size > 0 or filter.min_value.value != nil or filter.max_value.value != nil -%}
+        {%- assign has_active_filters = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if has_active_filters -%}
+      <div class="snc-active-filters">
+        {%- for filter in collection.filters -%}
+          {%- for value in filter.active_values -%}
+            <a href="{{ value.url_to_remove }}" class="snc-active-filter__item">
+              <span>{{ value.label }}</span>
+              <svg class="snc-active-filter__remove" width="10" height="10" viewBox="0 0 10 10"><line x1="1" y1="9" x2="9" y2="1"/><line x1="1" y1="1" x2="9" y2="9"/></svg>
+            </a>
+          {%- endfor -%}
+          {% if filter.type == 'price_range' %}
+            {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+              <a href="{{ filter.url_to_remove }}" class="snc-active-filter__item">
+                <span>
+                  {%- if filter.min_value.value -%}{{ filter.min_value.value | money }}{%- else -%}{{ 0 | money }}{%- endif -%}
+                  -
+                  {%- if filter.max_value.value -%}{{ filter.max_value.value | money }}{%- else -%}{{ filter.range_max | money }}{%- endif -%}
+                </span>
+                <svg class="snc-active-filter__remove" width="10" height="10" viewBox="0 0 10 10"><line x1="1" y1="9" x2="9" y2="1"/><line x1="1" y1="1" x2="9" y2="9"/></svg>
+              </a>
+            {%- endif -%}
+          {% endif %}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="snc-filter-drawer" data-filter-drawer>
+      <div class="snc-filter-drawer__backdrop" data-filter-drawer-close></div>
+      <div class="snc-filter-drawer__panel">
+        <div class="snc-filter-drawer__header">
+          <h3>Filters</h3>
+          <button type="button" class="snc-filter-drawer__close-btn" data-filter-drawer-close>&times;</button>
+        </div>
+        <div class="snc-filter-drawer__body" data-filter-drawer-body>
+          <!-- Cloned filters will be injected here by JS -->
+        </div>
+        <div class="snc-filter-drawer__footer">
+          <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="snc-filter-drawer__clear-btn">Clear all</a>
+          <button type="button" class="snc-filter-drawer__apply-btn" data-filter-drawer-apply>View results</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="snc-search-results__grid" style="--columns-desktop: {{ columns_desktop }}; --columns-mobile: {{ columns_mobile }};">
+      {%- if show_promo_media -%}
+        <div class="snc-plp-promo-card is-desktop-only" style="border-radius: {{ card_border_radius }}px;">
+          {%- if section.settings.promo_media_link != blank -%}
+            <a href="{{ section.settings.promo_media_link }}" class="snc-plp-promo-link">
+          {%- endif -%}
+          
+          {%- if section.settings.promo_media_video != blank -%}
+            {{ section.settings.promo_media_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'snc-plp-promo-media' }}
+          {%- elsif section.settings.promo_media_image != blank -%}
+            {{ section.settings.promo_media_image | image_url: width: 800 | image_tag: class: 'snc-plp-promo-media', loading: 'lazy' }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'snc-plp-promo-media' }}
+          {%- endif -%}
+
+          {%- if section.settings.promo_media_link != blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- for product_card_product in collection.products -%}
+          <div class="snc-search-results__grid-item">
+            {%- liquid
+              assign main_image = product_card_product.featured_image
+              assign hover_image = false
+              if product_card_product.images.size > 1
+                for image in product_card_product.images
+                  unless image == main_image
+                    assign hover_image = image
+                    break
+                  endunless
+                endfor
+              endif
+            
+              assign has_size_option = false
+              assign has_color_option = false
+              assign size_option = blank
+              assign color_option = blank
+              
+              if product_card_product
+                for option in product_card_product.options_with_values
+                  assign option_name_lower = option.name | downcase
+                  if option_name_lower == 'talla' or option_name_lower == 'size' or option_name_lower == 'tamaño'
+                    assign has_size_option = true
+                    assign size_option = option
+                  elsif option_name_lower == 'color' or option_name_lower == 'colour' or option_name_lower == 'colores'
+                    assign has_color_option = true
+                    assign color_option = option
+                  endif
+                endfor
+              endif
+            -%}
+            
+            <div class="snc-plp--product-card" data-card-style="{{ card_style }}" data-product-handle="{{ product_card_product.handle }}" data-product-available="{{ product_card_product.available }}" data-product-price="{{ product_card_product.price }}">
+              {%- if product_card_product -%}
+                <div class="snc-plp--product-image-wrapper">
+                  <a href="{{ product_card_product.url }}" class="snc-plp--product-image-link">
+                    <img 
+                      src="{{ main_image | image_url: width: 460 }}" 
+                      alt="{{ main_image.alt | escape }}" 
+                      class="snc-plp--product-main-image"
+                      loading="lazy"
+                      width="460"
+                      height="600"
+                    >
+                    {%- if hover_image -%}
+                      <img 
+                        src="{{ hover_image | image_url: width: 460 }}" 
+                        alt="{{ hover_image.alt | escape }}" 
+                        class="snc-plp--product-hover-image"
+                        loading="lazy"
+                        width="460"
+                        height="600"
+                      >
+                    {%- endif -%}
+                  </a>
+                  <button class="snc-plp--favorite-button" data-favorite-handle="{{ product_card_product.handle }}">
+                    <img src="{% if global_icon_wishlist != blank %}{{ global_icon_wishlist | image_url: width: 46 }}{% else %}{{ 'favorite.svg' | asset_url }}{% endif %}" alt="Add to favorites" class="snc-plp--favorite-icon">
+                  </button>                    
+                  
+                  {%- if card_style == 'below' and enable_quick_add -%}
+                    <div 
+                      class="snc-plp--quick-add-overlay"
+                      style="
+                        --qa-padding: {{ qa_padding }}px;
+                        --qa-option-padding: {{ qa_option_padding }}px;
+                        --qa-border-radius: {{ qa_border_radius }}px;
+                        --qa-sizes-per-row: {{ qa_sizes_per_row }};
+                        --qa-bg-color: {{ qa_bg_color }};
+                        --qa-option-bg-color: {{ qa_option_bg_color }};
+                        --qa-option-text-color: {{ qa_option_text_color }};
+                        --qa-option-hover-bg-color: {{ qa_option_hover_bg_color }};
+                        --qa-option-hover-text-color: {{ qa_option_hover_text_color }};
+                        --qa-option-border-radius: {{ qa_option_border_radius }}px;
+                      "
+                    >
+                      {%- if has_size_option and has_color_option -%}
+                         <div class="snc-plp--qa-step" data-step="size">
+                           {%- if qa_show_title -%}<span class="snc-plp--qa-title">Selecciona Talla</span>{%- endif -%}
+                           <div class="snc-plp--qa-options">
+                             {%- for value in size_option.values -%}
+                               {%- assign size_available = false -%}
+                               {%- for variant in product_card_product.variants -%}
+                                 {%- if variant.option1 == value or variant.option2 == value or variant.option3 == value -%}
+                                   {%- if variant.available -%}
+                                     {%- assign size_available = true -%}
+                                     {%- break -%}
+                                   {%- endif -%}
+                                 {%- endif -%}
+                               {%- endfor -%}
+                               <button type="button" class="snc-plp--qa-option" data-value="{{ value }}" {% unless size_available %}disabled{% endunless %}>{{ value }}</button>
+                             {%- endfor -%}
+                           </div>
+                         </div>
+                         <div class="snc-plp--qa-step" data-step="color" style="display: none; opacity: 0;">
+                           {%- if qa_show_title -%}<span class="snc-plp--qa-title">Selecciona Color</span>{%- endif -%}
+                           <div class="snc-plp--qa-options">
+                             {%- for value in color_option.values -%}
+                               <button type="button" class="snc-plp--qa-option" data-value="{{ value }}">{{ value }}</button>
+                             {%- endfor -%}
+                           </div>
+                         </div>
+                         <script type="application/json" class="snc-plp--variant-data">
+                           {{ product_card_product.variants | json }}
+                         </script>
+                      {%- elsif has_size_option -%}
+                         <div class="snc-plp--qa-step" data-step="size">
+                           {%- if qa_show_title -%}<span class="snc-plp--qa-title">Selecciona Talla</span>{%- endif -%}
+                           <div class="snc-plp--qa-options">
+                             {%- for value in size_option.values -%}
+                               {%- liquid 
+                                  assign variant_for_size = false
+                                  for variant in product_card_product.variants
+                                    if variant.option1 == value or variant.option2 == value or variant.option3 == value
+                                      assign variant_for_size = variant
+                                      break
+                                    endif
+                                  endfor
+                               -%}
+                               <button 
+                                 type="button" 
+                                 class="snc-plp--qa-option" 
+                                 data-variant-id="{{ variant_for_size.id }}" 
+                                 {% unless variant_for_size.available %}disabled{% endunless %}
+                               >
+                                 {{ value }}
+                               </button>
+                             {%- endfor -%}
+                           </div>
+                         </div>
+                      {%- else -%}
+                         <button type="button" class="snc-plp--qa-btn-full" data-add-product-handle="{{ product_card_product.handle }}">Add to cart</button>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+                <div class="snc-plp--product-footer">
+                  <div class="snc-plp--product-info">
+                    <a href="{{ product_card_product.url }}" class="snc-plp--product-title-link">
+                      <h3 class="snc-plp--product-title">{{ product_card_product.title }}</h3>
+                    </a>
+                    <div class="snc-plp--product-price-container">
+                      {%- if product_card_product.compare_at_price > product_card_product.price -%}
+                        <span class="snc-plp--product-compare-price">{{ product_card_product.compare_at_price | money }}</span>
+                      {%- endif -%}
+                      <span class="snc-plp--product-price">{{ product_card_product.price | money }}</span>
+                    </div>
+                  </div>
+                  {%- if enable_quick_add -%}
+                  <div class="snc-plp--add-container">
+                    {%- if has_size_option -%}
+                      <div class="snc-plp--sizes-dropdown">
+                        {%- for value in size_option.values -%}
+                          {%- liquid
+                            assign variant_for_size = false
+                            for variant in product_card_product.variants
+                              if variant.option1 == value or variant.option2 == value or variant.option3 == value
+                                assign variant_for_size = variant
+                                break
+                              endif
+                            endfor
+                          -%}
+                          <button 
+                            class="snc-plp--size-option" 
+                            data-variant-id="{{ variant_for_size.id }}"
+                            {% unless variant_for_size.available %}disabled{% endunless %}
+                          >
+                            {{ value }}
+                          </button>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                    <button class="snc-plp--add-button">
+                      <img src="{% if global_icon_plus != blank %}{{ global_icon_plus | image_url: width: 36 }}{% else %}{{ 'plus.svg' | asset_url }}{% endif %}" alt="Add to cart" class="snc-plp--plus-icon">
+                    </button>
+                  </div>
+                  {%- endif -%}
+                </div>
+              {%- else -%}
+                <div class="snc-plp--product-image-wrapper" style="background-color: #f0f0f0;"></div>
+                <div class="snc-plp--product-footer">
+                  <div class="snc-plp--product-info">
+                    <div style="height: 1.2em; width: 80%; background-color: #e0e0e0; margin-bottom: 6px; border-radius: 4px;"></div>
+                    <div style="height: 1em; width: 40%; background-color: #e0e0e0; border-radius: 4px;"></div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+      {%- endfor -%}
+    </div>
+
+      {%- if paginate.next -%}
+        <div class="snc-load-more">
+          <button type="button" class="snc-load-more__btn" data-load-more data-next-url="{{ paginate.next.url }}">Cargar más</button>
+        </div>
+      {%- endif -%}
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "SNC PLP",
+  "class": "section--snc-plp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración de Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "content_padding_vertical",
+      "label": "Padding vertical interno",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal",
+      "label": "Padding horizontal interno",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margen superior",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margen inferior",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Media Promocional (Solo Desktop 3 Cols)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_promo_media",
+      "label": "Habilitar media promocional",
+      "default": false,
+      "info": "Solo visible cuando la configuración global de columnas desktop es 3."
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_media_image",
+      "label": "Imagen"
+    },
+    {
+      "type": "video",
+      "id": "promo_media_video",
+      "label": "Video (MP4)"
+    },
+    {
+      "type": "url",
+      "id": "promo_media_link",
+      "label": "Enlace"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC PLP"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  /* Reutilizamos los estilos de snc-search-results.liquid ya que son idénticos */
+  /* Solo cambiamos el nombre de la clase principal si es necesario, pero podemos usar la misma */
+  .snc-search-results-page {
+    margin-top: var(--section-margin-top);
+    margin-bottom: var(--section-margin-bottom);
+    padding-top: var(--content-padding-vertical);
+    padding-bottom: var(--content-padding-vertical);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    {%- if full_width -%}
+      padding-left: var(--content-padding-horizontal);
+      padding-right: var(--content-padding-horizontal);
+    {%- else -%}
+      padding-left: max(var(--content-padding-horizontal), calc((100vw - 1512px) / 2));
+      padding-right: max(var(--content-padding-horizontal), calc((100vw - 1512px) / 2));
+    {%- endif -%}
+  }
+  .snc-search-results__header {
+    text-align: var(--section-header-alignment);
+    margin-bottom: 40px;
+  }
+  .snc-search-results__title {
+    font-size: var(--section-title-font-size);
+    color: var(--section-title-color);
+    font-family: var(--font-main);
+    font-weight: var(--section-title-font-weight);
+    text-transform: var(--section-title-text-transform);
+    margin: 0;
+  }
+  .snc-search-results__description {
+    margin-top: 15px;
+    font-family: var(--font-nunito, 'NunitoSans', sans-serif);
+    font-size: 16px;
+    color: #666;
+  }
+  .snc-search-results__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns-desktop, 4), 1fr);
+    gap: var(--grid-gap);
+    grid-auto-flow: dense; /* Importante para que los productos fluyan alrededor del promo */
+  }
+  .snc-plp-promo-card {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .snc-plp-promo-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .snc-plp-promo-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .snc-search-results__pagination {
+    margin-top: 60px;
+    text-align: center;
+  }
+  .snc-search-results__pagination .pagination__item {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  .snc-search-results__pagination .pagination__item a,
+  .snc-search-results__pagination .pagination__item span {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--card-title-color);
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+  .snc-search-results__pagination .pagination__item--current span {
+    background-color: var(--card-title-color);
+    color: #fff;
+    border-color: var(--card-title-color);
+  }
+
+  .snc-load-more {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .snc-load-more__btn {
+    padding: var(--load-more-padding-v) var(--load-more-padding-h);
+    background-color: var(--load-more-bg);
+    color: var(--load-more-text-color);
+    border: none;
+    border-radius: var(--load-more-radius);
+    font-family: var(--font-main);
+    font-size: var(--load-more-font-size);
+    font-weight: var(--load-more-font-weight);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  .snc-load-more__btn:hover {
+    opacity: 0.9;
+  }
+  .snc-load-more__btn.is-loading,
+  .snc-load-more__btn:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  /* Filter Bar Styles */
+  .snc-filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--filter-bar-bg);
+    padding: var(--filter-bar-padding-v) var(--filter-bar-padding-h);
+    border-radius: var(--filter-bar-radius);
+    margin-bottom: var(--filter-bar-margin-bottom);
+    margin-top: var(--filter-bar-margin-top);
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .snc-filter-bar__left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .snc-desktop-filters-wrapper {
+    display: contents;
+  }
+  .snc-filter-bar__right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: var(--font-main);
+    font-size: var(--filter-font-size);
+    color: var(--filter-btn-text-color);
+  }
+  .snc-filter-group {
+    position: relative;
+  }
+  .snc-filter-group__summary {
+    list-style: none;
+    cursor: pointer;
+    background-color: var(--filter-btn-bg);
+    color: var(--filter-btn-text-color);
+    padding: var(--filter-btn-padding-v) var(--filter-btn-padding-h);
+    border-radius: var(--filter-btn-radius);
+    font-family: var(--font-main);
+    font-size: var(--filter-font-size);
+    font-weight: var(--filter-font-weight);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    white-space: nowrap;
+    text-transform: var(--filter-text-transform);
+  }
+  .snc-filter-group__summary > span:first-child {
+    margin-right: var(--filter-bubble-margin-left);
+  }
+  .snc-filter-group__summary svg {
+    margin-left: var(--filter-btn-gap);
+  }
+  .snc-filter-group__bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background-color: var(--filter-bubble-bg);
+    color: var(--filter-bubble-text-color);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 50px;
+    line-height: 1;
+  }
+  .snc-filter-group__summary::-webkit-details-marker { display: none; }
+  .snc-filter-group[open] .snc-filter-group__summary svg {
+    transform: rotate(180deg);
+  }
+  .snc-filter-group__content {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 200px;
+    z-index: 100;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  .snc-filter-group__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 12px;
+    color: #666;
+  }
+  .snc-filter-group__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Price range */
+  .snc-price-range {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 4px 2px 2px;
+  }
+  .snc-price-range__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .snc-price-range__label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 6px;
+    font-family: var(--font-main);
+  }
+  .snc-price-range input[type="number"] {
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: var(--font-main);
+    font-size: 14px;
+    color: #111;
+    box-sizing: border-box;
+    background: #fff;
+  }
+  .snc-price-range input[type="number"]:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.5);
+  }
+  .snc-price-range__sliders {
+    position: relative;
+    height: 28px;
+    display: flex;
+    align-items: center;
+  }
+  .snc-price-range__sliders input[type="range"] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    height: 2px;
+    background: #e5e5e5;
+    appearance: none;
+    pointer-events: none;
+  }
+  .snc-price-range__sliders input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #111;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  .snc-price-range__sliders input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #111;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  .snc-filter-group__item {
+    margin-bottom: 6px;
+  }
+  .snc-filter-group__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+  }
+  .snc-filter-group__label.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .snc-filter-group__checkbox, .snc-filter-group__radio {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+  }
+  .snc-filter-group__radio { border-radius: 50%; }
+  .snc-filter-group__label input { display: none; }
+  .snc-filter-group__label input:checked + .snc-filter-group__checkbox,
+  .snc-filter-group__label input:checked + .snc-filter-group__radio {
+    background-color: var(--filter-btn-text-color);
+    border-color: var(--filter-btn-text-color);
+  }
+  .snc-filter-bar__clear {
+    background-color: var(--clear-btn-bg);
+    color: var(--clear-btn-text-color);
+  }
+  .snc-search-results-page .snc-color-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--swatch-color);
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-right: var(--filter-swatch-gap);
+    vertical-align: middle;
+  }
+  .snc-filter-bar__clear {
+    background-color: var(--clear-btn-bg);
+    color: var(--clear-btn-text-color);
+    padding: {{ section.settings.clear_btn_padding_vertical }}px {{ section.settings.clear_btn_padding_horizontal }}px;
+    border-radius: {{ section.settings.clear_btn_radius }}px;
+    text-decoration: underline;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: var(--clear-btn-text-transform);
+  }
+  .snc-filter-bar__count {
+    text-transform: var(--count-text-transform);
+    margin-left: var(--count-margin-left);
+    margin-right: var(--count-margin-right);
+  }
+  .snc-filter-bar__clear.is-hidden {
+    display: none;
+  }
+
+  .snc-active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: calc(var(--active-filter-gap-top) - var(--filter-bar-margin-bottom));
+    margin-bottom: 30px;
+  }
+  .snc-active-filter__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: var(--active-filter-padding-v) var(--active-filter-padding-h);
+    background-color: var(--active-filter-bg);
+    color: var(--active-filter-text-color);
+    border-radius: var(--active-filter-radius);
+    font-size: var(--active-filter-font-size);
+    font-weight: var(--active-filter-font-weight);
+    text-decoration: none;
+    transition: opacity 0.2s;
+    font-family: var(--font-main);
+  }
+  .snc-active-filter__item:hover {
+    opacity: 0.8;
+  }
+  .snc-active-filter__remove {
+    stroke: currentColor;
+    stroke-width: 1.5;
+    width: 10px;
+    height: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .snc-search-results__grid {
+      grid-template-columns: repeat(var(--columns-mobile, 2), 1fr);
+      gap: var(--grid-gap-mobile);
+    }
+    .snc-plp--product-image-wrapper {
+      {%- if card_height_mode == 'fixed' -%}height: {{ card_height_mobile }}px;{%- endif -%}
+    }
+    .snc-plp--product-title {
+      font-size: var(--card-title-font-size-mobile);
+    }
+    .snc-desktop-filters-wrapper {
+      display: none !important;
+    }
+    .snc-filter-mobile-trigger {
+      display: flex !important;
+      flex-grow: 1;
+    }
+    .snc-filter-bar__left {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .snc-filter-group__summary {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+
+  /* ESTILOS DE TARJETA (Copiados de snc-product-carousel) */
+  .snc-plp--product-card {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    border-radius: {{ card_border_radius }}px;
+    overflow: hidden;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+  .snc-plp--product-image-wrapper {
+    position: relative;
+    width: 100%;
+    {%- if card_height_mode == 'fixed' -%}
+      height: {{ settings.pg_card_height | default: 420 }}px;
+    {%- else -%}
+      height: auto;
+      aspect-ratio: {{ card_aspect_ratio }};
+    {%- endif -%}
+    overflow: hidden;
+    border-radius: {{ card_border_radius }}px;
+    background-color: #f5f5f5;
+  }
+  .snc-plp--product-image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .snc-plp--product-main-image,
+  .snc-plp--product-hover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ card_image_fit }};
+    display: block;
+    transition: opacity 0.3s ease;
+    filter: brightness({{ image_brightness | divided_by: 100.0 }});
+  }
+  .snc-plp--product-hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .snc-plp--product-image-wrapper:hover .snc-plp--product-main-image {
+    opacity: 0;
+  }
+  .snc-plp--product-image-wrapper:hover .snc-plp--product-hover-image {
+    opacity: 1;
+  }
+  .snc-plp--product-image-wrapper:not(:hover) .snc-plp--product-main-image,
+  .snc-plp--product-card:not(:has(.snc-plp--product-hover-image)) .snc-plp--product-main-image {
+    opacity: 1;
+  }
+  .snc-plp--favorite-button {
+    position: absolute;
+    top: {{ wishlist_inset }}px;
+    right: {{ wishlist_inset }}px;
+    background: {% if wishlist_bg_enabled %}{{ wishlist_bg_color }}{% else %}none{% endif %};
+    border: none;
+    padding: {% if wishlist_bg_enabled %}{{ wishlist_padding }}px{% else %}0{% endif %};
+    cursor: pointer;
+    z-index: 10;
+    width: {% if wishlist_bg_enabled %}{{ wishlist_size }}px{% else %}23px{% endif %};
+    height: {% if wishlist_bg_enabled %}{{ wishlist_size }}px{% else %}20px{% endif %};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+    border-radius: {{ wishlist_radius }}px;
+  }
+
+  .snc-plp--favorite-button.is-active .snc-plp--favorite-icon {
+    opacity: 0;
+  }
+  .snc-plp--favorite-button.is-active {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='{{ settings.global_wishlist_active_color | default: '#DA4B4B' | url_encode }}'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 23px 20px;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+  }
+  .snc-plp--favorite-button.is-bouncing {
+    animation: bounce 0.4s ease-in-out;
+  }
+
+  .snc-plp--favorite-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  .snc-plp--favorite-icon {
+    width: 23px;
+    height: 20px;
+    display: block;
+    object-fit: contain;
+  }
+  .snc-plp--product-footer {
+    position: absolute;
+    bottom: var(--card-content-padding-vertical);
+    left: var(--card-content-padding-horizontal);
+    right: var(--card-content-padding-horizontal);
+    height: 54px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    pointer-events: none;
+  }
+  .snc-plp--product-info {
+    flex: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .snc-plp--product-card:hover .snc-plp--product-info {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .snc-plp--product-title-link {
+    text-decoration: none;
+    display: block;
+    margin-bottom: var(--card-title-margin-bottom, 6px);
+  }
+  .snc-plp--product-title {
+    font-family: var(--font-main);
+    font-size: var(--card-title-font-size, 16px);
+    font-weight: normal;
+    color: var(--card-title-color, #0d0d0d);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .snc-plp--product-price-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .snc-plp--product-compare-price {
+    font-family: var(--font-main);
+    font-size: var(--card-price-font-size, 14px);
+    color: var(--card-compare-price-color, rgba(0, 0, 0, 0.4));
+    text-decoration: line-through;
+  }
+  .snc-plp--product-price {
+    font-family: var(--font-main);
+    font-size: var(--card-price-font-size, 14px);
+    font-weight: normal;
+    color: var(--card-price-color, #000000);
+  }
+  .snc-plp--add-container {
+    position: relative;
+    pointer-events: auto;
+  }
+  .snc-plp--add-button {
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .snc-plp--add-container:hover .snc-plp--add-button {
+    width: auto;
+    min-width: 200px;
+    padding: 0 20px;
+    border-radius: 1000px;
+  }
+  .snc-plp--plus-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .snc-plp--sizes-dropdown {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    background: #ffffff;
+    border-radius: 1000px;
+    padding: 12px 20px;
+    display: none;
+    gap: 15px;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .snc-plp--add-container:hover .snc-plp--sizes-dropdown {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .snc-plp--size-option {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: normal;
+    color: #0d0d0d;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    line-height: 1;
+  }
+  .snc-plp--size-option:hover {
+    opacity: 0.7;
+  }
+  .snc-plp--size-option:disabled,
+  .snc-plp--qa-option:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    position: relative;
+    text-decoration: none !important;
+    background-color: transparent !important;
+    color: #0d0d0d !important;
+  }
+
+  .snc-plp--size-option:disabled:hover,
+  .snc-plp--qa-option:disabled:hover {
+    transform: none;
+    border-color: #e5e5e5;
+  }
+
+  .snc-plp--size-option:disabled::after,
+  .snc-plp--qa-option:disabled::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background: currentColor;
+    transform: rotate(-20deg);
+  }
+
+  /* Estilos para tarjeta con contenido debajo */
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--product-footer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    height: auto;
+    padding: var(--card-content-padding-vertical) var(--card-content-padding-horizontal);
+    background: #ffffff;
+    pointer-events: auto;
+  }
+
+  .snc-plp--product-card[data-card-style="below"]:hover .snc-plp--product-info {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--product-image-wrapper {
+    border-radius: {{ card_border_radius }}px {{ card_border_radius }}px 0 0;
+  }
+
+  /* Quick Add Overlay for 'below' style */
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--add-container {
+    display: none;
+  }
+
+  .snc-plp--quick-add-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--qa-bg-color, #ffffff);
+    padding: var(--qa-padding, 13px);
+    border-radius: var(--qa-border-radius, 0) var(--qa-border-radius, 0) 0 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 20;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
+  .snc-plp--product-image-wrapper:hover .snc-plp--quick-add-overlay {
+    transform: translateY(0);
+  }
+
+  .snc-plp--qa-step {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: opacity 0.3s ease;
+  }
+
+  .snc-plp--qa-title {
+    font-family: var(--font-main);
+    font-size: 12px;
+    color: #666;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .snc-plp--qa-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .snc-plp--qa-option {
+    border: 1px solid #e5e5e5;
+    background: var(--qa-option-bg-color, white);
+    padding: var(--qa-option-padding, 6px);
+    font-family: var(--font-main);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: var(--qa-option-border-radius, 4px);
+    transition: all 0.2s;
+    color: var(--qa-option-text-color, #0d0d0d);
+    text-align: center;
+    flex-grow: 1;
+    flex-basis: calc((100% - (6px * (var(--qa-sizes-per-row, 5) - 1))) / var(--qa-sizes-per-row, 5));
+  }
+
+  .snc-plp--qa-option:hover {
+    border-color: var(--qa-option-hover-bg-color, #0d0d0d);
+    background: var(--qa-option-hover-bg-color, #0d0d0d);
+    color: var(--qa-option-hover-text-color, white);
+  }
+
+  .snc-plp--qa-btn-full {
+    width: 100%;
+    background: #0d0d0d;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-family: var(--font-main);
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  
+  .snc-plp--qa-btn-full:hover {
+    opacity: 0.9;
+  }
+</style>
+
+<style>
+  /* Mobile Filter Styles */
+  .snc-mobile-controls {
+    display: none;
+  }
+  .is-desktop-only {
+    display: flex; /* or inline-flex, block, etc. depending on context */
+  }
+  .snc-filter-mobile-trigger {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--filter-btn-bg);
+    color: var(--filter-btn-text-color);
+    padding: var(--filter-btn-padding-v) var(--filter-btn-padding-h);
+    border-radius: var(--filter-btn-radius);
+    font-family: var(--font-main);
+    font-size: var(--filter-font-size);
+    font-weight: var(--filter-font-weight);
+    border: none;
+    cursor: pointer;
+  }
+  .snc-filter-desktop-groups {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* Filter Drawer Styles */
+  .snc-filter-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .snc-filter-drawer.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .snc-filter-drawer__backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+  }
+  .snc-filter-drawer__panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .snc-filter-drawer.is-open .snc-filter-drawer__panel {
+    transform: translateX(0);
+  }
+  .snc-filter-drawer__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+  }
+  .snc-filter-drawer__header h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  .snc-filter-drawer__close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    color: black;
+  }
+  .snc-filter-drawer__body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  .snc-filter-drawer__body .snc-filter-group {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .snc-filter-drawer__body .snc-filter-group__summary {
+    background: none;
+    padding: 0;
+    font-weight: 700;
+    width: 100%;
+  }
+  .snc-filter-drawer__body .snc-filter-group__summary svg {
+    margin-left: auto;
+  }
+  .snc-filter-drawer__body .snc-filter-group__summary > span:first-child {
+    margin-right: 3px;
+  }
+  .snc-filter-drawer__body .snc-filter-group__content {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding: 10px 0 0 0;
+    max-height: none;
+    overflow: visible;
+  }
+  .snc-filter-drawer__body .snc-filter-desktop-groups {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+  }
+  .snc-filter-drawer__footer {
+    display: flex;
+    gap: 10px;
+    padding: 15px 20px;
+    border-top: 1px solid #f0f0f0;
+    flex-shrink: 0;
+    background: #fff;
+  }
+  .snc-filter-drawer__clear-btn,
+  .snc-filter-drawer__apply-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .snc-filter-drawer__clear-btn {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #e5e5e5;
+  }
+  .snc-filter-drawer__apply-btn {
+    background-color: var(--filter-btn-text-color, #0d0d0d);
+    color: #fff;
+    border: none;
+  }
+
+  .snc-filter-drawer__body .snc-active-filters {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
+  .snc-filter-drawer__active-title {
+    font-size: 14px;
+    display: none;
+    font-weight: 700;
+    color: #333;
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 768px) {
+    .is-desktop-only {
+      display: none !important;
+    }
+    .snc-mobile-controls {
+      display: block;
+      text-align: var(--section-header-alignment);
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+  }
+</style>

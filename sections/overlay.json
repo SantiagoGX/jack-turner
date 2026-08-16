@@ -1,0 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.overlay",
+  "name": "Overlay",
+  "sections": {
+    "cookie-banner": {
+      "type": "snc-cookie-banner",
+      "settings": {
+        "enable": false,
+        "message": "We use cookies to enhance your browsing experience and analyse site traffic.",
+        "accept_label": "Accept",
+        "decline_label": "Decline"
+      }
+    },
+    "legacy-popup": {
+      "type": "snc-legacy-club-popup",
+      "settings": {
+        "enable_popup": true,
+        "popup_eyebrow": "For those who move before the crowd...",
+        "popup_title": "Jack Turner Legacy Club",
+        "popup_lead": "Enter the Jack Turner Legacy Club;     Private access for collectors who prefer to move before the crowd and enjoy:",
+        "popup_bullet_1": "Priority access to new drops.",
+        "popup_bullet_2": "Exclusive offers not available on the site.",
+        "popup_bullet_3": "Early release of articles and brand insights.",
+        "popup_closing": "Limited communication. Maximum advantage.",
+        "popup_name_label": "First name",
+        "popup_name_placeholder": "First name (optional)",
+        "popup_email_label": "Email",
+        "popup_email_placeholder": "Email address",
+        "popup_cta": "Join the Legacy Club",
+        "popup_success": "Thank you. You are on the list.",
+        "luxury_panel_bg": "#f4f2ef",
+        "luxury_text": "#0d0d0d",
+        "luxury_text_muted": "#4a4a48",
+        "luxury_border": "#c9c4bc",
+        "luxury_accent": "#0d0d0d",
+        "luxury_button_label": "#f4f2ef",
+        "luxury_hairline": "#8b7355",
+        "image": "shopify://shop_images/IMG_2082.jpg",
+        "klaviyo_list_id": "TWy4DM",
+        "inactivity_seconds": 10,
+        "cookie_days": 3
+      }
+    }
+  },
+  "order": [
+    "cookie-banner",
+    "legacy-popup"
+  ]
+}

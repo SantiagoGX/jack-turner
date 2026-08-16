@@ -1,0 +1,563 @@
+{% comment %}
+  New section: SNC Icon Grid
+  Allows for a title, description, and a grid of up to 6 icons with their own text.
+  Also includes a final CTA button and link.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "SNC Icon Grid",
+  "class": "section--snc-icon-grid",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "section_border_radius",
+      "label": "Redondeo de la sección",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Cabecera de Sección"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿CÓMO GANAR PUNTOS?"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Descripción",
+      "default": "<p>You can earn points in various ways including purchases, sign-ups, social media follows and more. Then redeem them for vouchers.</p>"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Alineación de cabecera",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Estilos de Cabecera"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del Título",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Tamaño del Título",
+      "min": 16, "max": 48, "step": 1, "unit": "px", "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_font_weight",
+      "label": "Grosor del Título",
+      "min": 100, "max": 900, "step": 100, "default": 700
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color de la Descripción",
+      "default": "#666"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Tamaño de la Descripción",
+      "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_font_weight",
+      "label": "Grosor de la Descripción",
+      "min": 100, "max": 900, "step": 100, "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Configuración de la Grilla"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columnas en desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columnas en móvil",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Espacio horizontal entre iconos",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "grid_row_gap",
+      "label": "Espacio vertical entre filas",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Tamaño del icono",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Estilos de Texto (Iconos)"
+    },
+    {
+      "type": "color",
+      "id": "kicker_color",
+      "label": "Color del Título Pequeño",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "range",
+      "id": "kicker_font_size",
+      "label": "Tamaño del Título Pequeño",
+      "min": 10, "max": 24, "step": 1, "unit": "px", "default": 16
+    },
+    {
+      "type": "range",
+      "id": "kicker_font_weight",
+      "label": "Grosor del Título Pequeño",
+      "min": 100, "max": 900, "step": 100, "default": 700
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del Texto Principal",
+      "default": "#666"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Tamaño del Texto Principal",
+      "min": 10, "max": 20, "step": 1, "unit": "px", "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_font_weight",
+      "label": "Grosor del Texto Principal",
+      "min": 100, "max": 900, "step": 100, "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Botón Final"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "REGÍSTRATE AHORA"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Fondo del botón",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Texto del botón",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Color del borde",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Ancho del borde",
+      "min": 0, "max": 5, "step": 1, "unit": "px", "default": 0
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Padding vertical",
+      "min": 5, "max": 30, "step": 1, "unit": "px", "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Padding horizontal",
+      "min": 10, "max": 60, "step": 1, "unit": "px", "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Redondeo de borde",
+      "min": 0, "max": 50, "step": 1, "unit": "px", "default": 30
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Tamaño de fuente",
+      "min": 10, "max": 24, "step": 1, "unit": "px", "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_weight",
+      "label": "Grosor de fuente",
+      "min": 100, "max": 900, "step": 100, "default": 700
+    },
+    {
+      "type": "header",
+      "content": "Botón Final (Hover)"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Fondo del botón (Hover)",
+      "default": "#1e3326"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Texto del botón (Hover)",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Borde del botón (Hover)",
+      "default": "#1e3326"
+    },
+    {
+      "type": "header",
+      "content": "Enlace Final"
+    },
+    {
+      "type": "text",
+      "id": "final_link_text",
+      "label": "Texto del enlace final",
+      "default": "¿Ya tienes una cuenta?"
+    },
+    {
+      "type": "url",
+      "id": "final_link_url",
+      "label": "URL del enlace final"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado de Sección"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margen superior",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margen inferior",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding superior",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding inferior",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_item",
+      "name": "Icono",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icono"
+        },
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Título pequeño (Kicker)",
+          "default": "Buy any product"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto principal",
+          "default": "<p>1 punto cada vez que gastes 1MXN</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Icon Grid",
+      "blocks": [
+        { "type": "icon_item" },
+        { "type": "icon_item" },
+        { "type": "icon_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .snc-icon-grid {
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+    border-radius: {{ section.settings.section_border_radius }}px;
+    {%- if section.settings.full_width -%}
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    {%- else -%}
+      max-width: 1512px;
+      margin-left: auto;
+      margin-right: auto;
+      width: calc(100% - 40px);
+    {%- endif -%}
+  }
+  .snc-icon-grid--container {
+    max-width: 1512px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .snc-icon-grid--header {
+    text-align: {{ section.settings.header_alignment }};
+    margin-bottom: 50px;
+  }
+  .snc-icon-grid--title {
+    font-family: var(--font-main);
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: {{ section.settings.title_font_weight }};
+    color: {{ section.settings.title_color }};
+    margin: 0 0 15px 0;
+  }
+  .snc-icon-grid--description {
+    font-family: var(--font-main);
+    font-size: {{ section.settings.description_font_size }}px;
+    font-weight: {{ section.settings.description_font_weight }};
+    color: {{ section.settings.description_color }};
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .snc-icon-grid--description p {
+    margin: 0;
+  }
+  .snc-icon-grid--grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    column-gap: {{ section.settings.grid_gap }}px;
+    row-gap: {{ section.settings.grid_row_gap | default: 50 }}px;
+    margin-bottom: 50px;
+  }
+  .snc-icon-grid--item {
+    text-align: center;
+  }
+  .snc-icon-grid--icon-holder {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    margin: 0 auto 20px auto;
+  }
+  .snc-icon-grid--icon-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .snc-icon-grid--kicker {
+    font-family: var(--font-main);
+    font-size: var(--kicker-size);
+    font-weight: var(--kicker-weight);
+    color: var(--kicker-color);
+    margin: 0 0 8px 0;
+  }
+  .snc-icon-grid--text {
+    font-family: var(--font-main);
+    font-size: var(--text-size);
+    font-weight: var(--text-weight);
+    color: var(--text-color);
+    line-height: 1.5;
+  }
+  .snc-icon-grid--text p {
+    margin: 0;
+  }
+  .snc-icon-grid--footer {
+    text-align: center;
+  }
+  .snc-icon-grid--button {
+    display: inline-block;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: {{ section.settings.button_padding_vertical }}px {{ section.settings.button_padding_horizontal }}px;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-weight: {{ section.settings.button_font_weight }};
+    font-size: {{ section.settings.button_font_size }}px;
+    transition: all 0.2s ease;
+    margin-bottom: 15px;
+  }
+  .snc-icon-grid--button:hover {
+    background-color: {{ section.settings.button_hover_bg_color }};
+    color: {{ section.settings.button_hover_text_color }};
+    border-color: {{ section.settings.button_hover_border_color }};
+  }
+  .snc-icon-grid--final-link {
+    font-family: var(--font-main);
+    font-size: 14px;
+    color: #666;
+    text-decoration: underline;
+  }
+  .snc-icon-grid--final-link:hover {
+    color: #0d0d0d;
+  }
+
+  @media (max-width: 768px) {
+    .snc-icon-grid--grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+    }
+  }
+</style>
+
+<div class="snc-icon-grid" style="
+  --kicker-color: {{ section.settings.kicker_color }};
+  --kicker-size: {{ section.settings.kicker_font_size }}px;
+  --kicker-weight: {{ section.settings.kicker_font_weight }};
+  --text-color: {{ section.settings.text_color }};
+  --text-size: {{ section.settings.text_font_size }}px;
+  --text-weight: {{ section.settings.text_font_weight }};
+">
+  <div class="snc-icon-grid--container">
+    <div class="snc-icon-grid--header">
+      {%- if section.settings.title != blank -%}
+        <h2 class="snc-icon-grid--title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="snc-icon-grid--description rte">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="snc-icon-grid--grid">
+        {%- for block in section.blocks -%}
+          <div class="snc-icon-grid--item" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != blank -%}
+              <div class="snc-icon-grid--icon-holder">
+                <img src="{{ block.settings.icon | image_url: width: 100 }}" alt="{{ block.settings.kicker | escape }}" loading="lazy">
+              </div>
+            {%- endif -%}
+            {%- if block.settings.kicker != blank -%}
+              <h3 class="snc-icon-grid--kicker">{{ block.settings.kicker }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="snc-icon-grid--text rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="snc-icon-grid--footer">
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="snc-icon-grid--button">
+          {{ section.settings.button_text }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.final_link_text != blank -%}
+        <div>
+          <a href="{{ section.settings.final_link_url | default: '#' }}" class="snc-icon-grid--final-link">
+            {{ section.settings.final_link_text }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

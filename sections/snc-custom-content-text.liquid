@@ -1,0 +1,1045 @@
+{% schema %}
+{
+  "name": "SNC Custom Content",
+  "class": "section--snc-custom-content-text",
+  "settings": [
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 250,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen superior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 250,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen inferior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 400,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho máximo del contenido",
+      "default": 800
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alineación del texto",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "section_layout",
+      "label": "Layout de la sección",
+      "options": [
+        { "value": "stacked", "label": "Bloques verticales (actual)" },
+        { "value": "split", "label": "Texto + imagen en dos columnas" }
+      ],
+      "default": "stacked"
+    },
+    {
+      "type": "select",
+      "id": "split_image_position",
+      "label": "Posición de imagen (layout dos columnas)",
+      "options": [
+        { "value": "right", "label": "Imagen a la derecha" },
+        { "value": "left", "label": "Imagen a la izquierda" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "split_text_alignment",
+      "label": "Alineación del texto (layout dos columnas)",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "split_vertical_align",
+      "label": "Alineación vertical (layout dos columnas)",
+      "options": [
+        { "value": "flex-start", "label": "Arriba" },
+        { "value": "center", "label": "Centro" },
+        { "value": "flex-end", "label": "Abajo" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "split_gap",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "label": "Espacio entre columnas",
+      "default": 52
+    },
+    {
+      "type": "select",
+      "id": "split_mobile_order",
+      "label": "Orden en móvil (layout dos columnas)",
+      "options": [
+        { "value": "content_first", "label": "Texto primero, imagen después" },
+        { "value": "image_first", "label": "Imagen primero, texto después" }
+      ],
+      "default": "content_first"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Texto",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Agrega tu texto aquí</p>"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#0d0d0d"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño de fuente",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño de fuente (Móvil)",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "font_scale",
+          "min": 80,
+          "max": 160,
+          "step": 2,
+          "unit": "%",
+          "label": "Ajuste tamaño texto (Desktop)",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "font_scale_mobile",
+          "min": 80,
+          "max": 160,
+          "step": 2,
+          "unit": "%",
+          "label": "Ajuste tamaño texto (Móvil)",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "font_weight",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "label": "Grosor de fuente",
+          "default": 400
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen inferior",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "text_max_width",
+          "min": 100,
+          "max": 1000,
+          "step": 20,
+          "unit": "px",
+          "label": "Ancho máximo del texto",
+          "default": 800,
+          "info": "Controla el ancho máximo de este bloque de texto específico."
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Botones",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Botón 1"
+        },
+        {
+          "type": "select",
+          "id": "btn1_style_mode",
+          "label": "Modo de estilo (Botón 1)",
+          "options": [
+            { "value": "custom", "label": "Personalizado" },
+            { "value": "preset", "label": "Preset del tema" }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "select",
+          "id": "btn1_preset",
+          "label": "Estilo de Botón (Preset 1)",
+          "options": [
+            { "value": "1", "label": "Preset 1" },
+            { "value": "2", "label": "Preset 2" },
+            { "value": "3", "label": "Preset 3" }
+          ],
+          "default": "1"
+        },
+        {
+          "type": "select",
+          "id": "btn1_typography",
+          "label": "Estilo de tipografía (Botón 1)",
+          "options": [
+            { "value": "h1", "label": "Título principal" },
+            { "value": "h2", "label": "Títulos secundarios" },
+            { "value": "h3", "label": "Títulos pequeños" },
+            { "value": "body", "label": "Párrafo" },
+            { "value": "small", "label": "Párrafo pequeño" },
+            { "value": "button", "label": "Botón" },
+            { "value": "emphasis", "label": "Énfasis" }
+          ],
+          "default": "button"
+        },
+        {
+          "type": "liquid",
+          "id": "btn1_text",
+          "label": "Texto Botón 1",
+          "default": "Botón 1",
+          "info": "Permite HTML y Liquid."
+        },
+        {
+          "type": "url",
+          "id": "btn1_link",
+          "label": "Enlace Botón 1"
+        },
+        {
+          "type": "color",
+          "id": "btn1_bg_color",
+          "label": "Fondo Botón 1",
+          "default": "#0d0d0d"
+        },
+        {
+          "type": "color",
+          "id": "btn1_text_color",
+          "label": "Texto Botón 1",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "btn1_font_size",
+          "min": 10,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño fuente Botón 1",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "btn1_scale",
+          "min": 80,
+          "max": 160,
+          "step": 2,
+          "unit": "%",
+          "label": "Ajuste tamaño Botón 1 (Desktop)",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "btn1_scale_mobile",
+          "min": 80,
+          "max": 160,
+          "step": 2,
+          "unit": "%",
+          "label": "Ajuste tamaño Botón 1 (Móvil)",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "btn1_font_weight",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "label": "Grosor fuente Botón 1",
+          "default": 700
+        },
+        {
+          "type": "range",
+          "id": "btn1_padding_v",
+          "min": 5,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding vertical Botón 1",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "btn1_padding_h",
+          "min": 10,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding horizontal Botón 1",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "btn1_border_radius",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Redondeo de borde Botón 1",
+          "default": 4
+        },
+        {
+          "type": "color",
+          "id": "btn1_border_color",
+          "label": "Color de borde Botón 1",
+          "default": "#0d0d0d"
+        },
+        {
+          "type": "range",
+          "id": "btn1_border_width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "label": "Grosor de borde Botón 1",
+          "default": 0
+        },
+        {
+          "type": "checkbox",
+          "id": "btn1_underline",
+          "label": "Underline style (text link)",
+          "default": false,
+          "info": "Replaces border with a subtle underline that slides away on hover."
+        },
+        {
+          "type": "header",
+          "content": "Botón 2"
+        },
+        {
+          "type": "select",
+          "id": "btn2_style_mode",
+          "label": "Modo de estilo (Botón 2)",
+          "options": [
+            { "value": "custom", "label": "Personalizado" },
+            { "value": "preset", "label": "Preset del tema" }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "select",
+          "id": "btn2_preset",
+          "label": "Estilo de Botón (Preset 2)",
+          "options": [
+            { "value": "1", "label": "Preset 1" },
+            { "value": "2", "label": "Preset 2" },
+            { "value": "3", "label": "Preset 3" }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "btn2_typography",
+          "label": "Estilo de tipografía (Botón 2)",
+          "options": [
+            { "value": "h1", "label": "Título principal" },
+            { "value": "h2", "label": "Títulos secundarios" },
+            { "value": "h3", "label": "Títulos pequeños" },
+            { "value": "body", "label": "Párrafo" },
+            { "value": "small", "label": "Párrafo pequeño" },
+            { "value": "button", "label": "Botón" },
+            { "value": "emphasis", "label": "Énfasis" }
+          ],
+          "default": "button"
+        },
+        {
+          "type": "liquid",
+          "id": "btn2_text",
+          "label": "Texto Botón 2",
+          "info": "Permite HTML y Liquid."
+        },
+        {
+          "type": "url",
+          "id": "btn2_link",
+          "label": "Enlace Botón 2"
+        },
+        {
+          "type": "color",
+          "id": "btn2_bg_color",
+          "label": "Fondo Botón 2",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "btn2_text_color",
+          "label": "Texto Botón 2",
+          "default": "#0d0d0d"
+        },
+        {
+          "type": "color",
+          "id": "btn2_border_color",
+          "label": "Borde Botón 2",
+          "default": "#0d0d0d"
+        },
+        {
+          "type": "range",
+          "id": "btn2_border_width",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "unit": "px",
+          "label": "Ancho borde Botón 2",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "btn2_font_size",
+          "min": 10,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño fuente Botón 2",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "btn2_scale",
+          "min": 80,
+          "max": 160,
+          "step": 2,
+          "unit": "%",
+          "label": "Ajuste tamaño Botón 2 (Desktop)",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "btn2_scale_mobile",
+          "min": 80,
+          "max": 160,
+          "step": 2,
+          "unit": "%",
+          "label": "Ajuste tamaño Botón 2 (Móvil)",
+          "default": 100
+        },
+        {
+          "type": "range",
+          "id": "btn2_font_weight",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "label": "Grosor fuente Botón 2",
+          "default": 700
+        },
+        {
+          "type": "range",
+          "id": "btn2_padding_v",
+          "min": 5,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding vertical Botón 2",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "btn2_padding_h",
+          "min": 10,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "label": "Padding horizontal Botón 2",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "btn2_border_radius",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Redondeo de borde Botón 2",
+          "default": 4
+        },
+        {
+          "type": "range",
+          "id": "gap",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Espacio entre botones",
+          "default": 15
+        }
+      ]
+    },
+    {
+      "type": "images",
+      "name": "Imágenes",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image1",
+          "label": "Imagen 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Imagen 2"
+        },
+        {
+          "type": "select",
+          "id": "mobile_layout",
+          "label": "Diseño en móvil",
+          "options": [
+            { "value": "row", "label": "Una al lado de la otra" },
+            { "value": "column", "label": "Una debajo de la otra" }
+          ],
+          "default": "row"
+        },
+        {
+          "type": "range",
+          "id": "gap",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Espacio entre imágenes",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "label": "Redondeo de bordes",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "image_max_width",
+          "min": 120,
+          "max": 1200,
+          "step": 20,
+          "unit": "px",
+          "label": "Ancho máximo de imagen (desktop)",
+          "default": 460
+        },
+        {
+          "type": "range",
+          "id": "image_max_width_mobile",
+          "min": 120,
+          "max": 700,
+          "step": 10,
+          "unit": "px",
+          "label": "Ancho máximo de imagen (móvil)",
+          "default": 320
+        },
+        {
+          "type": "select",
+          "id": "image_alignment",
+          "label": "Alineación de imagen",
+          "options": [
+            { "value": "flex-start", "label": "Izquierda" },
+            { "value": "center", "label": "Centro" },
+            { "value": "flex-end", "label": "Derecha" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen inferior",
+          "default": 20
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Custom Content Text",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Título de ejemplo</h2>",
+            "font_size": 48,
+            "font_weight": 700
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Este es un texto de ejemplo para la sección.</p>",
+            "font_size": 16,
+            "font_weight": 400
+          }
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .snc-custom-content-text[data-section-id="{{ section.id }}"] {
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding: 0 20px;
+  }
+  
+  .snc-custom-content-text[data-section-id="{{ section.id }}"] .snc-cct--container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    text-align: {{ section.settings.alignment }};
+    display: flex;
+    flex-direction: column;
+  }
+
+  .snc-custom-content-text[data-section-id="{{ section.id }}"] .snc-cct--split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--split-gap, 52px);
+    align-items: var(--split-align, center);
+  }
+
+  .snc-custom-content-text[data-section-id="{{ section.id }}"] .snc-cct--split.snc-cct--split-image-left .snc-cct--split-media {
+    order: 1;
+  }
+
+  .snc-custom-content-text[data-section-id="{{ section.id }}"] .snc-cct--split.snc-cct--split-image-left .snc-cct--split-content {
+    order: 2;
+  }
+  
+  .snc-cct--text {
+    line-height: 1.4;
+    font-size: calc(var(--font-size-desktop) * var(--font-scale-desktop, 100) / 100);
+  }
+  
+  .snc-cct--text p, 
+  .snc-cct--text h1, 
+  .snc-cct--text h2, 
+  .snc-cct--text h3, 
+  .snc-cct--text h4, 
+  .snc-cct--text h5, 
+  .snc-cct--text h6 {
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  
+  .snc-custom-content-text[data-section-id="{{ section.id }}"] .snc-cct--buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: {{ section.settings.alignment }};
+    gap: var(--btn-gap);
+    margin-top: 10px;
+  }
+  
+  .snc-cct--btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    border: 0;
+    line-height: 1;
+    text-align: center;
+    --snc-cct-btn-scale-current: var(--snc-cct-btn-scale-desktop, 100);
+  }
+
+  .snc-cct--btn-label {
+    font-size: calc(1em * var(--snc-cct-btn-scale-current, 100) / 100);
+  }
+  
+  .snc-cct--btn:hover {
+    opacity: 0.85;
+  }
+
+  .snc-cct--btn--underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+    text-decoration-color: currentColor;
+    transition: text-decoration-color 0.25s ease, opacity 0.25s ease;
+  }
+  .snc-cct--btn--underline:hover {
+    opacity: 1;
+    text-decoration-color: transparent;
+  }
+  @media (max-width: 768px) {
+    .snc-cct--btn--underline {
+      width: auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .snc-cct--buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+    .snc-cct--btn {
+      width: 100%;
+      --snc-cct-btn-scale-current: var(--snc-cct-btn-scale-mobile, 100);
+    }
+    .snc-cct--text {
+      font-size: calc(var(--font-size-mobile) * var(--font-scale-mobile, 100) / 100);
+    }
+    .snc-cct--images {
+      flex-direction: var(--mobile-direction);
+    }
+  }
+
+  .snc-cct--images {
+    display: flex;
+    width: 100%;
+    gap: var(--img-gap);
+  }
+  
+  .snc-cct--image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: var(--img-align, center);
+  }
+  
+  .snc-cct--image {
+    width: 100%;
+    max-width: var(--img-max-width, 100%);
+    height: auto;
+    display: block;
+    border-radius: var(--img-radius);
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .snc-custom-content-text[data-section-id="{{ section.id }}"] .snc-cct--split {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .snc-custom-content-text[data-section-id="{{ section.id }}"] .snc-cct--split.snc-cct--split-mobile-image_first .snc-cct--split-media {
+      order: 1;
+    }
+    .snc-custom-content-text[data-section-id="{{ section.id }}"] .snc-cct--split.snc-cct--split-mobile-image_first .snc-cct--split-content {
+      order: 2;
+    }
+    .snc-cct--image {
+      max-width: var(--img-max-width-mobile, var(--img-max-width, 100%));
+    }
+  }
+</style>
+
+{%- liquid
+  assign has_images = false
+  for block in section.blocks
+    if block.type == 'images'
+      assign has_images = true
+    endif
+  endfor
+
+  assign use_split_layout = false
+  if section.settings.section_layout == 'split' and has_images
+    assign use_split_layout = true
+  endif
+
+  assign effective_alignment = section.settings.alignment
+  if use_split_layout
+    assign effective_alignment = section.settings.split_text_alignment
+  endif
+
+  assign buttons_justify = 'flex-start'
+  if effective_alignment == 'center'
+    assign buttons_justify = 'center'
+  elsif effective_alignment == 'right'
+    assign buttons_justify = 'flex-end'
+  endif
+-%}
+
+<div class="snc-custom-content-text" data-section-id="{{ section.id }}">
+  <div class="snc-cct--container">
+    {%- if use_split_layout -%}
+      <div
+        class="snc-cct--split snc-cct--split-image-{{ section.settings.split_image_position }} snc-cct--split-mobile-{{ section.settings.split_mobile_order }}"
+        style="--split-gap: {{ section.settings.split_gap }}px; --split-align: {{ section.settings.split_vertical_align }};"
+      >
+        <div class="snc-cct--split-content">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'text' -%}
+                {%- liquid
+                  assign text_margin_styles = ''
+                  if effective_alignment == 'center'
+                    assign text_margin_styles = 'margin-left: auto; margin-right: auto;'
+                  elsif effective_alignment == 'right'
+                    assign text_margin_styles = 'margin-left: auto; margin-right: 0;'
+                  else
+                    assign text_margin_styles = 'margin-left: 0; margin-right: auto;'
+                  endif
+                -%}
+                <div class="snc-cct--text" {{ block.shopify_attributes }} style="
+                  color: {{ block.settings.color }};
+                  --font-size-desktop: {{ block.settings.font_size }}px;
+                  --font-size-mobile: {{ block.settings.font_size_mobile | default: block.settings.font_size }}px;
+                  --font-scale-desktop: {{ block.settings.font_scale | default: 100 }};
+                  --font-scale-mobile: {{ block.settings.font_scale_mobile | default: 100 }};
+                  font-weight: {{ block.settings.font_weight }};
+                  margin-bottom: {{ block.settings.margin_bottom }}px;
+                  font-family: var(--font-main);
+                  text-align: {{ effective_alignment }};
+                  max-width: {{ block.settings.text_max_width }}px;
+                  {{ text_margin_styles }}
+                ">
+                  {{ block.settings.text }}
+                </div>
+              {%- when 'buttons' -%}
+                <div class="snc-cct--buttons" {{ block.shopify_attributes }} style="--btn-gap: {{ block.settings.gap }}px; justify-content: {{ buttons_justify }};">
+                  {%- if block.settings.btn1_text != blank -%}
+                    {%- if block.settings.btn1_style_mode == 'preset' -%}
+                      <a
+                        href="{{ block.settings.btn1_link | default: '#' }}"
+                        class="snc-cct--btn btn-preset-{{ block.settings.btn1_preset }} {{ block.settings.btn1_typography }}"
+                        style="--snc-cct-btn-scale-desktop: {{ block.settings.btn1_scale | default: 100 }}; --snc-cct-btn-scale-mobile: {{ block.settings.btn1_scale_mobile | default: 100 }};"
+                      >
+                        <span class="snc-cct--btn-label">{{ block.settings.btn1_text }}</span>
+                      </a>
+                    {%- else -%}
+                      <a href="{{ block.settings.btn1_link | default: '#' }}" class="snc-cct--btn{% if block.settings.btn1_underline %} snc-cct--btn--underline{% endif %}" style="
+                        background-color: {{ block.settings.btn1_bg_color }};
+                        color: {{ block.settings.btn1_text_color }};
+                        font-size: {{ block.settings.btn1_font_size }}px;
+                        font-weight: {{ block.settings.btn1_font_weight }};
+                        padding: {{ block.settings.btn1_padding_v }}px {{ block.settings.btn1_padding_h }}px;
+                        border: {{ block.settings.btn1_border_width | default: 0 }}px solid {{ block.settings.btn1_border_color | default: 'transparent' }};
+                        border-radius: {{ block.settings.btn1_border_radius }}px;
+                        font-family: var(--font-main);
+                        --snc-cct-btn-scale-desktop: {{ block.settings.btn1_scale | default: 100 }};
+                        --snc-cct-btn-scale-mobile: {{ block.settings.btn1_scale_mobile | default: 100 }};
+                      ">
+                        <span class="snc-cct--btn-label">{{ block.settings.btn1_text }}</span>
+                      </a>
+                    {%- endif -%}
+                  {%- endif -%}
+                  {%- if block.settings.btn2_text != blank -%}
+                    {%- if block.settings.btn2_style_mode == 'preset' -%}
+                      <a
+                        href="{{ block.settings.btn2_link | default: '#' }}"
+                        class="snc-cct--btn btn-preset-{{ block.settings.btn2_preset }} {{ block.settings.btn2_typography }}"
+                        style="--snc-cct-btn-scale-desktop: {{ block.settings.btn2_scale | default: 100 }}; --snc-cct-btn-scale-mobile: {{ block.settings.btn2_scale_mobile | default: 100 }};"
+                      >
+                        <span class="snc-cct--btn-label">{{ block.settings.btn2_text }}</span>
+                      </a>
+                    {%- else -%}
+                      <a href="{{ block.settings.btn2_link | default: '#' }}" class="snc-cct--btn" style="
+                        background-color: {{ block.settings.btn2_bg_color }};
+                        color: {{ block.settings.btn2_text_color }};
+                        font-size: {{ block.settings.btn2_font_size }}px;
+                        font-weight: {{ block.settings.btn2_font_weight }};
+                        padding: {{ block.settings.btn2_padding_v }}px {{ block.settings.btn2_padding_h }}px;
+                        border: {{ block.settings.btn2_border_width }}px solid {{ block.settings.btn2_border_color }};
+                        border-radius: {{ block.settings.btn2_border_radius }}px;
+                        font-family: var(--font-main);
+                        --snc-cct-btn-scale-desktop: {{ block.settings.btn2_scale | default: 100 }};
+                        --snc-cct-btn-scale-mobile: {{ block.settings.btn2_scale_mobile | default: 100 }};
+                      ">
+                        <span class="snc-cct--btn-label">{{ block.settings.btn2_text }}</span>
+                      </a>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+
+        <div class="snc-cct--split-media">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'images' -%}
+              <div class="snc-cct--images" {{ block.shopify_attributes }} style="
+                --img-gap: {{ block.settings.gap }}px;
+                --img-radius: {{ block.settings.border_radius }}px;
+                --img-max-width: {{ block.settings.image_max_width }}px;
+                --img-max-width-mobile: {{ block.settings.image_max_width_mobile }}px;
+                --img-align: {{ block.settings.image_alignment | default: 'center' }};
+                --mobile-direction: {{ block.settings.mobile_layout | default: 'row' }};
+                margin-bottom: {{ block.settings.margin_bottom }}px;
+              ">
+                {%- if block.settings.image1 != blank -%}
+                  <div class="snc-cct--image-wrapper">
+                    {{ block.settings.image1 | image_url: width: 1200 | image_tag: class: 'snc-cct--image', loading: 'lazy' }}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.image2 != blank -%}
+                  <div class="snc-cct--image-wrapper">
+                    {{ block.settings.image2 | image_url: width: 1200 | image_tag: class: 'snc-cct--image', loading: 'lazy' }}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- else -%}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'text' -%}
+            {%- liquid
+              assign text_margin_styles = ''
+              if effective_alignment == 'center'
+                assign text_margin_styles = 'margin-left: auto; margin-right: auto;'
+              elsif effective_alignment == 'right'
+                assign text_margin_styles = 'margin-left: auto; margin-right: 0;'
+              else
+                assign text_margin_styles = 'margin-left: 0; margin-right: auto;'
+              endif
+            -%}
+            <div class="snc-cct--text" {{ block.shopify_attributes }} style="
+              color: {{ block.settings.color }};
+              --font-size-desktop: {{ block.settings.font_size }}px;
+              --font-size-mobile: {{ block.settings.font_size_mobile | default: block.settings.font_size }}px;
+              --font-scale-desktop: {{ block.settings.font_scale | default: 100 }};
+              --font-scale-mobile: {{ block.settings.font_scale_mobile | default: 100 }};
+              font-weight: {{ block.settings.font_weight }};
+              margin-bottom: {{ block.settings.margin_bottom }}px;
+              font-family: var(--font-main);
+              text-align: {{ effective_alignment }};
+              max-width: {{ block.settings.text_max_width }}px;
+              {{ text_margin_styles }}
+            ">
+              {{ block.settings.text }}
+            </div>
+          {%- when 'buttons' -%}
+            <div class="snc-cct--buttons" {{ block.shopify_attributes }} style="--btn-gap: {{ block.settings.gap }}px; justify-content: {{ buttons_justify }};">
+              {%- if block.settings.btn1_text != blank -%}
+                {%- if block.settings.btn1_style_mode == 'preset' -%}
+                  <a
+                    href="{{ block.settings.btn1_link | default: '#' }}"
+                    class="snc-cct--btn btn-preset-{{ block.settings.btn1_preset }} {{ block.settings.btn1_typography }}"
+                    style="--snc-cct-btn-scale-desktop: {{ block.settings.btn1_scale | default: 100 }}; --snc-cct-btn-scale-mobile: {{ block.settings.btn1_scale_mobile | default: 100 }};"
+                  >
+                    <span class="snc-cct--btn-label">{{ block.settings.btn1_text }}</span>
+                  </a>
+                {%- else -%}
+                  <a href="{{ block.settings.btn1_link | default: '#' }}" class="snc-cct--btn{% if block.settings.btn1_underline %} snc-cct--btn--underline{% endif %}" style="
+                    background-color: {{ block.settings.btn1_bg_color }};
+                    color: {{ block.settings.btn1_text_color }};
+                    font-size: {{ block.settings.btn1_font_size }}px;
+                    font-weight: {{ block.settings.btn1_font_weight }};
+                    padding: {{ block.settings.btn1_padding_v }}px {{ block.settings.btn1_padding_h }}px;
+                    border: {{ block.settings.btn1_border_width | default: 0 }}px solid {{ block.settings.btn1_border_color | default: 'transparent' }};
+                    border-radius: {{ block.settings.btn1_border_radius }}px;
+                    font-family: var(--font-main);
+                    --snc-cct-btn-scale-desktop: {{ block.settings.btn1_scale | default: 100 }};
+                    --snc-cct-btn-scale-mobile: {{ block.settings.btn1_scale_mobile | default: 100 }};
+                  ">
+                    <span class="snc-cct--btn-label">{{ block.settings.btn1_text }}</span>
+                  </a>
+                {%- endif -%}
+              {%- endif -%}
+              {%- if block.settings.btn2_text != blank -%}
+                {%- if block.settings.btn2_style_mode == 'preset' -%}
+                  <a
+                    href="{{ block.settings.btn2_link | default: '#' }}"
+                    class="snc-cct--btn btn-preset-{{ block.settings.btn2_preset }} {{ block.settings.btn2_typography }}"
+                    style="--snc-cct-btn-scale-desktop: {{ block.settings.btn2_scale | default: 100 }}; --snc-cct-btn-scale-mobile: {{ block.settings.btn2_scale_mobile | default: 100 }};"
+                  >
+                    <span class="snc-cct--btn-label">{{ block.settings.btn2_text }}</span>
+                  </a>
+                {%- else -%}
+                  <a href="{{ block.settings.btn2_link | default: '#' }}" class="snc-cct--btn" style="
+                    background-color: {{ block.settings.btn2_bg_color }};
+                    color: {{ block.settings.btn2_text_color }};
+                    font-size: {{ block.settings.btn2_font_size }}px;
+                    font-weight: {{ block.settings.btn2_font_weight }};
+                    padding: {{ block.settings.btn2_padding_v }}px {{ block.settings.btn2_padding_h }}px;
+                    border: {{ block.settings.btn2_border_width }}px solid {{ block.settings.btn2_border_color }};
+                    border-radius: {{ block.settings.btn2_border_radius }}px;
+                    font-family: var(--font-main);
+                    --snc-cct-btn-scale-desktop: {{ block.settings.btn2_scale | default: 100 }};
+                    --snc-cct-btn-scale-mobile: {{ block.settings.btn2_scale_mobile | default: 100 }};
+                  ">
+                    <span class="snc-cct--btn-label">{{ block.settings.btn2_text }}</span>
+                  </a>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          {%- when 'images' -%}
+            <div class="snc-cct--images" {{ block.shopify_attributes }} style="
+              --img-gap: {{ block.settings.gap }}px;
+              --img-radius: {{ block.settings.border_radius }}px;
+              --img-max-width: {{ block.settings.image_max_width }}px;
+              --img-max-width-mobile: {{ block.settings.image_max_width_mobile }}px;
+              --img-align: {{ block.settings.image_alignment | default: 'center' }};
+              --mobile-direction: {{ block.settings.mobile_layout | default: 'row' }};
+              margin-bottom: {{ block.settings.margin_bottom }}px;
+            ">
+              {%- if block.settings.image1 != blank -%}
+                <div class="snc-cct--image-wrapper">
+                  {{ block.settings.image1 | image_url: width: 1200 | image_tag: class: 'snc-cct--image', loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.image2 != blank -%}
+                <div class="snc-cct--image-wrapper">
+                  {{ block.settings.image2 | image_url: width: 1200 | image_tag: class: 'snc-cct--image', loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>

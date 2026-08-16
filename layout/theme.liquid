@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
+    {%- endif -%}
+
+    {% # Inlined CSS Variables %}
+    {% render 'css-variables' %}
+
+    {% comment %} Custom Fonts Injection {% endcomment %}
+    {% if settings.custom_font_heading_url != blank or settings.custom_font_body_url != blank %}
+      <style>
+        {% if settings.custom_font_heading_url != blank %}
+          @font-face {
+            font-family: '{{ settings.custom_font_heading_name }}';
+            src: url('{{ settings.custom_font_heading_url }}') format('{% if settings.custom_font_heading_url contains ".woff2" %}woff2{% else %}woff{% endif %}');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+          }
+          :root {
+            --font-heading-family: '{{ settings.custom_font_heading_name }}', sans-serif;
+          }
+          h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+            font-family: '{{ settings.custom_font_heading_name }}', sans-serif !important;
+          }
+        {% endif %}
+
+        {% if settings.custom_font_body_url != blank %}
+          @font-face {
+            font-family: '{{ settings.custom_font_body_name }}';
+            src: url('{{ settings.custom_font_body_url }}') format('{% if settings.custom_font_body_url contains ".woff2" %}woff2{% else %}woff{% endif %}');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+          }
+          :root {
+            --font-body-family: '{{ settings.custom_font_body_name }}', sans-serif;
+          }
+          body, p, li, a, .body {
+            font-family: '{{ settings.custom_font_body_name }}', sans-serif !important;
+          }
+        {% endif %}
+      </style>
+    {% endif %}
+
+    {% comment %} Global Typography Styles {% endcomment %}
+    <style>
+      :root {
+        --main-title-size: {{ settings.main_title_size }}px;
+        --main-title-weight: {{ settings.main_title_weight }};
+        --main-title-spacing: {{ settings.main_title_spacing }}px;
+        --main-title-height: {{ settings.main_title_height }};
+
+        --secondary-title-size: {{ settings.secondary_title_size }}px;
+        --secondary-title-weight: {{ settings.secondary_title_weight }};
+        --secondary-title-spacing: {{ settings.secondary_title_spacing }}px;
+        --secondary-title-height: {{ settings.secondary_title_height }};
+
+        --small-title-size: {{ settings.small_title_size }}px;
+        --small-title-weight: {{ settings.small_title_weight }};
+        --small-title-spacing: {{ settings.small_title_spacing }}px;
+        --small-title-height: {{ settings.small_title_height }};
+
+        --paragraph-size: {{ settings.paragraph_size }}px;
+        --paragraph-weight: {{ settings.paragraph_weight }};
+        --paragraph-spacing: {{ settings.paragraph_spacing }}px;
+        --paragraph-height: {{ settings.paragraph_height }};
+        
+        --button-size: {{ settings.button_size }}px;
+        --button-weight: {{ settings.button_weight }};
+        --button-spacing: {{ settings.button_spacing }}px;
+        --button-transform: {{ settings.button_transform }};
+
+        /* Default colors fallback */
+        --main-title-color: var(--color-foreground);
+        --secondary-title-color: var(--color-foreground);
+        --small-title-color: var(--color-foreground);
+        --paragraph-color: var(--color-foreground);
+        --small-paragraph-color: var(--color-foreground);
+        --emphasis-color: var(--color-foreground);
+      }
+
+      h1, .h1 { font-size: var(--main-title-size); font-weight: var(--main-title-weight); letter-spacing: var(--main-title-spacing); line-height: var(--main-title-height); color: var(--main-title-color); }
+      h2, .h2 { font-size: var(--secondary-title-size); font-weight: var(--secondary-title-weight); letter-spacing: var(--secondary-title-spacing); line-height: var(--secondary-title-height); color: var(--secondary-title-color); }
+      h3, .h3, h4, .h4 { font-size: var(--small-title-size); font-weight: var(--small-title-weight); letter-spacing: var(--small-title-spacing); line-height: var(--small-title-height); color: var(--small-title-color); }
+      
+      body, p, .body { 
+        font-size: var(--paragraph-size); 
+        font-weight: var(--paragraph-weight); 
+        letter-spacing: var(--paragraph-spacing); 
+        line-height: var(--paragraph-height); 
+        color: var(--paragraph-color);
+      }
+
+      button, .btn, .button { font-size: var(--button-size); font-weight: var(--button-weight); letter-spacing: var(--button-spacing); text-transform: var(--button-transform); }
+      small, .small, .caption { font-size: {{ settings.small_paragraph_size }}px; font-weight: {{ settings.small_paragraph_weight }}; color: var(--small-paragraph-color); }
+      .emphasis { font-size: {{ settings.emphasis_size }}px; font-weight: {{ settings.emphasis_weight }}; color: var(--emphasis-color); }
+
+      /* Button Presets */
+      {% for i in (1..3) %}
+        {% capture border_width_key %}btn{{ i }}_border_width{% endcapture %}
+        {% capture border_pos_key %}btn{{ i }}_border_position{% endcapture %}
+        {% capture radius_key %}btn{{ i }}_radius{% endcapture %}
+        {% capture pad_v_key %}btn{{ i }}_padding_v{% endcapture %}
+        {% capture pad_h_key %}btn{{ i }}_padding_h{% endcapture %}
+
+        .btn-preset-{{ i }} {
+          padding: {{ settings[pad_v_key] }}px {{ settings[pad_h_key] }}px;
+          border-radius: {{ settings[radius_key] }}px;
+          {% if settings[border_pos_key] == 'all' %}
+            border: {{ settings[border_width_key] }}px solid var(--color-button-border);
+          {% else %}
+            border: 0;
+            border-{{ settings[border_pos_key] }}: {{ settings[border_width_key] }}px solid var(--color-button-border);
+          {% endif %}
+          transition: opacity 0.2s;
+          text-decoration: none;
+          display: inline-block;
+        }
+        .btn-preset-{{ i }}:hover { opacity: 0.9; }
+      {% endfor %}
+
+      .btn-preset-1 {
+        background-color: var(--color-button);
+        color: var(--color-button-text);
+      }
+      .btn-preset-2 {
+        background-color: transparent;
+        color: var(--color-secondary-button-text);
+      }
+       .btn-preset-3 {
+        background-color: transparent;
+        color: var(--color-secondary-button-text);
+      }
+
+      /* Color Schemes Generation */
+      {% for scheme in settings.color_schemes %}
+        .color-{{ scheme.id }}, .gradient.color-{{ scheme.id }} {
+          --color-background: {{ scheme.settings.background }};
+          --gradient-background: {{ scheme.settings.background }};
+          --color-foreground: {{ scheme.settings.text }};
+          
+          /* Scheme colors */
+          --color-button: {{ scheme.settings.button_background }};
+          --color-button-text: {{ scheme.settings.button_label }};
+          --color-button-border: {{ scheme.settings.secondary_button_label }};
+          --color-secondary-button-text: {{ scheme.settings.secondary_button_label }};
+          --color-shadow: {{ scheme.settings.shadow }};
+
+          /* Override global typography colors locally */
+          --main-title-color: {{ scheme.settings.title_color | default: scheme.settings.text }};
+          --secondary-title-color: {{ scheme.settings.subtitle_color | default: scheme.settings.text }};
+          --small-title-color: {{ scheme.settings.subtitle_color | default: scheme.settings.text }};
+          --paragraph-color: {{ scheme.settings.text }};
+          --small-paragraph-color: {{ scheme.settings.text }};
+          --emphasis-color: {{ scheme.settings.text }};
+          
+          /* Aplicar colores a elementos */
+          color: var(--color-foreground);
+          background: var(--gradient-background);
+        }
+      {% endfor %}
+    </style>
+
+    {% comment %}
+      Font preloading:
+      1. Preconnect to font CDN for faster connection
+      2. Preload only the critical font variant (base weight)
+      3. Additional variants load on-demand via @font-face
+    {% endcomment %}
+    {% unless settings.type_primary_font.system? %}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+
+      {% comment %} Preload the base font variant for initial page render {% endcomment %}
+      {{ settings.type_primary_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+    {% endunless %}
+
+    {% # Load and preload the critical CSS %}
+    {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'fonts.css.liquid' | asset_url | stylesheet_tag: preload: true }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    {% # Social, title, etc. %}
+    {% render 'meta-tags' %}
+    {% render 'snc-tracking-v2' %}
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    {% sections 'overlay' %}
+
+    {% sections 'header-group' %}
+
+    {{ content_for_layout }}
+
+    {% sections 'footer-group' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    {{ 'snc-sections.js' | asset_url | script_tag }}
+  </body>
+</html>

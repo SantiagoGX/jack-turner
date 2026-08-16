@@ -1,0 +1,537 @@
+{% schema %}
+{
+  "name": "SNC Collection Grid",
+  "class": "section--snc-collection-list",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Explora"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Nuestras Colecciones"
+    },
+    {
+      "type": "select",
+      "id": "section_header_alignment",
+      "label": "Alineación de cabecera",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "label": "Altura de la tarjeta (Desktop)",
+      "min": 300,
+      "max": 800,
+      "step": 10,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "label": "Altura de la tarjeta (Móvil)",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "default": 340,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "button_display",
+      "label": "Estilo del botón",
+      "options": [
+        { "value": "hover", "label": "En hover (Centro)" },
+        { "value": "static", "label": "Estático (Debajo del texto)" }
+      ],
+      "default": "hover"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón (Hover)",
+      "default": "Ver todo"
+    },
+    {
+      "type": "header",
+      "content": "Estilos del Botón"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Color de fondo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Color de texto",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Redondeo del botón",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Padding vertical",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Padding horizontal",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Configuración de Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margen superior",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "side_padding",
+      "label": "Padding lateral (Full Width)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20,
+      "info": "Aplica cuando el ancho completo está activo."
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Espacio entre elementos",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Redondeo de tarjetas",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Elemento",
+      "settings": [
+        {
+          "type": "select",
+          "id": "content_type",
+          "label": "Tipo de contenido",
+          "options": [
+            { "value": "collection", "label": "Colección" },
+            { "value": "manual", "label": "Manual" }
+          ],
+          "default": "collection"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección",
+          "info": "Usado cuando el tipo es 'Colección'"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen",
+          "info": "Opcional para colecciones (sobrescribe), requerido para manual."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "info": "Deja en blanco para usar el título de la colección."
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Texto del botón",
+          "info": "Deja en blanco para usar el texto global."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace",
+          "info": "Usado cuando el tipo es 'Manual' o para sobrescribir el enlace de la colección."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Collection Grid",
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .snc-collection-list {
+    padding-top: {{ section.settings.section_margin_top }}px;
+    padding-bottom: 60px;
+    {%- if section.settings.full_width -%}
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding-left: {{ section.settings.side_padding }}px;
+      padding-right: {{ section.settings.side_padding }}px;
+    {%- else -%}
+      width: 100%;
+      max-width: 1512px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    {%- endif -%}
+    flex-direction: column;
+    display: flex;
+  }
+
+  .snc-cl__header {
+    text-align: {{ section.settings.section_header_alignment }};
+    margin-bottom: 40px;
+    opacity: 0;
+  }
+
+  .snc-collection-list.is-visible .snc-cl__header {
+    animation: cardEntrance 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  .snc-cl__subtitle {
+    font-family: var(--font-nunito, sans-serif);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    color: #0d0d0d;
+    display: block;
+  }
+
+  .snc-cl__title {
+    font-family: var(--font-typos, serif);
+    font-size: 40px;
+    line-height: 1.1;
+    margin: 0;
+    color: #0d0d0d;
+  }
+
+  .snc-cl__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | at_least: 1 }}, 1fr);
+    gap: {{ section.settings.grid_gap }}px;
+  }
+
+  @keyframes cardEntrance {
+    from {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  .snc-cl__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    group: group;
+    opacity: 0;
+  }
+
+  .snc-cl__item:nth-child(1) { animation-delay: 0.1s; }
+  .snc-cl__item:nth-child(2) { animation-delay: 0.2s; }
+  .snc-cl__item:nth-child(3) { animation-delay: 0.3s; }
+  .snc-cl__item:nth-child(4) { animation-delay: 0.4s; }
+
+  .snc-collection-list.is-visible .snc-cl__item {
+    animation: cardEntrance 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  .snc-cl__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: {{ section.settings.card_height }}px;
+    overflow: hidden;
+    border-radius: {{ section.settings.card_border_radius }}px;
+    background: #f5f5f5;
+    margin-bottom: 0;
+  }
+
+  .snc-cl__parallax-box {
+    width: 100%;
+    height: 120%;
+    position: absolute;
+    top: -10%;
+    left: 0;
+    will-change: transform;
+  }
+
+  .snc-cl__image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .snc-cl__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+    display: block;
+    position: relative;
+  }
+
+  .snc-cl__item:hover .snc-cl__image {
+    transform: scale(1.1);
+  }
+
+  .snc-cl__content {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    right: 30px;
+    z-index: 2;
+    text-align: left;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .snc-cl__item:hover .snc-cl__content {
+    opacity: 0.8;
+  }
+
+  .snc-cl__item-title {
+    font-size: 24px;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  .snc-cl__item-subtitle {
+    font-size: 14px;
+    color: #FFFFFF;
+    margin-bottom: 5px;
+    display: block;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .snc-cl__view-btn {
+    background: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: {{ section.settings.button_padding_vertical }}px {{ section.settings.button_padding_horizontal }}px;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-family: var(--font-nunito, sans-serif);
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    z-index: 3;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .snc-cl__view-btn.hover {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .snc-cl__view-btn.static {
+    position: relative;
+    margin-top: 15px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .snc-cl__view-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  .snc-cl__item:hover .snc-cl__view-btn.hover {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  @media (max-width: 1024px) {
+    .snc-cl__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .snc-collection-list {
+      padding: 40px 20px;
+    }
+    .snc-cl__title {
+      font-size: 32px;
+    }
+    .snc-cl__grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    .snc-cl__image-wrapper {
+      height: {{ section.settings.card_height_mobile }}px;
+    }
+    .snc-cl__view-btn.hover {
+      display: none;
+    }
+  }
+</style>
+
+<div class="snc-collection-list" data-section-id="{{ section.id }}" data-section-type="snc-collection-list">
+  {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+    <div class="snc-cl__header">
+      {%- if section.settings.subtitle != blank -%}
+        <span class="snc-cl__subtitle">{{ section.settings.subtitle | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="snc-cl__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="snc-cl__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign content_type = block.settings.content_type | default: 'collection'
+        assign subtitle = block.settings.subtitle
+        assign btn_text = block.settings.button_text | default: section.settings.button_text
+        assign button_display = section.settings.button_display
+        
+        if content_type == 'collection'
+          assign collection = collections[block.settings.collection]
+          assign title = block.settings.title | default: collection.title | default: 'Collection'
+          assign image = block.settings.image | default: collection.image | default: collection.products.first.featured_image
+          assign url = block.settings.link | default: collection.url | default: '#'
+        else
+          assign title = block.settings.title | default: 'Título Manual'
+          assign image = block.settings.image
+          assign url = block.settings.link | default: '#'
+        endif
+      -%}
+      
+      <a href="{{ url }}" class="snc-cl__item" {{ block.shopify_attributes }}>
+        <div class="snc-cl__image-wrapper">
+          <div class="snc-cl__parallax-box">
+            {%- if image != blank -%}
+              <img 
+                src="{{ image | image_url: width: 600 }}" 
+                alt="{{ title | escape }}" 
+                class="snc-cl__image"
+                loading="lazy"
+              >
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'snc-cl__image' }}
+            {%- endif -%}
+          </div>
+          <div class="snc-cl__content">
+            {%- if subtitle != blank -%}
+              <span class="snc-cl__item-subtitle">{{ subtitle | escape }}</span>
+            {%- endif -%}
+            <h3 class="snc-cl__item-title">{{ title | escape }}</h3>
+            {%- if btn_text != blank and button_display == 'static' -%}
+              <span class="snc-cl__view-btn static">
+                {{ btn_text | escape }}
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            {%- endif -%}
+          </div>
+          {%- if btn_text != blank and button_display == 'hover' -%}
+            <span class="snc-cl__view-btn hover">
+              {{ btn_text | escape }}
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          {%- endif -%}
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>

@@ -1,0 +1,420 @@
+{% schema %}
+{
+  "name": "SNC List Collections",
+  "class": "section--snc-list-collections",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo (Full Width)",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen superior",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen inferior",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Encabezado"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Collections"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Browse collections"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Discover our curated selection.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "Estilo del título",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Estilo del texto",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "header",
+      "content": "Colecciones"
+    },
+    {
+      "type": "collection_list",
+      "id": "collection_list",
+      "label": "Colecciones a mostrar",
+      "info": "Si está vacío, se intentará mostrar todas las colecciones."
+    },
+    {
+      "type": "range",
+      "id": "collections_per_page",
+      "min": 6,
+      "max": 48,
+      "step": 6,
+      "label": "Colecciones por página",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columnas (escritorio)",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "media_aspect_ratio",
+      "label": "Proporción de imagen (tarjeta)",
+      "options": [
+        { "value": "16 / 10", "label": "16:10" },
+        { "value": "3 / 2", "label": "3:2" },
+        { "value": "1 / 1", "label": "1:1" },
+        { "value": "4 / 5", "label": "4:5 (más alto)" }
+      ],
+      "default": "4 / 5"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columnas (móvil)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Mostrar cantidad de productos",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "button_preset",
+      "label": "Estilo de Botón (Preset)",
+      "options": [
+        { "value": "1", "label": "Preset 1" },
+        { "value": "2", "label": "Preset 2" },
+        { "value": "3", "label": "Preset 3" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Estilo de tipografía del botón",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "button"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC List Collections"
+    }
+  ]
+}
+{% endschema %}
+
+{%- liquid
+  assign columns_mobile = section.settings.columns_mobile | default: '1'
+  assign per_page = section.settings.collections_per_page | default: 24
+  assign selected_collections = section.settings.collection_list
+-%}
+
+<style>
+  #snc-list-collections-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    width: 100%;
+    {% if section.settings.full_width %}
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    {% endif %}
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__container {
+    max-width: 1512px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__header {
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 50px;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__kicker {
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin: 0 0 10px 0;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__title {
+    margin: 0;
+    font-family: var(--font-main);
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__text {
+    margin: 0;
+    font-family: var(--font-main);
+    max-width: 680px;
+    opacity: 0.8;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__grid {
+    --cols: {{ section.settings.columns_desktop }};
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    min-height: 100%;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__media {
+    position: relative;
+    aspect-ratio: {{ section.settings.media_aspect_ratio }};
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__card:hover .snc-lc__media img {
+    transform: scale(1.03);
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__body {
+    padding: 18px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__name {
+    margin: 0;
+    font-family: var(--font-main);
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__meta {
+    font-family: var(--font-main);
+    font-size: 14px;
+    opacity: 0.75;
+    margin-top: -4px;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__actions {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__button {
+    display: inline-block;
+  }
+
+  #snc-list-collections-{{ section.id }} .snc-lc__empty {
+    font-family: var(--font-main);
+    opacity: 0.8;
+    padding: 40px 0;
+  }
+
+  @media (max-width: 900px) {
+    #snc-list-collections-{{ section.id }} .snc-lc__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #snc-list-collections-{{ section.id }} .snc-lc__container {
+      padding: 60px 20px;
+    }
+    #snc-list-collections-{{ section.id }} .snc-lc__grid {
+      --cols: {{ columns_mobile }};
+      gap: 16px;
+    }
+  }
+</style>
+
+<section id="snc-list-collections-{{ section.id }}">
+  <div class="snc-lc__container">
+    <header class="snc-lc__header">
+      <div>
+        {%- if section.settings.kicker != blank -%}
+          <p class="snc-lc__kicker">{{ section.settings.kicker | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h1 class="snc-lc__title {{ section.settings.title_style }}">{{ section.settings.title | escape }}</h1>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.text != blank -%}
+        <div class="snc-lc__text {{ section.settings.text_style }}">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- if selected_collections != blank -%}
+      <div class="snc-lc__grid" role="list">
+        {%- for collection in selected_collections -%}
+          {%- assign card_image = collection.image | default: collection.products.first.featured_image -%}
+          <a class="snc-lc__card" href="{{ collection.url }}" role="listitem">
+            <div class="snc-lc__media">
+              {%- if card_image != blank -%}
+                {{ card_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+            <div class="snc-lc__body">
+              <h2 class="snc-lc__name">{{ collection.title | escape }}</h2>
+              {%- if section.settings.show_product_count -%}
+                <div class="snc-lc__meta">{{ collection.all_products_count }} products</div>
+              {%- endif -%}
+              <div class="snc-lc__actions">
+                <span class="snc-lc__button btn-preset-{{ section.settings.button_preset }} {{ section.settings.button_style }}">View collection</span>
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      {%- paginate collections by per_page -%}
+        {%- if collections.size > 0 -%}
+          <div class="snc-lc__grid" role="list">
+            {%- for collection in collections -%}
+              {%- assign card_image = collection.image | default: collection.products.first.featured_image -%}
+              <a class="snc-lc__card" href="{{ collection.url }}" role="listitem">
+                <div class="snc-lc__media">
+                  {%- if card_image != blank -%}
+                    {{ card_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'collection-1' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </div>
+                <div class="snc-lc__body">
+                  <h2 class="snc-lc__name">{{ collection.title | escape }}</h2>
+                  {%- if section.settings.show_product_count -%}
+                    <div class="snc-lc__meta">{{ collection.all_products_count }} products</div>
+                  {%- endif -%}
+                  <div class="snc-lc__actions">
+                    <span class="snc-lc__button btn-preset-{{ section.settings.button_preset }} {{ section.settings.button_style }}">View collection</span>
+                  </div>
+                </div>
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="snc-lc__empty">No collections found.</div>
+        {%- endif -%}
+
+        {%- if paginate.pages > 1 -%}
+          <div style="margin-top: 40px;">
+            {{ paginate | default_pagination }}
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>

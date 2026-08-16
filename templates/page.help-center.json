@@ -1,0 +1,158 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "snc-help-center",
+      "blocks": {
+        "card_7HWx43": {
+          "type": "card",
+          "settings": {
+            "tab_category": "Políticas",
+            "title": "Política de Privacidad",
+            "text": "",
+            "link_text": "Leer más",
+            "link_url": "shopify://policies/privacy-policy"
+          }
+        },
+        "card_3QVJbp": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "tab_category": "General",
+            "title": "Todo sobre mi compra",
+            "text": "<p>¿Como rastreo mi pedido? <br/>¿Como puedo confirmar una compra? </p>",
+            "link_text": "",
+            "link_url": "#"
+          }
+        },
+        "card_gbhzRG": {
+          "type": "card",
+          "settings": {
+            "tab_category": "General",
+            "title": "Acerca de Nosotros",
+            "text": "",
+            "link_text": "Leer más",
+            "link_url": "shopify://pages/acerca-de-nosotros"
+          }
+        },
+        "card_Ydj4P4": {
+          "type": "card",
+          "settings": {
+            "tab_category": "General",
+            "title": "Preguntas frecuentes",
+            "text": "",
+            "link_text": "Leer más",
+            "link_url": "shopify://pages/preguntas-frecuentes"
+          }
+        },
+        "card_gxpxqL": {
+          "type": "card",
+          "settings": {
+            "tab_category": "General",
+            "title": "Descuentos",
+            "text": "<p>Compra 3 y llévate el 4to gratis dentro de esta colección.</p>",
+            "link_text": "Aprovecha y ahorra",
+            "link_url": "shopify://collections/leggins-seamless-adriana-olimpo"
+          }
+        },
+        "card_fFxUBW": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "tab_category": "General",
+            "title": "Tarjetas de Regalo",
+            "text": "<p>Descripción breve del tema.</p>",
+            "link_text": "Leer más",
+            "link_url": ""
+          }
+        },
+        "card_4qp8MX": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "tab_category": "General",
+            "title": "Rastreo de Pedido",
+            "text": "<p>Descripción breve del tema.</p>",
+            "link_text": "Leer más",
+            "link_url": "https://www.adrianaolimpo.com/pages/acerca-de-nosotros?view=rastrea-tu-pedido"
+          }
+        },
+        "card_XhDeyN": {
+          "type": "card",
+          "settings": {
+            "tab_category": "General",
+            "title": "Información para mayoristas",
+            "text": "",
+            "link_text": "Leer más",
+            "link_url": "https://www.adrianaolimpo.com/pages/mayoreo"
+          }
+        },
+        "card_CNbh6C": {
+          "type": "card",
+          "settings": {
+            "tab_category": "Políticas",
+            "title": "Política de Envíos",
+            "text": "",
+            "link_text": "Leer más",
+            "link_url": "shopify://policies/shipping-policy"
+          }
+        },
+        "card_AYQgPV": {
+          "type": "card",
+          "settings": {
+            "tab_category": "Políticas",
+            "title": "Política de Devoluciones",
+            "text": "",
+            "link_text": "Leer más",
+            "link_url": "shopify://policies/refund-policy"
+          }
+        }
+      },
+      "block_order": [
+        "card_7HWx43",
+        "card_3QVJbp",
+        "card_gbhzRG",
+        "card_Ydj4P4",
+        "card_gxpxqL",
+        "card_fFxUBW",
+        "card_4qp8MX",
+        "card_XhDeyN",
+        "card_CNbh6C",
+        "card_AYQgPV"
+      ],
+      "settings": {
+        "title": "Centro de Ayuda",
+        "title_color": "#000000",
+        "description": "<p>Selecciona un tema para encontrar la respuesta que buscas.</p>",
+        "margin_top": 100,
+        "margin_bottom": 40,
+        "bg_color": "#ffffff",
+        "tab_active_bg": "#000000",
+        "tab_active_text": "#ffffff",
+        "tab_inactive_bg": "#f1f1f1",
+        "tab_inactive_text": "#494949",
+        "card_bg": "#f9f9f9",
+        "card_title_color": "#000000",
+        "card_text_color": "#666666",
+        "link_text_color": "#000000",
+        "link_font_size": 15,
+        "link_font_weight": 600,
+        "link_margin_top": 65,
+        "link_line_gap": 2,
+        "link_line_thickness": 1,
+        "link_line_color": "#000000"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

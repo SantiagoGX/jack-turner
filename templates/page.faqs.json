@@ -1,0 +1,177 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "snc-info-hero",
+      "settings": {
+        "image": "shopify://shop_images/order_1755500925.jpg",
+        "color_scheme": "scheme-1",
+        "margin_top": 0,
+        "height_vh": 40,
+        "full_width": true,
+        "border_radius": 0,
+        "overlay_type": "solid",
+        "gradient_direction": "to top",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "content_vertical_position": "flex-end",
+        "content_horizontal_position": "flex-start",
+        "text_alignment": "left",
+        "title": "FAQ",
+        "title_max_width": 800,
+        "subtitle": "",
+        "text": "",
+        "title_style": "h1",
+        "subtitle_style": "body",
+        "text_style": "body",
+        "button_style": "button",
+        "button_label": "",
+        "button_link": "",
+        "button_preset": "1"
+      }
+    },
+    "main": {
+      "type": "snc-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "title": "When will my order ship?",
+            "content": "<p>After your payment is verified, it takes up to 24 hours to process and ship your order. Please note that this does not include weekends or holidays. If you place an order after 9 am PST on a Friday, it will likely be shipped out on the following Monday.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Will I have to pay international taxes & duties?",
+            "content": "<p>Your order may be subject to import duties and taxes imposed by your country's customs authority. The general amount for these fees is approximately 20% of the merchandise's dollar value. However, this can vary depending on your country's customs policies. Please contact your local customs office for specific information. Jack Turner Watches is not responsible for these charges, and you are liable for paying them.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "title": "How are taxes and duties calculated?",
+            "content": "<p>For Duties Delivered Unpaid (DDU) orders, you are responsible for all import duties, customs, and taxes levied by your country. Payment of these fees is necessary to release your order from customs upon arrival.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Can I change something on my order?",
+            "content": "<p>If you need to modify or cancel your order, please contact us immediately. Once your order is processed by our warehouse, we are unable to make any changes.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What does \"Unfulfilled\" mean in my order status?",
+            "content": "<p>\"Unfulfilled\" simply indicates that we have successfully received your order. Once your order is shipped, you will receive a tracking number, and your order status will change to \"Fulfilled.\"</p>"
+          }
+        },
+        "q6": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Why was my order canceled?",
+            "content": "<p>If your order was unexpectedly canceled, it may be due to our fraud filter flagging it as fraudulent. If you believe this is an error, please consider ordering again using a PayPal account.</p>"
+          }
+        },
+        "q7": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What is your return/exchange policy?",
+            "content": "<p>Please refer to our Refund Policy located in the Footer section of our website for detailed information on returns and exchanges.</p>"
+          }
+        },
+        "q8": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Do you offer expedited shipping options?",
+            "content": "<p>Yes, we offer expedited shipping options for select regions. You can choose your preferred shipping method during the checkout process.</p>"
+          }
+        },
+        "q9": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Can I track my order?",
+            "content": "<p>Yes, once your order is shipped, you will receive a tracking number via email. You can use this tracking number to monitor the status and location of your package.</p>"
+          }
+        },
+        "q10": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Do you ship to PO boxes or APO/FPO addresses?",
+            "content": "<p>Yes, we ship to both PO boxes and APO/FPO addresses. Please ensure to provide accurate address details during checkout.</p>"
+          }
+        },
+        "q11": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What should I do if I haven't received my order within the estimated delivery time?",
+            "content": "<p>If your order hasn't arrived within the estimated delivery time, please contact our customer service team, and we will assist you in tracking your package and resolving any issues.</p>"
+          }
+        },
+        "q12": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Are there any restrictions on international shipping destinations?",
+            "content": "<p>We ship to most international destinations. However, certain countries may have restrictions or limitations on the import of certain goods. Please check with your local customs office to ensure compliance with import regulations.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10",
+        "q11",
+        "q12"
+      ],
+      "settings": {
+        "title": "Frequently Asked Questions",
+        "section_title_color": "#000000",
+        "section_title_size": 40,
+        "section_title_weight": 700,
+        "section_title_margin_bottom": 20,
+        "description": "",
+        "section_desc_color": "#666666",
+        "section_desc_size": 16,
+        "section_desc_weight": 400,
+        "section_desc_margin_bottom": 40,
+        "header_alignment": "center",
+        "max_width": 800,
+        "margin_top": 80,
+        "margin_bottom": 100,
+        "item_padding_vertical": 20,
+        "item_padding_horizontal": 20,
+        "gap": 10,
+        "border_radius": 8,
+        "border_width": 1,
+        "border_color": "#e5e5e5",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "title_font_size": 18,
+        "title_font_weight": 600,
+        "content_color": "#666666",
+        "content_font_size": 16
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "main"
+  ]
+}

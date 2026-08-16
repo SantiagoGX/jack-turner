@@ -1,0 +1,458 @@
+{% schema %}
+{
+  "name": "SNC Mixed Grid",
+  "class": "section--snc-mixed-grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenido"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Our Products"
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "Estilo del Título",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto / Párrafo"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Estilo del Texto",
+      "options": [
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "h3", "label": "Títulos pequeños" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "min": 200,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho del párrafo",
+      "default": 800
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Alineación del encabezado",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "header_gap",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Espacio entre encabezado y grilla",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Configuración de Grilla"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección"
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Filas a mostrar",
+      "default": 2,
+      "info": "Patrón: 3 - 2 - 3 - 2"
+    },
+    {
+      "type": "range",
+      "id": "gap_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Espacio horizontal entre productos",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "gap_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Espacio vertical entre productos",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Tarjeta de Producto"
+    },
+    {
+      "type": "select",
+      "id": "image_height_mode",
+      "label": "Modo de altura de imagen",
+      "options": [
+        { "value": "aspect_ratio", "label": "Relación de aspecto" },
+        { "value": "fixed", "label": "Altura fija (px)" }
+      ],
+      "default": "aspect_ratio"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Relación de aspecto de imagen",
+      "options": [
+        { "value": "1/1", "label": "Cuadrado (1:1)" },
+        { "value": "3/4", "label": "Retrato (3:4)" },
+        { "value": "4/5", "label": "Retrato (4:5)" },
+        { "value": "16/9", "label": "Paisaje (16:9)" }
+      ],
+      "default": "3/4",
+      "info": "Aplica si el modo es 'Relación de aspecto'"
+    },
+    {
+      "type": "range",
+      "id": "image_height_desktop",
+      "min": 100,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Altura fija (Desktop)",
+      "default": 400,
+      "info": "Aplica si el modo es 'Altura fija'"
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Altura fija (Móvil)",
+      "default": 300,
+      "info": "Aplica si el modo es 'Altura fija'"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Redondeo de imagen",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Mostrar precio",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Superior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Inferior",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Mixed Grid",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}
+
+{%- liquid
+  assign rows = section.settings.rows
+  assign limit = 3
+  if rows >= 2
+    assign limit = 5
+  endif
+  if rows >= 3
+    assign limit = 8
+  endif
+  if rows >= 4
+    assign limit = 10
+  endif
+  
+  assign collection = section.settings.collection
+  assign wishlist_icon_version = settings.global_wishlist_icon_version | default: 'dark'
+  if wishlist_icon_version == 'light'
+    assign global_icon_wishlist = settings.global_icon_wishlist_light
+  else
+    assign global_icon_wishlist = settings.global_icon_wishlist_dark
+  endif
+  assign wishlist_bg_enabled = settings.global_wishlist_bg_enabled
+  assign wishlist_bg_color = settings.global_wishlist_bg_color | default: '#FFFFFF'
+  assign wishlist_inset = settings.global_wishlist_inset | default: 20
+  assign wishlist_padding = settings.global_wishlist_padding | default: 8
+  assign wishlist_radius = settings.global_wishlist_radius | default: 0
+  assign wishlist_size = settings.global_wishlist_size | default: 40
+-%}
+
+<style>
+  .snc-mixed-grid {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .snc-mixed-grid__header { margin-bottom: {{ section.settings.header_gap }}px; padding: 0 20px; text-align: {{ section.settings.header_alignment }}; }
+  .snc-mixed-grid__title { margin: 0 0 15px; }
+  .snc-mixed-grid__text { max-width: {{ section.settings.text_width }}px; margin: 0 auto; }
+  {% if section.settings.header_alignment == 'left' %}
+    .snc-mixed-grid__text { margin-left: 0; }
+  {% elsif section.settings.header_alignment == 'right' %}
+    .snc-mixed-grid__text { margin-right: 0; }
+  {% endif %}
+
+  .snc-mixed-grid__card {
+    position: relative;
+    height: 100%;
+  }
+  .snc-mixed-grid__card-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+  .snc-mixed-grid__card-link:hover .snc-mixed-grid__image {
+    transform: scale(1.05);
+  }
+  .snc-mixed-grid__container { padding: 0 20px; max-width: 1512px; margin: 0 auto; }
+  
+  .snc-mixed-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: {{ section.settings.gap_horizontal }}px;
+    row-gap: {{ section.settings.gap_vertical }}px;
+  }
+
+  /* Pattern 3-2-3-2 Logic */
+  .snc-mixed-grid__item:nth-child(1), .snc-mixed-grid__item:nth-child(2), .snc-mixed-grid__item:nth-child(3) { grid-column: span 2; }
+  .snc-mixed-grid__item:nth-child(4), .snc-mixed-grid__item:nth-child(5) { grid-column: span 3; }
+  .snc-mixed-grid__item:nth-child(6), .snc-mixed-grid__item:nth-child(7), .snc-mixed-grid__item:nth-child(8) { grid-column: span 2; }
+  .snc-mixed-grid__item:nth-child(9), .snc-mixed-grid__item:nth-child(10) { grid-column: span 3; }
+
+  .snc-mixed-grid__image-wrapper { 
+    position: relative; 
+    width: 100%; 
+    {% if section.settings.image_height_mode == 'aspect_ratio' %}aspect-ratio: {{ section.settings.image_ratio | replace: '/', '/' }}; height: auto;{% else %}height: {{ section.settings.image_height_desktop }}px;{% endif %}
+    overflow: hidden; 
+    border-radius: {{ section.settings.image_border_radius }}px; 
+    margin-bottom: 12px; 
+    background: #f5f5f5; 
+  }
+  .snc-mixed-grid__image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .snc-mixed-grid__card-link:hover .snc-mixed-grid__image { transform: scale(1.05); }
+  .snc-mixed-grid__card-title { font-size: 16px; font-weight: 600; margin: 0 0 4px; line-height: 1.3; }
+  .snc-mixed-grid__card-price { font-size: 14px; color: #666; }
+  .snc-plp--favorite-button {
+    position: absolute;
+    top: {{ wishlist_inset }}px;
+    right: {{ wishlist_inset }}px;
+    background: {% if wishlist_bg_enabled %}{{ wishlist_bg_color }}{% else %}none{% endif %};
+    border: none;
+    padding: {% if wishlist_bg_enabled %}{{ wishlist_padding }}px{% else %}0{% endif %};
+    cursor: pointer;
+    z-index: 10;
+    width: {% if wishlist_bg_enabled %}{{ wishlist_size }}px{% else %}23px{% endif %};
+    height: {% if wishlist_bg_enabled %}{{ wishlist_size }}px{% else %}20px{% endif %};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    border-radius: {{ wishlist_radius }}px;
+  }
+  .snc-plp--favorite-button.is-active .snc-plp--favorite-icon {
+    opacity: 0;
+  }
+  .snc-plp--favorite-button.is-active {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='{{ settings.global_wishlist_active_color | default: '#DA4B4B' | url_encode }}'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 23px 20px;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+  }
+  .snc-plp--favorite-button.is-bouncing {
+    animation: bounce 0.4s ease-in-out;
+  }
+  .snc-plp--favorite-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  .snc-plp--favorite-icon {
+    width: 23px;
+    height: 20px;
+    display: block;
+    object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+    .snc-mixed-grid__grid { grid-template-columns: repeat(2, 1fr); }
+    .snc-mixed-grid__item:nth-child(n) { grid-column: span 1 !important; }
+    .snc-mixed-grid__image-wrapper {
+      {% if section.settings.image_height_mode == 'fixed' %}height: {{ section.settings.image_height_mobile }}px;{% endif %}
+    }
+  }
+</style>
+
+<div class="snc-mixed-grid color-{{ section.settings.color_scheme }}">
+  <div class="snc-mixed-grid__header">
+    {% if section.settings.title != blank %}<h2 class="snc-mixed-grid__title {{ section.settings.title_style }}">{{ section.settings.title }}</h2>{% endif %}
+    {% if section.settings.text != blank %}<div class="snc-mixed-grid__text {{ section.settings.text_style }}">{{ section.settings.text }}</div>{% endif %}
+  </div>
+
+<div class="snc-mixed-grid__container">
+  <div class="snc-mixed-grid__grid">
+    {% for product in collection.products limit: limit %}
+        <div class="snc-mixed-grid__item">
+          <div class="snc-mixed-grid__card">
+            <a href="{{ product.url }}" class="snc-mixed-grid__card-link">
+              <div class="snc-mixed-grid__image-wrapper">
+                {{ product.featured_image | image_url: width: 800 | image_tag: class: 'snc-mixed-grid__image', loading: 'lazy' }}
+              </div>
+              <h3 class="snc-mixed-grid__card-title">{{ product.title }}</h3>
+              {% if section.settings.show_price %}<div class="snc-mixed-grid__card-price">{{ product.price | money }}</div>{% endif %}
+            </a>
+            <button class="snc-plp--favorite-button" type="button" data-favorite-handle="{{ product.handle }}">
+              <img src="{% if global_icon_wishlist != blank %}{{ global_icon_wishlist | image_url: width: 46 }}{% else %}{{ 'favorite.svg' | asset_url }}{% endif %}" alt="Add to favorites" class="snc-plp--favorite-icon">
+            </button>
+          </div>
+        </div>
+      {% else %}
+        {% for i in (1..limit) %}
+        <div class="snc-mixed-grid__item">
+          <div class="snc-mixed-grid__card">
+            <div class="snc-mixed-grid__image-wrapper">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'snc-mixed-grid__image' }}
+            </div>
+            <h3 class="snc-mixed-grid__card-title">Producto de ejemplo {{ i }}</h3>
+            {% if section.settings.show_price %}<div class="snc-mixed-grid__card-price">$999.00</div>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+</div>
+
+<script>
+  (function() {
+    const STORAGE_KEY = 'snc_favorites';
+    const sectionEl = document.getElementById('shopify-section-{{ section.id }}');
+    if (!sectionEl) return;
+    const buttons = Array.from(sectionEl.querySelectorAll('.snc-plp--favorite-button'));
+    if (!buttons.length) return;
+
+    function readFavorites() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function writeFavorites(list) {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      } catch (error) {}
+    }
+
+    function renderState() {
+      const favorites = readFavorites();
+      buttons.forEach(btn => {
+        const handle = btn.dataset.favoriteHandle;
+        btn.classList.toggle('is-active', handle && favorites.includes(handle));
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        const handle = this.dataset.favoriteHandle;
+        if (!handle) return;
+        const favorites = readFavorites();
+        const index = favorites.indexOf(handle);
+        if (index >= 0) {
+          favorites.splice(index, 1);
+        } else {
+          favorites.push(handle);
+        }
+        writeFavorites(favorites);
+        renderState();
+        this.classList.add('is-bouncing');
+        this.addEventListener('animationend', () => {
+          this.classList.remove('is-bouncing');
+        }, { once: true });
+        window.dispatchEvent(new CustomEvent('snc:wishlist-updated', { bubbles: true }));
+      });
+    });
+
+    window.addEventListener('snc:wishlist-updated', renderState);
+    window.addEventListener('storage', function(event) {
+      if (event.key === STORAGE_KEY) {
+        renderState();
+      }
+    });
+
+    renderState();
+  })();
+</script>

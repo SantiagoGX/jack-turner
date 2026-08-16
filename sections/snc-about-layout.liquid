@@ -1,0 +1,727 @@
+{% comment %}
+  About page layout with specialized block types:
+  - hero: Full-width hero with background image
+  - image_centered: Centered rectangular image (editorial style)
+  - story_text: Centered narrow text column for storytelling
+  - content_row: Two columns (image + text)
+  - cta_centered: Centered text with optional button
+{% endcomment %}
+
+<section
+  class="snc-about-layout"
+  style="
+    --snc-about-max-width: {{ section.settings.max_width }}px;
+    --snc-about-padding-top: {{ section.settings.padding_top }}px;
+    --snc-about-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --snc-about-gap: {{ section.settings.column_gap }}px;
+    --snc-about-bg: {{ section.settings.background_color }};
+    --snc-about-text: {{ section.settings.text_color }};
+    --snc-about-muted: {{ section.settings.muted_text_color }};
+    --snc-about-eyebrow: {{ section.settings.eyebrow_color }};
+  "
+>
+  <div class="snc-about-layout__inner">
+    {%- if section.settings.section_title != blank -%}
+      <h2 class="snc-about-layout__title {{ section.settings.section_title_style }}">{{ section.settings.section_title | escape }}</h2>
+    {%- endif -%}
+
+    <div class="snc-about-layout__rows">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+
+          {% comment %} ===== STORY HEADER (Title + Image) ===== {% endcomment %}
+          {%- when 'story_header' -%}
+            <div class="snc-about-story-header" {{ block.shopify_attributes }}>
+              {%- if block.settings.eyebrow != blank -%}
+                <span class="snc-about-story-header__eyebrow">{{ block.settings.eyebrow | escape }}</span>
+              {%- endif -%}
+              
+              {%- if block.settings.title != blank -%}
+                <h2 class="snc-about-story-header__title">{{ block.settings.title | escape }}</h2>
+              {%- endif -%}
+              
+              {%- if block.settings.image != blank -%}
+                <div class="snc-about-story-header__image-wrapper">
+                  {{-
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'snc-about-story-header__img',
+                      alt: block.settings.title
+                  -}}
+                </div>
+              {%- endif -%}
+            </div>
+
+          {% comment %} ===== IMAGE CENTERED BLOCK ===== {% endcomment %}
+          {%- when 'image_centered' -%}
+            {%- if block.settings.image != blank -%}
+              <div class="snc-about-image-centered" {{ block.shopify_attributes }}>
+                <div class="snc-about-image-centered__wrapper">
+                  {{-
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'snc-about-image-centered__img',
+                      alt: block.settings.caption | default: 'About image'
+                  -}}
+                </div>
+                {%- if block.settings.caption != blank -%}
+                  <p class="snc-about-image-centered__caption">{{ block.settings.caption | escape }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+          {% comment %} ===== STORY TEXT BLOCK ===== {% endcomment %}
+          {%- when 'story_text' -%}
+            <div class="snc-about-story-text" {{ block.shopify_attributes }}>
+              {%- if block.settings.eyebrow != blank -%}
+                <span class="snc-about-story-text__eyebrow">{{ block.settings.eyebrow | escape }}</span>
+              {%- endif -%}
+              
+              {%- if block.settings.title != blank -%}
+                <h2 class="snc-about-story-text__title">{{ block.settings.title | escape }}</h2>
+              {%- endif -%}
+              
+              {%- if block.settings.text != blank -%}
+                <div class="snc-about-story-text__content">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </div>
+
+          {% comment %} ===== CONTENT ROW (TWO COLUMNS) ===== {% endcomment %}
+          {%- when 'content_row' -%}
+            {%- liquid
+              assign image_position = block.settings.image_position | default: 'right'
+            -%}
+            <div 
+              class="snc-about-content-row snc-about-content-row--image-{{ image_position }}"
+              style="
+                --snc-about-row-image-height: {{ block.settings.image_height | default: 520 }}px;
+                --snc-about-row-image-height-mobile: {{ block.settings.image_height_mobile | default: 360 }}px;
+              "
+              {{ block.shopify_attributes }}
+            >
+              <div class="snc-about-content-row__text">
+                {%- if block.settings.eyebrow != blank -%}
+                  <span class="snc-about-content-row__eyebrow">{{ block.settings.eyebrow | escape }}</span>
+                {%- endif -%}
+                
+                {%- if block.settings.title != blank -%}
+                  <h3 class="snc-about-content-row__title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                
+                {%- if block.settings.text != blank -%}
+                  <div class="snc-about-content-row__body">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+
+              <div class="snc-about-content-row__media">
+                {%- if block.settings.image != blank -%}
+                  {{-
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'snc-about-content-row__img',
+                      sizes: '(min-width: 990px) 50vw, 100vw'
+                  -}}
+                {%- else -%}
+                  <div class="snc-about-content-row__img snc-about-content-row__img--placeholder"></div>
+                {%- endif -%}
+              </div>
+            </div>
+
+          {% comment %} ===== CTA CENTERED BLOCK ===== {% endcomment %}
+          {%- when 'cta_centered' -%}
+            <div class="snc-about-cta" {{ block.shopify_attributes }}>
+              {%- if block.settings.eyebrow != blank -%}
+                <span class="snc-about-cta__eyebrow">{{ block.settings.eyebrow | escape }}</span>
+              {%- endif -%}
+              
+              {%- if block.settings.title != blank -%}
+                <h2 class="snc-about-cta__title">{{ block.settings.title | escape }}</h2>
+              {%- endif -%}
+              
+              {%- if block.settings.text != blank -%}
+                <div class="snc-about-cta__text">{{ block.settings.text }}</div>
+              {%- endif -%}
+              
+              {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+                <a href="{{ block.settings.button_link }}" class="snc-about-cta__button">
+                  {{ block.settings.button_label }}
+                </a>
+              {%- endif -%}
+            </div>
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .snc-about-layout {
+    background: var(--snc-about-bg);
+    color: var(--snc-about-text);
+    padding-top: var(--snc-about-padding-top);
+    padding-bottom: var(--snc-about-padding-bottom);
+  }
+
+  .snc-about-layout__inner {
+    max-width: var(--snc-about-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .snc-about-layout__title {
+    margin: 0 0 48px 0;
+    text-align: center;
+  }
+
+  .snc-about-layout__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ===== STORY HEADER (Title + Image) ===== */
+  .snc-about-story-header {
+    text-align: center;
+    padding: 60px 0 40px;
+  }
+
+  .snc-about-story-header__eyebrow {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--snc-about-eyebrow);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .snc-about-story-header__title {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 0 0 40px;
+    color: var(--snc-about-text);
+  }
+
+  .snc-about-story-header__image-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .snc-about-story-header__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ===== IMAGE CENTERED BLOCK ===== */
+  .snc-about-image-centered {
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .snc-about-image-centered__wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .snc-about-image-centered__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .snc-about-image-centered__caption {
+    font-size: 14px;
+    color: var(--snc-about-muted);
+    margin-top: 16px;
+    font-style: italic;
+  }
+
+  /* ===== STORY TEXT BLOCK ===== */
+  .snc-about-story-text {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 0 60px;
+    text-align: center;
+  }
+
+  .snc-about-story-text__eyebrow {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--snc-about-eyebrow);
+    margin-bottom: 16px;
+  }
+
+  .snc-about-story-text__title {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 300;
+    line-height: 1.3;
+    margin: 0 0 32px;
+    color: var(--snc-about-text);
+  }
+
+  .snc-about-story-text__content {
+    text-align: left;
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    color: var(--snc-about-muted);
+  }
+
+  .snc-about-story-text__content p {
+    margin: 0 0 1.25rem 0;
+  }
+
+  .snc-about-story-text__content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .snc-about-story-text__content h3 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--snc-about-text);
+    margin: 2.5rem 0 1rem;
+    text-align: center;
+  }
+
+  .snc-about-story-text__content strong {
+    font-weight: 500;
+    color: var(--snc-about-text);
+  }
+
+  .snc-about-story-text__content em {
+    font-style: italic;
+    color: var(--snc-about-text);
+  }
+
+  /* ===== CONTENT ROW (TWO COLUMNS) ===== */
+  .snc-about-content-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--snc-about-gap);
+    align-items: center;
+    padding: 80px 0;
+  }
+
+  .snc-about-content-row--image-left .snc-about-content-row__text {
+    order: 2;
+  }
+
+  .snc-about-content-row--image-left .snc-about-content-row__media {
+    order: 1;
+  }
+
+  .snc-about-content-row__eyebrow {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--snc-about-eyebrow);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .snc-about-content-row__title {
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 0 0 20px;
+    color: var(--snc-about-text);
+  }
+
+  .snc-about-content-row__body {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--snc-about-muted);
+  }
+
+  .snc-about-content-row__body p {
+    margin: 0 0 12px 0;
+  }
+
+  .snc-about-content-row__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .snc-about-content-row__media {
+    height: var(--snc-about-row-image-height);
+    overflow: hidden;
+  }
+
+  .snc-about-content-row__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .snc-about-content-row__img--placeholder {
+    background: linear-gradient(135deg, #f1f1f1, #e8e8e8);
+  }
+
+  /* ===== CTA CENTERED BLOCK ===== */
+  .snc-about-cta {
+    text-align: center;
+    padding: 100px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .snc-about-cta__eyebrow {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--snc-about-eyebrow);
+    margin-bottom: 16px;
+  }
+
+  .snc-about-cta__title {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 300;
+    line-height: 1.3;
+    margin: 0 0 20px;
+    color: var(--snc-about-text);
+  }
+
+  .snc-about-cta__text {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--snc-about-muted);
+    margin-bottom: 32px;
+  }
+
+  .snc-about-cta__text p {
+    margin: 0;
+  }
+
+  .snc-about-cta__button {
+    display: inline-block;
+    padding: 16px 40px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--snc-about-text);
+    border: 1px solid var(--snc-about-text);
+    transition: all 0.3s ease;
+  }
+
+  .snc-about-cta__button:hover {
+    background-color: var(--snc-about-text);
+    color: var(--snc-about-bg);
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 989px) {
+    .snc-about-story-header {
+      padding: 40px 0 30px;
+    }
+
+    .snc-about-story-header__title {
+      margin-bottom: 30px;
+    }
+
+    .snc-about-story-header__image-wrapper {
+      max-width: 100%;
+      aspect-ratio: 3/4;
+    }
+
+    .snc-about-image-centered {
+      padding: 40px 0;
+    }
+
+    .snc-about-image-centered__wrapper {
+      max-width: 100%;
+      aspect-ratio: 3/4;
+    }
+
+    .snc-about-story-text {
+      padding: 30px 0 50px;
+    }
+
+    .snc-about-story-text__content {
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .snc-about-content-row {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 60px 0;
+    }
+
+    .snc-about-content-row__media {
+      height: var(--snc-about-row-image-height-mobile);
+      order: 1;
+    }
+
+    .snc-about-content-row__text {
+      order: 2;
+    }
+
+    .snc-about-cta {
+      padding: 60px 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SNC About Layout",
+  "class": "section--snc-about-layout",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "label": "Max content width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Column gap (two columns)",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Muted text",
+      "default": "#6c6c6c"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow/Labels",
+      "default": "#8a7a6a"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story_header",
+      "name": "Story Header",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "OUR STORY"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Legacy Is Not Given. It's Built."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Image displayed below the title"
+        }
+      ]
+    },
+    {
+      "type": "image_centered",
+      "name": "Image Centered",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Centered editorial image (4:3 ratio)"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption (optional)"
+        }
+      ]
+    },
+    {
+      "type": "story_text",
+      "name": "Story Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow (optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (optional)"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Story content",
+          "info": "Text will be centered in a narrow column for better reading"
+        }
+      ]
+    },
+    {
+      "type": "content_row",
+      "name": "Content Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image position",
+          "options": [
+            { "value": "right", "label": "Right" },
+            { "value": "left", "label": "Left" }
+          ],
+          "default": "right"
+        },
+        {
+          "type": "range",
+          "id": "image_height",
+          "min": 300,
+          "max": 700,
+          "step": 20,
+          "unit": "px",
+          "label": "Image height (desktop)",
+          "default": 520
+        },
+        {
+          "type": "range",
+          "id": "image_height_mobile",
+          "min": 250,
+          "max": 500,
+          "step": 10,
+          "unit": "px",
+          "label": "Image height (mobile)",
+          "default": 360
+        }
+      ]
+    },
+    {
+      "type": "cta_centered",
+      "name": "CTA Centered",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow (optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC About Layout",
+      "blocks": [
+        { "type": "story_text" },
+        { "type": "content_row" }
+      ]
+    }
+  ]
+}
+{% endschema %}

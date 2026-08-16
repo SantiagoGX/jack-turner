@@ -1,0 +1,99 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "snc_info_hero_RDa77P": {
+      "type": "snc-info-hero",
+      "name": "SNC Info Hero",
+      "settings": {
+        "image": "shopify://shop_images/6D4C9AC3-E451-4067-BD9D-C2A7F115873C.jpg",
+        "color_scheme": "",
+        "margin_top": 0,
+        "height_vh": 50,
+        "full_width": true,
+        "border_radius": 0,
+        "overlay_type": "gradient",
+        "gradient_direction": "to top",
+        "overlay_color": "#000000",
+        "overlay_opacity": 85,
+        "content_vertical_position": "flex-end",
+        "content_horizontal_position": "flex-start",
+        "text_alignment": "center",
+        "title": "CONTACT US",
+        "title_max_width": 800,
+        "subtitle": "Need Help?",
+        "text": "",
+        "title_style": "h1",
+        "title_scale": 100,
+        "title_scale_mobile": 100,
+        "subtitle_style": "body",
+        "subtitle_scale": 100,
+        "subtitle_scale_mobile": 100,
+        "text_style": "body",
+        "text_scale": 100,
+        "text_scale_mobile": 100,
+        "button_style": "button",
+        "button_scale": 100,
+        "button_scale_mobile": 100,
+        "button_label": "",
+        "button_link": "",
+        "button_preset": "1",
+        "show_award_badge": false,
+        "award_badge_text": "Best Luxury Watch Brand · 2026",
+        "award_badge_position": "bottom_right"
+      }
+    },
+    "snc_contact_form_K7fxiQ": {
+      "type": "snc-contact-form",
+      "custom_css": [
+        "button,input,textarea {font-size: 16px;}"
+      ],
+      "name": "SNC Contact Form",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subtitle": "",
+        "title": "CONTACT US",
+        "text": "<p>If you have any questions, please don't hesitate to contact us. Fill out the form and we'll get back to you as soon as possible.</p>",
+        "subtitle_style": "emphasis",
+        "title_style": "h2",
+        "text_style": "body",
+        "max_width": 760,
+        "margin_top": 100,
+        "margin_bottom": 100,
+        "padding_horizontal": 20,
+        "text_gap": 40,
+        "form_gap": 15,
+        "subtitle_color": "#9d9d9d",
+        "title_color": "#000000",
+        "paragraph_color": "#333333",
+        "field_padding_vertical": 13,
+        "field_padding_horizontal": 25,
+        "field_background": "#ffffff",
+        "field_border_radius": 0,
+        "field_border_color": "#e6e6e6",
+        "field_focus_border_color": "#2a4432",
+        "button_bg_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_border_radius": 8,
+        "separator_color": "#2a443233",
+        "info_background": "#f4f4f4",
+        "info_gap": 20,
+        "info_subtitle_color": "#646464",
+        "info_title_color": "#000000",
+        "info_subtitle_style": "body",
+        "info_title_style": "body"
+      }
+    }
+  },
+  "order": [
+    "snc_info_hero_RDa77P",
+    "snc_contact_form_K7fxiQ"
+  ]
+}

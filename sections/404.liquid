@@ -1,0 +1,119 @@
+<style>
+  .jt-404 {
+    min-height: 100dvh;
+    background: #f4f2ef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .jt-404__number {
+    font-family: var(--font-main);
+    font-size: clamp(120px, 20vw, 220px);
+    font-weight: 200;
+    line-height: 1;
+    color: #c9c4bc;
+    letter-spacing: -0.02em;
+    margin: 0 0 40px;
+    user-select: none;
+  }
+
+  .jt-404__divider {
+    width: 48px;
+    height: 1px;
+    background: #8b7355;
+    margin: 0 auto 36px;
+  }
+
+  .jt-404__kicker {
+    font-family: var(--font-main);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8b7355;
+    margin: 0 0 20px;
+  }
+
+  .jt-404__heading {
+    font-family: var(--font-main);
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: #0d0d0d;
+    margin: 0 0 16px;
+    max-width: 560px;
+  }
+
+  .jt-404__text {
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #4a4a48;
+    margin: 0 0 48px;
+    max-width: 400px;
+  }
+
+  .jt-404__cta {
+    display: inline-block;
+    font-family: var(--font-main);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f4f2ef;
+    background: #0d0d0d;
+    border: 1px solid #0d0d0d;
+    padding: 16px 40px;
+    border-radius: 0;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .jt-404__cta:hover {
+    background: transparent;
+    color: #0d0d0d;
+  }
+
+  .jt-404__secondary {
+    margin-top: 20px;
+    display: block;
+    font-family: var(--font-main);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4a4a48;
+    text-decoration: none;
+    border-bottom: 1px solid #c9c4bc;
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .jt-404__secondary:hover {
+    color: #0d0d0d;
+    border-color: #0d0d0d;
+  }
+</style>
+
+<section class="jt-404">
+  <p class="jt-404__number">404</p>
+  <p class="jt-404__kicker">Jack Turner Watches</p>
+  <div class="jt-404__divider"></div>
+  <h1 class="jt-404__heading">This page is no longer part of our collection.</h1>
+  <p class="jt-404__text">The page you were looking for may have been moved, renamed, or retired. Every detail here is intentional — and this one simply no longer exists.</p>
+  <a href="{{ routes.root_url }}" class="jt-404__cta">Return to the Collection</a>
+  <a href="{{ routes.all_products_collection_url }}" class="jt-404__secondary">Browse all watches</a>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

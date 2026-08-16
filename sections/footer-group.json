@@ -1,0 +1,174 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "snc-footer",
+      "blocks": {
+        "menu_column_HHi6bh": {
+          "type": "menu_column",
+          "settings": {
+            "menu": "watches",
+            "title_override": "WATCHES",
+            "title_url": "",
+            "content": "<ul>\n<li><a href=\"#\">Link 1</a></li>\n<li><a href=\"#\">Link 2</a></li>\n<li><a href=\"#\">Link 3</a></li>\n</ul>",
+            "title_size": 19,
+            "title_weight": "700",
+            "title_color": "#000000",
+            "title_margin_bottom": 15,
+            "link_size": 14,
+            "link_weight": "400",
+            "link_color": "#000000",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_left": 0,
+            "margin_right": 0
+          }
+        },
+        "menu_column_tVw7yj": {
+          "type": "menu_column",
+          "settings": {
+            "menu": "collections",
+            "title_override": "COLLECTIONS",
+            "title_url": "",
+            "content": "<ul>\n<li><a href=\"#\">Link 1</a></li>\n<li><a href=\"#\">Link 2</a></li>\n<li><a href=\"#\">Link 3</a></li>\n</ul>",
+            "title_size": 18,
+            "title_weight": "700",
+            "title_color": "#000000",
+            "title_margin_bottom": 15,
+            "link_size": 14,
+            "link_weight": "400",
+            "link_color": "#000000",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_left": 0,
+            "margin_right": 0
+          }
+        },
+        "menu_column_VbXwPr": {
+          "type": "menu_column",
+          "settings": {
+            "menu": "aditional-help",
+            "title_override": "CONTACT",
+            "title_url": "",
+            "content": "<ul>\n<li><a href=\"#\">Link 1</a></li>\n<li><a href=\"#\">Link 2</a></li>\n<li><a href=\"#\">Link 3</a></li>\n</ul>",
+            "title_size": 18,
+            "title_weight": "700",
+            "title_color": "#000000",
+            "title_margin_bottom": 15,
+            "link_size": 14,
+            "link_weight": "400",
+            "link_color": "#000000",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_left": 0,
+            "margin_right": 0
+          }
+        },
+        "menu_column_Ur99Bk": {
+          "type": "menu_column",
+          "settings": {
+            "menu": "shop-info",
+            "title_override": "LEGAL",
+            "title_url": "",
+            "content": "<ul>\n<li><a href=\"#\">Link 1</a></li>\n<li><a href=\"#\">Link 2</a></li>\n<li><a href=\"#\">Link 3</a></li>\n</ul>",
+            "title_size": 18,
+            "title_weight": "700",
+            "title_color": "#000000",
+            "title_margin_bottom": 15,
+            "link_size": 14,
+            "link_weight": "400",
+            "link_color": "#000000",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_left": 0,
+            "margin_right": 0
+          }
+        }
+      },
+      "block_order": [
+        "menu_column_HHi6bh",
+        "menu_column_tVw7yj",
+        "menu_column_VbXwPr",
+        "menu_column_Ur99Bk"
+      ],
+      "settings": {
+        "marquee_image": "shopify://shop_images/Frame_841_396d1b70-c844-4cdd-b2dc-f8a2bc8cda73.png",
+        "marquee_image_height": 130,
+        "marquee_gap": 50,
+        "marquee_speed": 20,
+        "marquee_bg_color": "#ffffff",
+        "info_columns_gap": 80,
+        "show_brand_logo": true,
+        "brand_logo_image": "shopify://shop_images/IMG_8365.png",
+        "brand_logo_shape": "circle",
+        "brand_logo_size": 120,
+        "brand_logo_border_color": "#c9b99a",
+        "brand_logo_url": "",
+        "brand_logo_alt": "Jack Turner",
+        "show_legacy_club": true,
+        "legacy_klaviyo_list_id": "TWy4DM",
+        "legacy_club_max_width": 360,
+        "legacy_club_border_width": 1,
+        "legacy_club_border_color": "#e0e0e0",
+        "legacy_club_title_size": 13,
+        "legacy_club_title_weight": "600",
+        "legacy_club_title_color": "#000000",
+        "legacy_club_sub_size": 10,
+        "legacy_club_sub_color": "#000000",
+        "legacy_club_body_size": 14,
+        "legacy_club_body_weight": "400",
+        "legacy_club_body_color": "#222222",
+        "legacy_club_closing_size": 10,
+        "legacy_club_closing_color": "#000000",
+        "legacy_club_input_bg": "#ffffff",
+        "legacy_club_input_border": "#000000",
+        "legacy_club_input_text": "#000000",
+        "legacy_club_btn_bg": "#000000",
+        "legacy_club_btn_text": "#ffffff",
+        "legacy_club_btn_border": "#000000",
+        "marquee_padding_vertical": 60,
+        "marquee_margin_top": 0,
+        "marquee_margin_bottom": 0,
+        "divider_thickness": 1,
+        "divider_color": "#e0e0e0",
+        "legal_brand_name": "JACK TURNER WATCHES",
+        "legal_brand_color": "#000000",
+        "legal_brand_size": 16,
+        "legal_brand_weight": "700",
+        "legal_rows_gap": 35,
+        "social_x_icon": "shopify://shop_images/akar-icons_pinterest-fill.svg",
+        "social_x_link": "https://www.pinterest.com/jackturnerwatches/",
+        "social_tiktok_icon": "shopify://shop_images/ri_facebook-fill.svg",
+        "social_tiktok_link": "https://www.facebook.com/share/14czx6JRHGp/?mibextid=wwXIfr",
+        "social_instagram_icon": "shopify://shop_images/instagramclaro_59decd0f-3711-4d81-9985-35781454f794.svg",
+        "social_instagram_link": "https://www.instagram.com/jackturnerwatches?igsh=MW1zNHJ4NjlpbW1jcA==",
+        "text_privacy": "PRIVACY POLICY",
+        "link_privacy": "shopify://policies/privacy-policy",
+        "text_terms": "TERMS OF SERVICE",
+        "link_terms": "shopify://policies/terms-of-service",
+        "text_legal": "LEGACY",
+        "link_legal": "shopify://collections/jack-turner-legacy-watches",
+        "legal_links_color": "#000000",
+        "legal_links_size": 14,
+        "legal_links_weight": "400",
+        "copyright_text": "© JACK TURNER 2018-2026 All rights reserved.",
+        "legal_copyright_color": "#000000",
+        "legal_copyright_size": 14,
+        "legal_copyright_weight": "500"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

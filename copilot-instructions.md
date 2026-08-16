@@ -1,0 +1,1 @@
+/Users/santiagosalinas/Documents/Shopify-Projects/Jack Turner/AGENTS.md

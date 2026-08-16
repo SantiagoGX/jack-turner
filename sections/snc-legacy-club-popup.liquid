@@ -1,0 +1,912 @@
+{%- unless section.settings.enable_popup -%}
+  {%- if request.design_mode -%}
+    <div class="snc-legacy-popup__editor-hint">
+      <p class="snc-legacy-popup__editor-hint-text">Legacy Club pop-up is disabled. Enable it in section settings.</p>
+    </div>
+    <style>
+      .snc-legacy-popup__editor-hint {
+        padding: 1rem;
+        text-align: center;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+      }
+      .snc-legacy-popup__editor-hint-text {
+        margin: 0;
+        font-size: 0.875rem;
+      }
+    </style>
+  {%- endif -%}
+{%- else -%}
+
+{% style %}
+  #snc-legacy-popup-{{ section.id }} .snc-legacy-popup__dialog {
+    --lc-bg: {{ section.settings.luxury_panel_bg | default: '#f4f2ef' }};
+    --lc-text: {{ section.settings.luxury_text | default: '#0d0d0d' }};
+    --lc-muted: {{ section.settings.luxury_text_muted | default: '#4a4a48' }};
+    --lc-border: {{ section.settings.luxury_border | default: '#c9c4bc' }};
+    --lc-accent: {{ section.settings.luxury_accent | default: '#0d0d0d' }};
+    --lc-button-label: {{ section.settings.luxury_button_label | default: '#f4f2ef' }};
+    --lc-hairline: {{ section.settings.luxury_hairline | default: '#8b7355' }};
+  }
+{% endstyle %}
+
+<div
+  class="snc-legacy-popup"
+  id="snc-legacy-popup-{{ section.id }}"
+  data-snc-legacy-popup-root
+  data-cookie-name="snc_legacy_club_dismiss"
+  data-cookie-days="{{ section.settings.cookie_days | default: 7 }}"
+  data-cookie-max-age="{{ section.settings.cookie_days | default: 7 | times: 86400 }}"
+  data-trigger-delay-ms="{{ section.settings.inactivity_seconds | default: 15 | times: 1000 }}"
+  data-popup-open="false"
+  hidden
+>
+  <div
+    class="snc-legacy-popup__overlay"
+    data-snc-legacy-popup-overlay
+    aria-hidden="true"
+  ></div>
+  <div
+    class="snc-legacy-popup__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="snc-legacy-popup-title-{{ section.id }}"
+    data-snc-legacy-popup-dialog
+    tabindex="-1"
+  >
+    <button
+      type="button"
+      class="snc-legacy-popup__close"
+      data-snc-legacy-popup-close
+      aria-label="{{ 'legacy_club.popup.close' | t }}"
+    >
+      <span class="snc-legacy-popup__close-line" aria-hidden="true"></span>
+      <span class="snc-legacy-popup__close-line snc-legacy-popup__close-line--b" aria-hidden="true"></span>
+    </button>
+    <div class="snc-legacy-popup__grid snc-legacy-popup__grid--split{% if section.settings.image == blank %} snc-legacy-popup__grid--has-placeholder{% endif %}">
+      {%- if section.settings.image != blank -%}
+        <div class="snc-legacy-popup__media">
+          {{
+            section.settings.image
+            | image_url: width: 900
+            | image_tag:
+              loading: 'lazy',
+              class: 'snc-legacy-popup__img',
+              widths: '375, 550, 750, 900',
+              sizes: '(min-width: 750px) 42vw, 100vw'
+          }}
+        </div>
+      {%- else -%}
+        <div class="snc-legacy-popup__media snc-legacy-popup__media--placeholder" aria-hidden="true">
+          <div class="snc-legacy-popup__placeholder-inner"></div>
+        </div>
+      {%- endif -%}
+      <div class="snc-legacy-popup__content">
+        <div class="snc-legacy-popup__content-inner">
+        <span class="snc-legacy-popup__rule" aria-hidden="true"></span>
+        <p class="snc-legacy-popup__eyebrow">{{ section.settings.popup_eyebrow }}</p>
+        <h2 class="snc-legacy-popup__title" id="snc-legacy-popup-title-{{ section.id }}">
+          {{ section.settings.popup_title }}
+        </h2>
+        <p class="snc-legacy-popup__lead">{{ section.settings.popup_lead }}</p>
+        <ul class="snc-legacy-popup__list">
+          <li>{{ section.settings.popup_bullet_1 }}</li>
+          <li>{{ section.settings.popup_bullet_2 }}</li>
+          <li>{{ section.settings.popup_bullet_3 }}</li>
+        </ul>
+        <p class="snc-legacy-popup__closing">{{ section.settings.popup_closing }}</p>
+
+        {%- assign popup_form_id = 'snc-legacy-popup-form-' | append: section.id -%}
+        <form
+          id="{{ popup_form_id }}"
+          class="snc-legacy-popup__form"
+          novalidate
+          data-success-message="{{ section.settings.popup_success | escape }}"
+        >
+          <div class="snc-legacy-popup__fields">
+            <label class="visually-hidden" for="snc-legacy-popup-name-{{ section.id }}">
+              {{ section.settings.popup_name_label }}
+            </label>
+            <input
+              type="text"
+              id="snc-legacy-popup-name-{{ section.id }}"
+              class="snc-legacy-popup__input"
+              autocomplete="given-name"
+              autocorrect="off"
+              autocapitalize="words"
+              placeholder="{{ section.settings.popup_name_placeholder }}"
+            >
+            <label class="visually-hidden" for="snc-legacy-popup-email-{{ section.id }}">
+              {{ section.settings.popup_email_label }}
+            </label>
+            <input
+              type="email"
+              id="snc-legacy-popup-email-{{ section.id }}"
+              class="snc-legacy-popup__input"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="{{ section.settings.popup_email_placeholder }}"
+              required
+            >
+            <button type="submit" class="snc-legacy-popup__submit">
+              {{ section.settings.popup_cta }}
+            </button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- endunless -%}
+
+{% stylesheet %}
+  .visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0 0 0 0);
+    word-wrap: normal !important;
+  }
+
+  .snc-legacy-popup[hidden] {
+    display: none !important;
+  }
+
+  .snc-legacy-popup:not([hidden]) {
+    display: block;
+  }
+
+  .snc-legacy-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    pointer-events: none;
+  }
+
+  .snc-legacy-popup__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 12, 11, 0.62);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .snc-legacy-popup[data-popup-open='true'] .snc-legacy-popup__overlay {
+    opacity: 1;
+  }
+
+  .snc-legacy-popup__dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, calc(-50% + 22px)) scale(0.96);
+    width: min(94vw, 880px);
+    max-height: min(92vh, 660px);
+    overflow: hidden;
+    overflow-y: auto;
+    background: var(--lc-bg, #f4f2ef);
+    color: var(--lc-text, #0d0d0d);
+    /* editorial frame */
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 32px 96px rgba(0, 0, 0, 0.28),
+      0 8px 24px rgba(0, 0, 0, 0.12);
+    pointer-events: auto;
+    opacity: 0;
+    transition:
+      opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .snc-legacy-popup__dialog::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--lc-hairline, rgba(139, 115, 85, 0.55)) 20%,
+      var(--lc-hairline, rgba(139, 115, 85, 0.55)) 80%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .snc-legacy-popup__overlay,
+    .snc-legacy-popup__dialog {
+      transition: none;
+    }
+  }
+
+  .snc-legacy-popup[data-popup-open='true'] .snc-legacy-popup__dialog {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* ── Exit animation ── */
+  .snc-legacy-popup[data-popup-closing='true'] .snc-legacy-popup__overlay {
+    opacity: 0;
+    transition: opacity 0.32s cubic-bezier(0.4, 0, 1, 1);
+  }
+
+  .snc-legacy-popup[data-popup-closing='true'] .snc-legacy-popup__dialog {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 14px)) scale(0.97);
+    transition:
+      opacity 0.28s cubic-bezier(0.4, 0, 1, 1),
+      transform 0.28s cubic-bezier(0.4, 0, 1, 1);
+  }
+
+  .snc-legacy-popup__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 3;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 1px solid var(--lc-border, rgba(13, 13, 13, 0.18));
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.72);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background 0.22s ease,
+      border-color 0.22s ease;
+  }
+
+  /* True × : each line rotated ±45° */
+  .snc-legacy-popup__close-line {
+    position: absolute;
+    width: 13px;
+    height: 1px;
+    background: var(--lc-text, #0d0d0d);
+    transform: rotate(-45deg);
+    transition:
+      background 0.22s ease,
+      transform 0.22s ease;
+  }
+
+  .snc-legacy-popup__close-line--b {
+    transform: rotate(45deg);
+  }
+
+  .snc-legacy-popup__close:hover {
+    background: var(--lc-text, #0d0d0d);
+    border-color: var(--lc-text, #0d0d0d);
+  }
+
+  .snc-legacy-popup__close:hover .snc-legacy-popup__close-line {
+    background: var(--lc-bg, #f4f2ef);
+  }
+
+  .snc-legacy-popup__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: min(62vh, 480px);
+  }
+
+  @media (min-width: 750px) {
+    .snc-legacy-popup__grid--split {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+  .snc-legacy-popup__media {
+    position: relative;
+    min-height: 200px;
+    background: #0c0c0b;
+  }
+
+  .snc-legacy-popup__media--placeholder {
+    min-height: 220px;
+  }
+
+  @media (min-width: 750px) {
+    .snc-legacy-popup__media {
+      min-height: 100%;
+    }
+
+    .snc-legacy-popup__grid--has-placeholder .snc-legacy-popup__media--placeholder {
+      min-height: 380px;
+    }
+  }
+
+  .snc-legacy-popup__placeholder-inner {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(165deg, #1a1918 0%, #0c0c0b 45%, #141312 100%),
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(139, 115, 85, 0.14), transparent 55%);
+  }
+
+  .snc-legacy-popup__placeholder-inner::after {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border: 1px solid rgba(244, 242, 239, 0.09);
+    pointer-events: none;
+  }
+
+  .snc-legacy-popup__img {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 750px) {
+    .snc-legacy-popup__img {
+      min-height: 100%;
+    }
+  }
+
+  /* Mobile: hide image, show form only */
+  @media (max-width: 749px) {
+    .snc-legacy-popup__media {
+      display: none;
+    }
+    .snc-legacy-popup__dialog {
+      max-height: min(90vh, 560px);
+      overflow-y: auto;
+    }
+    .snc-legacy-popup__grid {
+      min-height: unset;
+    }
+  }
+
+  .snc-legacy-popup__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(2.25rem, 5vw, 3.25rem) clamp(2rem, 5vw, 3rem);
+    font-family: var(--font-body-family, var(--font-primary--family, 'Futura PT', Futura, sans-serif));
+    background: var(--lc-bg, #f4f2ef);
+  }
+
+  .snc-legacy-popup__content-inner {
+    width: 100%;
+    max-width: 22rem;
+    position: relative;
+  }
+
+  .snc-legacy-popup__rule {
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(
+      90deg,
+      var(--lc-hairline, rgba(139, 115, 85, 0.85)),
+      rgba(139, 115, 85, 0.2)
+    );
+  }
+
+  .snc-legacy-popup__eyebrow {
+    margin: 0 0 1rem;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--lc-muted, #4a4a48);
+    line-height: 1.5;
+  }
+
+  .snc-legacy-popup__title {
+    margin: 0 0 1.25rem;
+    padding-bottom: 1rem;
+    font-family: var(--font-heading-family, 'Futura PT', Futura, sans-serif);
+    font-size: clamp(0.8125rem, 1.9vw, 0.9375rem);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    line-height: 1.45;
+    text-transform: uppercase;
+    color: var(--lc-text, #0d0d0d);
+    border-bottom: 1px solid var(--lc-border, rgba(13, 13, 13, 0.12));
+  }
+
+  .snc-legacy-popup__lead {
+    margin: 0 0 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.65;
+    color: var(--lc-text, #0d0d0d);
+  }
+
+  .snc-legacy-popup__list {
+    margin: 0 0 1.5rem;
+    padding: 0 0 0 1.125rem;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--lc-muted, #4a4a48);
+    list-style-type: disc;
+  }
+
+  .snc-legacy-popup__list li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.125rem;
+  }
+
+  .snc-legacy-popup__list li::marker {
+    color: var(--lc-hairline, #8b7355);
+  }
+
+  .snc-legacy-popup__closing {
+    margin: 0 0 1.75rem;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lc-text, #0d0d0d);
+    line-height: 1.6;
+  }
+
+  /* Form: always stacked — input full-width above, button full-width below */
+  .snc-legacy-popup__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.25rem;
+  }
+
+  .snc-legacy-popup__input {
+    width: 100%;
+    padding: 0.875rem 0;
+    border: none;
+    border-bottom: 1px solid var(--lc-border, rgba(13, 13, 13, 0.25));
+    border-radius: 0;
+    background: transparent;
+    color: var(--lc-text, #0d0d0d);
+    font-family: inherit;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s ease;
+  }
+
+  .snc-legacy-popup__input::placeholder {
+    color: var(--lc-muted, #4a4a48);
+    opacity: 0.6;
+    letter-spacing: 0.04em;
+  }
+
+  .snc-legacy-popup__input:focus {
+    outline: none;
+    border-bottom-color: var(--lc-text, #0d0d0d);
+  }
+
+  .snc-legacy-popup__submit {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--lc-accent, #0d0d0d);
+    border-radius: 0;
+    background: var(--lc-accent, #0d0d0d);
+    color: var(--lc-button-label, #f4f2ef);
+    font-family: var(--font-heading-family, 'Futura PT', Futura, sans-serif);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background 0.22s ease,
+      color 0.22s ease,
+      border-color 0.22s ease;
+  }
+
+  .snc-legacy-popup__submit:hover {
+    background: transparent;
+    color: var(--lc-accent, #0d0d0d);
+    border-color: var(--lc-accent, #0d0d0d);
+  }
+
+  .snc-legacy-popup__message {
+    padding: 0.75rem 0 0;
+    font-size: 0.875rem;
+    color: var(--lc-text, #0d0d0d);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .snc-legacy-popup__message--error {
+    color: #8c1d18;
+    font-weight: 500;
+  }
+
+  .snc-legacy-popup__message--success {
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (function () {
+    var root = document.querySelector('[data-snc-legacy-popup-root]');
+    if (!root) return;
+
+    var cookieName   = root.getAttribute('data-cookie-name') || 'snc_legacy_club_dismiss';
+    var cookieDays   = parseInt(root.getAttribute('data-cookie-days'), 10);   // 0 = never set cookie
+    var maxAge       = parseInt(root.getAttribute('data-cookie-max-age'), 10); // seconds
+    var triggerDelay = parseInt(root.getAttribute('data-trigger-delay-ms'), 10); // 0 = immediate
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    function getCookie(name) {
+      var match = document.cookie.match(
+        new RegExp('(?:^|; )' + name.replace(/[$()*+.?[\\\]^{|}]/g, '\\$&') + '=([^;]*)')
+      );
+      return match ? decodeURIComponent(match[1]) : null;
+    }
+
+    function setDismissCookie() {
+      // cookie_days === 0 means "always show" — never write a dismiss cookie
+      if (cookieDays === 0) return;
+      document.cookie =
+        cookieName + '=1;max-age=' + maxAge + ';path=/;SameSite=Lax';
+    }
+
+    // ── Open / Close ─────────────────────────────────────────────────────────
+
+    function openPopup() {
+      if (root.getAttribute('data-popup-open') === 'true') return;
+      detachTriggers();
+      root.removeAttribute('hidden');
+      root.setAttribute('data-popup-open', 'true');
+      var overlay = root.querySelector('[data-snc-legacy-popup-overlay]');
+      if (overlay) overlay.setAttribute('aria-hidden', 'false');
+      // Focus the email input, or the dialog itself for accessibility
+      var email  = root.querySelector('input[type="email"]');
+      var dialog = root.querySelector('[data-snc-legacy-popup-dialog]');
+      if (email)        { email.focus(); }
+      else if (dialog)  { dialog.focus(); }
+    }
+
+    function closePopup() {
+      if (root.getAttribute('data-popup-closing') === 'true') return;
+      root.setAttribute('data-popup-open', 'false');
+      root.setAttribute('data-popup-closing', 'true');
+      var ov = root.querySelector('[data-snc-legacy-popup-overlay]');
+      if (ov) ov.setAttribute('aria-hidden', 'true');
+      setDismissCookie();
+      detachTriggers();
+      setTimeout(function () {
+        root.setAttribute('hidden', '');
+        root.removeAttribute('data-popup-closing');
+      }, 360);
+    }
+
+    // ── Trigger logic ─────────────────────────────────────────────────────────
+    // PRIMARY  : delay timer (fires triggerDelay ms after DOMContentLoaded)
+    //            if triggerDelay === 0 → fires immediately (setTimeout 0)
+    // SECONDARY: exit-intent (mouse leaves viewport through the top)
+
+    var delayTimer = null;
+
+    function detachTriggers() {
+      clearTimeout(delayTimer);
+      document.documentElement.removeEventListener('mouseleave', onExitIntent, false);
+    }
+
+    function onExitIntent(e) {
+      if (typeof e.clientY === 'number' && e.clientY <= 0) openPopup();
+    }
+
+    function schedulePrimaryTrigger() {
+      // triggerDelay === 0 → show on next tick so the page has painted
+      var delay = (isNaN(triggerDelay) || triggerDelay < 0) ? 15000 : triggerDelay;
+      delayTimer = setTimeout(openPopup, delay);
+    }
+
+    // ── Guard: cookie check (skip when cookie_days === 0) ────────────────────
+    if (cookieDays !== 0 && getCookie(cookieName)) {
+      root.setAttribute('hidden', '');
+      return;
+    }
+
+    // ── Design-mode preview ───────────────────────────────────────────────────
+    // Only open when the merchant clicks the section in the editor, not on load.
+    if (typeof Shopify !== 'undefined' && Shopify.designMode) {
+      var edClose    = root.querySelector('[data-snc-legacy-popup-close]');
+      var edOverlayEl = root.querySelector('[data-snc-legacy-popup-overlay]');
+
+      function editorOpen() {
+        root.removeAttribute('hidden');
+        root.setAttribute('data-popup-open', 'true');
+        var edOv = root.querySelector('[data-snc-legacy-popup-overlay]');
+        if (edOv) edOv.setAttribute('aria-hidden', 'false');
+      }
+
+      function editorClose() {
+        if (root.getAttribute('data-popup-closing') === 'true') return;
+        root.setAttribute('data-popup-open', 'false');
+        root.setAttribute('data-popup-closing', 'true');
+        setTimeout(function () {
+          root.setAttribute('hidden', '');
+          root.removeAttribute('data-popup-closing');
+        }, 360);
+      }
+
+      if (edClose)     edClose.addEventListener('click', editorClose);
+      if (edOverlayEl) edOverlayEl.addEventListener('click', editorClose);
+
+      // Open only when this section is selected in the editor
+      document.addEventListener('shopify:section:select', function (e) {
+        if (e.detail && e.detail.sectionId === '{{ section.id }}') editorOpen();
+      });
+      document.addEventListener('shopify:section:deselect', function (e) {
+        if (e.detail && e.detail.sectionId === '{{ section.id }}') editorClose();
+      });
+
+      return;
+    }
+
+    // ── Wire close controls ───────────────────────────────────────────────────
+    var closeBtn  = root.querySelector('[data-snc-legacy-popup-close]');
+    var overlayEl = root.querySelector('[data-snc-legacy-popup-overlay]');
+    if (closeBtn)  closeBtn.addEventListener('click', closePopup);
+    if (overlayEl) overlayEl.addEventListener('click', closePopup);
+
+    var dlg = root.querySelector('[data-snc-legacy-popup-dialog]');
+    if (dlg) {
+      dlg.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { e.preventDefault(); closePopup(); }
+      });
+    }
+
+    // ── Start triggers ────────────────────────────────────────────────────────
+    // Attach secondary exit-intent listener first, then schedule primary timer
+    document.documentElement.addEventListener('mouseleave', onExitIntent, false);
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', schedulePrimaryTrigger);
+    } else {
+      schedulePrimaryTrigger();
+    }
+
+    // ── Form submit → Klaviyo Client API (no native submit = no CAPTCHA) ───────
+    var popupForm = root.querySelector('.snc-legacy-popup__form');
+    if (popupForm && typeof fetch !== 'undefined') {
+      popupForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var emailInput = popupForm.querySelector('input[type="email"]');
+        if (!emailInput || !emailInput.value.trim()) return;
+        var nameInput  = popupForm.querySelector('input[type="text"]');
+        var firstName  = nameInput ? nameInput.value.trim() : '';
+        var submitBtn = popupForm.querySelector('button[type="submit"]');
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.55'; }
+        var profileAttrs = { email: emailInput.value.trim(), properties: { source: 'Legacy Club Pop-up' } };
+        if (firstName) profileAttrs.first_name = firstName;
+        fetch('https://a.klaviyo.com/client/subscriptions/?company_id=X2CxYi', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'revision': '2024-10-15' },
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: profileAttrs
+                  }
+                }
+              },
+              relationships: {
+                list: { data: { type: 'list', id: 'TWy4DM' } }
+              }
+            }
+          })
+        }).then(function (res) {
+          if (res.ok || res.status === 202) {
+            var fields = popupForm.querySelector('.snc-legacy-popup__fields');
+            if (fields) fields.style.display = 'none';
+            var msg = document.createElement('p');
+            msg.className = 'snc-legacy-popup__message snc-legacy-popup__message--success';
+            msg.textContent = popupForm.getAttribute('data-success-message') || 'Thank you. You are on the list.';
+            popupForm.appendChild(msg);
+            setDismissCookie();
+            setTimeout(closePopup, 2500);
+          } else {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+          }
+        }).catch(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+        });
+      });
+    }
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Legacy Club pop-up",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_popup",
+      "label": "Enable pop-up",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "popup_eyebrow",
+      "label": "Eyebrow (small text above title)",
+      "default": "For those who move before the crowd..."
+    },
+    {
+      "type": "text",
+      "id": "popup_title",
+      "label": "Title",
+      "default": "Jack Turner Legacy Club"
+    },
+    {
+      "type": "text",
+      "id": "popup_lead",
+      "label": "Lead paragraph",
+      "default": "Join a private list of collectors who get:"
+    },
+    {
+      "type": "text",
+      "id": "popup_bullet_1",
+      "label": "Benefit 1",
+      "default": "Priority access to new drops."
+    },
+    {
+      "type": "text",
+      "id": "popup_bullet_2",
+      "label": "Benefit 2",
+      "default": "Exclusive offers not available on the site."
+    },
+    {
+      "type": "text",
+      "id": "popup_bullet_3",
+      "label": "Benefit 3",
+      "default": "Early release of articles and brand insights."
+    },
+    {
+      "type": "text",
+      "id": "popup_closing",
+      "label": "Closing line",
+      "default": "Limited communication. Maximum advantage."
+    },
+    {
+      "type": "text",
+      "id": "popup_name_label",
+      "label": "Name field label (screen readers)",
+      "default": "First name"
+    },
+    {
+      "type": "text",
+      "id": "popup_name_placeholder",
+      "label": "Name placeholder",
+      "default": "First name (optional)"
+    },
+    {
+      "type": "text",
+      "id": "popup_email_label",
+      "label": "Email field label (screen readers)",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "popup_email_placeholder",
+      "label": "Email placeholder",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "popup_cta",
+      "label": "Button text",
+      "default": "Join the Legacy Club"
+    },
+    {
+      "type": "text",
+      "id": "popup_success",
+      "label": "Success message",
+      "default": "Thank you. You are on the list."
+    },
+    {
+      "type": "header",
+      "content": "Luxury panel colors"
+    },
+    {
+      "type": "color",
+      "id": "luxury_panel_bg",
+      "label": "Panel background",
+      "default": "#f4f2ef"
+    },
+    {
+      "type": "color",
+      "id": "luxury_text",
+      "label": "Primary text",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "luxury_text_muted",
+      "label": "Secondary text",
+      "default": "#4a4a48"
+    },
+    {
+      "type": "color",
+      "id": "luxury_border",
+      "label": "Borders",
+      "default": "#c9c4bc",
+      "info": "Use a soft grey or taupe for editorial frames."
+    },
+    {
+      "type": "color",
+      "id": "luxury_accent",
+      "label": "Button background",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "luxury_button_label",
+      "label": "Button label",
+      "default": "#f4f2ef"
+    },
+    {
+      "type": "color",
+      "id": "luxury_hairline",
+      "label": "Gold / accent line",
+      "default": "#8b7355"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (optional)"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "Klaviyo list ID (optional)",
+      "default": "TWy4DM",
+      "info": "'Newsletter' list in Klaviyo (ID: TWy4DM). Sent as hidden field \"g\" on form submit."
+    },
+    {
+      "type": "range",
+      "id": "inactivity_seconds",
+      "min": 0,
+      "max": 90,
+      "step": 1,
+      "unit": "s",
+      "label": "Inactivity delay before show",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "cookie_days",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "d",
+      "label": "Hide again after close (cookie)",
+      "default": 7
+    }
+  ],
+  "presets": [{ "name": "Legacy Club pop-up" }]
+}
+{% endschema %}

@@ -1,0 +1,441 @@
+{% schema %}
+{
+  "name": "SNC Help Center",
+  "class": "section--snc-help-center",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cabecera"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Centro de Ayuda"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Párrafo descriptivo",
+      "default": "<p>Selecciona un tema para encontrar la respuesta que buscas.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Estilos Generales"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen superior",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen inferior",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo de la sección",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Estilos de Tabs"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Fondo tab activo",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "Texto tab activo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_bg",
+      "label": "Fondo tab inactivo",
+      "default": "#F1F1F1"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_text",
+      "label": "Texto tab inactivo",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "header",
+      "content": "Estilos de Cards"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Fondo tarjeta",
+      "default": "#F9F9F9"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Color título tarjeta",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Color texto tarjeta",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Estilos de Enlaces (Cards)"
+    },
+    {
+      "type": "color",
+      "id": "link_text_color",
+      "label": "Color del texto",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "range",
+      "id": "link_font_size",
+      "label": "Tamaño de fuente",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "link_font_weight",
+      "label": "Grosor de fuente",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "link_margin_top",
+      "label": "Margen superior",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "link_line_gap",
+      "label": "Separación texto-línea",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "link_line_thickness",
+      "label": "Grosor de la línea",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "link_line_color",
+      "label": "Color de la línea",
+      "default": "#0d0d0d"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Tarjeta de Ayuda",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_category",
+          "label": "Nombre de la Pestaña (Tab)",
+          "default": "General",
+          "info": "Las tarjetas con el mismo nombre de pestaña se agruparán juntas."
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icono"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título de la tarjeta",
+          "default": "Título de ayuda"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Descripción breve del tema.</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Texto del enlace",
+          "default": "Leer más"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "URL del enlace"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Help Center",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": { "tab_category": "Envíos", "title": "Rastrea tu pedido" }
+        },
+        {
+          "type": "card",
+          "settings": { "tab_category": "Envíos", "title": "Tiempos de entrega" }
+        },
+        {
+          "type": "card",
+          "settings": { "tab_category": "Devoluciones", "title": "Política de devolución" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{%- assign tabs = section.blocks | map: 'settings' | map: 'tab_category' | uniq -%}
+{%- assign first_tab = tabs | first -%}
+{%- assign first_tab_handle = first_tab | handleize -%}
+
+<style>
+  .snc-help-center {
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+    padding: 40px 20px;
+  }
+
+  .snc-hc--container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .snc-hc--header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .snc-hc--title {
+    font-size: 48px;
+    color: {{ section.settings.title_color }};
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+  }
+
+  .snc-hc--description {
+    font-family: var(--font-main);
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .snc-hc--tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .snc-hc--tab {
+    background-color: {{ section.settings.tab_inactive_bg }};
+    color: {{ section.settings.tab_inactive_text }};
+    border: none;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .snc-hc--tab:hover {
+    opacity: 0.9;
+  }
+
+  .snc-hc--tab.is-active {
+    background-color: {{ section.settings.tab_active_bg }};
+    color: {{ section.settings.tab_active_text }};
+  }
+
+  .snc-hc--grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .snc-hc--card {
+    background-color: {{ section.settings.card_bg }};
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .snc-hc--card[hidden] {
+    display: none;
+  }
+
+  .snc-hc--icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-bottom: 20px;
+  }
+
+  .snc-hc--card-title {
+    font-family: var(--font-main);
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ section.settings.card_title_color }};
+    margin: 0 0 10px 0;
+  }
+
+  .snc-hc--card-text {
+    font-family: var(--font-main);
+    font-size: 15px;
+    color: {{ section.settings.card_text_color }};
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .snc-hc--card-link {
+    font-family: var(--font-main);
+    font-size: {{ section.settings.link_font_size }}px;
+    font-weight: {{ section.settings.link_font_weight }};
+    color: {{ section.settings.link_text_color }};
+    text-decoration: none;
+    margin-top: {{ section.settings.link_margin_top }}px;
+    display: inline-block;
+    transition: opacity 0.2s ease;
+  }
+
+  .snc-hc--card-link:hover {
+    opacity: 0.7;
+  }
+
+  .snc-hc--card-link span {
+    display: inline-block;
+    padding-bottom: {{ section.settings.link_line_gap }}px;
+    border-bottom: {{ section.settings.link_line_thickness }}px solid {{ section.settings.link_line_color }};
+  }
+
+  @media (max-width: 900px) {
+    .snc-hc--grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .snc-hc--grid {
+      grid-template-columns: 1fr;
+    }
+    .snc-hc--tabs {
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+    .snc-hc--tab {
+      flex-shrink: 0;
+    }
+  }
+</style>
+
+<div class="snc-help-center" data-section-id="{{ section.id }}" data-section-type="snc-help-center">
+  <div class="snc-hc--container">
+    <div class="snc-hc--header">
+      {%- if section.settings.title != blank -%}
+        <h1 class="snc-hc--title">{{ section.settings.title }}</h1>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="snc-hc--description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if tabs.size > 0 -%}
+      <div class="snc-hc--tabs">
+        {%- for tab in tabs -%}
+          <button class="snc-hc--tab {% if forloop.first %}is-active{% endif %}" data-tab-trigger="{{ tab | handleize }}">
+            {{ tab }}
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <div class="snc-hc--grid">
+        {%- for block in section.blocks -%}
+          {%- assign tab_handle = block.settings.tab_category | handleize -%}
+          <div class="snc-hc--card" data-tab-content="{{ tab_handle }}" {% unless tab_handle == first_tab_handle %}hidden{% endunless %} {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != blank -%}
+              <img src="{{ block.settings.icon | image_url: width: 100 }}" alt="" class="snc-hc--icon" loading="lazy">
+            {%- endif -%}
+            
+            {%- if block.settings.title != blank -%}
+              <h3 class="snc-hc--card-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            
+            {%- if block.settings.text != blank -%}
+              <div class="snc-hc--card-text">{{ block.settings.text }}</div>
+            {%- endif -%}
+            
+            {%- if block.settings.link_text != blank and block.settings.link_url != blank -%}
+              <a href="{{ block.settings.link_url }}" class="snc-hc--card-link">
+                <span>{{ block.settings.link_text }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>

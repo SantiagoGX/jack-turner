@@ -1,0 +1,413 @@
+{% schema %}
+{
+  "name": "SNC Scroll Effect",
+  "class": "section--snc-scroll-effect",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración General"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen Superior",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margen Inferior",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Configuración del Botón"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del Botón",
+      "default": "Explore"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del Botón"
+    },
+    {
+      "type": "image_picker",
+      "id": "button_icon",
+      "label": "Icono del botón"
+    },
+    {
+      "type": "range",
+      "id": "button_icon_width",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Ancho del icono",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "button_icon_position",
+      "label": "Posición del icono",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "right"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "scroll_slide",
+      "name": "Bloque de Contenido",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Subtítulo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título Principal"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Descripción del bloque.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "product",
+          "id": "product_link",
+          "label": "Producto (link de la imagen)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Scroll Effect",
+      "blocks": [
+        { "type": "scroll_slide" },
+        { "type": "scroll_slide" },
+        { "type": "scroll_slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  #snc-flex-vertical-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    background-image: url("{{ 'frame-857.png' | asset_url }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: {{ section.settings.margin_top }}px;
+    padding-bottom: {{ section.settings.margin_bottom }}px;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    /* Altura total = 100vh * número de slides */
+    height: {{ section.blocks.size | times: 100 }}vh;
+  }
+
+  .snc-scroll--sticky-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("//cdn.shopify.com/s/files/1/0040/8538/3237/t/25/assets/frame-857.png?v=124861815317418689321771096771");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .snc-scroll--slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.97);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    padding: 0 5%;
+    box-sizing: border-box;
+    will-change: opacity, transform;
+  }
+
+  .snc-scroll--slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+  }
+
+  .snc-scroll--content-inner {
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  .snc-scroll--text-col {
+    flex: 1;
+    max-width: 600px;
+    color: {{ section.settings.text_color }};
+  }
+
+  .snc-scroll--subtitle {
+    font-family: var(--font-main);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: block;
+    opacity: 0.8;
+    color: black;
+  }
+
+  .snc-scroll--title {
+    font-family: var(--font-main);
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+  }
+
+  .snc-scroll--desc {
+    font-family: var(--font-main);
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    opacity: 0.9;
+  }
+
+  .snc-scroll--btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: transparent;
+    color: black;
+    text-decoration: none;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 1px solid #000000;
+    line-height: 1.2;
+  }
+  .snc-scroll--btn:hover {
+    background: black;
+    border-color: black;
+    color: #FFFFFF;
+  }
+  .snc-scroll--btn:hover .snc-scroll--btn-icon{
+    filter: invert(1);
+  }
+  .snc-scroll--btn-icon {
+    display: block;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .snc-scroll--image-col {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .snc-scroll--image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .snc-scroll--image-link {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  @media (max-width: 768px) {
+    .snc-scroll--content-inner {
+      flex-direction: column-reverse;
+      text-align: center;
+      gap: 30px;
+    }
+    .snc-scroll--title {
+      font-size: 28px;
+    }
+    .snc-scroll--image {
+      max-width: 100%;
+      max-height: 40vh;
+    }
+    #snc-flex-vertical-{{ section.id }} {
+      height: auto;
+      padding: 60px 0;
+    }
+    .snc-scroll--sticky-container {
+      position: relative;
+      height: auto;
+      display: block;
+    }
+    .snc-scroll--slide {
+      position: relative;
+      opacity: 1;
+      filter: none;
+      transform: none;
+      height: auto;
+      padding: 40px 20px;
+      margin-bottom: 40px;
+    }
+  }
+</style>
+
+<div id="snc-flex-vertical-{{ section.id }}">
+  <div class="snc-scroll--sticky-container">
+    {% for block in section.blocks %}
+      <div class="snc-scroll--slide {% if forloop.first %}is-active{% endif %}" data-index="{{ forloop.index0 }}">
+        <div class="snc-scroll--content-inner">
+          <div class="snc-scroll--text-col">
+            {% if block.settings.subtitle != blank %}
+              <span class="snc-scroll--subtitle">{{ block.settings.subtitle }}</span>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <h2 class="snc-scroll--title">{{ block.settings.title }}</h2>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="snc-scroll--desc">{{ block.settings.text }}</div>
+            {% endif %}
+            {% if section.settings.button_label != blank %}
+              {%- assign _btn_href = section.settings.button_link -%}
+              {%- if block.settings.product_link != blank -%}
+                {%- assign _btn_href = block.settings.product_link.url -%}
+              {%- endif -%}
+              <a href="{{ _btn_href }}" class="snc-scroll--btn">
+                {%- assign icon_style = 'width: ' | append: section.settings.button_icon_width | append: 'px;' -%}
+                {% if section.settings.button_icon != blank and section.settings.button_icon_position == 'left' %}
+                  {{ section.settings.button_icon | image_url: width: 100 | image_tag: class: 'snc-scroll--btn-icon', style: icon_style }}
+                {% endif %}
+                <span>{{ section.settings.button_label }}</span>
+                {% if section.settings.button_icon != blank and section.settings.button_icon_position == 'right' %}
+                  {{ section.settings.button_icon | image_url: width: 100 | image_tag: class: 'snc-scroll--btn-icon', style: icon_style }}
+                {% endif %}
+              </a>
+            {% endif %}
+          </div>
+          <div class="snc-scroll--image-col">
+            {% if block.settings.image != blank %}
+              {%- assign img_loading = forloop.first | default: false -%}
+              {%- if img_loading %}{% assign img_loading = 'eager' %}{% else %}{% assign img_loading = 'lazy' %}{%- endif -%}
+              {%- if block.settings.product_link != blank -%}
+                <a class="snc-scroll--image-link" href="{{ block.settings.product_link.url }}">
+                  {{ block.settings.image | image_url: width: 800 | image_tag: class: 'snc-scroll--image', loading: img_loading }}
+                </a>
+              {%- else -%}
+                {{ block.settings.image | image_url: width: 800 | image_tag: class: 'snc-scroll--image', loading: img_loading }}
+              {%- endif -%}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'snc-scroll--image' }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('snc-flex-vertical-{{ section.id }}');
+    if (!section) return;
+    if (window.innerWidth <= 768) return;
+
+    const slides = section.querySelectorAll('.snc-scroll--slide');
+    const slideCount = slides.length;
+
+    // Cache sectionHeight — read once, not on every scroll tick
+    let sectionHeight = section.offsetHeight;
+    let rafPending = false;
+    let lastActiveIndex = 0;
+
+    window.addEventListener('resize', () => {
+      sectionHeight = section.offsetHeight;
+    }, { passive: true });
+
+    window.addEventListener('scroll', () => {
+      if (rafPending) return;
+      rafPending = true;
+
+      requestAnimationFrame(() => {
+        rafPending = false;
+
+        const rect = section.getBoundingClientRect();
+        const scrollDistance = sectionHeight - window.innerHeight;
+        if (scrollDistance <= 0) return;
+
+        let progress = -rect.top / scrollDistance;
+        if (progress < 0) progress = 0;
+        if (progress > 1) progress = 1;
+
+        let activeIndex = Math.floor(progress * slideCount);
+        if (activeIndex >= slideCount) activeIndex = slideCount - 1;
+
+        if (activeIndex === lastActiveIndex) return;
+        lastActiveIndex = activeIndex;
+
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('is-active', index === activeIndex);
+        });
+      });
+    }, { passive: true });
+  });
+</script>

@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "main": {
+      "type": "snc-article",
+      "settings": {
+        "max_width": 760,
+        "margin_top": 60,
+        "margin_bottom": 80,
+        "show_author": true,
+        "show_date": true,
+        "show_share_buttons": true,
+        "show_tags": true,
+        "title_color": "#000000",
+        "meta_color": "#666666",
+        "text_color": "#333333",
+        "accent_color": "#000000",
+        "image_radius": 12
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

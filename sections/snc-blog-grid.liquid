@@ -1,0 +1,397 @@
+{% comment %}
+  Blog listing grid with an editorial layout (variable card spans).
+  Designed for templates/blog.json but can be reused elsewhere.
+{% endcomment %}
+
+{%- liquid
+  assign blog_obj = blog
+  if section.settings.blog != blank
+    assign blog_obj = blogs[section.settings.blog]
+  endif
+
+  assign limit = section.settings.limit | default: 7
+  assign count = 0
+  if blog_obj != blank
+    assign count = blog_obj.articles.size
+    if count > limit
+      assign count = limit
+    endif
+  endif
+-%}
+
+<section
+  class="snc-blog-grid"
+  style="
+    --snc-blog-max-width: {{ section.settings.max_width }}px;
+    --snc-blog-padding-top: {{ section.settings.padding_top }}px;
+    --snc-blog-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --snc-blog-title-color: {{ section.settings.title_color }};
+    --snc-blog-meta-color: {{ section.settings.meta_color }};
+    --snc-blog-text-color: {{ section.settings.text_color }};
+    --snc-blog-card-radius: {{ section.settings.card_radius }}px;
+    --snc-blog-image-radius: {{ section.settings.image_radius }}px;
+  "
+>
+  <div class="snc-blog-grid__inner">
+    <header class="snc-blog-grid__header">
+      {%- if section.settings.title != blank -%}
+        <h1 class="snc-blog-grid__title">{{ section.settings.title | escape }}</h1>
+      {%- else -%}
+        <h1 class="snc-blog-grid__title">{{ blog_obj.title | default: 'Blog' | escape }}</h1>
+      {%- endif -%}
+    </header>
+
+    <div class="snc-blog-grid__grid">
+      {%- if blog_obj != blank and blog_obj.articles.size > 0 -%}
+        {%- for article in blog_obj.articles limit: limit -%}
+          {%- assign index = forloop.index0 -%}
+          {%- assign grid_class = 'span-2' -%}
+
+          {%- if count == 3 -%}
+            {%- assign grid_class = 'span-2' -%}
+          {%- elsif count == 4 -%}
+            {%- if index == 0 -%}
+              {%- assign grid_class = 'span-4' -%}
+            {%- elsif index == 1 -%}
+              {%- assign grid_class = 'span-2' -%}
+            {%- elsif index == 2 -%}
+              {%- assign grid_class = 'span-2' -%}
+            {%- elsif index == 3 -%}
+              {%- assign grid_class = 'span-4' -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- assign cycle_index = index | modulo: 7 -%}
+            {%- case cycle_index -%}
+              {%- when 0 -%}{%- assign grid_class = 'span-4' -%}
+              {%- when 1 -%}{%- assign grid_class = 'span-2' -%}
+              {%- when 2 -%}{%- assign grid_class = 'span-2' -%}
+              {%- when 3 -%}{%- assign grid_class = 'span-2' -%}
+              {%- when 4 -%}{%- assign grid_class = 'span-2' -%}
+              {%- when 5 -%}{%- assign grid_class = 'span-3' -%}
+              {%- when 6 -%}{%- assign grid_class = 'span-3' -%}
+            {%- endcase -%}
+          {%- endif -%}
+
+          <a href="{{ article.url }}" class="snc-blog-card {{ grid_class }}">
+            <div class="snc-blog-card__image-wrapper">
+              {%- if article.image -%}
+                {{
+                  article.image
+                  | image_url: width: 1400
+                  | image_tag:
+                    loading: 'lazy',
+                    class: 'snc-blog-card__image',
+                    sizes: '(min-width: 990px) 50vw, 100vw'
+                }}
+              {%- endif -%}
+            </div>
+
+            <div class="snc-blog-card__content">
+              <div class="snc-blog-card__meta">{{ article.published_at | date: '%b %d, %Y' }}</div>
+              <h2 class="snc-blog-card__title">{{ article.title | escape }}</h2>
+              <div class="snc-blog-card__excerpt">
+                {{ article.excerpt_or_content | strip_html | truncatewords: section.settings.excerpt_words }}
+              </div>
+              <span class="snc-blog-card__link">{{ section.settings.read_more_label | escape }}</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <p class="snc-blog-grid__empty">{{ section.settings.empty_text | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .snc-blog-grid {
+    padding-top: calc(var(--snc-blog-padding-top) + var(--custom-header-total-height, 0px));
+    padding-bottom: var(--snc-blog-padding-bottom);
+  }
+
+  .snc-blog-grid__inner {
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: var(--snc-blog-max-width);
+    box-sizing: border-box;
+  }
+
+  .snc-blog-grid__header {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .snc-blog-grid__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    color: var(--snc-blog-title-color);
+    font-weight: 500;
+  }
+
+  .snc-blog-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+
+  .snc-blog-card.span-2 {
+    grid-column: span 2;
+  }
+
+  .snc-blog-card.span-3 {
+    grid-column: span 3;
+  }
+
+  .snc-blog-card.span-4 {
+    grid-column: span 4;
+  }
+
+  .snc-blog-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: #ffffff;
+    border-radius: var(--snc-blog-card-radius);
+    padding: 13px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .snc-blog-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  }
+
+  .snc-blog-card__image-wrapper {
+    width: 100%;
+    height: 300px;
+    border-radius: var(--snc-blog-image-radius);
+    overflow: hidden;
+    margin-bottom: 18px;
+    background: #f3f3f3;
+  }
+
+  .snc-blog-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+  }
+
+  .snc-blog-card:hover .snc-blog-card__image {
+    transform: scale(1.1);
+  }
+
+  .snc-blog-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 10px 16px;
+  }
+
+  .snc-blog-card__meta {
+    font-family: var(--font-body-family);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--snc-blog-meta-color);
+  }
+
+  .snc-blog-card__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--snc-blog-title-color);
+    font-weight: 500;
+  }
+
+  .snc-blog-card__excerpt {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--snc-blog-text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .snc-blog-card__link {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--snc-blog-title-color);
+    text-decoration: underline;
+    margin-top: 4px;
+    text-underline-offset: 4px;
+  }
+
+  .snc-blog-grid__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: var(--font-body-family);
+    color: var(--snc-blog-meta-color);
+    margin: 40px 0;
+  }
+
+  @media (max-width: 768px) {
+    .snc-blog-grid__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .snc-blog-card.span-2,
+    .snc-blog-card.span-3,
+    .snc-blog-card.span-4 {
+      grid-column: span 1;
+    }
+
+    .snc-blog-card__image-wrapper {
+      height: 240px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SNC Blog Grid",
+  "class": "section--snc-blog-grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title override",
+      "default": "Journal"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog (optional)",
+      "info": "Leave empty to use the current blog from the template."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 3,
+      "max": 100,
+      "step": 1,
+      "label": "Number of articles",
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "excerpt_words",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "label": "Excerpt words",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "read_more_label",
+      "label": "Read more label",
+      "default": "Read more"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty state text",
+      "default": "No articles found."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 420,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Max width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "meta_color",
+      "label": "Meta color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Card radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Image radius",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Blog Grid"
+    }
+  ]
+}
+{% endschema %}

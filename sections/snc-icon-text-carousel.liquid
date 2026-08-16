@@ -1,0 +1,355 @@
+{%- liquid
+  assign static_icon = section.settings.icon
+  assign static_title = section.settings.static_title
+  assign slides = section.blocks
+-%}
+
+{% schema %}
+{
+  "name": "SNC Icon Text Carousel",
+  "class": "section--snc-icon-text-carousel",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icono estático"
+    },
+    {
+      "type": "text",
+      "id": "static_title",
+      "label": "Título estático",
+      "default": "Nuestros Valores"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de texto",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Posición de la imagen",
+      "options": [
+        {
+          "value": "right",
+          "label": "Derecha"
+        },
+        {
+          "value": "left",
+          "label": "Izquierda"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "checkbox",
+      "id": "parallax_enabled",
+      "label": "Activar efecto parallax",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "parallax_intensity",
+      "min": 0,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Intensidad del parallax",
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Diapositiva",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título dinámico",
+          "default": "Título de la Diapositiva"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Párrafo dinámico",
+          "default": "<p>Descripción de la diapositiva que cambia con la imagen.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Icon Text Carousel",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .snc-itc--root {
+    display: flex;
+    gap: 60px;
+    width: calc(100% - 40px);
+    margin: 60px auto;
+    padding: 60px;
+    align-items: stretch;
+    background-color: {{ section.settings.background_color }};
+    border-radius: 20px;
+    box-sizing: border-box;
+    color: {{ section.settings.text_color }};
+  }
+
+  .snc-itc--root.is-reversed {
+    flex-direction: row-reverse;
+  }
+
+  .snc-itc--left-col {
+    flex: 0 0 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .snc-itc--static-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 0;
+  }
+
+  .snc-itc--static-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .snc-itc--static-title {
+    font-family: var(--font-typos, 'TyposLab', serif);
+    font-size: 24px;
+    color: currentColor;
+    margin: 0;
+  }
+
+  .snc-itc--dynamic-content {
+    position: relative;
+    min-height: 150px; /* To avoid layout shift */
+  }
+
+  .snc-itc--text-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  }
+
+  .snc-itc--text-slide.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .snc-itc--dynamic-title {
+    font-family: var(--font-typos, 'TyposLab', serif);
+    font-size: 32px;
+    color: currentColor;
+    margin: 0 0 15px 0;
+  }
+
+  .snc-itc--dynamic-text {
+    font-family: var(--font-nunito, 'NunitoSans', sans-serif);
+    font-size: 16px;
+    line-height: 1.6;
+    color: currentColor;
+  }
+  .snc-itc--dynamic-text p { margin: 0; }
+
+  .snc-itc--right-col {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .snc-itc--carousel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 600px;
+  }
+
+  .snc-itc--image-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+
+  .snc-itc--image-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    {% if section.settings.parallax_enabled %}
+      height: calc(100% + {{ section.settings.parallax_intensity | default: 100 }}px); /* Extra height for movement */
+      position: relative;
+      top: -{{ section.settings.parallax_intensity | default: 100 | divided_by: 2 }}px; /* Center the oversized image */
+      will-change: transform;
+      transition: transform 0.1s linear;
+    {% endif %}
+  }
+
+  /* Slide States */
+  .snc-itc--image-slide.is-active {
+    opacity: 1;
+    z-index: 2;
+    transform: scale(1);
+  }
+
+  .snc-itc--image-slide:not(.is-active) {
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 990px) {
+    .snc-itc--root {
+      flex-direction: column;
+    }
+    .snc-itc--left-col {
+      flex-basis: auto;
+    }
+    .snc-itc--carousel-wrapper {
+      height: 450px;
+    }
+  }
+
+  .snc-itc--navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  .snc-itc--arrow {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid {{ section.settings.text_color }};
+    background: transparent;
+    color: {{ section.settings.text_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .snc-itc--arrow:hover {
+    background: {{ section.settings.text_color }};
+    color: {{ section.settings.background_color }};
+  }
+
+  .snc-itc--pagination {
+    display: flex;
+    gap: 8px;
+  }
+
+  .snc-itc--dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: currentColor;
+    opacity: 0.3;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+
+  .snc-itc--dot.is-active {
+    opacity: 1;
+  }
+</style>
+
+<div class="snc-itc--root{% if section.settings.image_position == 'left' %} is-reversed{% endif %}" data-section-id="{{ section.id }}" data-section-type="snc-icon-text-carousel" data-parallax-enabled="{{ section.settings.parallax_enabled }}" data-parallax-intensity="{{ section.settings.parallax_intensity | default: 100 }}">
+  <div class="snc-itc--left-col">
+    <div class="snc-itc--static-header">
+      {%- if static_icon != blank -%}
+        <img 
+          src="{{ static_icon | image_url: width: 50 }}" 
+          alt="{{ static_icon.alt | escape }}"
+          class="snc-itc--static-icon"
+          width="40" height="40"
+          loading="lazy"
+        >
+      {%- endif -%}
+      {%- if static_title != blank -%}
+        <h2 class="snc-itc--static-title">{{ static_title | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="snc-itc--dynamic-content" data-text-container>
+      {%- for block in slides -%}
+        <div class="snc-itc--text-slide {% if forloop.first %}is-active{% endif %}" data-text-for="{{ block.id }}">
+          <h3 class="snc-itc--dynamic-title">{{ block.settings.title | escape }}</h3>
+          <div class="snc-itc--dynamic-text rte">{{ block.settings.text }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="snc-itc--navigation">
+      <button class="snc-itc--arrow" data-prev aria-label="Anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="snc-itc--pagination" data-pagination></div>
+      <button class="snc-itc--arrow" data-next aria-label="Siguiente">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="snc-itc--right-col">
+    {%- if slides.size > 0 -%}
+      <div class="snc-itc--carousel-wrapper" data-carousel-wrapper>
+        {%- for block in slides -%}
+          <div class="snc-itc--image-slide" data-image-id="{{ block.id }}">
+            {%- if block.settings.image != blank -%}
+              <img 
+                src="{{ block.settings.image | image_url: width: 1000 }}" 
+                alt="{{ block.settings.image.alt | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p>Agrega diapositivas para ver el carrusel.</p>
+    {%- endif -%}
+  </div>
+</div>

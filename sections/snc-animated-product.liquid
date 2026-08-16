@@ -1,0 +1,426 @@
+{% schema %}
+{
+  "name": "SNC Animated Product",
+  "class": "section--snc-animated-product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenido"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Producto Destacado"
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "Estilo del Título",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto / Párrafo"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Estilo del Texto",
+      "options": [
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "h3", "label": "Títulos pequeños" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "min": 200,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho del párrafo",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "header_gap",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Espacio entre encabezado y producto",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Producto"
+    },
+    {
+      "type": "range",
+      "id": "image_limit",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Cantidad de imágenes a mostrar",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Estilo del Producto"
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño título producto (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "product_title_size_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño título producto (Móvil)",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Color título producto",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "product_title_transform",
+      "label": "Transformación título producto",
+      "options": [
+        { "value": "none", "label": "Normal" },
+        { "value": "uppercase", "label": "Mayúsculas" },
+        { "value": "lowercase", "label": "Minúsculas" },
+        { "value": "capitalize", "label": "Capitalizar" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Estilo de Imágenes"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Altura de imagen (Desktop)",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "min": 150,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Altura de imagen (Móvil)",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Redondeo de bordes de imagen",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Espacio entre imágenes",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Ver producto"
+    },
+    {
+      "type": "select",
+      "id": "button_preset",
+      "label": "Estilo de Botón",
+      "options": [
+        { "value": "1", "label": "Preset 1" },
+        { "value": "2", "label": "Preset 2" },
+        { "value": "3", "label": "Preset 3" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Superior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Inferior",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Producto",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Producto"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Título personalizado"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto del botón (Opcional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Animated Product",
+      "category": "Animated"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .snc-animated-product {
+    position: relative;
+    width: 100%;
+    /* La altura se define inline según la cantidad de bloques */
+  }
+  
+  .snc-animated-product__sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    text-align: center;
+  }
+
+  .snc-animated-product__header { margin-bottom: {{ section.settings.header_gap }}px; padding: 0 20px; }
+  .snc-animated-product__title { margin: 0 0 15px; }
+  .snc-animated-product__text { max-width: {{ section.settings.text_width }}px; margin: 0 auto; }
+  
+  .snc-animated-product__slides {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .snc-animated-product__content { 
+    grid-area: 1 / 1;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px; 
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+
+  .snc-animated-product__content.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+  
+  .snc-animated-product__content:not(.is-active) {
+    transform: scale(0.95);
+  }
+  
+  .snc-animated-product__name {
+    font-size: {{ section.settings.product_title_size }}px;
+    color: {{ section.settings.product_title_color }};
+    text-transform: {{ section.settings.product_title_transform }};
+    line-height: 1.1; margin: 0; font-weight: 700;
+  }
+  .snc-animated-product__content a {
+    font-size: {{ settings.button_size }}px;
+    text-transform: {{ settings.button_transform }};
+  }
+  
+  .snc-animated-product__gallery { display: flex; gap: {{ section.settings.image_gap }}px; width: 100%; overflow-x: auto; padding: 0 20px; margin-top: 20px; scrollbar-width: none; }
+  .snc-animated-product__gallery::-webkit-scrollbar { display: none; }
+  .snc-animated-product__image { flex: 1; width: auto; min-width: 0; height: {{ section.settings.image_height }}px; border-radius: {{ section.settings.image_border_radius }}px; object-fit: cover; }
+  
+  @media (max-width: 768px) {
+    .snc-animated-product__name { font-size: {{ section.settings.product_title_size_mobile }}px; }
+    .snc-animated-product__image { height: {{ section.settings.image_height_mobile }}px; }
+  }
+</style>
+
+{% assign scroll_height = section.blocks.size | times: 100 %}
+{% if section.blocks.size == 0 %}{% assign scroll_height = 100 %}{% endif %}
+
+<div class="snc-animated-product color-{{ section.settings.color_scheme }}" style="height: {{ scroll_height }}vh;">
+  <div class="snc-animated-product__sticky-container">
+    <div class="snc-animated-product__header">
+      {% if section.settings.title != blank %}<h2 class="snc-animated-product__title {{ section.settings.title_style }}">{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<div class="snc-animated-product__text {{ section.settings.text_style }}">{{ section.settings.text }}</div>{% endif %}
+    </div>
+
+    <div class="snc-animated-product__slides">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign product = block.settings.product %}
+          {% assign btn_text = block.settings.button_label | default: section.settings.button_label %}
+          
+          <div class="snc-animated-product__content {% if forloop.first %}is-active{% endif %}" {{ block.shopify_attributes }}>
+            {% if product != blank %}
+              <h3 class="snc-animated-product__name">{{ block.settings.custom_title | default: product.title }}</h3>
+              
+              {% if btn_text != blank %}
+                <a href="{{ product.url }}" class="btn-preset-{{ section.settings.button_preset }}">{{ btn_text }}</a>
+              {% endif %}
+
+              <div class="snc-animated-product__gallery">
+                {% for image in product.images limit: section.settings.image_limit %}
+                  {{ image | image_url: width: 600 | image_tag: class: 'snc-animated-product__image', loading: 'lazy' }}
+                {% endfor %}
+              </div>
+            {% else %}
+              <h3 class="snc-animated-product__name">Producto {{ forloop.index }}</h3>
+              <a href="#" class="btn-preset-{{ section.settings.button_preset }}">{{ btn_text | default: 'Ver producto' }}</a>
+              <div class="snc-animated-product__gallery">
+                {{ 'product-1' | placeholder_svg_tag: 'snc-animated-product__image' }}
+                {{ 'product-2' | placeholder_svg_tag: 'snc-animated-product__image' }}
+                {{ 'product-3' | placeholder_svg_tag: 'snc-animated-product__image' }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="snc-animated-product__content is-active">
+          <h3 class="snc-animated-product__name">Agrega bloques de producto</h3>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('#shopify-section-{{ section.id }} .snc-animated-product');
+    const slides = section.querySelectorAll('.snc-animated-product__content');
+    const totalSlides = slides.length;
+    const stickyContainer = section.querySelector('.snc-animated-product__sticky-container');
+    const stickyHeader = stickyContainer ? stickyContainer.querySelector('.snc-animated-product__header') : null;
+    const headerGapValue = {{ section.settings.header_gap | default: 40 }};
+    const paddingTopValue = {{ section.settings.padding_top | default: 60 }};
+    const paddingBottomValue = {{ section.settings.padding_bottom | default: 60 }};
+
+    function adjustAnimatedProductHeight() {
+      if (!section || !stickyContainer || slides.length === 0) return;
+      stickyContainer.style.height = 'auto';
+      const viewportHeight = window.innerHeight || 0;
+      const headerHeight = stickyHeader ? stickyHeader.offsetHeight : 0;
+      let maxSlideHeight = 0;
+      slides.forEach(slide => {
+        maxSlideHeight = Math.max(maxSlideHeight, slide.scrollHeight);
+      });
+      const totalPadding = paddingTopValue + paddingBottomValue;
+      const requiredContentHeight = Math.max(viewportHeight - totalPadding, headerHeight + headerGapValue + maxSlideHeight, 0);
+      const stickyHeight = requiredContentHeight + totalPadding;
+      const sectionHeight = stickyHeight * slides.length;
+      stickyContainer.style.height = `${stickyHeight}px`;
+      section.style.height = `${sectionHeight}px`;
+    }
+
+    adjustAnimatedProductHeight();
+    window.addEventListener('resize', adjustAnimatedProductHeight, { passive: true });
+    window.addEventListener('load', adjustAnimatedProductHeight);
+
+    if (totalSlides > 1) {
+      window.addEventListener('scroll', () => {
+        const rect = section.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const totalHeight = rect.height - viewportHeight;
+        
+        if (totalHeight > 0) {
+          // Calcular progreso basado en cuánto de la sección ha pasado el top del viewport
+          let progress = -rect.top / totalHeight;
+          progress = Math.max(0, Math.min(1, progress));
+          
+          // Determinar índice activo
+          const activeIndex = Math.min(Math.floor(progress * totalSlides), totalSlides - 1);
+          
+          slides.forEach((slide, index) => {
+            if (index === activeIndex) {
+              slide.classList.add('is-active');
+            } else {
+              slide.classList.remove('is-active');
+            }
+          });
+        }
+      }, { passive: true });
+    }
+  });
+</script>

@@ -1,0 +1,267 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "snc_info_hero_NJbGc6": {
+      "type": "snc-info-hero",
+      "name": "SNC Info Hero",
+      "settings": {
+        "image": "shopify://shop_images/image_50_1.png",
+        "margin_top": 0,
+        "height_vh": 50,
+        "title": "Rastrea tu pedido",
+        "subtitle": "",
+        "overlay_type": "gradient",
+        "gradient_direction": "to top",
+        "overlay_color": "#000000",
+        "overlay_opacity": 100,
+        "full_width": true,
+        "border_radius": 0,
+        "content_vertical_position": "flex-end",
+        "content_horizontal_position": "flex-start",
+        "text_alignment": "left",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "snc_custom_content_text_3yFiGf": {
+      "type": "snc-custom-content-text",
+      "blocks": {
+        "text_94qda4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ingresa tus datos para conocer más sobre tu pedido y la información de seguimiento.<br/></p>",
+            "color": "#000000",
+            "font_size": 22,
+            "font_size_mobile": 16,
+            "font_weight": 700,
+            "margin_bottom": 15,
+            "text_max_width": 500
+          }
+        }
+      },
+      "block_order": [
+        "text_94qda4"
+      ],
+      "name": "SNC Custom Content Text",
+      "settings": {
+        "margin_top": 60,
+        "margin_bottom": 60,
+        "max_width": 800,
+        "alignment": "center"
+      }
+    },
+    "1767235374b2d2071f": {
+      "type": "apps",
+      "settings": {}
+    },
+    "snc_apps_EiaGd6": {
+      "type": "snc-apps",
+      "name": "SNC Apps",
+      "settings": {
+        "text_color": "text--neutral",
+        "bg": "palette--light bg--neutral",
+        "width": "wrapper",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "main": {
+      "type": "snc-faq",
+      "blocks": {
+        "faq_item_Kg6QNg": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Cuánto cuesta el envío?",
+            "content": "<p>🚚 Envío Asegurado Estándar (3 a 7 días): $99. Ofrecemos envío Gratis en compras mínimas a $1,548</p>"
+          }
+        },
+        "faq_item_giQMJG": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Cuánto tarda en llegar mi pedido?",
+            "content": "<p>Tu pedido llega en un plazo estimado de 2 a 5 días hábiles, dependiendo de tu ubicación y del tipo de envío seleccionado.<br/><br/><strong>Envío Estándar o Gratis</strong>• Ciudades principales: 1 a 3 días hábiles<br/>• Resto del país: 3 a 7 días hábiles<br/>• Procesamos pedidos lunes, miércoles y viernes antes de las 12:00 p.m.<br/><br/><strong>Envío Exprés</strong>• Ciudades principales: 24 horas<br/>• Resto del país: 1 a 3 días hábiles<br/>• Pedidos confirmados antes de las 12:00 p.m. se procesan el mismo día.</p>"
+          }
+        },
+        "faq_item_QYhm6b": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Cómo vienen las tallas?",
+            "content": "<p>Nuestras tallas vienen con medidas exactas y alta precisión. No usamos tallas genéricas ni amplias. La talla adecuada para ti depende de tus medidas y del tipo de tela del producto:<br/><br/><strong>Supplex:</strong>tejido de alta elasticidad, se adapta más fácilmente.<br/><br/><strong>Seamless:</strong>tejido de elasticidad media, con ajuste más compresivo.</p>"
+          }
+        },
+        "faq_item_3MY3B4": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Cómo debo cuidar las prendas?",
+            "content": "<ul><li>Lava a mano o en ciclo delicado.</li><li>No uses cloro ni suavizantes.</li><li>Seca a la sombra.</li><li>No planches.</li><li>No mezcles con prendas ásperas o abrasivas.</li></ul>"
+          }
+        },
+        "faq_item_iXMMyG": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Cuál es su política de devoluciones?",
+            "content": "<p>Pasos para solicitar tu cambio:<br/><br/>1.- Envía un correo a <a href=\"mailto:ayuda@adrianaolimpo.com\" title=\"mailto:ayuda@adrianaolimpo.com\"><strong>ayuda@adrianaolimpo.com</strong></a><strong> </strong>con asunto DEVOLUCIÓN + tu número de pedido.<br/><br/>2.- Indícanos las prendas a regresar, un breve motivo del cambio y el número de guía con el cual viajará tu paquete.<br/><br/>– Dirección de destino:<br/>Adriana Yeraldín Martínez Montaño<br/>Arroyo de Cuquiarachic 35, Río Grande Residencial, acceso 297<br/>CP 83288, Hermosillo, Sonora<br/>Teléfono 662 152 8726<br/><br/><br/>Si prefieres que Adriana Olimpo gestione la guía de devolución, realice una transferencia de 99 pesos y adjunte la fotografía del comprobante (concepto: tu nombre).<br/><br/>Banco: Mercado Pago<br/>CLABE: 722969010148302448<br/>Titular: Adriana Olimpo<br/><br/>– Recibirás una guía Estafeta, DHL o FedEx en un plazo no mayor a 72 horas, con vigencia de 7 días naturales.<br/>– Lleva el paquete a la sucursal indicada dentro de ese plazo.<br/>– No es posible elegir la paquetería ni solicitar recolección a domicilio.<br/><br/><br/>Confirmación y Monedero electrónico:<br/><br/>– Cuando la prenda llegue y pase la inspección, recibirás un monedero electrónico por el valor total de la prenda en un máximo de 72 horas hábiles.<br/>– No realizamos reposición del mismo modelo debido a la rotación constante de inventario.<br/>– Sin devoluciones en efectivo: la compensación se emite solamente en monedero electrónico, sin caducidad.</p>"
+          }
+        },
+        "faq_item_GzAQkE": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Es segura la compra?",
+            "content": "<p>Claro, todas tus transacciones están 100% seguras y encriptadas.Trabajamos con pasarelas de pago confiables y certificadas, por lo que tus datos siempre están protegidos.</p>"
+          }
+        },
+        "faq_item_iPTLnx": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿En qué ciudad están?",
+            "content": "<p>Nos encontramos en Hermosillo, Sonora, México.</p>"
+          }
+        },
+        "faq_item_7UJGz9": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Qué métodos de pago aceptan? ¿Dan meses sin intereses?",
+            "content": "<p>Comprando desde nuestra tienda en línea, puedes pagar de forma segura con:<br/><br/>•<strong>Tarjeta de crédito o débito• PayPal• KueskiPay• Aplazo• Meses sin intereses (MSI)</strong>Solo entra a adrianaolimpo.com, elige tus modelos favoritos, agrégalos al carrito y realiza tu pago directamente desde la página.<br/><br/>Comprando por chat, también puedes pagar de forma segura con:<br/><br/>• Transferencia bancaria<br/>• Depósito en Oxxo<br/>• PayPal<br/>• Pago con tarjeta mediante enlace seguro<br/><br/>Solo envíame las fotos o nombres de los modelos que te gustaron; te pediré tus datos de envío y te compartiré el método de pago que prefieras 🖤<br/><br/>En cualquiera de las dos opciones tu compra es segura, verificada y respaldada por nuestro sistema de pedidos ✨</p>"
+          }
+        },
+        "faq_item_rkX3zz": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Cada cuánto suben modelos nuevos?",
+            "content": "<p>Nos mantenemos en constante innovación, subimos modelos nuevos hasta 4 veces por semana<br/><br/><strong>Línea Súplex</strong>(edición especial y limitada)<br/>Estas piezas no tienen restock. Una vez que se agotan, no vuelven a producirse exactamente iguales.<br/>Aun así, solemos lanzar modelos muy similares (mismo color, acabado o estilo), por lo que te recomiendo revisar nuestra tienda con frecuencia. Subimos novedades hasta 4 veces por semana ✨<br/><br/><strong>Línea Seamless</strong>(Santoni)<br/>En esta línea sí puedes recibir notificación cuando la talla o el modelo vuelva a estar disponible.<br/>Solo necesitas hacer lo siguiente👇<br/><br/>Entra al producto.<br/><br/>Selecciona la talla que está agotada.<br/><br/>Ingresa tu correo “Notificarme cuando esté disponible” <br/><br/>En cuanto tengamos restock, te llegará un aviso automático.<br/></p>"
+          }
+        },
+        "faq_item_iLBNWk": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Que son los Olimpo puntos?",
+            "content": "<p>Es nuestro sistema de recompensas para clientas registradas. Cada compra o interacción te suma puntos que puedes canjear por descuentos en futuras compras. <br/><br/>Puedes aprender más haciendo clic aquí: <a href=\"https://www.adrianaolimpo.com/pages/acerca-de-nosotros?view=olimpo-puntos\" title=\"https://www.adrianaolimpo.com/pages/acerca-de-nosotros?view=olimpo-puntos\">Olimpo Puntos</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_Kg6QNg",
+        "faq_item_giQMJG",
+        "faq_item_QYhm6b",
+        "faq_item_3MY3B4",
+        "faq_item_iXMMyG",
+        "faq_item_GzAQkE",
+        "faq_item_iPTLnx",
+        "faq_item_7UJGz9",
+        "faq_item_rkX3zz",
+        "faq_item_iLBNWk"
+      ],
+      "settings": {
+        "title": "FAQ's",
+        "section_title_color": "#000000",
+        "section_title_size": 32,
+        "section_title_weight": 700,
+        "section_title_margin_bottom": 35,
+        "description": "",
+        "section_desc_color": "#666666",
+        "section_desc_size": 16,
+        "section_desc_weight": 400,
+        "section_desc_margin_bottom": 40,
+        "header_alignment": "center",
+        "max_width": 800,
+        "margin_top": 65,
+        "margin_bottom": 100,
+        "item_padding_vertical": 20,
+        "item_padding_horizontal": 20,
+        "gap": 10,
+        "border_radius": 8,
+        "border_width": 1,
+        "border_color": "#e5e5e5",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "title_font_size": 18,
+        "title_font_weight": 600,
+        "content_color": "#666666",
+        "content_font_size": 16
+      }
+    },
+    "snc_custom_content_text_chaq79": {
+      "type": "snc-custom-content-text",
+      "blocks": {
+        "text_6jQtrx": {
+          "type": "text",
+          "settings": {
+            "text": "<p>¿Necesitas ayuda? </p>",
+            "color": "#000000",
+            "font_size": 48,
+            "font_size_mobile": 16,
+            "font_weight": 700,
+            "margin_bottom": 15,
+            "text_max_width": 800
+          }
+        },
+        "text_cfx9Qy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Visita nuestro Centro de Ayuda para ver más preguntas frecuentes o contacta a nuestro equipo de atención al cliente.</p>",
+            "color": "#4f4f4f",
+            "font_size": 16,
+            "font_size_mobile": 16,
+            "font_weight": 400,
+            "margin_bottom": 15,
+            "text_max_width": 460
+          }
+        },
+        "buttons_86Fcrz": {
+          "type": "buttons",
+          "settings": {
+            "btn1_text": "Centro de ayuda",
+            "btn1_link": "",
+            "btn1_bg_color": "#000000",
+            "btn1_text_color": "#ffffff",
+            "btn1_font_size": 16,
+            "btn1_font_weight": 400,
+            "btn1_padding_v": 12,
+            "btn1_padding_h": 24,
+            "btn1_border_radius": 50,
+            "btn2_text": "",
+            "btn2_link": "",
+            "btn2_bg_color": "#ffffff",
+            "btn2_text_color": "#2a4432",
+            "btn2_border_color": "#2a4432",
+            "btn2_border_width": 1,
+            "btn2_font_size": 16,
+            "btn2_font_weight": 700,
+            "btn2_padding_v": 12,
+            "btn2_padding_h": 24,
+            "btn2_border_radius": 4,
+            "gap": 15
+          }
+        }
+      },
+      "block_order": [
+        "text_6jQtrx",
+        "text_cfx9Qy",
+        "buttons_86Fcrz"
+      ],
+      "name": "SNC Custom Content Text",
+      "settings": {
+        "margin_top": 60,
+        "margin_bottom": 185,
+        "max_width": 800,
+        "alignment": "center"
+      }
+    }
+  },
+  "order": [
+    "snc_info_hero_NJbGc6",
+    "snc_custom_content_text_3yFiGf",
+    "1767235374b2d2071f",
+    "snc_apps_EiaGd6",
+    "main",
+    "snc_custom_content_text_chaq79"
+  ]
+}

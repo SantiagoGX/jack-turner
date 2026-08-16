@@ -1,0 +1,121 @@
+{%- comment -%}
+  Section: Custom Liquid
+  Permite a los comerciantes agregar bloques de código Liquid/HTML/JS personalizados.
+{%- endcomment -%}
+
+{%- liquid
+  assign full_width = section.settings.full_width
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+-%}
+
+<style>
+  .snc-custom-liquid-section-{{ section.id }} {
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+    margin-top: {{ margin_top }}px;
+    margin-bottom: {{ margin_bottom }}px;
+    box-sizing: border-box;
+  }
+
+  .snc-custom-liquid-container-{{ section.id }} {
+    width: 100%;
+    margin: 0 auto;
+    {% unless full_width %}
+      max-width: var(--max-page-width, 110rem);
+      padding-left: var(--min-page-margin, 20px);
+      padding-right: var(--min-page-margin, 20px);
+    {% endunless %}
+  }
+
+  .snc-custom-liquid-block {
+    margin-bottom: {{ section.settings.block_gap }}px;
+  }
+
+  .snc-custom-liquid-block:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+<div class="snc-custom-liquid-section-{{ section.id }}">
+  <div class="snc-custom-liquid-container-{{ section.id }}">
+    {%- for block in section.blocks -%}
+      <div class="snc-custom-liquid-block" {{ block.shopify_attributes }}>
+        {%- if block.type == 'liquid' -%}
+          {{ block.settings.code }}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SNC Custom Liquid",
+  "class": "section--snc-custom-liquid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Diseño de Sección"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding superior",
+      "min": 0, "max": 100, "step": 5, "unit": "px", "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding inferior",
+      "min": 0, "max": 100, "step": 5, "unit": "px", "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margen superior",
+      "min": 0, "max": 100, "step": 5, "unit": "px", "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margen inferior",
+      "min": 0, "max": 100, "step": 5, "unit": "px", "default": 0
+    },
+    {
+      "type": "range",
+      "id": "block_gap",
+      "label": "Espacio entre bloques",
+      "min": 0, "max": 50, "step": 5, "unit": "px", "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "liquid",
+      "name": "Bloque de Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "code",
+          "label": "Código Liquid/HTML/JS",
+          "info": "Agrega tu código personalizado aquí. Ten cuidado, ya que un código incorrecto puede afectar el tema."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Custom Liquid",
+      "blocks": [ { "type": "liquid" } ]
+    }
+  ]
+}
+{% endschema %}

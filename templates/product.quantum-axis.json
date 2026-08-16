@@ -1,0 +1,374 @@
+{
+  "sections": {
+    "main": {
+      "type": "snc-pdp-hero",
+      "blocks": {
+        "scarcity_jt001": {
+          "type": "scarcity",
+          "settings": {
+            "text": "Limited remaining inventory from the current production run."
+          }
+        },
+        "delivery_text_qTAa3q": {
+          "type": "delivery_text",
+          "settings": {
+            "min_days": 3,
+            "max_days": 6,
+            "country": "",
+            "prefix": "Receive by",
+            "suffix": ".",
+            "color": "#000000",
+            "font_size": 14,
+            "font_weight": 400,
+            "letter_spacing": 0,
+            "word_gap": 6,
+            "fallback_text": "Ships within..."
+          }
+        },
+        "quantity_selector_bNNPbB": {
+          "type": "quantity_selector",
+          "settings": {
+            "label": "Quantity",
+            "margin_bottom": 20
+          }
+        },
+        "primary_actions_aN9Fze": {
+          "type": "primary_actions",
+          "settings": {
+            "add_to_cart_text": "ADD TO CART",
+            "buy_now_text": "BUY NOW",
+            "buttons_layout": "column",
+            "buttons_order": "buy_first",
+            "show_buy_now_button": true,
+            "show_add_to_cart_button": true,
+            "add_to_cart_bg_color": "#ebebeb",
+            "add_to_cart_text_color": "#000000",
+            "add_to_cart_border_color": "#2a4432",
+            "buy_now_bg_color": "#000000",
+            "buy_now_text_color": "#ffffff",
+            "buy_now_border_color": "#2a4432",
+            "button_padding_y": 17,
+            "button_padding_x": 25,
+            "button_border_radius": 0,
+            "button_border_width": 0,
+            "button_font_size": 14,
+            "payment_icons_gap": 10,
+            "show_secure_badge": false,
+            "secure_badge_text": "100% Secure Encrypted Checkout"
+          }
+        },
+        "loox_reviews_loox_rating_FKry73": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-rating/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "contentSize": 13,
+            "pattern": "",
+            "hideText": false,
+            "alignment": "",
+            "layout": "",
+            "textColor": "#000000",
+            "starColor": "#000000",
+            "showAllReviews": false,
+            "looxOpenFloatingWidget": false,
+            "emptyRatingWidget": false
+          }
+        },
+        "trust_badges_jt001": {
+          "type": "trust_badges",
+          "settings": {}
+        },
+        "description_3KyRig": {
+          "type": "description",
+          "settings": {
+            "custom_description": "",
+            "truncate_length": 150,
+            "fallback_text": "Product description."
+          }
+        },
+        "specifications_jt001": {
+          "type": "specifications",
+          "settings": {
+            "title": "Specifications"
+          }
+        },
+        "accordion_W6VR7c": {
+          "type": "accordion",
+          "settings": {
+            "background_color": "#FAFAFA",
+            "border_radius": 0,
+            "border_color": "#c9c4bc",
+            "border_width": 0,
+            "margin_top": 0,
+            "border_position": "bottom",
+            "title_color": "#0d0d0d",
+            "title_hover_bg_color": "rgba(0,0,0,0)",
+            "title_size": 17,
+            "title_weight": 500,
+            "title_text_transform": "none",
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 20,
+            "content_padding_vertical": 20,
+            "content_padding_horizontal": 20,
+            "title": "Shipping Policy",
+            "content": "<p>Most all other orders are processed within 24 hours of credit card approval. Orders placed on Saturday and Sunday will be processed on Monday. Orders placed on an official holiday will be processed on the following business day.</p><p><strong>SHIPPING OPTIONS</strong> The following shipping options are available: Standard Ground (Arrives within 5-7 business days) Expedited 2nd Day (Arrives in 2 business days) Rush Overnight (Next business day) Rush Overnight Delivery: Orders must be placed weekdays before 12:00pm EST (for watches not needing any adjustments) for guaranteed same day shipment. Orders received after 12:00pm EST will ship the following business day (if no adjustments are needed for the watch). If order needs verification, allow 1-2 more business days.</p><p><strong>SHIPPING COST</strong> Shipping charges vary depending on the package size, weight, destination and shipping method. Standard Ground (Arrives within 5-7 business days): Free of charge Expedited 2nd Day (Arrives in 2 business days): Shipping quotes can be obtained on the shopping cart page Rush Overnight(Next business day): Shipping quotes can be obtained on the shopping cart page Holiday Shipping Information: In order to receive purchased watches before December 25th; Second day Shipping orders need to be placed by 12:00 noon Wednesday, December 17,2014 Last overnight needs to be placed by noon Thursday, December 18, 2014 Overnight orders placed by noon December 22nd could possibly be delivered on Tuesday, December 23rd but are not guaranteed. Please note, for security purposes, our customer service team may contact you via phone to verify your order. In order to speed up this process please respond in a timely manner. Also note, if the purchased watch requires sizing, please allow an additional business day for our watchmakers to perform the adjustments.</p><p><strong>SPECIAL NOTE:</strong> We do not ship to PO Boxes. Please note we only ship to U.S. addresses (Continental United States and Hawaii.)</p><p><strong>SHIPPING ADDRESS DISCLAIMER</strong> Your shipping address is checked by our system for security reasons and to guarantee the best delivery time. Our address verification software package is updated regularly and contains all valid addresses from the United States of America. You will be asked to change your shipping address if this address you enter is not recognized. Should you have any problems with the address validation, please contact us </p>"
+          }
+        },
+        "accordion_9AYnTj": {
+          "type": "accordion",
+          "settings": {
+            "background_color": "#FAFAFA",
+            "border_radius": 0,
+            "border_color": "#c9c4bc",
+            "border_width": 0,
+            "margin_top": 0,
+            "border_position": "bottom",
+            "title_color": "#0d0d0d",
+            "title_hover_bg_color": "rgba(0,0,0,0)",
+            "title_size": 17,
+            "title_weight": 500,
+            "title_text_transform": "none",
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 20,
+            "content_padding_vertical": 20,
+            "content_padding_horizontal": 20,
+            "title": "Refund Policy",
+            "content": "<p>Returns on Apparels and Accessories:</p><p>Because all Apparel and Accessories are made to order, there are No Refunds. No Exchanges. All Sales are Final.</p><p>Returns on Wrist Watches:<br/>• If you are not 100% satisfied with your Jack Turner Time Piece, you can return it to us for an exchange or refund provided it is returned to us within 14 Days of order receipt. Please note that any ‘Pre-Order’ purchase is binding and non-refundable.</p><p>• Returns or exchanges are only accepted for ‘In Stock’ items purchased directly from JackTurnerWatches.com, and only from customers in the United States. All sales to other countries and continents are FINAL, except in the case of manufacturing defects or warranty claims (see warranty information below ).</p><p>• Items returned for refund or exchange must be returned in new, unused and re-sellable condition, with the original packaging and any protective coverings and product information intact. Returns that are damaged, soiled or altered may not be accepted and may be sent back to the customer.</p><p>• Returns received after 14 days of original receipt may be accepted at the discretion of Jack Turner Watches for store credit only.</p><p>Returns Address:<br/>Jack Turner Watches LLC<br/>370 W Pleasantview Avenue Ste 2-296<br/>Hackensack, NJ 07601</p><p>Jack Turner Watches will review replacement/return requests ONLY if:<br/>(a) The product is damaged, or there is a print error<br/>(b) Jack Turner Watches receives a submitted complaint (support@jackturnerwatches.com) within 14 days from the day the product was delivered to the customer.</p><p>Warranty Information:<br/>• If your Jack Turner watch malfunctions within the first 18 months, we will repair or replace the timepiece for you at no cost to you. If you have a warranty claim, please email our customer service department to receive further instructions.</p><p>• The warranty on our timepieces will be voided by the following circumstances: Internal or external damage caused by accidents, mishaps, mishandling, abusive treatment of the watch or unscrewing of the crown. Modifications, attempted repairs, or tampering with the watch by unauthorized third parties will also render your warranty void. Please use only replacement batteries of the type prescribed by Jack Turner Watches, as damage from unsuitable batteries is not covered under warranty.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_rating_FKry73",
+        "scarcity_jt001",
+        "delivery_text_qTAa3q",
+        "quantity_selector_bNNPbB",
+        "primary_actions_aN9Fze",
+        "trust_badges_jt001",
+        "description_3KyRig",
+        "specifications_jt001",
+        "accordion_W6VR7c",
+        "accordion_9AYnTj"
+      ],
+      "settings": {
+        "show-limited-edition": false,
+        "show_youtube_corner_badge": false,
+        "youtube_corner_badge_text": "As Seen on YouTube",
+        "youtube_corner_action": "modal",
+        "youtube_corner_link": "https://www.youtube.com/@jackturnerwatches",
+        "youtube_corner_link_new_tab": true,
+        "youtube_corner_modal_image": "shopify://shop_images/898794DA-7DCD-486C-8774-81FFFB864BE1.png",
+        "youtube_corner_left_offset": 24,
+        "youtube_corner_bottom_offset": 24,
+        "youtube_corner_font_size": 11,
+        "youtube_corner_bg_color": "#f4f2ef",
+        "youtube_corner_bg_color_hover": "#ffffff",
+        "youtube_corner_text_color": "#4a4a48",
+        "youtube_corner_border_color": "#c9c4bc",
+        "content_width_percent": 60,
+        "content_padding_vertical": 100,
+        "content_padding_horizontal": 200,
+        "mobile_content_padding_vertical": 20,
+        "mobile_content_padding_horizontal": 30,
+        "grid_gap": 5,
+        "mobile_image_height": 400,
+        "mobile_gap": 5,
+        "image_brightness": 100,
+        "image_border_radius": 0,
+        "title_font_size": 40,
+        "title_font_weight": 500,
+        "title_color": "#000000",
+        "title_text_transform": "capitalize",
+        "price_color": "#000000",
+        "discount_badge_bg_color": "#e5e5e5",
+        "discount_badge_text_color": "#000000",
+        "discount_badge_border_radius": 7
+      }
+    },
+    "snc_images_JkfyBL": {
+      "type": "snc-images",
+      "blocks": {
+        "image_zCpnaD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/B44C1708-6893-4EBB-80C7-D9D9A38A8677_1.png",
+            "image_width": 100,
+            "alignment": "center",
+            "link": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_zCpnaD"
+      ],
+      "disabled": true,
+      "name": "SNC Images",
+      "settings": {
+        "background_color": "rgba(0,0,0,0)",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "full_width": true,
+        "max_width": 1600,
+        "columns_desktop": 1,
+        "columns_mobile": 1,
+        "gap": 20,
+        "image_ratio": "auto",
+        "image_fit": "cover",
+        "border_radius": 8,
+        "caption_color": "#000000",
+        "caption_size": 16
+      }
+    },
+    "snc_image_content_r8t43L": {
+      "type": "snc-image-content",
+      "blocks": {
+        "item_hanmD4": {
+          "type": "item",
+          "settings": {
+            "title": "Eternal Connection",
+            "image": "shopify://shop_images/IMG_4716.jpg",
+            "text": "<p>We design meaningful timepieces that serve as a bridge between generations, capturing the stories and connections that define us.</p>"
+          }
+        },
+        "item_43Dwnq": {
+          "type": "item",
+          "settings": {
+            "title": "Uncompromising Precision",
+            "image": "shopify://shop_images/3T6A5633.jpg",
+            "text": "<p>Blending modern technical precision with timeless storytelling to ensure every piece is a masterwork of reliability.</p>"
+          }
+        },
+        "item_XMLnfY": {
+          "type": "item",
+          "settings": {
+            "title": "The Inherited Story",
+            "image": "shopify://shop_images/50635FB0-A3FC-410C-A79E-68DED6D4CF8B.jpg",
+            "text": "<p>Inspired by the founder’s own heritage, we build watches intended to be inherited and cherished, not just worn.</p>"
+          }
+        },
+        "item_iAKEgD": {
+          "type": "item",
+          "settings": {
+            "title": "Rare Distinction",
+            "image": "shopify://shop_images/IMG_2564.jpg",
+            "text": "<p>Strictly limited collections crafted exclusively for collectors who value rarity, emotional depth, and exclusive craftsmanship.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_hanmD4",
+        "item_43Dwnq",
+        "item_XMLnfY",
+        "item_iAKEgD"
+      ],
+      "name": "Imagen y Texto Flexible",
+      "settings": {
+        "subtitle": "THE MANTRA",
+        "title": "Legacy Born in Tradition"
+      }
+    },
+    "snc_reviews_AgFfg7": {
+      "type": "snc-reviews",
+      "blocks": {
+        "review_D4xFth": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/image_81f19efe-3a80-4046-9f93-8df7b2f0e368.jpg",
+            "title": "Harry - Ridgefield Park, NJ",
+            "text": "\" I wear my Jack Turner daily. It's built like a tank and draws compliments every time.\"",
+            "rating": 5
+          }
+        },
+        "review_bBjhVY": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/D6BF0C08-F7BC-4943-AFAA-034A5C44563C.jpeg",
+            "title": "Oleg - NY",
+            "text": "Loving my Chrono! Goes great with a dress shirt and it's a strap monster. I purchased a suede strap but it came with an extra rally sport strap that took the watch to another level when I put it on.",
+            "rating": 5
+          }
+        },
+        "review_9eMW39": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/D44CE9BD-EA4E-4DC4-9FD8-3B298CBBFF7F.heic",
+            "title": "Chandler - New York, NY",
+            "text": "This timepiece reminds me of my Tissot-PRX that i bought last year but it's ten times better. I appreciate how thin it is, it's simplicity, sleek profile and the way that it shines when i move my wrist. I'm always getting compliments so i love the attention that it gets. I just genuinely adore this watch. My only issue with them is that the watches are made in small batches so on two occasions, i've missed out on pieces that had caught my eye.",
+            "rating": 5
+          }
+        },
+        "review_d3Xw9D": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/image_b7347f03-3743-45cc-80e7-54fca57e32fa.jpg",
+            "title": "Ahmed  - Escondido Hills, CA",
+            "text": "“I’ll be as candid with you as I was with the folks over at Jack Turner: I confess, I’ve never closely examined these watches before. While they all appear well-crafted, they never sparked my curiosity until i saw the Meridian. I caught a snapshot of this release in my inbox and it completely altered my perception. I wound up pulling the trigger and i’m so happy that i did. The watch was stunning, sleek and you can tell it was well thought out. It came with a real leather watch roll and an extra strap. They also threw in some nice gloves for me. At this price point, you really cant ask for more. This was a blind buy that i will never regret…\"",
+            "rating": 5
+          }
+        },
+        "review_PfBQAw": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Facetune_23-07-2023-12-38-33-compressed.jpg",
+            "title": "Steve - Morristown, NJ",
+            "text": "\"Recently bought my watch, and I'm impressed by the quality of the materials used. It's evident that a lot of thought and effort went into making this piece. While not the cheapest, it surpasses other brands offering more features for the price. Highly satisfied with my purchase in NJ\"",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "review_D4xFth",
+        "review_bBjhVY",
+        "review_9eMW39",
+        "review_d3Xw9D",
+        "review_PfBQAw"
+      ],
+      "name": "SNC Reviews",
+      "settings": {
+        "subtitle": "Real stories of connection from those who carry our tradition across generations.",
+        "title": "A Community of Legacy",
+        "card_height": 640,
+        "image_height": 240,
+        "image_height_mobile": 200,
+        "horizontal_gap": 20,
+        "speed": 40,
+        "pause_on_hover": false,
+        "show_fade": false
+      }
+    },
+    "177772774512f84a51": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_rating_ccWzKK": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-rating/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "contentSize": 16,
+            "pattern": "",
+            "hideText": false,
+            "alignment": "",
+            "layout": "",
+            "textColor": "",
+            "starColor": "",
+            "showAllReviews": false,
+            "looxOpenFloatingWidget": false,
+            "emptyRatingWidget": false
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_rating_ccWzKK"
+      ],
+      "settings": {}
+    },
+    "177895133763e44103": {
+      "type": "apps",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "snc_reviews_AgFfg7",
+    "snc_images_JkfyBL",
+    "snc_image_content_r8t43L",
+    "177772774512f84a51",
+    "177895133763e44103"
+  ]
+}

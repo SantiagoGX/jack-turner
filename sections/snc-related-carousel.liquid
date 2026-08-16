@@ -1,0 +1,1275 @@
+{%- liquid
+  assign title = section.settings.title
+  assign subtitle = section.settings.subtitle
+  assign text = section.settings.text
+  assign limit = section.settings.limit | default: 12
+  
+  # Configuración visual
+  assign card_style = section.settings.card_style | default: 'overlay'
+  assign visible_desktop = section.settings.visible_desktop | default: 3
+  assign visible_mobile = section.settings.visible_mobile | default: 1
+  assign card_height_mode = section.settings.card_height_mode | default: 'fixed'
+  assign card_aspect_ratio = section.settings.card_aspect_ratio | default: '3/4'
+  assign card_gap = section.settings.card_gap | default: 24
+  assign card_border_radius = section.settings.card_border_radius | default: 10
+  assign image_brightness = section.settings.image_brightness | default: 100
+  assign card_image_fit = section.settings.card_image_fit | default: 'contain'
+  
+  assign carousel_mode = section.settings.carousel_mode | default: 'infinite'
+  assign carousel_peek_enabled = false
+  if carousel_mode != 'normal'
+    assign carousel_peek_enabled = true
+  endif
+  assign full_width = section.settings.full_width
+  assign carousel_side_padding = section.settings.carousel_side_padding | default: 0
+  assign section_margin_top = section.settings.section_margin_top | default: 0
+  assign section_margin_bottom = section.settings.section_margin_bottom | default: 0
+  assign side_peek = section.settings.side_peek | default: 10
+  
+  # Quick Add settings
+  assign enable_quick_add = section.settings.enable_quick_add
+  assign qa_show_title = section.settings.qa_show_title
+  assign qa_option_padding = section.settings.qa_option_padding | default: 6
+  assign qa_padding = section.settings.qa_padding | default: 13
+  assign qa_border_radius = section.settings.qa_border_radius | default: 0
+  assign qa_sizes_per_row = section.settings.qa_sizes_per_row | default: 5
+  assign qa_bg_color = section.settings.qa_bg_color | default: '#ffffff'
+  assign qa_option_bg_color = section.settings.qa_option_bg_color | default: '#ffffff'
+  assign qa_option_text_color = section.settings.qa_option_text_color | default: '#0d0d0d'
+  assign qa_option_hover_bg_color = section.settings.qa_option_hover_bg_color | default: '#0d0d0d'
+  assign qa_option_hover_text_color = section.settings.qa_option_hover_text_color | default: '#ffffff'
+  assign qa_option_border_radius = section.settings.qa_option_border_radius | default: 4
+
+  # Colors & Fonts
+  assign card_title_color = section.settings.card_title_color | default: '#0d0d0d'
+  assign card_price_color = section.settings.card_price_color | default: '#000000'
+  assign card_compare_price_color = section.settings.card_compare_price_color | default: 'rgba(0, 0, 0, 0.4)'
+  assign card_title_margin_bottom = section.settings.card_title_margin_bottom | default: 6
+  
+  assign card_title_font_size = section.settings.card_title_font_size | default: 16
+  assign card_price_font_size = section.settings.card_price_font_size | default: 14
+
+  assign global_icon_plus = settings.global_icon_plus_dark
+  assign wishlist_icon_version = settings.global_wishlist_icon_version | default: 'dark'
+  if wishlist_icon_version == 'light'
+    assign global_icon_wishlist = settings.global_icon_wishlist_light
+  else
+    assign global_icon_wishlist = settings.global_icon_wishlist_dark
+  endif
+  
+  assign wishlist_bg_enabled = settings.global_wishlist_bg_enabled
+  assign wishlist_bg_color = settings.global_wishlist_bg_color | default: '#FFFFFF'
+  assign wishlist_inset = settings.global_wishlist_inset | default: 20
+  assign wishlist_radius = settings.global_wishlist_radius | default: 0
+  assign wishlist_padding = settings.global_wishlist_padding | default: 8
+  assign wishlist_size = settings.global_wishlist_size | default: 40
+  
+  assign dot_color = section.settings.dot_color | default: '#d8d8d8'
+  assign dot_active_color = section.settings.dot_active_color | default: '#0d0d0d'
+  assign section_header_alignment = section.settings.section_header_alignment | default: 'center'
+  
+  # Lógica de Productos Relacionados (Server Side)
+  # 1. Intentamos obtener la colección del producto
+  #    (Podríamos usar product.collections, pero a veces es mejor usar recomendaciones de Shopify
+  #     o simplemente la primera colección).
+  assign related_collection = product.collections.first
+  
+  # 2. Si el usuario definió una colección manual de respaldo en settings, úsala si la automática falla
+  if section.settings.fallback_collection != blank and related_collection == blank
+    assign related_collection = collections[section.settings.fallback_collection]
+  endif
+
+  # 3. Si el usuario define una colección manual, sobrescribe la automática y la de respaldo
+  if section.settings.manual_collection != blank
+    assign related_collection = collections[section.settings.manual_collection]
+  endif
+-%}
+
+{% schema %}
+{
+  "name": "SNC Related Carousel",
+  "class": "section--snc-related-carousel",
+  "templates": ["product"],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Completa el look"
+    },
+    {
+      "type": "select",
+      "id": "subtitle_style",
+      "label": "Estilo del Subtítulo",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Productos Relacionados"
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "Estilo del Título",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto / Párrafo"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Estilo del Texto",
+      "options": [
+        { "value": "h1", "label": "Título principal" },
+        { "value": "h2", "label": "Títulos secundarios" },
+        { "value": "h3", "label": "Títulos pequeños" },
+        { "value": "body", "label": "Párrafo" },
+        { "value": "small", "label": "Párrafo pequeño" },
+        { "value": "button", "label": "Botón" },
+        { "value": "emphasis", "label": "Énfasis" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "select",
+      "id": "section_header_alignment",
+      "label": "Alineación de textos (Título/Subtítulo)",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "paragraph",
+      "content": "Esta sección muestra productos de la misma colección que el producto actual."
+    },
+    {
+      "type": "collection",
+      "id": "manual_collection",
+      "label": "Colección manual (sobrescribe)",
+      "info": "Si seleccionas una colección aquí, se usará en lugar de la automática y la de respaldo."
+    },
+    {
+      "type": "collection",
+      "id": "fallback_collection",
+      "label": "Colección de respaldo",
+      "info": "Se usará si el producto no pertenece a ninguna colección."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Máximo de productos",
+      "min": 3,
+      "max": 24,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Apariencia"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Estilo de tarjeta",
+      "options": [
+        { "value": "overlay", "label": "Contenido sobre imagen" },
+        { "value": "below", "label": "Contenido debajo de imagen" }
+      ],
+      "default": "overlay"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margen superior del slider",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margen inferior del slider",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "carousel_mode",
+      "label": "Modo de carrusel",
+      "default": "infinite",
+      "options": [
+        { "value": "normal", "label": "Normal (sin bordes visibles)" },
+        { "value": "infinite", "label": "Infinito (bordes visibles)" },
+        { "value": "semi", "label": "Semi infinito (corte derecho al inicio)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "side_peek",
+      "label": "Porción visible lateral (%)",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "default": 10,
+      "unit": "%",
+      "info": "Porcentaje visible del ancho de cada card. Aplica para Infinito y Semi infinito."
+    },
+    {
+      "type": "range",
+      "id": "carousel_side_padding",
+      "label": "Espaciado lateral del carrusel (px)",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "default": 0,
+      "unit": "px",
+      "info": "Controla la distancia a los bordes de pantalla. Aplica para Infinito y Semi infinito."
+    },
+    {
+      "type": "range",
+      "id": "visible_desktop",
+      "label": "Cards visibles (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "visible_mobile",
+      "label": "Cards visibles (móvil)",
+      "default": "1",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "label": "Alto de la tarjeta (px) - Modo fijo",
+      "min": 260,
+      "max": 720,
+      "step": 10,
+      "default": 420
+    },
+    {
+      "type": "select",
+      "id": "card_height_mode",
+      "label": "Modo de altura de tarjeta",
+      "options": [
+        { "value": "fixed", "label": "Altura fija (px)" },
+        { "value": "aspect_ratio", "label": "Relación de aspecto" }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "select",
+      "id": "card_aspect_ratio",
+      "label": "Relación de aspecto",
+      "options": [
+        { "value": "1/1", "label": "Cuadrado (1:1)" },
+        { "value": "3/4", "label": "Retrato (3:4)" },
+        { "value": "4/5", "label": "Retrato (4:5)" },
+        { "value": "2/3", "label": "Retrato Alto (2:3)" },
+        { "value": "4/3", "label": "Paisaje (4:3)" },
+        { "value": "16/9", "label": "Paisaje (16:9)" }
+      ],
+      "default": "3/4"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Espacio entre tarjetas",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Redondeo de bordes",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_brightness",
+      "label": "Brillo de las imágenes",
+      "min": 80,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "card_image_fit",
+      "label": "Ajuste de imagen de producto",
+      "options": [
+        { "value": "cover", "label": "Rellenar (Cover)" },
+        { "value": "contain", "label": "Ajustar (Contain)" }
+      ],
+      "default": "contain"
+    },
+    { "type": "header", "content": "Colores de Texto (Tarjetas)" },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Título del producto",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "card_price_color",
+      "label": "Precio del producto",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_compare_price_color",
+      "label": "Precio comparado (tachado)",
+      "default": "rgba(0, 0, 0, 0.4)"
+    },
+    {
+      "type": "range",
+      "id": "card_title_font_size",
+      "label": "Tamaño título de producto",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_price_font_size",
+      "label": "Tamaño precio de producto",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Quick Add (Contenido Debajo)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_add",
+      "label": "Habilitar Quick Add",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "qa_show_title",
+      "label": "Mostrar título de variantes",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "qa_padding",
+      "label": "Padding interno del panel",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "qa_option_padding",
+      "label": "Padding interno de opciones",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "qa_border_radius",
+      "label": "Redondeo de bordes del panel",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "qa_sizes_per_row",
+      "label": "Tallas por fila",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "color",
+      "id": "qa_bg_color",
+      "label": "Color de fondo del panel",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "qa_option_bg_color",
+      "label": "Fondo de opciones",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "qa_option_text_color",
+      "label": "Texto de opciones",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "qa_option_hover_bg_color",
+      "label": "Fondo de opciones (Hover)",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "qa_option_hover_text_color",
+      "label": "Texto de opciones (Hover)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "qa_option_border_radius",
+      "label": "Redondeo de opciones",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Navegación (Dots)"
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Color de puntos inactivos",
+      "default": "#d8d8d8"
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Color de punto activo",
+      "default": "#0d0d0d"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Related Carousel",
+      "category": "Related Products"
+    }
+  ]
+}
+{% endschema %}
+
+{%- if related_collection != blank and related_collection.products_count > 1 -%}
+
+<style>
+  /* Wrapper para "romper" el contenedor de la Product Page y ser Full Width */
+  .snc-product-carousel-wrapper {
+    {%- if full_width -%}
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    {%- else -%}
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+    {%- endif -%}
+    padding: 60px 0 80px;
+    letter-spacing: -0.04em;
+  }
+
+  .snc-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    clip-path: none;
+    box-sizing: border-box;
+    padding-left: var(--snc-edge-spacing, 0px);
+    padding-right: var(--snc-edge-spacing, 0px);
+  }
+
+  .snc-carousel__inner {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .snc-carousel__header {
+    text-align: var(--section-header-alignment, center);
+    margin-bottom: 40px;
+    padding: 0 20px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .snc-carousel__subtitle {
+    margin: 0 0 8px 0;
+  }
+
+  .snc-carousel__title {
+    margin: 0;
+  }
+
+  .snc-carousel__text {
+    margin: 15px 0 0 0;
+  }
+  .snc-carousel__text p {
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  /* --- LOGICA INFINITA --- */
+  .snc-carousel__track {
+    --snc-visible: {{ visible_desktop }};
+    --snc-gap: {{ card_gap }}px;
+    {%- assign visible_desktop_numeric = visible_desktop | plus: 0 -%}
+    {%- if carousel_peek_enabled and visible_desktop_numeric > 1 -%}
+      --snc-peek-frac: {{ side_peek | divided_by: 100.0 }};
+    {%- else -%}
+      --snc-peek-frac: 0;
+    {%- endif -%}
+    --snc-card-width: calc((100% - (var(--snc-gap) * (var(--snc-visible) - 1))) / (var(--snc-visible) + (2 * var(--snc-peek-frac))));
+    --snc-scroll-pad-left: calc(var(--snc-card-width) * var(--snc-peek-frac));
+    --snc-scroll-pad-right: var(--snc-scroll-pad-left);
+    --snc-clip-left: 0px;
+    --snc-clip-right: 0px;
+    {%- if carousel_mode == 'semi' -%}
+      --snc-scroll-pad-left: 0px;
+      --snc-scroll-pad-right: calc(var(--snc-card-width) * var(--snc-peek-frac));
+      --snc-clip-right: calc(var(--snc-card-width) * var(--snc-peek-frac));
+    {%- endif -%}
+    
+    display: flex; 
+    gap: var(--snc-gap);
+    padding: 0;
+    scroll-padding-left: var(--snc-scroll-pad-left);
+    scroll-padding-right: var(--snc-scroll-pad-right);
+    clip-path: inset(0 var(--snc-clip-right) 0 var(--snc-clip-left));
+    
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: auto; /* El JS controlará el smooth behavior */
+    
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .snc-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .snc-carousel__slide {
+    scroll-snap-align: start;
+    {%- if card_height_mode == 'fixed' -%}
+      height: {{ section.settings.card_height | default: 420 }}px;
+    {%- else -%}
+      height: auto;
+    {%- endif -%}
+    flex-shrink: 0;
+    position: relative;
+    width: var(--snc-card-width);
+  }
+
+  /* Ajustes de la tarjeta dentro del carrusel para respetar la altura del slide */
+  {%- if card_height_mode == 'fixed' -%}
+  .section--snc-related-carousel .snc-plp--product-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .section--snc-related-carousel .snc-plp--product-image-wrapper {
+    height: 100%;
+    flex: 1 1 auto;
+  }
+  {%- endif -%}
+
+  .snc-carousel__nav {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    left: 2%;
+    right: 2%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .snc-carousel__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .snc-carousel__arrow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  }
+
+  .snc-carousel__arrow svg {
+    width: 18px;
+    height: 18px;
+    fill: #0d0d0d;
+  }
+
+  .snc-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding: 0;
+    flex-wrap: wrap;
+    padding-bottom: 2px;
+  }
+
+  .snc-carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--snc-dot-color, #d8d8d8);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .snc-carousel__dot.is-active {
+    background: var(--snc-dot-active-color, #0d0d0d);
+    transform: scale(1.3);
+  }
+
+  @media (max-width: 768px) {
+    .snc-carousel__title { font-size: 32px; }
+    .snc-carousel__track {
+      --snc-visible: {{ visible_mobile }};
+      --snc-gap: {{ card_gap | times: 0.7 | round }}px;
+      {%- if carousel_peek_enabled and visible_mobile != '1' -%}
+        --snc-peek-frac: {{ side_peek | divided_by: 100.0 }};
+      {%- else -%}
+        --snc-peek-frac: 0;
+      {%- endif -%}
+    }
+    .snc-carousel__nav { display: none; }
+  }
+
+  /* ESTILOS DE TARJETA (Copiados de snc-product-carousel) */
+  .snc-plp--product-card {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    border-radius: {{ card_border_radius }}px;
+    overflow: hidden;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+  .snc-plp--product-image-wrapper {
+    position: relative;
+    width: 100%;
+    {%- if card_height_mode == 'fixed' -%}
+      height: 600px; /* Fallback */
+    {%- else -%}
+      height: auto;
+      aspect-ratio: {{ card_aspect_ratio }};
+    {%- endif -%}
+    overflow: hidden;
+    border-radius: {{ card_border_radius }}px;
+    background-color: #f5f5f5;
+  }
+  .snc-plp--product-image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .snc-plp--product-main-image,
+  .snc-plp--product-hover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ card_image_fit }};
+    display: block;
+    transition: opacity 0.3s ease;
+    filter: brightness({{ image_brightness | divided_by: 100.0 }});
+  }
+  .snc-plp--product-hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .snc-plp--product-image-wrapper:hover .snc-plp--product-main-image {
+    opacity: 0;
+  }
+  .snc-plp--product-image-wrapper:hover .snc-plp--product-hover-image {
+    opacity: 1;
+  }
+  .snc-plp--product-image-wrapper:not(:hover) .snc-plp--product-main-image,
+  .snc-plp--product-card:not(:has(.snc-plp--product-hover-image)) .snc-plp--product-main-image {
+    opacity: 1;
+  }
+  .snc-plp--favorite-button {
+    position: absolute;
+    top: {{ wishlist_inset }}px;
+    right: {{ wishlist_inset }}px;
+    background: {% if wishlist_bg_enabled %}{{ wishlist_bg_color }}{% else %}none{% endif %};
+    border: none;
+    padding: {% if wishlist_bg_enabled %}{{ wishlist_padding }}px{% else %}0{% endif %};
+    cursor: pointer;
+    z-index: 10;
+    width: {% if wishlist_bg_enabled %}{{ wishlist_size }}px{% else %}23px{% endif %};
+    height: {% if wishlist_bg_enabled %}{{ wishlist_size }}px{% else %}20px{% endif %};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+    border-radius: {{ wishlist_radius }}px;
+  }
+  .snc-plp--favorite-button.is-active .snc-plp--favorite-icon {
+    opacity: 0;
+  }
+  .snc-plp--favorite-button.is-active {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='{{ settings.global_wishlist_active_color | default: '#DA4B4B' | url_encode }}'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 23px 20px;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+  }
+  .snc-plp--favorite-button.is-bouncing {
+    animation: bounce 0.4s ease-in-out;
+  }
+  .snc-plp--favorite-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  .snc-plp--favorite-icon {
+    width: 23px;
+    height: 20px;
+    display: block;
+    object-fit: contain;
+  }
+  .snc-plp--product-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    right: 20px;
+    height: 54px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    pointer-events: none;
+  }
+  .snc-plp--product-info {
+    flex: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .snc-plp--product-card:hover .snc-plp--product-info {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .snc-plp--product-title-link {
+    text-decoration: none;
+    display: block;
+    margin-bottom: var(--card-title-margin-bottom, 6px);
+  }
+  .snc-plp--product-title {
+    font-family: var(--font-main);
+    font-size: var(--card-title-font-size, 16px);
+    font-weight: normal;
+    color: var(--card-title-color, #0d0d0d);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .snc-plp--product-price-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .snc-plp--product-compare-price {
+    font-family: var(--font-main);
+    font-size: var(--card-price-font-size, 14px);
+    color: var(--card-compare-price-color, rgba(0, 0, 0, 0.4));
+    text-decoration: line-through;
+  }
+  .snc-plp--product-price {
+    font-family: var(--font-main);
+    font-size: var(--card-price-font-size, 14px);
+    font-weight: normal;
+    color: var(--card-price-color, #000000);
+  }
+  .snc-plp--add-container {
+    position: relative;
+    pointer-events: auto;
+  }
+  .snc-plp--add-button {
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .snc-plp--add-container:hover .snc-plp--add-button {
+    width: auto;
+    min-width: 200px;
+    padding: 0 20px;
+    border-radius: 1000px;
+  }
+  .snc-plp--plus-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .snc-plp--sizes-dropdown {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    background: #ffffff;
+    border-radius: 1000px;
+    padding: 12px 20px;
+    display: none;
+    gap: 15px;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .snc-plp--add-container:hover .snc-plp--sizes-dropdown {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .snc-plp--size-option {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: normal;
+    color: #0d0d0d;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    line-height: 1;
+  }
+  .snc-plp--size-option:hover {
+    opacity: 0.7;
+  }
+  .snc-plp--size-option:disabled,
+  .snc-plp--qa-option:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    position: relative;
+    text-decoration: none !important;
+    background-color: transparent !important;
+    color: #0d0d0d !important;
+  }
+  .snc-plp--size-option:disabled:hover,
+  .snc-plp--qa-option:disabled:hover {
+    transform: none;
+    border-color: #e5e5e5;
+  }
+  .snc-plp--size-option:disabled::after,
+  .snc-plp--qa-option:disabled::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background: currentColor;
+    transform: rotate(-20deg);
+  }
+
+  /* Estilos para tarjeta con contenido debajo */
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--product-footer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    height: auto;
+    padding: 15px;
+    background: #ffffff;
+    pointer-events: auto;
+  }
+  .snc-plp--product-card[data-card-style="below"]:hover .snc-plp--product-info {
+    opacity: 1;
+    transform: none;
+  }
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--product-image-wrapper {
+    border-radius: {{ card_border_radius }}px {{ card_border_radius }}px 0 0;
+  }
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--add-container {
+    display: none;
+  }
+  .snc-plp--quick-add-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--qa-bg-color, #ffffff);
+    padding: var(--qa-padding, 13px);
+    border-radius: var(--qa-border-radius, 0) var(--qa-border-radius, 0) 0 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 20;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+  .snc-plp--product-image-wrapper:hover .snc-plp--quick-add-overlay {
+    transform: translateY(0);
+  }
+  .snc-plp--qa-step {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: opacity 0.3s ease;
+  }
+  .snc-plp--qa-title {
+    font-family: var(--font-main);
+    font-size: 12px;
+    color: #666;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .snc-plp--qa-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .snc-plp--qa-option {
+    border: 1px solid #e5e5e5;
+    background: var(--qa-option-bg-color, white);
+    padding: var(--qa-option-padding, 6px);
+    font-family: var(--font-main);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: var(--qa-option-border-radius, 4px);
+    transition: all 0.2s;
+    color: var(--qa-option-text-color, #0d0d0d);
+    text-align: center;
+    flex-grow: 1;
+    flex-basis: calc((100% - (6px * (var(--qa-sizes-per-row, 5) - 1))) / var(--qa-sizes-per-row, 5));
+  }
+  .snc-plp--qa-option:hover {
+    border-color: var(--qa-option-hover-bg-color, #0d0d0d);
+    background: var(--qa-option-hover-bg-color, #0d0d0d);
+    color: var(--qa-option-hover-text-color, white);
+  }
+  .snc-plp--qa-btn-full {
+    width: 100%;
+    background: #0d0d0d;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-family: var(--font-main);
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  .snc-plp--qa-btn-full:hover {
+    opacity: 0.9;
+  }
+  @media (max-width: 1023px) {
+    .snc-plp--add-button { width: 40px; height: 40px; }
+    .snc-plp--plus-icon { width: 14px; height: 14px; }
+  }
+  @media (max-width: 767px) {
+    .snc-plp--product-card { width: 100%; max-width: none; min-width: 0; }
+    .snc-plp--product-image-wrapper { height: auto; aspect-ratio: 460 / 600; }
+  }
+</style>
+
+<div class="snc-product-carousel-wrapper"
+     style="
+       --card-title-color: {{ card_title_color }};
+       --card-price-color: {{ card_price_color }};
+       --card-compare-price-color: {{ card_compare_price_color }};
+       --card-title-margin-bottom: {{ card_title_margin_bottom }}px;
+       --card-title-font-size: {{ card_title_font_size }}px;
+       --card-price-font-size: {{ card_price_font_size }}px;
+       --snc-dot-color: {{ dot_color }};
+       --snc-dot-active-color: {{ dot_active_color }};
+       --section-header-alignment: {{ section_header_alignment }};
+       --snc-edge-spacing: {{ carousel_side_padding }}px;
+       margin-top: {{ section_margin_top }}px;
+       margin-bottom: {{ section_margin_bottom }}px;
+     ">
+  <div class="snc-carousel" 
+       data-section-id="{{ section.id }}"
+       data-section-type="snc-related-carousel"
+       data-visible-desktop="{{ visible_desktop }}"
+       data-visible-mobile="{{ visible_mobile }}"
+       data-carousel-mode="{{ carousel_mode }}"
+       data-side-peek="{{ side_peek }}">
+       
+    <div class="snc-carousel__inner">
+      <div class="snc-carousel__header">
+        {%- if subtitle != blank -%}
+          <div class="snc-carousel__subtitle {{ section.settings.subtitle_style }}">{{ subtitle | escape }}</div>
+        {%- endif -%}
+        {%- if title != blank -%}
+          <h2 class="snc-carousel__title {{ section.settings.title_style }}">{{ title | escape }}</h2>
+        {%- endif -%}
+        {%- if text != blank -%}
+          <div class="snc-carousel__text {{ section.settings.text_style }}">{{ text }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="snc-carousel__track" data-track>
+        {%- assign counter = 0 -%}
+        {%- for p in related_collection.products -%}
+           {%- comment -%} EVITAR MOSTRAR EL PRODUCTO ACTUAL {%- endcomment -%}
+           {%- unless p.id == product.id -%}
+             <div class="snc-carousel__slide" data-index="{{ counter }}">
+               {%- assign product_card_product = p -%}
+               {%- liquid
+                assign main_image = product_card_product.featured_image
+                assign hover_image = false
+                if product_card_product.images.size > 1
+                  for image in product_card_product.images
+                    unless image == main_image
+                      assign hover_image = image
+                      break
+                    endunless
+                  endfor
+                endif
+              
+                assign has_size_option = false
+                assign has_color_option = false
+                assign size_option = blank
+                assign color_option = blank
+                
+                if product_card_product
+                  for option in product_card_product.options_with_values
+                    assign option_name_lower = option.name | downcase
+                    if option_name_lower == 'talla' or option_name_lower == 'size' or option_name_lower == 'tamaño'
+                      assign has_size_option = true
+                      assign size_option = option
+                    elsif option_name_lower == 'color' or option_name_lower == 'colour' or option_name_lower == 'colores'
+                      assign has_color_option = true
+                      assign color_option = option
+                    endif
+                  endfor
+                endif
+              -%}
+              
+              <div class="snc-plp--product-card" data-card-style="{{ card_style }}" data-product-handle="{{ product_card_product.handle }}" data-product-available="{{ product_card_product.available }}" data-product-price="{{ product_card_product.price }}">
+                  <div class="snc-plp--product-image-wrapper">
+                    <a href="{{ product_card_product.url }}" class="snc-plp--product-image-link">
+                      <img src="{{ main_image | image_url: width: 460 }}" alt="{{ main_image.alt | escape }}" class="snc-plp--product-main-image" loading="lazy" width="460" height="600">
+                      {%- if hover_image -%}
+                        <img src="{{ hover_image | image_url: width: 460 }}" alt="{{ hover_image.alt | escape }}" class="snc-plp--product-hover-image" loading="lazy" width="460" height="600">
+                      {%- endif -%}
+                    </a>
+                    <button class="snc-plp--favorite-button" data-favorite-handle="{{ product_card_product.handle }}">
+                      <img src="{% if global_icon_wishlist != blank %}{{ global_icon_wishlist | image_url: width: 46 }}{% else %}{{ 'favorite.svg' | asset_url }}{% endif %}" alt="Add to favorites" class="snc-plp--favorite-icon">
+                    </button>                    
+                    
+                    {%- if card_style == 'below' and enable_quick_add -%}
+                      <div class="snc-plp--quick-add-overlay" style="--qa-padding: {{ qa_padding }}px; --qa-option-padding: {{ qa_option_padding }}px; --qa-border-radius: {{ qa_border_radius }}px; --qa-sizes-per-row: {{ qa_sizes_per_row }}; --qa-bg-color: {{ qa_bg_color }}; --qa-option-bg-color: {{ qa_option_bg_color }}; --qa-option-text-color: {{ qa_option_text_color }}; --qa-option-hover-bg-color: {{ qa_option_hover_bg_color }}; --qa-option-hover-text-color: {{ qa_option_hover_text_color }}; --qa-option-border-radius: {{ qa_option_border_radius }}px;">
+                        {%- if has_size_option and has_color_option -%}
+                           <div class="snc-plp--qa-step" data-step="size">
+                             {%- if qa_show_title -%}<span class="snc-plp--qa-title">Selecciona Talla</span>{%- endif -%}
+                             <div class="snc-plp--qa-options">
+                               {%- for value in size_option.values -%}
+                                 {%- assign size_available = false -%}
+                                 {%- for variant in product_card_product.variants -%}
+                                   {%- if variant.option1 == value or variant.option2 == value or variant.option3 == value -%}
+                                     {%- if variant.available -%}{%- assign size_available = true -%}{%- break -%}{%- endif -%}
+                                   {%- endif -%}
+                                 {%- endfor -%}
+                                 <button type="button" class="snc-plp--qa-option" data-value="{{ value }}" {% unless size_available %}disabled{% endunless %}>{{ value }}</button>
+                               {%- endfor -%}
+                             </div>
+                           </div>
+                           <div class="snc-plp--qa-step" data-step="color" style="display: none; opacity: 0;">
+                             {%- if qa_show_title -%}<span class="snc-plp--qa-title">Selecciona Color</span>{%- endif -%}
+                             <div class="snc-plp--qa-options">
+                               {%- for value in color_option.values -%}
+                                 <button type="button" class="snc-plp--qa-option" data-value="{{ value }}">{{ value }}</button>
+                               {%- endfor -%}
+                             </div>
+                           </div>
+                           <script type="application/json" class="snc-plp--variant-data">{{ product_card_product.variants | json }}</script>
+                        {%- elsif has_size_option -%}
+                           <div class="snc-plp--qa-step" data-step="size">
+                             {%- if qa_show_title -%}<span class="snc-plp--qa-title">Selecciona Talla</span>{%- endif -%}
+                             <div class="snc-plp--qa-options">
+                               {%- for value in size_option.values -%}
+                                 {%- liquid 
+                                    assign variant_for_size = false
+                                    for variant in product_card_product.variants
+                                      if variant.option1 == value or variant.option2 == value or variant.option3 == value
+                                        assign variant_for_size = variant
+                                        break
+                                      endif
+                                    endfor
+                                 -%}
+                                 <button type="button" class="snc-plp--qa-option" data-variant-id="{{ variant_for_size.id }}" {% unless variant_for_size.available %}disabled{% endunless %}>{{ value }}</button>
+                               {%- endfor -%}
+                             </div>
+                           </div>
+                        {%- else -%}
+                           <button type="button" class="snc-plp--qa-btn-full" data-add-product-handle="{{ product_card_product.handle }}">Add to cart</button>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  <div class="snc-plp--product-footer">
+                    <div class="snc-plp--product-info">
+                      <a href="{{ product_card_product.url }}" class="snc-plp--product-title-link"><h3 class="snc-plp--product-title">{{ product_card_product.title }}</h3></a>
+                      <div class="snc-plp--product-price-container">
+                        {%- if product_card_product.compare_at_price > product_card_product.price -%}<span class="snc-plp--product-compare-price">{{ product_card_product.compare_at_price | money }}</span>{%- endif -%}
+                        <span class="snc-plp--product-price">{{ product_card_product.price | money }}</span>
+                      </div>
+                    </div>
+                    {%- if enable_quick_add -%}
+                    <div class="snc-plp--add-container">
+                      {%- if has_size_option -%}
+                        <div class="snc-plp--sizes-dropdown">
+                          {%- for value in size_option.values -%}
+                            {%- liquid
+                              assign variant_for_size = false
+                              for variant in product_card_product.variants
+                                if variant.option1 == value or variant.option2 == value or variant.option3 == value
+                                  assign variant_for_size = variant
+                                  break
+                                endif
+                              endfor
+                            -%}
+                            <button class="snc-plp--size-option" data-variant-id="{{ variant_for_size.id }}" {% unless variant_for_size.available %}disabled{% endunless %}>{{ value }}</button>
+                          {%- endfor -%}
+                        </div>
+                      {%- endif -%}
+                      <button class="snc-plp--add-button">
+                        <img src="{% if global_icon_plus != blank %}{{ global_icon_plus | image_url: width: 36 }}{% else %}{{ 'plus.svg' | asset_url }}{% endif %}" alt="Add to cart" class="snc-plp--plus-icon">
+                      </button>
+                    </div>
+                    {%- endif -%}
+                  </div>
+              </div>
+             </div>
+             {%- assign counter = counter | plus: 1 -%}
+             {%- if counter >= limit -%}{%- break -%}{%- endif -%}
+           {%- endunless -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="snc-carousel__nav">
+        <button class="snc-carousel__arrow" type="button" data-prev aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="snc-carousel__arrow" type="button" data-next aria-label="Siguiente">
+          <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="snc-carousel__dots" data-dots></div>
+    </div>
+  </div>
+</div>
+
+
+{%- endif -%}

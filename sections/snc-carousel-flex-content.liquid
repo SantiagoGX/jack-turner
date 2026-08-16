@@ -1,0 +1,664 @@
+{% schema %}
+{
+  "name": "SNC Carousel Flex Content",
+  "class": "section--snc-carousel-flex-content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración General"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Espaciado superior (dentro del fondo)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Espaciado inferior (dentro del fondo)",
+      "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo (Full Width)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_horizontal_scroll",
+      "label": "Activar Scroll Horizontal (Efecto Pin)",
+      "default": false,
+      "info": "Fija la sección y convierte el scroll vertical en horizontal en escritorio."
+    },
+    {
+      "type": "header",
+      "content": "Contenido Superior"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Título"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Texto descriptivo a la derecha.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Estilos del Título"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del Título",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Ancho del bloque (0 = Automático)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente (Escritorio)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente (Móvil)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Grosor de fuente",
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "title_letter_spacing",
+      "min": -5,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Espaciado entre letras",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "title_text_transform",
+      "label": "Transformación de texto",
+      "options": [
+        { "value": "none", "label": "Ninguna" },
+        { "value": "uppercase", "label": "Mayúsculas" },
+        { "value": "lowercase", "label": "Minúsculas" },
+        { "value": "capitalize", "label": "Capitalizar" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Estilos del Texto"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del Texto",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Ancho del bloque (0 = Automático)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho máximo del texto",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente (Escritorio)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño de fuente (Móvil)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Grosor de fuente",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "text_line_height",
+      "min": 1.0,
+      "max": 2.0,
+      "step": 0.1,
+      "label": "Altura de línea",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "text_letter_spacing",
+      "min": -2,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Espaciado entre letras",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Producto",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Producto"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "SNC Carousel Flex Content",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  #snc-carousel-flex-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    {% if section.settings.full_width %}
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    {% endif %}
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-carousel-flex--container {
+    max-width: 1512px;
+    margin: 0 auto;
+    padding:
+      calc(121px + {{ section.settings.margin_top }}px)
+      109px
+      calc(60px + {{ section.settings.margin_bottom }}px);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-carousel-title {
+    margin: 0;
+    color: {{ section.settings.title_color }};
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: {{ section.settings.title_font_weight }};
+    letter-spacing: {{ section.settings.title_letter_spacing }}px;
+    text-transform: {{ section.settings.title_text_transform }};
+    {% if section.settings.title_width > 0 %}
+      width: {{ section.settings.title_width }}%;
+      flex: 0 0 {{ section.settings.title_width }}%;
+    {% endif %}
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-carousel-text {
+    margin: 0;
+    max-width: {{ section.settings.text_max_width }}px;
+    text-align: right;
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_font_size }}px;
+    font-weight: {{ section.settings.text_font_weight }};
+    line-height: {{ section.settings.text_line_height }};
+    letter-spacing: {{ section.settings.text_letter_spacing }}px;
+    {% if section.settings.text_width > 0 %}
+      width: {{ section.settings.text_width }}%;
+      flex: 0 0 {{ section.settings.text_width }}%;
+    {% endif %}
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-carousel-slider-wrapper {
+    /* Efecto de desbordamiento a la derecha */
+    margin-right: calc(50% - 50vw);
+    padding-right: 40px;
+  }
+
+	  #snc-carousel-flex-{{ section.id }} .snc-carousel-slider {
+	    display: flex;
+	    gap: 20px;
+	    overflow-x: auto;
+	    overflow-y: hidden;
+	    padding-bottom: 20px;
+	    padding-right: 20px; /* Espacio al final del scroll */
+	    scrollbar-width: none;
+	    scroll-behavior: smooth;
+	    scroll-snap-type: x proximity;
+	    -webkit-overflow-scrolling: touch;
+	    overscroll-behavior-x: contain;
+	  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-carousel-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+	  #snc-carousel-flex-{{ section.id }} .snc-carousel-item {
+	    flex: 0 0 auto;
+	    /* Cálculo para 3.3 productos visibles dentro del ancho del contenedor */
+	    /* (100% del contenedor - gaps) / 3.3 */
+	    width: calc((100% - 40px) / 3.3);
+	    min-width: 250px; /* Ancho mínimo para móviles */
+	    scroll-snap-align: start;
+	  }
+
+  /* Estilos de Tarjeta Premium con Alineación Simétrica */
+  #snc-carousel-flex-{{ section.id }} .snc-custom-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-media {
+    background-color: #ffffff;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    height: clamp(320px, 46vh, 460px);
+    padding: 30px;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-content-wrapper {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 15px;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+    text-align: left;
+    line-height: 1.2;
+    display: block;
+    flex-grow: 1;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-wishlist {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #000;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-wishlist:hover svg {
+    fill: currentColor;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #666;
+    flex-grow: 1; /* Empuja el botón hacia abajo */
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 0;
+    border: 1px solid #000;
+    background: transparent;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+
+  #snc-carousel-flex-{{ section.id }} .snc-card-button:hover {
+    background: #000;
+    color: #fff;
+  }
+
+	  @media (max-width: 768px) {
+    /* Permit inner horizontal scroll without bleeding to page level */
+    #snc-carousel-flex-{{ section.id }} {
+      overflow-x: clip;
+    }
+
+	    #snc-carousel-flex-{{ section.id }} .snc-carousel-flex--container {
+	      padding:
+	        calc(0px + {{ section.settings.margin_top }}px)
+	        0px
+	        calc(40px + {{ section.settings.margin_bottom }}px);
+        gap: 24px;
+	    }
+
+    #snc-carousel-flex-{{ section.id }} .snc-carousel-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 0 20px;
+    }
+
+    #snc-carousel-flex-{{ section.id }} .snc-carousel-title {
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+    }
+
+    #snc-carousel-flex-{{ section.id }} .snc-carousel-text {
+      font-size: {{ section.settings.text_font_size_mobile }}px;
+      text-align: left;
+    }
+
+    #snc-carousel-flex-{{ section.id }} .snc-carousel-slider-wrapper {
+      margin-right: 0;
+      padding-right: 0;
+    }
+
+    #snc-carousel-flex-{{ section.id }} .snc-carousel-slider {
+      padding: 0 20px 16px;
+      gap: 14px;
+      scroll-snap-type: x mandatory;
+    }
+
+    #snc-carousel-flex-{{ section.id }} .snc-carousel-item {
+      width: calc(76vw - 14px); /* shows ~1.15 items — indicates swipeability */
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+
+    #snc-carousel-flex-{{ section.id }} .snc-card-media {
+      height: clamp(260px, 38vh, 380px);
+    }
+  }
+
+  {% if request.design_mode %}
+    #snc-carousel-flex-{{ section.id }} .snc-custom-card {
+      pointer-events: none;
+    }
+  {% endif %}
+
+	  /* Estilos para Scroll Horizontal (Pin Effect) */
+	  {% if section.settings.enable_horizontal_scroll %}
+	    @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+	      #snc-carousel-flex-{{ section.id }} {
+	        padding: 0; /* El padding lo manejará el contenedor sticky */
+	        overflow: visible; /* Permitir que sticky funcione correctamente */
+	      }
+      #snc-carousel-flex-{{ section.id }} .snc-pin-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center;
+        background-color: {{ section.settings.background_color }};
+        z-index: 10;
+      }
+
+      #snc-carousel-flex-{{ section.id }} .snc-carousel-flex--container {
+        padding:
+          calc(60px + {{ section.settings.margin_top }}px)
+          109px
+          calc(60px + {{ section.settings.margin_bottom }}px);
+        gap: 30px;
+      }
+
+      #snc-carousel-flex-{{ section.id }} .snc-card-media {
+        height: clamp(300px, 40vh, 440px);
+      }
+	      #snc-carousel-flex-{{ section.id }} .snc-carousel-slider {
+	        will-change: transform;
+	        overflow: visible;
+	        scroll-snap-type: none;
+	      }
+      /* Ajustar padding interno para evitar recortes en pantallas pequeñas */
+      #snc-carousel-flex-{{ section.id }} .snc-pin-sticky .snc-carousel-flex--container {
+      }
+    }
+  {% endif %}
+</style>
+
+<div id="snc-carousel-flex-{{ section.id }}" class="snc-carousel-wrapper" data-enable-scroll="{{ section.settings.enable_horizontal_scroll }}">
+  <div class="snc-pin-spacer">
+    <div class="snc-pin-sticky">
+      <div class="snc-carousel-flex--container">
+    <!-- Contenedor Superior -->
+    <div class="snc-carousel-header">
+      <h2 class="snc-carousel-title">{{ section.settings.title }}</h2>
+      <div class="snc-carousel-text">{{ section.settings.text }}</div>
+    </div>
+
+    <!-- Contenedor Inferior (Carrusel) -->
+    <div class="snc-carousel-slider-wrapper">
+      <div class="snc-carousel-slider">
+        {% for block in section.blocks %}
+          <div class="snc-carousel-item" {{ block.shopify_attributes }}>
+            {% assign product = block.settings.product %}
+            <div class="snc-custom-card">
+              <div class="snc-card-media">
+                {% if product.featured_image != blank %}
+                  {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'snc-card-image' }}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'snc-card-image' }}
+                {% endif %}
+              </div>
+              
+              <div class="snc-card-content-wrapper">
+                <div class="snc-card-header">
+                  <h3 class="snc-card-title">{{ product.title | default: 'PRODUCT TITLE' }}</h3>
+                  <button type="button" class="snc-card-wishlist" aria-label="Add to favorites">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  </button>
+                </div>
+
+	                <div class="snc-card-meta">
+	                  <span class="snc-card-price">{{ product.price | money | default: '$99.00' }}</span>
+	                </div>
+
+                <a href="{{ product.url }}" class="snc-card-button">
+                  DISCOVER MORE
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if section.settings.enable_horizontal_scroll %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const sectionId = "snc-carousel-flex-{{ section.id }}";
+    const wrapper = document.getElementById(sectionId);
+    const spacer = wrapper.querySelector('.snc-pin-spacer');
+    const sticky = wrapper.querySelector('.snc-pin-sticky');
+	    const slider = wrapper.querySelector('.snc-carousel-slider');
+	    
+	    // Solo ejecutar en escritorio (mayor a 1024px)
+	    if (window.innerWidth < 1024) return;
+	    // En touch devices debe funcionar como carrusel con swipe (sin pin/scroll vertical)
+	    const isTouchDevice =
+	      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+	      (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+	    if (isTouchDevice) return;
+
+	    let scrollDist = 0;
+
+    function initScroll() {
+      // Calcular cuánto se desborda el slider horizontalmente
+      // scrollWidth (ancho total contenido) - clientWidth (ancho visible)
+      const sliderScrollWidth = slider.scrollWidth;
+      const sliderClientWidth = slider.clientWidth;
+      
+      // La distancia extra que necesitamos scrollear
+      // Agregamos un pequeño buffer (e.g. 100px) para asegurar que se vea el final
+      scrollDist = sliderScrollWidth - sliderClientWidth;
+
+	      if (scrollDist <= 0) {
+	        spacer.style.height = 'auto';
+	        slider.style.transform = 'translateX(0px)';
+	        return;
+	      }
+
+      // La altura del contenedor spacer será: Altura de la ventana + Distancia a recorrer
+      spacer.style.height = (window.innerHeight + scrollDist) + 'px';
+    }
+
+    // Inicializar y recalcular en resize
+    window.addEventListener('load', initScroll);
+    window.addEventListener('resize', initScroll);
+    initScroll();
+
+    // Lógica de Scroll
+    let isScrolling = false;
+    function onScroll() {
+      if (!isScrolling) {
+        window.requestAnimationFrame(function() {
+          const rect = spacer.getBoundingClientRect();
+          
+          if (rect.top <= 0 && -rect.top <= scrollDist) {
+            slider.style.transform = `translateX(${rect.top}px)`;
+          } else if (rect.top > 0) {
+            slider.style.transform = `translateX(0px)`;
+          } else if (-rect.top > scrollDist) {
+            slider.style.transform = `translateX(-${scrollDist}px)`;
+          }
+          isScrolling = false;
+        });
+        isScrolling = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  });
+</script>
+{% endif %}

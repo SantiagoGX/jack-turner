@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "404": {
+    "title": "404",
+    "not_found": "Page not found.",
+    "back_to_shopping": "Back to shopping"
+  },
+  "blog": {
+    "article_comments": "Comments",
+    "article_metadata_html": "{{ date }} by {{ author }}",
+    "comment_form_body": "Comment",
+    "comment_form_email": "Email",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Post",
+    "comment_form_title": "Add a comment"
+  },
+  "cart": {
+    "checkout": "Checkout",
+    "title": "Cart",
+    "update": "Update",
+    "remove": "Remove"
+  },
+  "customers": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "title": "Login"
+    }
+  },
+  "collections": {
+    "title": "Collections"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Add to Apple Wallet",
+    "card": "Gift card",
+    "expired": "This gift card has expired",
+    "expires_on": "Expires on {{ expires_on }}",
+    "use_at_checkout": "Use this gift card at checkout"
+  },
+  "password": {
+    "title": "This shop is private",
+    "password": "Password",
+    "enter": "Enter"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search articles, pages, or products",
+    "submit": "Search",
+    "no_results_html": "No results found for {{ terms }}",
+    "results_for_html": "{{ count }} results found for {{ terms }}"
+  },
+  "sections": {
+    "about_layout": {
+      "name": "About Layout",
+      "labels": {
+        "layout_type": "Layout Type",
+        "two_columns": "Two columns (image + text)",
+        "text_only_wide": "Text only - Wide",
+        "text_only_narrow": "Text only - Narrow/Centered",
+        "image_only": "Image only - Full width"
+      }
+    }
+  },
+  "legacy_club": {
+    "title": "Jack Turner Legacy Club",
+    "subhead": "For those who move before the crowd...",
+    "body_intro": "Join a private list of collectors who get:",
+    "bullet_1": "Priority access to new drops.",
+    "bullet_2": "Exclusive offers not available on the site.",
+    "bullet_3": "Early release of articles and brand insights.",
+    "closing": "Limited communication. Maximum advantage.",
+    "cta": "Join the Legacy Club",
+    "email_label": "Email",
+    "email_placeholder": "Email address",
+    "success": "Thank you. You are on the list.",
+    "popup": {
+      "close": "Close",
+      "disabled_editor_hint": "Legacy Club pop-up is disabled. Enable it in section settings to preview."
+    }
+  }
+}

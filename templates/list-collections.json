@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "main": {
+      "type": "snc-list-collections",
+      "settings": {
+        "full_width": true,
+        "margin_top": 80,
+        "margin_bottom": 80,
+        "background_color": "#ffffff",
+        "kicker": "Collections",
+        "title": "Browse collections",
+        "text": "<p>Discover our curated selection.</p>",
+        "title_style": "h2",
+        "text_style": "body",
+        "collections_per_page": 24,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "show_product_count": false,
+        "button_preset": "2",
+        "button_style": "button"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

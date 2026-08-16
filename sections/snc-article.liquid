@@ -1,0 +1,542 @@
+{% comment %}
+  Styled article section for templates/article.json.
+{% endcomment %}
+
+{%- liquid
+  assign max_width = section.settings.max_width | default: 759
+  assign margin_top = section.settings.margin_top | default: 60
+  assign margin_bottom = section.settings.margin_bottom | default: 60
+-%}
+
+<section
+  class="snc-article"
+  style="
+    --snc-article-max-width: {{ max_width }}px;
+    --snc-article-margin-top: {{ margin_top }}px;
+    --snc-article-margin-bottom: {{ margin_bottom }}px;
+    --snc-article-title-color: {{ section.settings.title_color }};
+    --snc-article-meta-color: {{ section.settings.meta_color }};
+    --snc-article-text-color: {{ section.settings.text_color }};
+    --snc-article-accent: {{ section.settings.accent_color }};
+    --snc-article-image-radius: {{ section.settings.image_radius }}px;
+  "
+>
+  <div class="snc-article__inner">
+    <article>
+      <header class="snc-article__header">
+        <nav class="snc-article__breadcrumbs" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span>/</span>
+          <a href="{{ blog.url }}">{{ blog.title }}</a>
+          <span>/</span>
+          <span>{{ article.title | truncate: 36 }}</span>
+        </nav>
+
+        <h1 class="snc-article__title">{{ article.title }}</h1>
+
+        <div class="snc-article__meta">
+          {%- if section.settings.show_author -%}
+            <span>By {{ article.author }}</span>
+          {%- endif -%}
+          {%- if section.settings.show_date -%}
+            {%- if section.settings.show_author %} &bull; {% endif -%}
+            <span>{{ article.published_at | date: '%b %d, %Y' }}</span>
+          {%- endif -%}
+        </div>
+      </header>
+
+      {%- if article.image -%}
+        <div class="snc-article__featured-image">
+          {{
+            article.image
+            | image_url: width: 2000
+            | image_tag:
+              loading: 'eager',
+              class: 'snc-article__featured-img',
+              sizes: '(min-width: 990px) 759px, 100vw'
+          }}
+        </div>
+      {%- endif -%}
+
+      <div class="snc-article__content rte">
+        {{ article.content }}
+      </div>
+
+      <footer class="snc-article__footer">
+        {%- if section.settings.show_tags and article.tags.size > 0 -%}
+          <div class="snc-article__tags">
+            {%- for tag in article.tags -%}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="snc-article__tag">{{ tag }}</a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_share_buttons -%}
+          <div class="snc-article__share">
+            <span class="snc-article__share-label">Share:</span>
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: article.url }}"
+              class="snc-article__share-link"
+              target="_blank"
+              rel="noopener"
+              aria-label="Share on Facebook"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <a
+              href="https://twitter.com/intent/tweet?text={{ article.title | url_encode }}&url={{ shop.url | append: article.url }}"
+              class="snc-article__share-link"
+              target="_blank"
+              rel="noopener"
+              aria-label="Share on X"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            {%- if article.image -%}
+              <a
+                href="https://pinterest.com/pin/create/button/?url={{ shop.url | append: article.url }}&media={{ article.image | image_url: width: 1200 }}&description={{ article.title | url_encode }}"
+                class="snc-article__share-link"
+                target="_blank"
+                rel="noopener"
+                aria-label="Share on Pinterest"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.017 0C5.383 0 0 5.383 0 12.017c0 5.075 3.123 9.388 7.51 11.15.11.21.03.51-.18.62-.22.1-.48 0-.6-.22-.02-.03-.04-.05-.05-.08-4.72-2.03-7.8-6.88-7.68-12.28.12-5.54 4.6-10.02 10.14-10.14 6.4-.14 11.62 4.96 11.62 11.15 0 4.23-2.23 7.9-5.6 9.62-.1.05-.22.05-.32 0-.2-.1-.28-.38-.18-.58l1.02-4.1c.18-.72-.05-1.5-.6-2.02l-1.6-1.5c-.55-.52-1.3-.7-2.08-.4l-1.5.6c-.8.3-1.65.1-2.3-.5l-1.5-1.4c-.65-.6-1.02-1.45-1.02-2.35 0-1.88 1.52-3.4 3.4-3.4h5.5c1.88 0 3.4 1.52 3.4 3.4 0 .9-.36 1.7-1 2.3l-1.5 1.4c-.65.6-1.5.8-2.3.5l-1.5-.6c-.78-.3-1.22.25-1.22.9v.4c0 .45.35.8.8.8h.5c.45 0 .8-.35.8-.8v-.2c0-.45.35-.8.8-.8s.8.35.8.8v.2c0 1.32 1.08 2.4 2.4 2.4h.5c1.32 0 2.4-1.08 2.4-2.4V8.5c0-3.02-2.48-5.5-5.5-5.5h-5.5C7.48 3 5 5.48 5 8.5c0 1.9.98 3.6 2.5 4.5l1.5 1.4c.65.6 1.5.8 2.3.5l1.5-.6c.78-.3 1.65-.1 2.3.5l1.6 1.5c.55.52.78 1.3.6 2.02l-1.02 4.1c-.1.4.08.8.48 1 .4.2.85.1 1.15-.2.1-.1.18-.22.23-.35.02-.05.03-.1.04-.15 3.2-1.9 5.2-5.3 5.2-9.15C24.017 5.383 18.634 0 12.017 0z"></path></svg>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </footer>
+    </article>
+
+    {%- if blog.comments_enabled? -%}
+      <div class="snc-article__comments" id="comments">
+        {%- if article.comments_count > 0 -%}
+          <h2 class="snc-article__comments-title">Comments ({{ article.comments_count }})</h2>
+          {%- paginate article.comments by 5 -%}
+            {%- for comment in article.comments -%}
+              <div class="snc-article__comment">
+                <p class="snc-article__comment-body">{{ comment.content }}</p>
+                <small class="snc-article__comment-meta">{{ comment.author }} &bull; {{ comment.created_at | date: '%b %d, %Y' }}</small>
+              </div>
+            {%- endfor -%}
+            {%- if paginate.pages > 1 -%}
+              <div class="snc-article__pagination">
+                {{ paginate | default_pagination: anchor: 'comments' }}
+              </div>
+            {%- endif -%}
+          {%- endpaginate -%}
+        {%- endif -%}
+
+        {%- form 'new_comment', article -%}
+          <h2 class="snc-article__comments-title">Leave a comment</h2>
+          {{ form.errors | default_errors }}
+
+          <div class="snc-article__form-row">
+            <div class="snc-article__field">
+              <label class="snc-article__label" for="snc-comment-author-{{ section.id }}">Name</label>
+              <input id="snc-comment-author-{{ section.id }}" type="text" name="comment[author]" value="{{ form.author }}" placeholder="Name" required>
+            </div>
+            <div class="snc-article__field">
+              <label class="snc-article__label" for="snc-comment-email-{{ section.id }}">Email</label>
+              <input id="snc-comment-email-{{ section.id }}" type="email" name="comment[email]" value="{{ form.email }}" placeholder="Email" required>
+            </div>
+          </div>
+
+          <div class="snc-article__field">
+            <label class="snc-article__label" for="snc-comment-body-{{ section.id }}">Message</label>
+            <textarea id="snc-comment-body-{{ section.id }}" name="comment[body]" rows="5" placeholder="Message" required>{{ form.body }}</textarea>
+          </div>
+
+          <button type="submit" class="snc-article__button">Post comment</button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .snc-article__inner {
+    max-width: var(--snc-article-max-width);
+    margin-top: calc(var(--snc-article-margin-top) + var(--custom-header-total-height, 0px));
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--snc-article-margin-bottom);
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .snc-article__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .snc-article__breadcrumbs {
+    font-family: var(--font-body-family);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--snc-article-meta-color);
+    margin-bottom: 14px;
+  }
+
+  .snc-article__breadcrumbs a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .snc-article__breadcrumbs a:hover {
+    opacity: 0.75;
+  }
+
+  .snc-article__breadcrumbs span {
+    margin: 0 8px;
+  }
+
+  .snc-article__title {
+    font-family: var(--font-heading-family);
+    font-size: clamp(28px, 4.2vw, 40px);
+    color: var(--snc-article-title-color);
+    margin: 0 0 14px 0;
+    line-height: 1.15;
+    font-weight: 500;
+  }
+
+  .snc-article__meta {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    color: var(--snc-article-meta-color);
+  }
+
+  .snc-article__featured-image {
+    width: 100%;
+    border-radius: var(--snc-article-image-radius);
+    overflow: hidden;
+    margin-bottom: 40px;
+    background: #f3f3f3;
+  }
+
+  .snc-article__featured-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .snc-article__content {
+    font-family: var(--font-body-family);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--snc-article-text-color);
+  }
+
+  .snc-article__content p {
+    margin: 0 0 1.5em;
+  }
+
+  .snc-article__content h2,
+  .snc-article__content h3,
+  .snc-article__content h4 {
+    font-family: var(--font-heading-family);
+    color: var(--snc-article-title-color);
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .snc-article__content a {
+    color: var(--snc-article-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .snc-article__footer {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .snc-article__share {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .snc-article__share-label {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--snc-article-title-color);
+  }
+
+  .snc-article__share-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 50%;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    color: var(--snc-article-title-color);
+  }
+
+  .snc-article__share-link:hover {
+    background: #f5f5f5;
+    transform: scale(1.08);
+  }
+
+  .snc-article__share-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .snc-article__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .snc-article__tag {
+    background: #f1f1f1;
+    border: 1px solid #e5e5e5;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--snc-article-title-color);
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .snc-article__tag:hover {
+    background: #eaeaea;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .snc-article__comments {
+    margin-top: 60px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 40px;
+  }
+
+  .snc-article__comments-title {
+    font-family: var(--font-heading-family);
+    font-size: 28px;
+    color: var(--snc-article-title-color);
+    text-align: center;
+    margin: 0 0 24px 0;
+    font-weight: 500;
+  }
+
+  .snc-article__comment {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 18px 0;
+  }
+
+  .snc-article__comment-body {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    color: var(--snc-article-text-color);
+  }
+
+  .snc-article__comment-meta {
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    color: var(--snc-article-meta-color);
+  }
+
+  .snc-article__form-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .snc-article__field {
+    flex: 1;
+    margin-bottom: 14px;
+  }
+
+  .snc-article__label {
+    display: none;
+  }
+
+  .snc-article__field input,
+  .snc-article__field textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  }
+
+  .snc-article__field input:focus,
+  .snc-article__field textarea:focus {
+    outline: none;
+    border-color: var(--snc-article-accent);
+  }
+
+  .snc-article__button {
+    background: var(--snc-article-accent);
+    color: #ffffff;
+    border: none;
+    padding: 14px 24px;
+    font-family: var(--font-heading-family);
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: opacity 0.2s ease;
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 280px;
+    margin: 6px auto 0;
+  }
+
+  .snc-article__button:hover {
+    opacity: 0.9;
+  }
+
+  .snc-article__pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .snc-article__content {
+      font-size: 16px;
+    }
+
+    .snc-article__form-row {
+      flex-direction: column;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SNC Article",
+  "tag": "section",
+  "class": "section--snc-article",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 420,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "label": "Max width",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show share buttons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show tags",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "meta_color",
+      "label": "Meta color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Image radius",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Article"
+    }
+  ]
+}
+{% endschema %}

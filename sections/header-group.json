@@ -1,0 +1,259 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "snc-header": {
+      "type": "snc-header",
+      "blocks": {
+        "mobile_drawer_DCbzwC": {
+          "type": "mobile_drawer",
+          "settings": {
+            "mobile_menu": "main-menu",
+            "icon_version": "dark",
+            "enable_advanced_colors": true,
+            "panel_height_mode": "full_viewport",
+            "panel_top_gap": 0,
+            "panel_bottom_gap": 0,
+            "panel_side_gap": 0,
+            "panel_padding_horizontal": 20,
+            "panel_padding_top": 0,
+            "panel_padding_bottom": 40,
+            "panel_border_radius": 0,
+            "menu_gap": 10,
+            "menu_title_color": "#000000",
+            "close_icon_color": "#000000",
+            "menu_title_size": 16,
+            "menu_title_weight": 400,
+            "search_placeholder": "Search...",
+            "search_padding_v": 12,
+            "search_padding_h": 16,
+            "search_bg_color": "#f5f5f5",
+            "search_text_color": "#2a4432",
+            "search_border_radius": 8,
+            "menu_item_color": "#000000",
+            "menu_item_size": 18,
+            "menu_item_weight": 400,
+            "show_footer_content": false,
+            "editorial_text": "Cada huarache es una historia tejida a mano, un recuerdo que camina con nosotros.",
+            "editorial_color": "#000000",
+            "editorial_size": 18,
+            "editorial_weight": 400,
+            "social_facebook_url": "",
+            "social_instagram_url": "",
+            "social_tiktok_url": "",
+            "social_icon_size": 26,
+            "social_btn_size": 40,
+            "social_btn_bg": "rgba(0,0,0,0)",
+            "social_btn_border": "rgba(0,0,0,0)"
+          }
+        },
+        "search_overlay_nR3cmT": {
+          "type": "search_overlay",
+          "settings": {
+            "search_placeholder": "Search in Jack Turner",
+            "search_bar_radius": 0,
+            "search_results_radius": 0,
+            "search_input_weight": 400,
+            "result_title_color": "#000000",
+            "result_title_size": 18,
+            "result_title_weight": 500,
+            "result_price_size": 15,
+            "result_price_weight": 400,
+            "result_image_width": 90,
+            "result_image_brightness": 95,
+            "view_all_color": "#000000",
+            "view_all_weight": 500
+          }
+        }
+      },
+      "block_order": [
+        "mobile_drawer_DCbzwC",
+        "search_overlay_nR3cmT"
+      ],
+      "settings": {
+        "announcement_bg_color": "#000000",
+        "announcement_text_color": "#ffffff",
+        "announcement_arrow_color": "#ffffff",
+        "header_bg_color": "rgba(0,0,0,0)",
+        "header_text_color": "#ffffff",
+        "header_sticky_bg_color": "#ffffff",
+        "header_sticky_text_color": "#000000",
+        "show_burger_desktop": true,
+        "announcement-enabled": false,
+        "logo_version": "light",
+        "logo_version_sticky": "dark",
+        "icon_version": "light",
+        "icon_version_sticky": "dark",
+        "wishlist_url": "",
+        "locale-label": "EN",
+        "currency-label": "$USD",
+        "sticky-enabled": true,
+        "static_on_home_only": true,
+        "announcement_sticky": false,
+        "smooth_scroll_enabled": false,
+        "smooth_scroll_duration": 1.2,
+        "show-locale-selector": false,
+        "show-region-selector": false
+      }
+    },
+    "snc_side_cart_e9RVb7": {
+      "type": "snc-side-cart",
+      "blocks": {
+        "free_shipping_bar_3V3mRq": {
+          "type": "free_shipping_bar",
+          "settings": {
+            "threshold": 0,
+            "margin_bottom": 20,
+            "text_before": "",
+            "text_after": "",
+            "success_message": "<p><strong>¡Congrats!</strong> your shipping is free</p>",
+            "status_text_size": 14,
+            "progress_color": "#001f3f",
+            "progress_success_color": "#001f3f",
+            "text_color": "#333333",
+            "success_text_color": "#000000"
+          }
+        },
+        "favorites_AfAdKK": {
+          "type": "favorites",
+          "settings": {
+            "wishlist_details_gap": 0,
+            "wishlist_layout": "grid",
+            "wishlist_add_button_text": "ADD",
+            "wishlist_title_text": "Wishlist",
+            "wishlist_title_size": 20,
+            "wishlist_title_color": "#000000",
+            "wishlist_title_margin_bottom": 8,
+            "wishlist_title_margin_top": 25,
+            "wishlist_description_text": "You can find here your favorite products",
+            "wishlist_description_size": 14,
+            "wishlist_description_color": "#666666",
+            "wishlist_content_grid_gap": 12,
+            "wishlist_items_margin_bottom": 20,
+            "wishlist_card_bg": "#ffffff",
+            "wishlist_card_radius": 14,
+            "wishlist_card_padding": 12,
+            "wishlist_image_radius": 8,
+            "wishlist_card_border_color": "#f0f0f0",
+            "wishlist_card_border_enabled": false,
+            "wishlist_card_shadow_enabled": false,
+            "wishlist_card_shadow": "0 4px 12px rgba(0,0,0,0.05)"
+          }
+        },
+        "upsell_7jjHwq": {
+          "type": "upsell",
+          "settings": {
+            "margin_top": 50,
+            "margin_bottom": 50,
+            "vertical_padding": 15,
+            "item_height": 100,
+            "item_padding": 10,
+            "card_radius": 0,
+            "image_radius": 0,
+            "collection": "rings",
+            "limit": 5,
+            "title": "Complete the colection",
+            "text": "Agrega estos productos a tu orden.",
+            "bg_color": "#f5f5f5",
+            "title_color": "#333333",
+            "text_color": "#666666",
+            "title_size": 14,
+            "text_size": 12,
+            "add_button_text": "Add",
+            "show_plus_icon": true,
+            "add_btn_bg_color": "rgba(0,0,0,0)",
+            "add_btn_text_color": "#000000",
+            "add_btn_border_radius": 0,
+            "add_btn_border_width": 1,
+            "add_btn_border_color": "#000000",
+            "add_btn_border_position": "bottom",
+            "add_btn_padding_vertical": 4,
+            "add_btn_padding_horizontal": 0
+          }
+        },
+        "cart_summary_VnT3MA": {
+          "type": "cart_summary",
+          "settings": {
+            "margin_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "free_shipping_bar_3V3mRq",
+        "favorites_AfAdKK",
+        "upsell_7jjHwq",
+        "cart_summary_VnT3MA"
+      ],
+      "name": "SNC Side Cart",
+      "settings": {
+        "cart_tab_label": "Cart",
+        "wishlist_tab_label": "Wishlist",
+        "cart_title_fallback_text": "Cart",
+        "cart_title_fallback_size": 16,
+        "cart_title_fallback_color": "#2a4432",
+        "cart_title_fallback_weight": 600,
+        "cart_title_fallback_bg": "#f0f0f0",
+        "cart_full_height": true,
+        "cart_border_radius": 0,
+        "cart_side_margin": 0,
+        "cart_width": 30,
+        "cart_switcher_font_size": 16,
+        "cart_switcher_active_color": "#2a4432",
+        "cart_switcher_inactive_color": "#999999",
+        "cart_gap": 20,
+        "cart_header_padding_vertical": 20,
+        "cart_header_padding_horizontal": 20,
+        "cart_footer_padding_vertical": 20,
+        "cart_footer_padding_horizontal": 20,
+        "cart_body_padding_vertical": 20,
+        "cart_body_padding_horizontal": 20,
+        "mobile_cart_header_padding_vertical": 15,
+        "mobile_cart_header_padding_horizontal": 15,
+        "mobile_cart_body_padding_vertical": 15,
+        "mobile_cart_body_padding_horizontal": 15,
+        "mobile_cart_footer_padding_vertical": 15,
+        "mobile_cart_footer_padding_horizontal": 15,
+        "cart_item_image_radius": 0,
+        "cart_item_image_brightness": 100,
+        "cart_qty_icon_size": 10,
+        "cart_qty_border_width": 0,
+        "cart_qty_border_radius": 4,
+        "cart_item_title_font_size": 14,
+        "cart_item_title_color": "#000000",
+        "cart_item_price_color": "#000000",
+        "cart_item_price_weight": 300,
+        "cart_checkout_btn_bg": "#000000",
+        "cart_checkout_btn_text": "#ffffff",
+        "cart_checkout_btn_label": "GO TO CHECKOUT",
+        "cart_guarantee_text": "Your purchase is protected by our service policy",
+        "cart_payment_icons": "visa,master,american_express,paypal",
+        "cart_empty_title": "It seems you haven't added anything yet.",
+        "cart_empty_title_style": "h3",
+        "cart_empty_text": "",
+        "cart_empty_text_style": "body",
+        "cart_empty_image_width": 185,
+        "cart_empty_button_1_text": "See Collection",
+        "cart_empty_button_1_link": "",
+        "cart_empty_button_1_bg_color": "#000000",
+        "cart_empty_button_1_text_color": "#ffffff",
+        "cart_empty_button_2_text": "",
+        "cart_empty_button_2_link": "",
+        "cart_empty_button_2_bg_color": "#ffffff",
+        "cart_empty_button_2_text_color": "#000000"
+      }
+    }
+  },
+  "order": [
+    "snc-header",
+    "snc_side_cart_e9RVb7"
+  ]
+}

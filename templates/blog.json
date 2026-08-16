@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "snc-blog-grid",
+      "settings": {
+        "title": "",
+        "blog": "news",
+        "limit": 48,
+        "excerpt_words": 50,
+        "read_more_label": "Read more",
+        "empty_text": "No articles found.",
+        "max_width": 1440,
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "title_color": "#000000",
+        "meta_color": "#666666",
+        "text_color": "#000000",
+        "card_radius": 12,
+        "image_radius": 10
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

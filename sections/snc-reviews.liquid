@@ -1,0 +1,660 @@
+{%- liquid
+  assign card_height = section.settings.card_height | default: 450
+  
+  # Configuración para evitar saltos en blanco: Generamos suficientes copias
+  assign duplication_count = 10
+  assign animation_end = 100.0 | divided_by: duplication_count
+-%}
+
+{% schema %}
+{
+  "name": "SNC Reviews",
+  "class": "section--snc-reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "LO QUE DICEN DE NOSOTROS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Reseñas"
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "min": 400,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Altura de la tarjeta",
+      "default": 450
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 120,
+      "max": 420,
+      "step": 10,
+      "unit": "px",
+      "label": "Altura de la imagen en tarjeta",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "min": 120,
+      "max": 420,
+      "step": 10,
+      "unit": "px",
+      "label": "Altura de la imagen (móvil)",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "horizontal_gap",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Espaciado horizontal",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "label": "Velocidad de animación",
+      "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pausar animación al pasar el mouse",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fade",
+      "label": "Mostrar desvanecido en bordes",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Reseña",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título de la reseña"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Reseña",
+          "default": "Texto de la reseña..."
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Estrellas",
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Reviews"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .snc-reviews--root {
+    padding: 80px 0;
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .snc-reviews--header {
+    text-align: center;
+    padding: 0 20px;
+    max-width: 1512px;
+    margin: 0 auto 60px;
+  }
+
+  .snc-reviews--subtitle {
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 12px 0;
+    display: block;
+  }
+
+  .snc-reviews--title {
+    font-family: var(--font-main);
+    font-size: 34px;
+    color: #000000;
+    margin: 0;
+    line-height: 1.1;
+    font-weight: 400;
+  }
+
+  .snc-reviews--container {
+    overflow: hidden;
+    padding: 0 0 40px;
+    width: 100%;
+    position: relative;
+  }
+
+  {%- if section.settings.show_fade -%}
+  .snc-reviews--container::before,
+  .snc-reviews--container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .snc-reviews--container::before {
+    left: 0;
+    background: linear-gradient(to right, #FFFFFF, transparent);
+  }
+
+  .snc-reviews--container::after {
+    right: 0;
+    background: linear-gradient(to left, #FFFFFF, transparent);
+  }
+  {%- endif -%}
+
+  .snc-reviews--track {
+    display: flex;
+    width: max-content;
+    animation: snc-reviews-marquee {{ section.settings.speed }}s linear infinite;
+    will-change: transform;
+  }
+  
+  {% if section.settings.pause_on_hover %}
+  .snc-reviews--container:hover .snc-reviews--track {
+    animation-play-state: paused;
+  }
+  {% endif %}
+
+  .snc-reviews--set {
+    display: flex;
+    gap: {{ section.settings.horizontal_gap }}px;
+    padding-right: {{ section.settings.horizontal_gap }}px;
+  }
+  
+  @keyframes snc-reviews-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-{{ animation_end }}%); }
+  }
+
+  .snc-reviews--card {
+    background-color: #FAFAFA;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 300px;
+    height: {{ card_height }}px;
+    flex-shrink: 0;
+  }
+
+  .snc-reviews--image-wrapper {
+    width: 100%;
+    flex: 1;
+    min-height: {{ section.settings.image_height }}px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .snc-reviews--card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .snc-reviews--card:hover .snc-reviews--card-image {
+    transform: scale(1.05);
+  }
+  .snc-reviews--card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  }
+  
+  .snc-reviews--card-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px 5px 5px 5px;
+    background: transparent;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+
+  .snc-reviews--card-title {
+    font-family: var(--font-main);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+    color: #000000;
+  }
+
+  .snc-reviews--card-text {
+    font-family: var(--font-main);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    color: #666666;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .snc-reviews--stars {
+    display: flex;
+    gap: 2px;
+    color: #FFC107;
+    margin-top: 5px;
+  }
+  
+  .snc-reviews--star svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+
+  .snc-reviews--read-more {
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    margin-top: auto;
+    text-decoration: underline;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .snc-reviews--root {
+      padding: 60px 0;
+    }
+    .snc-reviews--title {
+      font-size: 24px;
+    }
+    .snc-reviews--header {
+      margin-bottom: 40px;
+    }
+    .snc-reviews--container {
+      padding-bottom: 20px;
+    }
+    
+    .snc-reviews--set {
+      gap: 12px;
+      padding-right: 12px;
+    }
+    .snc-reviews--card {
+      padding: 10px;
+      width: 260px;
+      height: 380px;
+    }
+    .snc-reviews--image-wrapper {
+      min-height: {{ section.settings.image_height_mobile }}px;
+    }
+    .snc-reviews--card-title {
+      font-size: 18px;
+    }
+    .snc-reviews--card-text {
+      font-size: 13px;
+    }
+  }
+
+  /* Estilos del Modal */
+  .snc-reviews--modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .snc-reviews--modal.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  .snc-reviews--modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+  .snc-reviews--modal-content {
+    position: relative;
+    background: #fff;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    border-radius: 12px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    z-index: 2;
+  }
+  .snc-reviews--modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    color: #000000;
+    transition: transform 0.2s ease;
+  }
+  .snc-reviews--modal-close:hover { transform: scale(1.1); }
+  .snc-reviews--modal-image-col { flex: 1; background: #f5f5f5; min-height: 300px; position: relative; }
+  .snc-reviews--modal-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .snc-reviews--modal-text-col { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+  .snc-reviews--modal-title { font-family: var(--font-main); font-size: 20px; font-weight: 600; color: #000000; margin: 0; line-height: 1.2; }
+  .snc-reviews--modal-body { font-family: var(--font-main); font-size: 14px; line-height: 1.6; color: #333; white-space: pre-wrap; }
+  .snc-reviews--modal-stars { display: flex; gap: 4px; color: #FFC107; }
+  .snc-reviews--modal-stars svg { width: 20px; height: 20px; fill: currentColor; }
+
+  @media (max-width: 768px) {
+    .snc-reviews--modal-content { flex-direction: column; max-height: 85vh; width: 90%; }
+    .snc-reviews--modal-image-col { flex: 0 0 40%; min-height: auto; }
+    .snc-reviews--modal-text-col { flex: 1; padding: 20px; }
+    .snc-reviews--modal-title { font-size: 20px; }
+    .snc-reviews--modal-body { font-size: 14px; }
+  }
+
+  .snc-reviews--modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid #E5E5E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: transform 0.2s ease;
+    color: #000000;
+  }
+  .snc-reviews--modal-nav:hover { transform: translateY(-50%) scale(1.1); }
+  .snc-reviews--modal-nav.prev { left: 20px; }
+  .snc-reviews--modal-nav.next { right: 20px; }
+</style>
+
+<div class="snc-reviews--root">
+  <div class="snc-reviews--header">
+    {%- if section.settings.title != blank -%}
+      <h2 class="snc-reviews--title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <span class="snc-reviews--subtitle">{{ section.settings.subtitle | escape }}</span>
+    {%- endif -%}
+  </div>
+
+  <div class="snc-reviews--container">
+    <div class="snc-reviews--track">
+      {%- capture reviews_content -%}
+        {%- for block in section.blocks -%}
+          <div
+            class="snc-reviews--card"
+            role="button"
+            tabindex="0"
+            data-index="{{ forloop.index0 }}"
+            {{ block.shopify_attributes }}
+            data-open-modal
+            data-image="{% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 1200 }}{% endif %}"
+            data-title="{{ block.settings.title | escape }}"
+            data-text="{{ block.settings.text | escape }}"
+            data-rating="{{ block.settings.rating }}"
+          >
+            <div class="snc-reviews--image-wrapper">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  class="snc-reviews--card-image"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </div>
+
+            <div class="snc-reviews--card-content">
+              <h3 class="snc-reviews--card-title">{{ block.settings.title | escape }}</h3>
+              <p class="snc-reviews--card-text">{{ block.settings.text | escape }}</p>
+              <div class="snc-reviews--stars">
+                {%- for i in (1..block.settings.rating) -%}
+                  <span class="snc-reviews--star">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  </span>
+                {%- endfor -%}
+              </div>
+              <span class="snc-reviews--read-more">Read more</span>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endcapture -%}
+        
+      {%- for i in (1..duplication_count) -%}
+        <div class="snc-reviews--set" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
+          {{ reviews_content }}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Estructura del Modal {%- endcomment -%}
+<div class="snc-reviews--modal" id="snc-reviews-modal-{{ section.id }}" aria-hidden="true">
+  <div class="snc-reviews--modal-overlay" data-close-modal></div>
+  <div class="snc-reviews--modal-content">
+    <button type="button" class="snc-reviews--modal-close" data-close-modal aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 1L1 13M1 1l12 12"/></svg>
+    </button>
+    <button type="button" class="snc-reviews--modal-nav prev" data-modal-prev aria-label="Previous">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button type="button" class="snc-reviews--modal-nav next" data-modal-next aria-label="Next">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="snc-reviews--modal-image-col">
+      <img src="" alt="" class="snc-reviews--modal-img">
+    </div>
+    <div class="snc-reviews--modal-text-col">
+      <h3 class="snc-reviews--modal-title"></h3>
+      <div class="snc-reviews--modal-stars"></div>
+      <div class="snc-reviews--modal-body"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('snc-reviews-modal-{{ section.id }}');
+    if (!modal) return;
+    
+    const modalImg = modal.querySelector('.snc-reviews--modal-img');
+    const modalTitle = modal.querySelector('.snc-reviews--modal-title');
+    const modalBody = modal.querySelector('.snc-reviews--modal-body');
+    const modalStars = modal.querySelector('.snc-reviews--modal-stars');
+    const closeButtons = modal.querySelectorAll('[data-close-modal]');
+    const prevBtn = modal.querySelector('[data-modal-prev]');
+    const nextBtn = modal.querySelector('[data-modal-next]');
+    
+    let currentIndex = 0;
+    const totalReviews = {{ section.blocks.size }};
+    
+    function closeModal() {
+      modal.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    }
+
+    function updateModal(index) {
+      // Buscar cualquier tarjeta con el índice correcto (hay duplicados)
+      const card = document.querySelector(`.snc-reviews--card[data-index="${index}"]`);
+      if (!card) return;
+      
+      const { image, title, text, rating } = card.dataset;
+      
+      modalImg.src = image || '';
+      modalImg.style.display = image ? 'block' : 'none';
+      modalTitle.textContent = title;
+      modalBody.textContent = text;
+      
+      let starsHtml = '';
+      for (let i = 0; i < parseInt(rating); i++) starsHtml += '<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
+      modalStars.innerHTML = starsHtml;
+      
+      currentIndex = index;
+    }
+
+    document.querySelectorAll('.snc-reviews--card').forEach(card => {
+      function openCardModal() {
+        const index = parseInt(card.dataset.index);
+        updateModal(index);
+        modal.classList.add('is-visible');
+        document.body.style.overflow = 'hidden';
+      }
+
+      card.addEventListener('click', openCardModal);
+      card.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        openCardModal();
+      });
+    });
+    
+    prevBtn.addEventListener('click', () => {
+      const newIndex = (currentIndex - 1 + totalReviews) % totalReviews;
+      updateModal(newIndex);
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      const newIndex = (currentIndex + 1) % totalReviews;
+      updateModal(newIndex);
+    });
+    
+    closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!('ontouchstart' in window)) return;
+
+    const root = document.querySelector('.snc-reviews--root');
+    if (!root) return;
+    const track = root.querySelector('.snc-reviews--track');
+    if (!track) return;
+
+    const SPEED = {{ section.settings.speed }};
+    const ANIM_END_PCT = {{ animation_end }};
+    const SWIPE_THRESHOLD = 8;
+
+    let touchStartX = 0;
+    let touchStartTranslateX = 0;
+    let isSwiping = false;
+
+    function getTranslateX(el) {
+      const matrix = new DOMMatrix(window.getComputedStyle(el).transform);
+      return matrix.m41;
+    }
+
+    function resumeFrom(posX) {
+      const totalPx = track.scrollWidth * (ANIM_END_PCT / 100);
+      let offset = (-posX) % totalPx;
+      if (offset < 0) offset += totalPx;
+      const delay = -(offset / totalPx) * SPEED;
+      track.style.transform = '';
+      track.style.animation = 'snc-reviews-marquee ' + SPEED + 's ' + delay + 's linear infinite';
+    }
+
+    track.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+      touchStartTranslateX = getTranslateX(track);
+      isSwiping = false;
+      track.style.animation = 'none';
+      track.style.transform = 'translateX(' + touchStartTranslateX + 'px)';
+    }, { passive: true });
+
+    track.addEventListener('touchmove', function(e) {
+      const deltaX = e.touches[0].clientX - touchStartX;
+      if (Math.abs(deltaX) > SWIPE_THRESHOLD) isSwiping = true;
+      if (!isSwiping) return;
+      track.style.transform = 'translateX(' + (touchStartTranslateX + deltaX) + 'px)';
+    }, { passive: true });
+
+    track.addEventListener('touchend', function(e) {
+      const deltaX = e.changedTouches[0].clientX - touchStartX;
+      const finalX = isSwiping ? touchStartTranslateX + deltaX : touchStartTranslateX;
+      resumeFrom(finalX);
+    }, { passive: true });
+  });
+</script>

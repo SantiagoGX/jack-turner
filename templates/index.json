@@ -1,0 +1,625 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "snc-info-hero",
+      "name": "SNC Info Hero",
+      "settings": {
+        "video": "shopify://files/videos/Hero JT.mp4",
+        "color_scheme": "scheme-1",
+        "margin_top": 0,
+        "height_vh": 100,
+        "full_width": true,
+        "border_radius": 0,
+        "overlay_type": "gradient",
+        "gradient_direction": "to top",
+        "overlay_color": "#000000",
+        "overlay_opacity": 100,
+        "content_vertical_position": "center",
+        "content_horizontal_position": "center",
+        "text_alignment": "center",
+        "title": "Not made for everyone.   Limited mechanical timepieces for those who understand what a watch is meant to become.",
+        "title_max_width": 800,
+        "subtitle": "Discernment Is Rare.",
+        "text": "<p><em>- Chosen by collectors in the U.S. and abroad -</em></p>",
+        "title_style": "h2",
+        "title_scale": 96,
+        "title_scale_mobile": 100,
+        "subtitle_style": "h1",
+        "subtitle_scale": 120,
+        "subtitle_scale_mobile": 100,
+        "text_style": "body",
+        "text_scale": 100,
+        "text_scale_mobile": 100,
+        "button_style": "button",
+        "button_scale": 100,
+        "button_scale_mobile": 106,
+        "button_label": "Explore",
+        "button_link": "shopify://collections/jack-turner-legacy-watches",
+        "button_preset": "1",
+        "show_award_badge": true,
+        "award_badge_text": "THE PERFECT GIFT AWARD 2026",
+        "award_badge_position": "below_button",
+        "award_badge_image": "shopify://shop_images/IMG_8365.png"
+      }
+    },
+    "snc_custom_content_text_i6YUXA": {
+      "type": "snc-custom-content-text",
+      "blocks": {
+        "images_9TyKmi": {
+          "type": "images",
+          "settings": {
+            "image1": "shopify://shop_images/898794DA-7DCD-486C-8774-81FFFB864BE1.png",
+            "mobile_layout": "row",
+            "gap": 28,
+            "border_radius": 8,
+            "image_max_width": 200,
+            "image_max_width_mobile": 170,
+            "image_alignment": "center",
+            "margin_bottom": 21
+          }
+        },
+        "text_qaE9qn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Time, Considered.</p>",
+            "color": "#4a4a48",
+            "font_size": 20,
+            "font_size_mobile": 17,
+            "font_scale": 100,
+            "font_scale_mobile": 100,
+            "font_weight": 400,
+            "margin_bottom": 12,
+            "text_max_width": 800
+          }
+        },
+        "text_TTrtWM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>For those who understand the value of restraint.</p>",
+            "color": "#000000",
+            "font_size": 32,
+            "font_size_mobile": 22,
+            "font_scale": 100,
+            "font_scale_mobile": 100,
+            "font_weight": 700,
+            "margin_bottom": 0,
+            "text_max_width": 800
+          }
+        },
+        "buttons_acUXL9": {
+          "type": "buttons",
+          "settings": {
+            "btn1_style_mode": "custom",
+            "btn1_preset": "1",
+            "btn1_typography": "button",
+            "btn1_text": "Discover The Quantum Axis.",
+            "btn1_border_color": "#0d0d0d",
+            "btn1_border_width": 0,
+            "btn1_underline": true,
+            "btn1_link": "shopify://products/quantum-axis-tourbillon",
+            "btn1_bg_color": "rgba(0,0,0,0)",
+            "btn1_text_color": "#0d0d0d",
+            "btn1_font_size": 20,
+            "btn1_scale": 100,
+            "btn1_scale_mobile": 94,
+            "btn1_font_weight": 400,
+            "btn1_padding_v": 8,
+            "btn1_padding_h": 10,
+            "btn1_border_radius": 0,
+            "btn2_style_mode": "custom",
+            "btn2_preset": "2",
+            "btn2_typography": "button",
+            "btn2_text": "",
+            "btn2_link": "",
+            "btn2_bg_color": "#ffffff",
+            "btn2_text_color": "#2a4432",
+            "btn2_border_color": "#2a4432",
+            "btn2_border_width": 1,
+            "btn2_font_size": 16,
+            "btn2_scale": 100,
+            "btn2_scale_mobile": 100,
+            "btn2_font_weight": 700,
+            "btn2_padding_v": 12,
+            "btn2_padding_h": 24,
+            "btn2_border_radius": 4,
+            "gap": 15
+          }
+        }
+      },
+      "block_order": [
+        "images_9TyKmi",
+        "text_qaE9qn",
+        "text_TTrtWM",
+        "buttons_acUXL9"
+      ],
+      "name": "SNC Custom Content Text",
+      "settings": {
+        "margin_top": 35,
+        "margin_bottom": 0,
+        "max_width": 680,
+        "alignment": "center",
+        "section_layout": "stacked",
+        "split_image_position": "right",
+        "split_text_alignment": "left",
+        "split_vertical_align": "center",
+        "split_gap": 52,
+        "split_mobile_order": "content_first"
+      }
+    },
+    "snc_images_k6YQcC": {
+      "type": "snc-images",
+      "blocks": {
+        "image_3zmFte": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_5wzhin5wzhin5wzh_1.png",
+            "image_width": 100,
+            "alignment": "center",
+            "link": "shopify://products/quantum-axis-tourbillon",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_3zmFte"
+      ],
+      "custom_css": [],
+      "name": "SNC Images",
+      "settings": {
+        "background_color": "rgba(0,0,0,0)",
+        "margin_top": 40,
+        "margin_bottom": 40,
+        "full_width": true,
+        "max_width": 1200,
+        "columns_desktop": 1,
+        "columns_mobile": 1,
+        "gap": 20,
+        "image_ratio": "auto",
+        "image_fit": "cover",
+        "border_radius": 8,
+        "caption_color": "#000000",
+        "caption_size": 16
+      }
+    },
+    "snc_flex_content_PAgfPW": {
+      "type": "snc-flex-content",
+      "blocks": {
+        "content_block_9ht87K": {
+          "type": "content_block",
+          "settings": {
+            "text_content": "<p>Jack Turner creates mechanical timepieces in limited numbers, without compromise.</p>",
+            "width": 0,
+            "text_max_width": 570,
+            "text_color_val": "#ffffff",
+            "text_font_size": 22,
+            "text_font_size_mobile": 16,
+            "text_font_weight": 400,
+            "text_line_height": 1,
+            "text_letter_spacing": 0,
+            "text_transform": "none",
+            "text_align": "left",
+            "text_margin_bottom": 0,
+            "text_padding_v": 0,
+            "text_padding_h": 0,
+            "text_icon_width": 20,
+            "text_icon_position": "right",
+            "button_label": "Discover More",
+            "button_link": "shopify://collections/jack-turner-legacy-watches",
+            "button_preset": "1",
+            "button_style": "h1",
+            "button_margin_bottom": 10,
+            "button_font_size": 16,
+            "button_font_weight": 700,
+            "button_padding_v": 12,
+            "button_padding_h": 24,
+            "button_text_color": "#ffffff",
+            "button_border_color": "#ffffff",
+            "border_width": 1,
+            "button_icon_image": "shopify://shop_images/arrow_-left-claroclaro.svg",
+            "button_icon_width": 20,
+            "button_icon_position": "right",
+            "image": "shopify://shop_images/IMG_8169_eb4d7c9c-6be3-4df3-95a7-9d2bf38e781b.jpg",
+            "image_width": 0,
+            "image_height": 400,
+            "image_link": "shopify://collections/jack-turner-legacy-watches",
+            "image_border_radius": 0
+          }
+        },
+        "content_block_LbBiVQ": {
+          "type": "content_block",
+          "settings": {
+            "text_content": "<p>Discover our essential accessories crafted for the modern collector.</p>",
+            "width": 100,
+            "text_max_width": 580,
+            "text_color_val": "#ffffff",
+            "text_font_size": 22,
+            "text_font_size_mobile": 16,
+            "text_font_weight": 400,
+            "text_line_height": 1,
+            "text_letter_spacing": 1,
+            "text_transform": "none",
+            "text_align": "left",
+            "text_margin_bottom": 0,
+            "text_padding_v": 0,
+            "text_padding_h": 0,
+            "text_icon_width": 20,
+            "text_icon_position": "right",
+            "button_label": "Shop Accessories",
+            "button_link": "shopify://collections/accessories",
+            "button_preset": "1",
+            "button_style": "h1",
+            "button_margin_bottom": 0,
+            "button_font_size": 16,
+            "button_font_weight": 700,
+            "button_padding_v": 10,
+            "button_padding_h": 30,
+            "button_text_color": "#ffffff",
+            "button_border_color": "#ffffff",
+            "border_width": 1,
+            "button_icon_image": "shopify://shop_images/arrow_-left-claroclaro.svg",
+            "button_icon_width": 20,
+            "button_icon_position": "right",
+            "image": "shopify://shop_images/IMG_8229.jpg",
+            "image_width": 0,
+            "image_height": 400,
+            "image_link": "shopify://collections/accessories",
+            "image_border_radius": 0
+          }
+        }
+      },
+      "block_order": [
+        "content_block_9ht87K",
+        "content_block_LbBiVQ"
+      ],
+      "name": "SNC Flex Content",
+      "settings": {
+        "background_color": "#0e0e0e",
+        "margin_top": 25,
+        "margin_bottom": 100,
+        "full_width": true,
+        "max_width": 1200
+      }
+    },
+    "snc_flex_content_vertical_AijKTH": {
+      "type": "snc-flex-content-vertical",
+      "blocks": {
+        "scroll_slide_t9GFXA": {
+          "type": "scroll_slide",
+          "settings": {
+            "subtitle": "The Modern Heirloom",
+            "title": "“Meridian” Limited Edition Swiss Automatic",
+            "text": "",
+            "image": "shopify://shop_images/image_2.png",
+            "product_link": "jack-turner-meridian-limited-edition-swiss-automatic-mvmt-sports-watch"
+          }
+        },
+        "scroll_slide_9JiH7Q": {
+          "type": "scroll_slide",
+          "settings": {
+            "subtitle": "A Diver Built to Outlast the Tide.",
+            "title": "\"Tsunami\" Limited Edition Swiss Made Diver",
+            "text": "",
+            "image": "shopify://shop_images/Fondo_de_WhatsApp_Image_2026-02-21_at_18.25_eliminado.30_c8caf121-eb0b-41b1-97a6-c375a5e6dcb9.png",
+            "product_link": "the-tsunami-swiss-automatic-dive-watch"
+          }
+        },
+        "scroll_slide_fMriNQ": {
+          "type": "scroll_slide",
+          "settings": {
+            "subtitle": "Understated Strength. Daily Dependability.",
+            "title": "The Silver “Maverick”Pilot/Field Watch",
+            "text": "",
+            "image": "shopify://shop_images/Fondo_de_IMG-5654_2_eliminado.png",
+            "product_link": "jack-turner-watches-maverick-pilot-feild-watch"
+          }
+        }
+      },
+      "block_order": [
+        "scroll_slide_t9GFXA",
+        "scroll_slide_9JiH7Q",
+        "scroll_slide_fMriNQ"
+      ],
+      "name": "SNC Flex Content Vertical",
+      "settings": {
+        "background_color": "#f1f1f1",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "text_color": "#ffffff",
+        "button_label": "Explore",
+        "button_link": "shopify://collections/jack-turner-legacy-watches",
+        "button_icon": "shopify://shop_images/arrow_-left-claroclaro_31f09465-bdca-495b-8b39-2dda07913d18.svg",
+        "button_icon_width": 20,
+        "button_icon_position": "right"
+      }
+    },
+    "snc_our_story": {
+      "type": "snc-our-story",
+      "name": "SNC Our Story",
+      "settings": {
+        "subtitle": "OUR STORY",
+        "title": "Legacy Is Not Given. It's Built.",
+        "text": "<p>Jack Turner was founded on a simple belief: a watch should outlive the moment it was purchased in. Inspired by heritage, discipline, and timeless design, every piece is produced in limited numbers and built with mechanical integrity at its core.</p>",
+        "button_label": "Discover Our Story",
+        "button_link": "shopify://pages/our-story",
+        "button_preset": "1",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "subtitle_color": "#666666",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "layout": "centered"
+      }
+    },
+    "snc_reviews_UwxYRj": {
+      "type": "snc-reviews",
+      "blocks": {
+        "review_yJeLBQ": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/0c3407c1-e807-4045-a29c-5a37a365f871.jpg",
+            "title": "Santiago, Miami FL",
+            "text": "I’ve had the Meridian on my wrist for a few days now and I can honestly say it exceeded my expectations. The first thing I noticed was how clean and well-balanced the design is—it looks even better in person than it does online.\nIt’s super comfortable and sits perfectly on the wrist, especially with a dress shirt. I’ve already gotten a couple of compliments at work, which never really happens with my other watches.",
+            "rating": 5
+          }
+        },
+        "review_GMFDQD": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Resized_20250627_163424.jpg",
+            "title": "Lucien - Provence-Alpes-Côte d'Azur - France",
+            "text": "C’est de loin la plus belle montre de ma collection actuelle. Tous mes amis passionnés d’horlogerie pensent que je l’ai payée très cher, et je l’adore.",
+            "rating": 5
+          }
+        },
+        "review_jFQBtD": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/1014F46B-F467-45C6-B745-12A655402EDC.jpg",
+            "title": "Frankie G- Chelsea, NY",
+            "text": "Most dive watches look the same but the Tsunami has its own DNA. I always have people asking me what I'm wearing which is a great conversation starter.",
+            "rating": 5
+          }
+        },
+        "review_yary87": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/D44CE9BD-EA4E-4DC4-9FD8-3B298CBBFF7F.heic",
+            "title": "Chandler - New York, NY",
+            "text": "This timepiece reminds me of my Tissot-PRX that i bought last year but it's ten times better. I appreciate how thin it is, it's simplicity, sleek profile and the way that it shines when i move my wrist. I'm always getting compliments so i love the attention that it gets. I just genuinely adore this watch. My only issue with them is that the watches are made in small batches so on two occasions, I've missed out on pieces that had caught my eye.",
+            "rating": 5
+          }
+        },
+        "review_mc6Ww9": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/image_81f19efe-3a80-4046-9f93-8df7b2f0e368.jpg",
+            "title": "Armando - Monterrey, Mexico",
+            "text": "Realmente amo mi nuevo reloj. Lo uso todos los días y actualmente estoy ahorrando para comprar otro reloj de estos chicos.",
+            "rating": 5
+          }
+        },
+        "review_zcHyhy": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Facetune_23-07-2023-12-38-33-compressed.jpg",
+            "title": "Steven - Morristown, NJ",
+            "text": "Recently bought my watch, and I'm impressed by the quality of the materials used. It's evident that a lot of thought and effort went into making this piece. While not the cheapest, it surpasses other brands offering more features for the price. Highly satisfied with my purchase.",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "review_yJeLBQ",
+        "review_GMFDQD",
+        "review_jFQBtD",
+        "review_yary87",
+        "review_mc6Ww9",
+        "review_zcHyhy"
+      ],
+      "name": "SNC Reviews",
+      "settings": {
+        "subtitle": "Authentic feedback from collectors who wear Jack Turner Watches.",
+        "title": "What Owners Are Saying:",
+        "card_height": 640,
+        "image_height": 240,
+        "image_height_mobile": 200,
+        "horizontal_gap": 20,
+        "speed": 40,
+        "pause_on_hover": false,
+        "show_fade": false
+      }
+    },
+    "snc_flex_content_end_f7B7Qa": {
+      "type": "snc-flex-content-end",
+      "blocks": {
+        "slide_type_1_DPX6nT": {
+          "type": "slide_type_1",
+          "settings": {
+            "title": "Swiss Automatic Movements.",
+            "text": "<p>The pulse of precision. Engineered with world-class Swiss horology to ensure a lifetime of reliability and mechanical soul.</p>",
+            "image": "shopify://shop_images/IMG_8188.jpg",
+            "title_color": "#000000",
+            "title_size": 40,
+            "text_color": "#000000",
+            "text_size": 18,
+            "content_max_width": 380,
+            "text_container_height": 0,
+            "text_offset_y": -60
+          }
+        },
+        "slide_type_2_AaKUem": {
+          "type": "slide_type_2",
+          "settings": {
+            "subtitle": "",
+            "title": "Sapphire Crystal & Hand-Finished Details",
+            "text": "<p>Unrivaled clarity meets artisanal mastery. Featuring scratch-resistant sapphire and surfaces meticulously hand-polished to achieve a mirror-like finish.</p>",
+            "image": "shopify://shop_images/IMG_8167.jpg",
+            "image_2": "shopify://shop_images/IMG_8168.jpg",
+            "subtitle_color": "#000000",
+            "subtitle_size": 14,
+            "title_color": "#000000",
+            "title_size": 40,
+            "text_color": "#000000",
+            "text_size": 18,
+            "content_max_width": 420,
+            "text_container_height": 0,
+            "text_offset_y": -45
+          }
+        },
+        "slide_type_2_HMmrJz": {
+          "type": "slide_type_2",
+          "settings": {
+            "subtitle": "",
+            "title": "Supple Italian Leather",
+            "text": "<p>A perfect fit of luxury and comfort. Hand-selected hides that age with character, providing an uncompromising feel on the wrist.</p>",
+            "image": "shopify://shop_images/IMG_8173.jpg",
+            "image_2": "shopify://shop_images/IMG_8171.jpg",
+            "subtitle_color": "#000000",
+            "subtitle_size": 14,
+            "title_color": "#000000",
+            "title_size": 40,
+            "text_color": "#000000",
+            "text_size": 18,
+            "content_max_width": 390,
+            "text_container_height": 0,
+            "text_offset_y": -55
+          }
+        },
+        "slide_type_4_6XpeqE": {
+          "type": "slide_type_4",
+          "settings": {
+            "logo_image": "shopify://shop_images/IMG_0502_c68df1bf-e5fe-4187-8361-e4b4bc090a18.png",
+            "title": "The Trust Factor",
+            "subtitle": "<ul><li><strong>Inspected before shipment. </strong></li><li><strong>Backed by 2-Year warranty. </strong></li><li><strong>Supported by a real founder-led brand.</strong></li><li><strong>30-Day Return Privilege</strong><br/></li></ul>",
+            "macro_image": "shopify://shop_images/Order-36898-332_1.png",
+            "alignment": "left",
+            "content_max_width": 420,
+            "text_container_height": 0,
+            "text_offset_y": 0,
+            "logo_width": 110,
+            "macro_width": 65,
+            "macro_fit": "contain",
+            "macro_scale": 115,
+            "macro_offset_x": 0,
+            "macro_offset_y": 0,
+            "title_color": "#000000",
+            "title_size": 40,
+            "subtitle_color": "#000000",
+            "subtitle_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "slide_type_1_DPX6nT",
+        "slide_type_2_AaKUem",
+        "slide_type_2_HMmrJz",
+        "slide_type_4_6XpeqE"
+      ],
+      "name": "SNC Flex Content End",
+      "settings": {
+        "background_color": "#ffffff",
+        "text_color": "#000000"
+      }
+    },
+    "snc_carousel_flex_content_xPpKxC": {
+      "type": "snc-carousel-flex-content",
+      "blocks": {
+        "product_x6peKX": {
+          "type": "product",
+          "settings": {
+            "product": "jack-turner-meridian-limited-edition-swiss-automatic-mvmt-sports-watch"
+          }
+        },
+        "product_cUeCpN": {
+          "type": "product",
+          "settings": {
+            "product": "jack-turner-watches-black-pvd-maverick-pilot-feild-watch"
+          }
+        },
+        "product_8MgKX4": {
+          "type": "product",
+          "settings": {
+            "product": "limited-edition-release-el-magico-le2019-1-300-available-for-pre-sale-today-shipping-on-august-7th"
+          }
+        },
+        "product_JheaUR": {
+          "type": "product",
+          "settings": {
+            "product": "quantum-axis-tourbillon"
+          }
+        },
+        "product_hE6UTN": {
+          "type": "product",
+          "settings": {
+            "product": "the-tsunami-swiss-automatic-dive-watch"
+          }
+        },
+        "product_xw6p6e": {
+          "type": "product",
+          "settings": {
+            "product": "jack-turner-watches-maverick-pilot-feild-watch"
+          }
+        }
+      },
+      "block_order": [
+        "product_x6peKX",
+        "product_cUeCpN",
+        "product_8MgKX4",
+        "product_JheaUR",
+        "product_hE6UTN",
+        "product_xw6p6e"
+      ],
+      "name": "SNC Carousel Flex Content",
+      "settings": {
+        "background_color": "#f1f1f1",
+        "margin_top": 40,
+        "margin_bottom": 40,
+        "full_width": true,
+        "enable_horizontal_scroll": true,
+        "title": "The Legacy Selection",
+        "text": "<p><strong>Limited production only. Once a series is retired, it becomes part of the Jack Turner archive. Secure yours while available.</strong></p>",
+        "title_color": "#000000",
+        "title_width": 54,
+        "title_font_size": 36,
+        "title_font_size_mobile": 33,
+        "title_font_weight": 600,
+        "title_letter_spacing": 0,
+        "title_text_transform": "none",
+        "text_color": "#000000",
+        "text_width": 0,
+        "text_max_width": 600,
+        "text_font_size": 18,
+        "text_font_size_mobile": 14,
+        "text_font_weight": 400,
+        "text_line_height": 1.5,
+        "text_letter_spacing": 0
+      }
+    },
+    "pagefly-home": {
+      "type": "pagefly-home",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "snc_custom_content_text_i6YUXA",
+    "snc_images_k6YQcC",
+    "snc_flex_content_PAgfPW",
+    "snc_flex_content_vertical_AijKTH",
+    "snc_our_story",
+    "snc_reviews_UwxYRj",
+    "snc_flex_content_end_f7B7Qa",
+    "snc_carousel_flex_content_xPpKxC",
+    "pagefly-home"
+  ]
+}

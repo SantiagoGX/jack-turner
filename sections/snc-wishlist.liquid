@@ -1,0 +1,693 @@
+{%- liquid
+  assign columns_desktop = settings.pg_columns_desktop | default: 4
+  assign columns_mobile = settings.pg_columns_mobile | default: '2'
+  assign grid_gap = settings.pg_grid_gap | default: 20
+  assign card_title_font_size_mobile = settings.pg_card_title_font_size_mobile | default: 14
+  assign grid_gap_mobile = settings.pg_grid_gap_mobile | default: 15
+  assign section_margin_top = section.settings.section_margin_top | default: 40
+  assign section_margin_bottom = section.settings.section_margin_bottom | default: 40
+  assign section_header_alignment = settings.sh_alignment | default: 'center'
+  assign section_title_color = settings.sh_title_color | default: '#0d0d0d'
+  assign section_title_font_size = settings.sh_title_font_size | default: 36
+  assign section_title_font_weight = settings.sh_title_font_weight | default: 500
+  assign section_title_text_transform = settings.sh_title_text_transform | default: 'none'
+
+  assign full_width = section.settings.full_width | default: false
+  assign content_padding_vertical = section.settings.content_padding_vertical | default: 40
+  assign content_padding_horizontal = section.settings.content_padding_horizontal | default: 20
+
+  assign card_content_padding_vertical = settings.pg_card_content_padding_vertical | default: 20
+  assign card_content_padding_horizontal = settings.pg_card_content_padding_horizontal | default: 20
+  assign card_style = settings.pg_card_style | default: 'overlay'
+  assign card_height_mode = settings.pg_card_height_mode | default: 'fixed'
+  assign card_height_mobile = settings.pg_card_height_mobile | default: 280
+  assign card_aspect_ratio = settings.pg_card_aspect_ratio | default: '3/4'
+  assign card_border_radius = settings.pg_card_border_radius | default: 10
+  assign image_brightness = settings.pg_image_brightness | default: 100
+  assign card_image_fit = settings.pg_card_image_fit | default: 'contain'
+
+  assign qa_show_title = settings.pg_qa_show_title
+  assign qa_option_padding = settings.pg_qa_option_padding | default: 6
+  assign qa_padding = settings.pg_qa_padding | default: 13
+  assign qa_border_radius = settings.pg_qa_border_radius | default: 0
+  assign qa_sizes_per_row = settings.pg_qa_sizes_per_row | default: 5
+  assign qa_bg_color = settings.pg_qa_bg_color | default: '#ffffff'
+  assign qa_option_bg_color = settings.pg_qa_option_bg_color | default: '#ffffff'
+  assign qa_option_text_color = settings.pg_qa_option_text_color | default: '#0d0d0d'
+  assign qa_option_hover_bg_color = settings.pg_qa_option_hover_bg_color | default: '#0d0d0d'
+  assign qa_option_hover_text_color = settings.pg_qa_option_hover_text_color | default: '#ffffff'
+  assign qa_option_border_radius = settings.pg_qa_option_border_radius | default: 4
+
+  assign enable_quick_add = settings.pg_enable_quick_add
+  assign card_title_color = settings.pg_card_title_color | default: '#0d0d0d'
+  assign card_price_color = settings.pg_card_price_color | default: '#000000'
+  assign card_compare_price_color = settings.pg_card_compare_price_color | default: 'rgba(0, 0, 0, 0.4)'
+  assign card_title_margin_bottom = settings.pg_card_title_margin_bottom | default: 6
+
+  assign card_title_font_size = settings.pg_card_title_font_size | default: 16
+  assign card_price_font_size = settings.pg_card_price_font_size | default: 14
+  assign global_icon_plus = settings.global_icon_plus
+
+  if global_icon_plus != blank
+    assign plus_icon_url = global_icon_plus | image_url: width: 36
+  else
+    assign plus_icon_url = 'plus.svg' | asset_url
+  endif
+
+  assign wishlist_icon_version = settings.global_wishlist_icon_version | default: 'dark'
+  if wishlist_icon_version == 'dark'
+    assign global_icon_wishlist = settings.global_icon_wishlist_dark
+  else
+    assign global_icon_wishlist = settings.global_icon_wishlist_light
+  endif
+
+  if global_icon_wishlist != blank
+    assign wishlist_icon_url = global_icon_wishlist | image_url: width: 46
+  else
+    assign wishlist_icon_url = 'favorite.svg' | asset_url
+  endif
+
+  assign section_title = section.settings.title | default: 'My Favorites' 
+-%}
+
+<style>
+  .snc-wishlist--root {
+    margin-top: var(--section-margin-top);
+    margin-bottom: var(--section-margin-bottom);
+    padding-top: var(--content-padding-vertical);
+    padding-bottom: var(--content-padding-vertical);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    {%- if full_width -%}
+      padding-left: var(--content-padding-horizontal);
+      padding-right: var(--content-padding-horizontal);
+    {%- else -%}
+      padding-left: max(var(--content-padding-horizontal), calc((100vw - 1512px) / 2));
+      padding-right: max(var(--content-padding-horizontal), calc((100vw - 1512px) / 2));
+    {%- endif -%}
+    display: flex;
+    flex-direction: column;
+  }
+
+  .snc-wishlist--header {
+    margin-bottom: 40px;
+    text-align: var(--section-header-alignment);
+  }
+
+  .snc-wishlist--title {
+    font-size: var(--section-title-font-size);
+    color: var(--section-title-color);
+    font-family: var(--font-main);
+    font-weight: var(--section-title-font-weight);
+    text-transform: var(--section-title-text-transform);
+    margin: 0;
+  }
+
+  .snc-wishlist--tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+  }
+
+  .snc-wishlist--tab {
+    background: #F1F1F1;
+    border: 1px solid #E5E5E5;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-family: var(--font-nunito, 'NunitoSans', sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: #0d0d0d;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .snc-wishlist--tab:hover {
+    background-color: #e5e5e5;
+  }
+
+  .snc-wishlist--tab.is-active {
+    background-color: #0d0d0d;
+    color: #ffffff;
+    border-color: #0d0d0d;
+  }
+
+  .snc-wishlist--grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns-desktop, 4), 1fr);
+    gap: var(--grid-gap);
+  }
+
+  .snc-wishlist--card-wrapper {
+    position: relative;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .snc-wishlist--remove-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 11;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .snc-wishlist--remove-button:hover {
+    background-color: #ffffff;
+    transform: scale(1.1);
+  }
+
+  .snc-wishlist--remove-button svg {
+    width: 18px;
+    height: 18px;
+    stroke: #c0392b;
+  }
+  
+  .snc-wishlist--empty-message {
+    text-align: center;
+    padding: 80px 20px;
+    font-family: var(--font-nunito, 'NunitoSans', sans-serif);
+    font-size: 18px;
+    color: #666;
+  }
+
+  .snc-plp--loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 60px 0;
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .snc-plp--spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0d0d0d;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  /* Estilos de tarjeta copiados de PLP para consistencia */
+  .snc-plp--product-card {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    border-radius: {{ card_border_radius }}px;
+    overflow: hidden;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .snc-plp--product-image-wrapper {
+    position: relative;
+    width: 100%;
+    {%- if card_height_mode == 'fixed' -%}
+      height: {{ settings.pg_card_height | default: 420 }}px;
+    {%- else -%}
+      height: auto;
+      aspect-ratio: {{ card_aspect_ratio }};
+    {%- endif -%}
+    overflow: hidden;
+    border-radius: {{ card_border_radius }}px;
+    background-color: #f5f5f5;
+  }
+
+  .snc-plp--product-image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .snc-plp--product-main-image,
+  .snc-plp--product-hover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ card_image_fit }};
+    display: block;
+    transition: opacity 0.3s ease;
+    filter: brightness({{ image_brightness | divided_by: 100.0 }});
+  }
+
+  .snc-plp--product-hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  .snc-plp--product-image-wrapper:hover .snc-plp--product-main-image {
+    opacity: 0;
+  }
+
+  .snc-plp--product-image-wrapper:hover .snc-plp--product-hover-image {
+    opacity: 1;
+  }
+  .snc-plp--product-image-wrapper:not(:hover) .snc-plp--product-main-image,
+  .snc-plp--product-card:not(:has(.snc-plp--product-hover-image)) .snc-plp--product-main-image {
+    opacity: 1;
+  }
+
+  /* Ocultar el botón de favoritos original del card en la wishlist */
+  .snc-wishlist--root .snc-plp--favorite-button {
+    display: none !important;
+  }
+
+  .snc-plp--product-footer {
+    position: absolute;
+    bottom: var(--card-content-padding-vertical);
+    left: var(--card-content-padding-horizontal);
+    right: var(--card-content-padding-horizontal);
+    height: 54px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .snc-plp--product-info {
+    flex: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .snc-plp--product-card:hover .snc-plp--product-info {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .snc-plp--product-title-link {
+    text-decoration: none;
+    display: block;
+    margin-bottom: var(--card-title-margin-bottom, 6px);
+  }
+
+  .snc-plp--product-title {
+    font-family: var(--font-main);
+    font-size: var(--card-title-font-size, 16px);
+    font-weight: normal;
+    color: var(--card-title-color, #0d0d0d);
+    margin: 0;
+    line-height: 1.2;
+    min-height: 1.2em;
+  }
+
+  .snc-plp--product-title:empty::before {
+    content: attr(data-fallback-title);
+    color: #0d0d0d;
+  }
+
+  .snc-plp--product-price-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .snc-plp--product-compare-price {
+    font-family: var(--font-main);
+    font-size: var(--card-price-font-size, 14px);
+    color: var(--card-compare-price-color, rgba(0, 0, 0, 0.4));
+    text-decoration: line-through;
+  }
+
+  .snc-plp--product-price {
+    font-family: var(--font-main);
+    font-size: var(--card-price-font-size, 14px);
+    font-weight: normal;
+    color: var(--card-price-color, #000000);
+  }
+
+  .snc-plp--add-container {
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .snc-plp--add-button {
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .snc-plp--add-container:hover .snc-plp--add-button {
+    width: auto;
+    min-width: 200px;
+    padding: 0 20px;
+    border-radius: 1000px;
+  }
+
+  .snc-plp--plus-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .snc-plp--sizes-dropdown {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    background: #ffffff;
+    border-radius: 1000px;
+    padding: 12px 20px;
+    display: none;
+    gap: 15px;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .snc-plp--add-container:hover .snc-plp--sizes-dropdown {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .snc-plp--size-option {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: normal;
+    color: #0d0d0d;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    line-height: 1;
+  }
+
+  .snc-plp--size-option:hover {
+    opacity: 0.7;
+  }
+
+  .snc-plp--size-option:disabled,
+  .snc-plp--qa-option:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    position: relative;
+    text-decoration: none !important;
+    background-color: transparent !important;
+    color: #0d0d0d !important;
+  }
+
+  .snc-plp--size-option:disabled:hover,
+  .snc-plp--qa-option:disabled:hover {
+    transform: none;
+    border-color: #e5e5e5;
+  }
+
+  .snc-plp--size-option:disabled::after,
+  .snc-plp--qa-option:disabled::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background: currentColor;
+    transform: rotate(-20deg);
+  }
+
+  .snc-plp--check-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  /* Estilos para producto de variante única (Agregar) */
+  /* Estilos para tarjeta con contenido debajo */
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--product-footer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    height: auto;
+    padding: var(--card-content-padding-vertical) var(--card-content-padding-horizontal);
+    background: #ffffff;
+    pointer-events: auto;
+  }
+
+  .snc-plp--product-card[data-card-style="below"]:hover .snc-plp--product-info {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--product-image-wrapper {
+    border-radius: {{ card_border_radius }}px {{ card_border_radius }}px 0 0;
+  }
+
+  /* Quick Add Overlay for 'below' style */
+  .snc-plp--product-card[data-card-style="below"] .snc-plp--add-container {
+    display: none;
+  }
+
+  .snc-plp--quick-add-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--qa-bg-color, #ffffff);
+    padding: var(--qa-padding, 13px);
+    border-radius: var(--qa-border-radius, 0) var(--qa-border-radius, 0) 0 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 20;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
+  .snc-plp--product-image-wrapper:hover .snc-plp--quick-add-overlay {
+    transform: translateY(0);
+  }
+
+  .snc-plp--qa-step {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: opacity 0.3s ease;
+  }
+
+  .snc-plp--qa-title {
+    font-family: var(--font-main);
+    font-size: 12px;
+    color: #666;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .snc-plp--qa-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .snc-plp--qa-option {
+    border: 1px solid #e5e5e5;
+    background: var(--qa-option-bg-color, white);
+    padding: var(--qa-option-padding, 6px);
+    font-family: var(--font-main);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: var(--qa-option-border-radius, 4px);
+    transition: all 0.2s;
+    color: var(--qa-option-text-color, #0d0d0d);
+    text-align: center;
+    flex-grow: 1;
+    flex-basis: calc((100% - (6px * (var(--qa-sizes-per-row, 5) - 1))) / var(--qa-sizes-per-row, 5));
+  }
+
+  .snc-plp--qa-option:hover {
+    border-color: var(--qa-option-hover-bg-color, #0d0d0d);
+    background: var(--qa-option-hover-bg-color, #0d0d0d);
+    color: var(--qa-option-hover-text-color, white);
+  }
+
+  .snc-plp--qa-btn-full {
+    width: 100%;
+    background: #0d0d0d;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-family: var(--font-main);
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  
+  .snc-plp--qa-btn-full:hover {
+    opacity: 0.9;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 1023px) {
+    .snc-wishlist--grid {
+      grid-template-columns: repeat(var(--columns-mobile, 2), 1fr);
+      gap: var(--grid-gap-mobile);
+    }
+    .snc-plp--product-image-wrapper {
+      {%- if card_height_mode == 'fixed' -%}height: {{ card_height_mobile }}px;{%- endif -%}
+    }
+    .snc-plp--product-title {
+      font-size: var(--card-title-font-size-mobile);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .snc-wishlist--tabs {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .snc-wishlist--tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .snc-wishlist--tab {
+      flex-shrink: 0;
+    }
+  }
+
+  .snc-wishlist--root[data-enable-quick-add="false"] .snc-plp--add-container,
+  .snc-wishlist--root[data-enable-quick-add="false"] .snc-plp--quick-add-overlay {
+    display: none !important;
+  }
+</style>
+
+<div class="snc-wishlist--root" data-section-id="{{ section.id }}" data-section-type="snc-wishlist" data-plus-icon-url="{{ plus_icon_url }}" data-wishlist-icon-url="{{ wishlist_icon_url }}" data-card-style="{{ card_style }}" data-qa-show-title="{{ qa_show_title }}" data-enable-quick-add="{{ enable_quick_add }}" style="
+    --grid-gap: {{ grid_gap }}px;
+    --grid-gap-mobile: {{ grid_gap_mobile }}px;
+    --section-margin-top: {{ section_margin_top }}px;
+    --section-margin-bottom: {{ section_margin_bottom }}px;
+    --section-header-alignment: {{ section_header_alignment }};
+    --section-title-color: {{ section_title_color }};
+    --section-title-font-size: {{ section_title_font_size }}px;
+    --section-title-font-weight: {{ section_title_font_weight }};
+    --section-title-text-transform: {{ section_title_text_transform }};
+    --content-padding-vertical: {{ content_padding_vertical }}px;
+    --card-title-font-size-mobile: {{ card_title_font_size_mobile }}px;
+    --content-padding-horizontal: {{ content_padding_horizontal }}px;
+    --card-content-padding-vertical: {{ card_content_padding_vertical }}px;
+    --card-content-padding-horizontal: {{ card_content_padding_horizontal }}px;
+    --card-title-color: {{ card_title_color }};
+    --card-price-color: {{ card_price_color }};
+    --card-compare-price-color: {{ card_compare_price_color }};
+    --card-title-margin-bottom: {{ card_title_margin_bottom }}px;
+    --card-title-font-size: {{ card_title_font_size }}px;
+    --card-price-font-size: {{ card_price_font_size }}px;
+    --qa-padding: {{ qa_padding }}px;
+    --qa-option-padding: {{ qa_option_padding }}px;
+    --qa-border-radius: {{ qa_border_radius }}px;
+    --qa-sizes-per-row: {{ qa_sizes_per_row }};
+    --qa-bg-color: {{ qa_bg_color }};
+    --qa-option-bg-color: {{ qa_option_bg_color }};
+    --qa-option-text-color: {{ qa_option_text_color }};
+    --qa-option-hover-bg-color: {{ qa_option_hover_bg_color }};
+    --qa-option-hover-text-color: {{ qa_option_hover_text_color }};
+    --qa-option-border-radius: {{ qa_option_border_radius }}px;
+    --columns-desktop: {{ columns_desktop }};
+    --columns-mobile: {{ columns_mobile }};
+  ">
+  <div class="snc-wishlist--header">
+    <h1 class="snc-wishlist--title">{{ section_title }}</h1>
+  </div>
+
+  <div class="snc-wishlist--tabs" data-wishlist-tabs style="display: none;">
+    <button class="snc-wishlist--tab is-active" data-filter="all">Todos</button>
+  </div>
+
+  <div class="snc-wishlist--grid" data-wishlist-grid>
+  </div>
+  
+  <div class="snc-wishlist--empty-message" data-wishlist-empty style="display: none;">
+    <p>You haven't added any products to your favorites yet.</p>
+    <a href="{{ routes.all_products_collection_url }}" class="snc-plp--load-more-button" style="margin-top: 20px;">Explore products</a>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "SNC Wishlist",
+  "class": "section--snc-wishlist",
+  "settings": [
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margen superior",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margen inferior",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "My Favorites"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Wishlist"
+    }
+  ]
+}
+{% endschema %}

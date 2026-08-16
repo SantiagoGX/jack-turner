@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": {
+      "type": "snc-legal-page",
+      "settings": {
+        "max_width": 760,
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "kicker": "LEGAL",
+        "show_title": true,
+        "show_subtitle": false,
+        "subtitle": "",
+        "show_content": true,
+        "title_color": "#000000",
+        "text_color": "#333333",
+        "muted_color": "#666666",
+        "accent_color": "#000000"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
+

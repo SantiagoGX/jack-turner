@@ -1,0 +1,1811 @@
+<style>
+  /* NOTA: Si 'Futura PT' no está cargada en el tema, pega aquí el @import de Adobe Fonts/Typekit */
+  /* Estilos Estructurales Base */
+  .snc-footer {
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .snc-footer--container {
+    width: 100%;
+    max-width: 1512px;
+    height: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Estilos Marquee Estático (Fila 1) */
+  .snc-footer__marquee-static {
+    width: 100vw; /* Fuerza ancho completo de pantalla */
+    margin-left: calc(50% - 50vw); /* Centra y rompe el contenedor padre */
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    
+    /* Estilos Dinámicos */
+    background-color: {{ section.settings.marquee_bg_color }};
+    padding: {{ section.settings.marquee_padding_vertical }}px 0;
+    margin-top: {{ section.settings.marquee_margin_top }}px;
+    margin-bottom: {{ section.settings.marquee_margin_bottom }}px;
+  }
+
+  .snc-footer__marquee-track {
+    display: flex;
+    width: max-content;
+    animation: snc-marquee-scroll {{ section.settings.marquee_speed }}s linear infinite;
+  }
+
+  .snc-footer__marquee-item {
+    display: block;
+    height: {{ section.settings.marquee_image_height }}px;
+    width: auto;
+    object-fit: contain;
+    margin-right: {{ section.settings.marquee_gap }}px;
+  }
+
+  @keyframes snc-marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Estilos Info Row (Fila 2) */
+  .snc-footer__info-row {
+    width: 100%;
+    max-width: 1372px;
+    margin: 0 auto;
+    min-height: 220px; /* Hug 220px */
+    padding: 40px 0 20px 0;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .snc-footer__info-row-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: clamp(28px, 4vw, 56px);
+  }
+
+  .snc-footer__info-wrapper {
+    width: 100%;
+    max-width: 1130px;
+    margin: 0;
+    min-height: 100px;
+    display: flex;
+    justify-content: flex-start;
+    gap: {{ section.settings.info_columns_gap }}px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .snc-footer__legacy-club {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: {{ section.settings.legacy_club_max_width }}px;
+    padding-left: clamp(20px, 3vw, 36px);
+    border-left: {{ section.settings.legacy_club_border_width }}px solid {{ section.settings.legacy_club_border_color }};
+  }
+
+  /* ── Logo de Marca ────────────────────────────────────── */
+  .snc-footer__brand-logo {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 clamp(12px, 2vw, 28px);
+  }
+
+  .snc-footer__brand-logo-link {
+    display: block;
+    line-height: 0;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .snc-footer__brand-logo-link[href='']:not(.snc-footer__brand-logo--lightbox),
+  .snc-footer__brand-logo-link:not([href]):not(.snc-footer__brand-logo--lightbox) {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  button.snc-footer__brand-logo-link {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .snc-footer__brand-logo--lightbox {
+    cursor: pointer;
+  }
+
+  .snc-footer__brand-logo-img {
+    display: block;
+    width: {{ section.settings.brand_logo_size }}px;
+    height: {{ section.settings.brand_logo_size }}px;
+    object-fit: cover;
+    border: 1px solid {{ section.settings.brand_logo_border_color | default: '#c9b99a' }};
+    border-radius: {% if section.settings.brand_logo_shape == 'circle' %}50%{% else %}0{% endif %};
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.28s ease;
+  }
+
+  .snc-footer__brand-logo-link:hover .snc-footer__brand-logo-img {
+    transform: scale(1.03);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
+  }
+
+  /* Placeholder shown when no image is uploaded */
+  .snc-footer__brand-logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: {{ section.settings.brand_logo_size }}px;
+    height: {{ section.settings.brand_logo_size }}px;
+    border: 1px dashed {{ section.settings.brand_logo_border_color | default: '#c9b99a' }};
+    border-radius: {% if section.settings.brand_logo_shape == 'circle' %}50%{% else %}0{% endif %};
+    opacity: 0.45;
+  }
+
+  .snc-footer__brand-logo-placeholder::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: currentColor;
+    position: absolute;
+  }
+
+  .snc-footer__brand-logo-placeholder::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 18px;
+    background: currentColor;
+    position: absolute;
+  }
+
+  @media (max-width: 768px) {
+    .snc-footer__brand-logo {
+      padding: 0;
+      justify-content: flex-start;
+    }
+  }
+
+  .snc-footer__legacy-club-heading {
+    margin: 0 0 10px;
+    font-family: var(--font-heading-family, 'Futura PT', Futura, sans-serif);
+    font-size: {{ section.settings.legacy_club_title_size }}px;
+    font-weight: {{ section.settings.legacy_club_title_weight }};
+    letter-spacing: 0.18em;
+    line-height: 1.25;
+    text-transform: uppercase;
+    color: {{ section.settings.legacy_club_title_color }};
+  }
+
+  .snc-footer__legacy-club-sub {
+    margin: 0 0 14px;
+    font-family: var(--font-body-family, 'Futura PT', Futura, sans-serif);
+    font-size: {{ section.settings.legacy_club_sub_size }}px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: {{ section.settings.legacy_club_sub_color }};
+    opacity: 0.88;
+  }
+
+  .snc-footer__legacy-club-intro {
+    margin: 0 0 10px;
+    font-size: {{ section.settings.legacy_club_body_size }}px;
+    font-weight: {{ section.settings.legacy_club_body_weight }};
+    line-height: 1.55;
+    color: {{ section.settings.legacy_club_body_color }};
+  }
+
+  .snc-footer__legacy-club-list {
+    margin: 0 0 14px;
+    padding-left: 1rem;
+    font-size: {{ section.settings.legacy_club_body_size }}px;
+    font-weight: {{ section.settings.legacy_club_body_weight }};
+    line-height: 1.5;
+    color: {{ section.settings.legacy_club_body_color }};
+  }
+
+  .snc-footer__legacy-club-list li {
+    margin-bottom: 6px;
+  }
+
+  .snc-footer__legacy-club-closing {
+    margin: 0 0 18px;
+    font-size: {{ section.settings.legacy_club_closing_size }}px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: {{ section.settings.legacy_club_closing_color }};
+    opacity: 0.85;
+  }
+
+  .snc-footer__legacy-club-form .snc-footer__legacy-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .snc-footer__legacy-input {
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid {{ section.settings.legacy_club_input_border }};
+    border-radius: 0;
+    background: {{ section.settings.legacy_club_input_bg }};
+    color: {{ section.settings.legacy_club_input_text }};
+    font-family: var(--font-body-family, 'Futura PT', Futura, sans-serif);
+    font-size: 14px;
+    letter-spacing: 0.03em;
+  }
+
+  .snc-footer__legacy-input::placeholder {
+    color: {{ section.settings.legacy_club_input_text }};
+    opacity: 0.4;
+  }
+
+  .snc-footer__legacy-submit {
+    grid-column: 1 / -1;
+    padding: 12px 18px;
+    border: 1px solid {{ section.settings.legacy_club_btn_border }};
+    border-radius: 0;
+    background: {{ section.settings.legacy_club_btn_bg }};
+    color: {{ section.settings.legacy_club_btn_text }};
+    font-family: var(--font-heading-family, 'Futura PT', Futura, sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+
+  .snc-footer__legacy-submit:hover {
+    opacity: 0.88;
+  }
+
+  .snc-footer__legacy-message {
+    margin-top: 10px;
+    font-size: 13px;
+    color: {{ section.settings.legacy_club_body_color }};
+  }
+
+  .snc-footer__legacy-message--error {
+    color: #b00020;
+  }
+
+  .snc-footer__legacy-visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0 0 0 0);
+    word-wrap: normal !important;
+  }
+
+  .snc-footer__column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .snc-footer__column-title {
+    font-family: 'Futura PT', 'Futura', sans-serif;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .snc-footer__column-title a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+  }
+
+  .snc-footer__column-title a:hover {
+    opacity: 0.7;
+  }
+
+  .snc-footer__column-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .snc-footer__column-content a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+  }
+
+  .snc-footer__column-content a:hover {
+    opacity: 0.7;
+  }
+
+  /* Estilos Legal Row (Fila 3) */
+  .snc-footer__legal-row {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+    min-height: 72px; /* Hug 72px */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: {{ section.settings.legal_rows_gap }}px;
+  }
+
+  .snc-footer__legal-top {
+    width: 100%;
+    padding-bottom: 0;
+    padding-top: 30px;
+    border-top: {{ section.settings.divider_thickness }}px solid {{ section.settings.divider_color }};
+  }
+
+  .snc-footer__legal-bottom {
+    width: 100%;
+    padding-top: 30px;
+    border-top: {{ section.settings.divider_thickness }}px solid {{ section.settings.divider_color }};
+  }
+
+  .snc-footer__legal-inner {
+    width: 100%;
+    max-width: 1372px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .snc-footer__social-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .snc-footer__social-icon-img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    object-fit: contain;
+  }
+
+  .snc-footer__brand-name {
+    color: {{ section.settings.legal_brand_color }};
+    font-size: {{ section.settings.legal_brand_size }}px;
+    font-weight: {{ section.settings.legal_brand_weight }};
+  }
+
+  .snc-footer__legal-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .snc-footer__legal-links a {
+    text-decoration: none;
+    color: {{ section.settings.legal_links_color }};
+    font-size: {{ section.settings.legal_links_size }}px;
+    font-weight: {{ section.settings.legal_links_weight }};
+  }
+
+  .snc-footer__copyright {
+    color: {{ section.settings.legal_copyright_color }};
+    font-size: {{ section.settings.legal_copyright_size }}px;
+    font-weight: {{ section.settings.legal_copyright_weight }};
+  }
+
+  @media (max-width: 768px) {
+    .snc-footer__info-row {
+      height: auto;
+      padding: 20px;
+    }
+    .snc-footer__info-row-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 36px;
+    }
+
+    .snc-footer__legacy-club {
+      max-width: none;
+      padding-left: 0;
+      border-left: none;
+      padding-top: 28px;
+      border-top: {{ section.settings.legacy_club_border_width }}px solid {{ section.settings.legacy_club_border_color }};
+    }
+
+    .snc-footer__info-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px 20px;
+    }
+    .snc-footer__legal-row {
+      flex-direction: column;
+      height: auto;
+      gap: 20px;
+    }
+    .snc-footer__legal-inner {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+    .snc-footer__legal-links {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  /* ── Logo Lightbox ───────────────────────────────────── */
+  .snc-footer__logo-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9990;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .snc-footer__logo-lightbox[hidden] {
+    display: none;
+  }
+
+  .snc-footer__logo-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 13, 13, 0.96);
+    cursor: pointer;
+  }
+
+  .snc-footer__logo-lightbox-stage {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 0 24px;
+    animation: snc-logo-lightbox-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes snc-logo-lightbox-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .snc-footer__logo-lightbox-close {
+    position: static;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    padding: 0 0 18px 0;
+    cursor: pointer;
+    color: rgba(244, 242, 239, 0.4);
+    transition: color 0.25s ease;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-family: var(--font-heading-family);
+    line-height: 1;
+  }
+
+  .snc-footer__logo-lightbox-close:hover {
+    color: rgba(244, 242, 239, 0.88);
+  }
+
+  .snc-footer__logo-lightbox-close::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .snc-footer__logo-lightbox-close-x {
+    display: none;
+  }
+
+  .snc-footer__logo-lightbox-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .snc-footer__logo-lightbox-img {
+    display: block;
+    max-width: min(480px, 90vw);
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border: 1px solid rgba(201, 196, 188, 0.2);
+    box-shadow:
+      0 0 60px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(139, 115, 85, 0.1);
+  }
+
+  .snc-footer__logo-lightbox-caption {
+    font-family: var(--font-heading-family);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: rgba(201, 196, 188, 0.45);
+    margin: 0;
+  }
+</style>
+
+<footer class="snc-footer">
+  <div class="snc-footer--container">
+    <div class="snc-footer__marquee-static">
+      <div class="snc-footer__marquee-track">
+        {%- comment -%} Repetimos la imagen suficientes veces para cubrir pantallas grandes y permitir el loop (2 sets de 15) {%- endcomment -%}
+        {%- for i in (1..30) -%}
+          {%- if section.settings.marquee_image != blank -%}
+            {{ section.settings.marquee_image | image_url: height: 200 | image_tag: class: 'snc-footer__marquee-item', loading: 'lazy' }}
+          {%- else -%}
+            <div class="snc-footer__marquee-item" style="background-color: #e0e0e0; height: 50px; display: flex; align-items: center; justify-content: center; color: #999;">IMG</div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="snc-footer__info-row">
+      <div class="snc-footer__info-row-inner">
+        <div class="snc-footer__info-wrapper">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign column_title = block.settings.title
+              assign column_title_url = block.settings.title_url
+              assign column_content = block.settings.content
+
+              if block.type == 'menu_column'
+                assign menu_handle = block.settings.menu
+                assign menu_obj = linklists[menu_handle]
+
+                assign column_title = block.settings.title_override
+                if column_title == blank and menu_obj != blank
+                  assign column_title = menu_obj.title
+                endif
+              endif
+            -%}
+            <div class="snc-footer__column" {{ block.shopify_attributes }} style="
+              margin-top: {{ block.settings.margin_top }}px;
+              margin-bottom: {{ block.settings.margin_bottom }}px;
+              margin-left: {{ block.settings.margin_left }}px;
+              margin-right: {{ block.settings.margin_right }}px;
+            ">
+              {%- if column_title != blank -%}
+                <h3 class="snc-footer__column-title" style="
+                  color: {{ block.settings.title_color }};
+                  font-size: {{ block.settings.title_size }}px;
+                  font-weight: {{ block.settings.title_weight }};
+                  margin-bottom: {{ block.settings.title_margin_bottom }}px;
+                ">
+                  {%- if column_title_url != blank -%}
+                    <a href="{{ column_title_url }}">{{ column_title }}</a>
+                  {%- else -%}
+                    {{ column_title }}
+                  {%- endif -%}
+                </h3>
+              {%- endif -%}
+              <div class="snc-footer__column-content" style="
+                color: {{ block.settings.link_color }};
+                font-size: {{ block.settings.link_size }}px;
+                font-weight: {{ block.settings.link_weight }};
+              ">
+                {%- if block.type == 'menu_column' -%}
+                  {%- if menu_obj != blank and menu_obj.links.size > 0 -%}
+                    <ul>
+                      {%- for link in menu_obj.links -%}
+                        <li>
+                          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- else -%}
+                    {{ column_content }}
+                  {%- endif -%}
+                {%- else -%}
+                  {{ column_content }}
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.show_brand_logo -%}
+          <div class="snc-footer__brand-logo">
+            {%- assign logo_tag = 'span' -%}
+            {%- if section.settings.brand_logo_lightbox and section.settings.brand_logo_image != blank -%}
+              {%- assign logo_tag = 'button' -%}
+            {%- elsif section.settings.brand_logo_url != blank -%}
+              {%- assign logo_tag = 'a' -%}
+            {%- endif -%}
+
+            {%- if section.settings.brand_logo_image != blank -%}
+              <{{ logo_tag }}
+                class="snc-footer__brand-logo-link{% if section.settings.brand_logo_lightbox and section.settings.brand_logo_image != blank %} snc-footer__brand-logo--lightbox{% endif %}"
+                {%- if logo_tag == 'a' -%}
+                  href="{{ section.settings.brand_logo_url }}"
+                {%- endif -%}
+                {%- if logo_tag == 'button' -%}
+                  type="button"
+                  data-logo-lightbox-trigger
+                  aria-label="Ver imagen completa"
+                {%- endif -%}
+              >
+                {{
+                  section.settings.brand_logo_image
+                  | image_url: width: 400
+                  | image_tag:
+                    class: 'snc-footer__brand-logo-img',
+                    loading: 'lazy',
+                    alt: section.settings.brand_logo_alt | default: 'Jack Turner',
+                    widths: '100, 120, 140, 160, 200, 240, 300, 400'
+                }}
+              </{{ logo_tag }}>
+
+              {%- if section.settings.brand_logo_lightbox -%}
+                <div
+                  class="snc-footer__logo-lightbox"
+                  id="snc-logo-lightbox-{{ section.id }}"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="{{ section.settings.brand_logo_alt | default: 'Jack Turner' }}"
+                  hidden
+                >
+                  <div class="snc-footer__logo-lightbox-backdrop" data-logo-lightbox-close></div>
+                  <div class="snc-footer__logo-lightbox-stage">
+                    <button
+                      class="snc-footer__logo-lightbox-close"
+                      data-logo-lightbox-close
+                      aria-label="Cerrar"
+                      type="button"
+                    >
+                      <span class="snc-footer__logo-lightbox-close-x" aria-hidden="true">&#x2715;</span>
+                      <span>Close</span>
+                    </button>
+                    <figure class="snc-footer__logo-lightbox-figure">
+                      {{
+                        section.settings.brand_logo_image
+                        | image_url: width: 1200
+                        | image_tag:
+                          class: 'snc-footer__logo-lightbox-img',
+                          loading: 'lazy',
+                          alt: section.settings.brand_logo_alt | default: 'Jack Turner',
+                          widths: '400, 600, 800, 1000, 1200'
+                      }}
+                      <figcaption class="snc-footer__logo-lightbox-caption">Jack Turner</figcaption>
+                    </figure>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- else -%}
+              {%- comment -%} Placeholder visible solo en el editor de Shopify {%- endcomment -%}
+              {%- if request.design_mode -%}
+                <span
+                  class="snc-footer__brand-logo-placeholder"
+                  title="Sube el logo del Footer en los ajustes de esta sección"
+                  style="position:relative;"
+                ></span>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_legacy_club -%}
+          <aside class="snc-footer__legacy-club">
+            <h3 class="snc-footer__legacy-club-heading">{{ 'legacy_club.title' | t }}</h3>
+            <p class="snc-footer__legacy-club-sub">{{ 'legacy_club.subhead' | t }}</p>
+            <p class="snc-footer__legacy-club-intro">{{ 'legacy_club.body_intro' | t }}</p>
+            <ul class="snc-footer__legacy-club-list">
+              <li>{{ 'legacy_club.bullet_1' | t }}</li>
+              <li>{{ 'legacy_club.bullet_2' | t }}</li>
+              <li>{{ 'legacy_club.bullet_3' | t }}</li>
+            </ul>
+            <p class="snc-footer__legacy-club-closing">{{ 'legacy_club.closing' | t }}</p>
+            {%- assign footer_legacy_form_id = 'snc-legacy-footer-' | append: section.id -%}
+            <form
+              id="{{ footer_legacy_form_id }}"
+              class="snc-footer__legacy-club-form"
+              novalidate
+            >
+              <div class="snc-footer__legacy-fields">
+                <label class="snc-footer__legacy-visually-hidden" for="snc-legacy-footer-name-{{ section.id }}">
+                  First name
+                </label>
+                <input
+                  type="text"
+                  id="snc-legacy-footer-name-{{ section.id }}"
+                  class="snc-footer__legacy-input"
+                  autocomplete="given-name"
+                  autocapitalize="words"
+                  autocorrect="off"
+                  placeholder="First name (optional)"
+                >
+                <label class="snc-footer__legacy-visually-hidden" for="snc-legacy-footer-email-{{ section.id }}">
+                  {{ 'legacy_club.email_label' | t }}
+                </label>
+                <input
+                  type="email"
+                  name="contact[email]"
+                  id="snc-legacy-footer-email-{{ section.id }}"
+                  class="snc-footer__legacy-input"
+                  autocomplete="email"
+                  autocapitalize="off"
+                  autocorrect="off"
+                  placeholder="{{ 'legacy_club.email_placeholder' | t }}"
+                  required
+                >
+                <button type="submit" class="snc-footer__legacy-submit">{{ 'legacy_club.cta' | t }}</button>
+              </div>
+            </form>
+
+            {%- comment -%}
+              ============================================================
+              PLACEHOLDER — LUXlife Perfect Gift Award 2026
+              Uncomment and replace asset filename once badge is uploaded.
+              ============================================================
+              <div class="snc-footer__award" style="margin-top:24px;">
+                <img
+                  src="{{ 'luxlife-award-2026.png' | asset_url }}"
+                  alt="LUXlife Perfect Gift Award 2026"
+                  width="120"
+                  height="auto"
+                  loading="lazy"
+                  style="display:block;max-width:120px;"
+                >
+              </div>
+            {%- endcomment -%}
+          </aside>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="snc-footer__legal-row">
+      <!-- Contenedor Arriba: Marca + Redes Sociales -->
+      <div class="snc-footer__legal-top">
+        <div class="snc-footer__legal-inner">
+          <div class="snc-footer__brand-name">
+            {{ section.settings.legal_brand_name }}
+          </div>
+          <div class="snc-footer__social-icons">
+            <!-- X -->
+            {%- if section.settings.social_x_link != blank -%}
+              <a href="{{ section.settings.social_x_link }}" target="_blank" rel="noopener">
+                {%- if section.settings.social_x_icon != blank -%}
+                  {{ section.settings.social_x_icon | image_url: width: 50 | image_tag: class: 'snc-footer__social-icon-img', loading: 'lazy', alt: 'X' }}
+                {%- else -%}
+                  <span>X</span>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+            <!-- TikTok -->
+            {%- if section.settings.social_tiktok_link != blank -%}
+              <a href="{{ section.settings.social_tiktok_link }}" target="_blank" rel="noopener">
+                {%- if section.settings.social_tiktok_icon != blank -%}
+                  {{ section.settings.social_tiktok_icon | image_url: width: 50 | image_tag: class: 'snc-footer__social-icon-img', loading: 'lazy', alt: 'TikTok' }}
+                {%- else -%}
+                  <span>TikTok</span>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+            <!-- Instagram -->
+            {%- if section.settings.social_instagram_link != blank -%}
+              <a href="{{ section.settings.social_instagram_link }}" target="_blank" rel="noopener">
+                {%- if section.settings.social_instagram_icon != blank -%}
+                  {{ section.settings.social_instagram_icon | image_url: width: 50 | image_tag: class: 'snc-footer__social-icon-img', loading: 'lazy', alt: 'Instagram' }}
+                {%- else -%}
+                  <span>IG</span>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+      <!-- Contenedor Abajo: Legales + Copyright -->
+      <div class="snc-footer__legal-bottom">
+        <div class="snc-footer__legal-inner">
+          <div class="snc-footer__legal-links">
+            {%- if section.settings.text_privacy != blank -%}<a href="{{ section.settings.link_privacy }}">{{ section.settings.text_privacy }}</a>{%- endif -%}
+            {%- if section.settings.text_terms != blank -%}<a href="{{ section.settings.link_terms }}">{{ section.settings.text_terms }}</a>{%- endif -%}
+            {%- if section.settings.text_legal != blank -%}<a href="{{ section.settings.link_legal }}">{{ section.settings.text_legal }}</a>{%- endif -%}
+          </div>
+          <div class="snc-footer__copyright">
+            {{ section.settings.copyright_text }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% javascript %}
+  (function () {
+    /* ─── Footer Legacy Club — Klaviyo Client API v3 subscribe ─────────────────
+       Intercepts the footer signup form submit, calls Klaviyo directly to
+       subscribe the email to list TWy4DM, then shows a success state.
+       The native Shopify form is NOT submitted (no redirect; pure JS flow).
+    ──────────────────────────────────────────────────────────────────────────── */
+
+    var KLAVIYO_COMPANY_ID = 'X2CxYi';
+    var KLAVIYO_LIST_ID    = 'TWy4DM';
+    var KLAVIYO_ENDPOINT   =
+      'https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_COMPANY_ID;
+
+    /* Locate every footer Legacy Club form on the page (handles multi-section edge cases). */
+    var forms = document.querySelectorAll('.snc-footer__legacy-club-form');
+    if (!forms.length) return;
+
+    forms.forEach(function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var emailInput = form.querySelector('input[type="email"]');
+        if (!emailInput || !emailInput.value.trim()) return;
+
+        var email      = emailInput.value.trim();
+        var nameInput  = form.querySelector('input[type="text"]');
+        var firstName  = nameInput ? nameInput.value.trim() : '';
+        var submitBtn  = form.querySelector('.snc-footer__legacy-submit');
+        var fieldsDiv  = form.querySelector('.snc-footer__legacy-fields');
+
+        /* Disable button while in-flight */
+        if (submitBtn) {
+          submitBtn.disabled    = true;
+          submitBtn.style.opacity = '0.55';
+        }
+
+        fetch(KLAVIYO_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'revision':      '2024-10-15'
+          },
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: Object.assign({ email: email }, firstName ? { first_name: firstName } : {})
+                  }
+                }
+              },
+              relationships: {
+                list: { data: { type: 'list', id: KLAVIYO_LIST_ID } }
+              }
+            }
+          })
+        })
+        .then(function (res) {
+          if (res.ok || res.status === 202) {
+            /* Success — hide the fields, show success message */
+            if (fieldsDiv) fieldsDiv.style.display = 'none';
+
+            var successMsg = form.querySelector('.snc-footer__legacy-message');
+            if (!successMsg) {
+              successMsg = document.createElement('div');
+              successMsg.className = 'snc-footer__legacy-message';
+              form.appendChild(successMsg);
+            }
+            successMsg.textContent = 'Thank you — you\'ve joined the Legacy Club.';
+            successMsg.style.display = 'block';
+          } else {
+            /* Non-2xx response: re-enable button, silent fail */
+            if (submitBtn) {
+              submitBtn.disabled    = false;
+              submitBtn.style.opacity = '';
+            }
+          }
+        })
+        .catch(function () {
+          /* Network error: re-enable button, silent fail */
+          if (submitBtn) {
+            submitBtn.disabled    = false;
+            submitBtn.style.opacity = '';
+          }
+        });
+      });
+    });
+  })();
+{% endjavascript %}
+
+{%- if section.settings.brand_logo_lightbox and section.settings.brand_logo_image != blank -%}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var lightbox = document.getElementById('snc-logo-lightbox-{{ section.id }}');
+  var trigger  = document.querySelector('#shopify-section-{{ section.id }} [data-logo-lightbox-trigger]');
+  if (!lightbox || !trigger) return;
+
+  function openLogo() {
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var stage = lightbox.querySelector('.snc-footer__logo-lightbox-stage');
+    if (stage) {
+      stage.style.animation = 'none';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { stage.style.animation = ''; });
+      });
+    }
+  }
+
+  function closeLogo() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  trigger.addEventListener('click', openLogo);
+
+  lightbox.querySelectorAll('[data-logo-lightbox-close]').forEach(function (el) {
+    el.addEventListener('click', closeLogo);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLogo();
+  });
+});
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "SNC Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Marquee Infinito (Fila 1)"
+    },
+    {
+      "type": "image_picker",
+      "id": "marquee_image",
+      "label": "Imagen para Loop"
+    },
+    {
+      "type": "range",
+      "id": "marquee_image_height",
+      "min": 20,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Alto de la imagen",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "marquee_gap",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Espacio entre imágenes",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "label": "Velocidad de animación (segundos)",
+      "default": 20,
+      "info": "Menor número = Más rápido"
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "color",
+      "id": "marquee_bg_color",
+      "label": "Color de Fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Fila de Información (Columnas)"
+    },
+    {
+      "type": "range",
+      "id": "info_columns_gap",
+      "min": 20,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Espacio entre columnas",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Logo de Marca (entre columnas y Legacy Club)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_logo",
+      "label": "Mostrar logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo_image",
+      "label": "Imagen del logo"
+    },
+    {
+      "type": "select",
+      "id": "brand_logo_shape",
+      "label": "Forma",
+      "options": [
+        { "value": "square", "label": "Cuadrado" },
+        { "value": "circle", "label": "Circular / Redondo" }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "range",
+      "id": "brand_logo_size",
+      "min": 60,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Tamaño (ancho y alto)",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "brand_logo_border_color",
+      "label": "Color del borde",
+      "default": "#c9b99a",
+      "info": "Deja el dorado-taupe para un acabado de lujo."
+    },
+    {
+      "type": "checkbox",
+      "id": "brand_logo_lightbox",
+      "label": "Abrir en pantalla completa al hacer clic",
+      "default": true,
+      "info": "Muestra el logo en una vista premium fullscreen. Tiene prioridad sobre la URL."
+    },
+    {
+      "type": "url",
+      "id": "brand_logo_url",
+      "label": "URL al hacer clic (si lightbox está desactivado)"
+    },
+    {
+      "type": "text",
+      "id": "brand_logo_alt",
+      "label": "Texto alternativo (accesibilidad)",
+      "default": "Jack Turner"
+    },
+    {
+      "type": "header",
+      "content": "Jack Turner Legacy Club"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_legacy_club",
+      "label": "Mostrar bloque Legacy Club",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "legacy_klaviyo_list_id",
+      "label": "Klaviyo list ID (opcional)",
+      "default": "TWy4DM",
+      "info": "Lista 'Newsletter' en Klaviyo. Campo oculto \"g\" enviado al enviar el formulario."
+    },
+    {
+      "type": "range",
+      "id": "legacy_club_max_width",
+      "min": 260,
+      "max": 440,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho máximo del bloque",
+      "default": 360
+    },
+    {
+      "type": "range",
+      "id": "legacy_club_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Grosor separador Legacy Club",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_border_color",
+      "label": "Color separador",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "legacy_club_title_size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño título Legacy",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "legacy_club_title_weight",
+      "label": "Grosor título Legacy",
+      "options": [
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_title_color",
+      "label": "Color título Legacy",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "legacy_club_sub_size",
+      "min": 9,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño subtítulo Legacy",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_sub_color",
+      "label": "Color subtítulo Legacy",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "legacy_club_body_size",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño texto Legacy",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "legacy_club_body_weight",
+      "label": "Grosor texto Legacy",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_body_color",
+      "label": "Color texto Legacy",
+      "default": "#222222"
+    },
+    {
+      "type": "range",
+      "id": "legacy_club_closing_size",
+      "min": 9,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño cierre Legacy",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_closing_color",
+      "label": "Color cierre Legacy",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_input_bg",
+      "label": "Fondo campo email",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_input_border",
+      "label": "Borde campo email",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_input_text",
+      "label": "Texto campo email",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_btn_bg",
+      "label": "Fondo botón",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_btn_text",
+      "label": "Texto botón",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "legacy_club_btn_border",
+      "label": "Borde botón",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Márgenes"
+    },
+    {
+      "type": "range",
+      "id": "marquee_padding_vertical",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Relleno Vertical (Padding)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "marquee_margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margen Superior",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "marquee_margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margen Inferior",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Estilo de Divisores"
+    },
+    {
+      "type": "range",
+      "id": "divider_thickness",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Grosor del divisor",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Color del divisor",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Barra Legal (Fila 3)"
+    },
+    {
+      "type": "text",
+      "id": "legal_brand_name",
+      "label": "Nombre de la Marca (Izquierda Arriba)",
+      "default": "ADRIANA OLIMPO"
+    },
+    {
+      "type": "color",
+      "id": "legal_brand_color",
+      "label": "Color Marca",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "legal_brand_size",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Marca",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "legal_brand_weight",
+      "label": "Grosor Marca",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "900", "label": "Black" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "legal_rows_gap",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Espacio entre filas legales",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Redes Sociales (Derecha Arriba)"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_x_icon",
+      "label": "Icono X (Cargar SVG)"
+    },
+    {
+      "type": "url",
+      "id": "social_x_link",
+      "label": "Enlace X"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_tiktok_icon",
+      "label": "Icono TikTok (Cargar SVG)"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok_link",
+      "label": "Enlace TikTok"
+    },
+    {
+      "type": "image_picker",
+      "id": "social_instagram_icon",
+      "label": "Icono Instagram (Cargar SVG)"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram_link",
+      "label": "Enlace Instagram"
+    },
+    {
+      "type": "header",
+      "content": "Enlaces Legales (Izquierda Abajo)"
+    },
+    {
+      "type": "text",
+      "id": "text_privacy",
+      "label": "Texto Privacidad",
+      "default": "Privacidad de datos"
+    },
+    {
+      "type": "url",
+      "id": "link_privacy",
+      "label": "Enlace Privacidad"
+    },
+    {
+      "type": "text",
+      "id": "text_terms",
+      "label": "Texto Términos y Condiciones",
+      "default": "Términos y condiciones"
+    },
+    {
+      "type": "url",
+      "id": "link_terms",
+      "label": "Enlace Términos"
+    },
+    {
+      "type": "text",
+      "id": "text_legal",
+      "label": "Texto Términos Legales",
+      "default": "Términos legales"
+    },
+    {
+      "type": "url",
+      "id": "link_legal",
+      "label": "Enlace Legales"
+    },
+    {
+      "type": "color",
+      "id": "legal_links_color",
+      "label": "Color Enlaces",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "legal_links_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Enlaces",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "legal_links_weight",
+      "label": "Grosor Enlaces",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Copyright (Derecha Abajo)"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Texto Copyright",
+      "default": "© 2024 Adriana Olimpo. Todos los derechos reservados."
+    },
+    {
+      "type": "color",
+      "id": "legal_copyright_color",
+      "label": "Color Copyright",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "legal_copyright_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Copyright",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "legal_copyright_weight",
+      "label": "Grosor Copyright",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "manual_column",
+      "name": "Columna Manual",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "TÍTULO"
+        },
+        {
+          "type": "url",
+          "id": "title_url",
+          "label": "Enlace del Título"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Contenido HTML (Enlaces)",
+          "default": "<ul>\n<li><a href=\"#\">Enlace 1</a></li>\n<li><a href=\"#\">Enlace 2</a></li>\n<li><a href=\"#\">Enlace 3</a></li>\n</ul>",
+          "info": "Escribe tu lista de enlaces usando HTML <ul><li><a href='...'>...</a></li></ul>"
+        },
+        {
+          "type": "header",
+          "content": "Estilos del Título"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "min": 12,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño del título",
+          "default": 18
+        },
+        {
+          "type": "select",
+          "id": "title_weight",
+          "label": "Grosor del título",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" },
+            { "value": "900", "label": "Black" }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del título",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "title_margin_bottom",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen inferior título",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Estilos de Enlaces/Texto"
+        },
+        {
+          "type": "range",
+          "id": "link_size",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño de texto",
+          "default": 14
+        },
+        {
+          "type": "select",
+          "id": "link_weight",
+          "label": "Grosor de texto",
+          "options": [
+            { "value": "300", "label": "Light" },
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "color",
+          "id": "link_color",
+          "label": "Color de texto",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Márgenes del Bloque"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen Superior",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen Inferior",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_left",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen Izquierdo",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_right",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen Derecho",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "menu_column",
+      "name": "Columna desde Menú",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menú"
+        },
+        {
+          "type": "text",
+          "id": "title_override",
+          "label": "Título (opcional, si lo dejas vacío usa el título del menú)",
+          "default": "Menu"
+        },
+        {
+          "type": "url",
+          "id": "title_url",
+          "label": "Enlace del Título (opcional)"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Contenido fallback (solo si no seleccionas un menú)",
+          "default": "<ul>\n<li><a href=\"#\">Link 1</a></li>\n<li><a href=\"#\">Link 2</a></li>\n<li><a href=\"#\">Link 3</a></li>\n</ul>"
+        },
+        {
+          "type": "header",
+          "content": "Estilos del Título"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "min": 12,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño del título",
+          "default": 18
+        },
+        {
+          "type": "select",
+          "id": "title_weight",
+          "label": "Grosor del título",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "600", "label": "Semi Bold" },
+            { "value": "700", "label": "Bold" },
+            { "value": "900", "label": "Black" }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del título",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "title_margin_bottom",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen inferior título",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Estilos de Enlaces/Texto"
+        },
+        {
+          "type": "range",
+          "id": "link_size",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño de texto",
+          "default": 14
+        },
+        {
+          "type": "select",
+          "id": "link_weight",
+          "label": "Grosor de texto",
+          "options": [
+            { "value": "300", "label": "Light" },
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "color",
+          "id": "link_color",
+          "label": "Color de texto",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Márgenes del Bloque"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen Superior",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen Inferior",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_left",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen Izquierdo",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_right",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margen Derecho",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SNC Footer",
+      "blocks": [
+        { "type": "manual_column", "settings": { "title": "COLUMNA 1" } },
+        { "type": "manual_column", "settings": { "title": "COLUMNA 2" } },
+        { "type": "manual_column", "settings": { "title": "COLUMNA 3" } },
+        { "type": "manual_column", "settings": { "title": "COLUMNA 4" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

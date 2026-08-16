@@ -1,0 +1,351 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "snc_info_hero_hkHEGz": {
+      "type": "snc-info-hero",
+      "name": "SNC Info Hero",
+      "settings": {
+        "image": "shopify://shop_images/AO_copy.jpg",
+        "margin_top": 0,
+        "height_vh": 50,
+        "full_width": true,
+        "border_radius": 0,
+        "overlay_type": "gradient",
+        "gradient_direction": "to top",
+        "overlay_color": "#000000",
+        "overlay_opacity": 100,
+        "content_vertical_position": "flex-end",
+        "content_horizontal_position": "flex-start",
+        "text_alignment": "left",
+        "title": "Olimpo Puntos",
+        "subtitle": "GANA MÁS",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "snc_custom_content_text_WwF8AM": {
+      "type": "snc-custom-content-text",
+      "blocks": {
+        "text_aBfgiV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>GANA PUNTOS PARA CANJEAR POR VALES</p>",
+            "color": "#000000",
+            "font_size": 26,
+            "font_size_mobile": 16,
+            "font_weight": 700,
+            "margin_bottom": 15,
+            "text_max_width": 800
+          }
+        },
+        "text_bFNtkc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Acumula puntos para obtener vales y avanza en nuestros niveles de lealtad para desbloquear recompensas exclusivas. Simplemente canjéalos al finalizar tu compra.</p>",
+            "color": "#525252",
+            "font_size": 16,
+            "font_size_mobile": 16,
+            "font_weight": 400,
+            "margin_bottom": 15,
+            "text_max_width": 500
+          }
+        },
+        "buttons_JiixcB": {
+          "type": "buttons",
+          "settings": {
+            "btn1_text": "REGISTRATE AHORA",
+            "btn1_link": "",
+            "btn1_bg_color": "#000000",
+            "btn1_text_color": "#ffffff",
+            "btn1_font_size": 16,
+            "btn1_font_weight": 700,
+            "btn1_padding_v": 18,
+            "btn1_padding_h": 38,
+            "btn1_border_radius": 50,
+            "btn2_text": "",
+            "btn2_link": "",
+            "btn2_bg_color": "#ffffff",
+            "btn2_text_color": "#2a4432",
+            "btn2_border_color": "#2a4432",
+            "btn2_border_width": 1,
+            "btn2_font_size": 16,
+            "btn2_font_weight": 700,
+            "btn2_padding_v": 12,
+            "btn2_padding_h": 24,
+            "btn2_border_radius": 4,
+            "gap": 15
+          }
+        }
+      },
+      "block_order": [
+        "text_aBfgiV",
+        "text_bFNtkc",
+        "buttons_JiixcB"
+      ],
+      "name": "SNC Custom Content Text",
+      "settings": {
+        "margin_top": 100,
+        "margin_bottom": 100,
+        "max_width": 800,
+        "alignment": "center"
+      }
+    },
+    "snc_icon_grid_yAYBmD": {
+      "type": "snc-icon-grid",
+      "blocks": {
+        "icon_item_CqxcNk": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/cart.png",
+            "kicker": "Compra cualquier producto",
+            "text": "<p>1 punto cada vez que gastes 1MXN</p>"
+          }
+        },
+        "icon_item_rJzHpH": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/instagram.png",
+            "kicker": "Síguenos en Instagram",
+            "text": "<p>500 OLIMPOPUNTOS</p>"
+          }
+        },
+        "icon_item_hBawRj": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/tiktok.png",
+            "kicker": "Síguenos en TikTok",
+            "text": "<p>500 puntos</p>"
+          }
+        },
+        "icon_item_AVQzxz": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/facebook.png",
+            "kicker": "Dar me gusta en Facebook",
+            "text": "<p>500 puntos</p>"
+          }
+        },
+        "icon_item_GGdhhw": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/cake.png",
+            "kicker": "Bono de cumpleaños",
+            "text": "<p>2000 OLIMPOPUNTOS</p>"
+          }
+        },
+        "icon_item_jn3mVE": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/document.png",
+            "kicker": "Crea tu cuenta",
+            "text": "<p>1000 puntos</p>"
+          }
+        }
+      },
+      "block_order": [
+        "icon_item_CqxcNk",
+        "icon_item_rJzHpH",
+        "icon_item_hBawRj",
+        "icon_item_AVQzxz",
+        "icon_item_GGdhhw",
+        "icon_item_jn3mVE"
+      ],
+      "name": "SNC Icon Grid",
+      "settings": {
+        "background_color": "#f9f9f9",
+        "full_width": true,
+        "section_border_radius": 0,
+        "title": "¿CÓMO GANAR PUNTOS?",
+        "description": "<p>Puedes ganar puntos de varias maneras incluyendo compras, registros, seguimientos en redes sociales y más. Luego canjearlos por vales.</p>",
+        "header_alignment": "center",
+        "title_color": "#000000",
+        "title_font_size": 24,
+        "title_font_weight": 700,
+        "description_color": "#666666",
+        "description_font_size": 16,
+        "description_font_weight": 400,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "grid_gap": 30,
+        "grid_row_gap": 85,
+        "icon_size": 50,
+        "kicker_color": "#000000",
+        "kicker_font_size": 16,
+        "kicker_font_weight": 700,
+        "text_color": "#666666",
+        "text_font_size": 14,
+        "text_font_weight": 400,
+        "button_text": "REGÍSTRATE AHORA",
+        "button_link": "",
+        "button_bg_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#2a4432",
+        "button_border_width": 0,
+        "button_padding_vertical": 14,
+        "button_padding_horizontal": 40,
+        "button_border_radius": 30,
+        "button_font_size": 14,
+        "button_font_weight": 700,
+        "button_hover_bg_color": "#cfcfcf",
+        "button_hover_text_color": "#000000",
+        "button_hover_border_color": "#ffffff",
+        "final_link_text": "¿Ya tienes una cuenta?",
+        "final_link_url": "",
+        "margin_top": 0,
+        "margin_bottom": 55,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "snc_faq_JyMX4f": {
+      "type": "snc-faq",
+      "blocks": {
+        "faq_item_wedtXk": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Qué son los Olimpo Puntos?",
+            "content": "<p>Es nuestro sistema de recompensas para clientas registradas. Cada compra o interacción te suma puntos que puedes canjear por descuentos en futuras compras.</p>"
+          }
+        },
+        "faq_item_rPMtCP": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Cómo funcionan los Olimpo Puntos?",
+            "content": "<p>Ganas puntos al comprar, seguirnos o invitar amigas.<br/>Luego puedes canjearlos por cupones de descuento directamente en nuestra tienda online. Solo necesitas iniciar sesión y verificar tu correo.</p>"
+          }
+        },
+        "faq_item_cmEbLD": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Cómo puedo ganar Olimpo Puntos?",
+            "content": "<p>Haz clic en el botón flotante rosa \"Olimpo Puntos\" (abajo a la izquierda en nuestra página de inicio).<br/><br/>Inicia sesión con tu correo y confirma el código que te llegará por email.<br/><br/>Canjea tus puntos por un cupón.<br/><br/>Aplica el código en el checkout… ¡y listo!</p>"
+          }
+        },
+        "faq_item_atECty": {
+          "type": "faq_item",
+          "settings": {
+            "title": "¿Tienen fecha de expiración los Olimpo Puntos?",
+            "content": "<p>Sí. Los puntos acumulados tienen una vigencia de 12 meses desde la fecha en que los ganaste.<br/>Asegúrate de usarlos a tiempo para no perderlos.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_wedtXk",
+        "faq_item_rPMtCP",
+        "faq_item_cmEbLD",
+        "faq_item_atECty"
+      ],
+      "name": "SNC FAQ",
+      "settings": {
+        "title": "PREGUNTAS FRECUENTES",
+        "section_title_color": "#000000",
+        "section_title_size": 26,
+        "section_title_weight": 700,
+        "section_title_margin_bottom": 35,
+        "description": "",
+        "section_desc_color": "#666666",
+        "section_desc_size": 16,
+        "section_desc_weight": 400,
+        "section_desc_margin_bottom": 40,
+        "header_alignment": "center",
+        "max_width": 800,
+        "margin_top": 40,
+        "margin_bottom": 40,
+        "item_padding_vertical": 20,
+        "item_padding_horizontal": 20,
+        "gap": 10,
+        "border_radius": 8,
+        "border_width": 1,
+        "border_color": "#e5e5e5",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "title_font_size": 18,
+        "title_font_weight": 600,
+        "content_color": "#666666",
+        "content_font_size": 16
+      }
+    },
+    "snc_custom_content_text_Nmnkhf": {
+      "type": "snc-custom-content-text",
+      "blocks": {
+        "text_wUqUmc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>¿NECESITAS AYUDA? </p>",
+            "color": "#000000",
+            "font_size": 26,
+            "font_size_mobile": 16,
+            "font_weight": 700,
+            "margin_bottom": 15,
+            "text_max_width": 800
+          }
+        },
+        "text_7WtYfm": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Visita nuestro Centro de Ayuda para ver más preguntas frecuentes o contacta a nuestro equipo de atención al cliente.</p>",
+            "color": "#525252",
+            "font_size": 16,
+            "font_size_mobile": 16,
+            "font_weight": 400,
+            "margin_bottom": 15,
+            "text_max_width": 500
+          }
+        },
+        "buttons_KxPTcj": {
+          "type": "buttons",
+          "settings": {
+            "btn1_text": "REGISTRATE AHORA",
+            "btn1_link": "",
+            "btn1_bg_color": "#000000",
+            "btn1_text_color": "#ffffff",
+            "btn1_font_size": 16,
+            "btn1_font_weight": 700,
+            "btn1_padding_v": 18,
+            "btn1_padding_h": 38,
+            "btn1_border_radius": 50,
+            "btn2_text": "",
+            "btn2_link": "",
+            "btn2_bg_color": "#ffffff",
+            "btn2_text_color": "#2a4432",
+            "btn2_border_color": "#2a4432",
+            "btn2_border_width": 1,
+            "btn2_font_size": 16,
+            "btn2_font_weight": 700,
+            "btn2_padding_v": 12,
+            "btn2_padding_h": 24,
+            "btn2_border_radius": 4,
+            "gap": 15
+          }
+        }
+      },
+      "block_order": [
+        "text_wUqUmc",
+        "text_7WtYfm",
+        "buttons_KxPTcj"
+      ],
+      "name": "SNC Custom Content Text",
+      "settings": {
+        "margin_top": 45,
+        "margin_bottom": 100,
+        "max_width": 800,
+        "alignment": "center"
+      }
+    }
+  },
+  "order": [
+    "snc_info_hero_hkHEGz",
+    "snc_custom_content_text_WwF8AM",
+    "snc_icon_grid_yAYBmD",
+    "snc_faq_JyMX4f",
+    "snc_custom_content_text_Nmnkhf"
+  ]
+}
